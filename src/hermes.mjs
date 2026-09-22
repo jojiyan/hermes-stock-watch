@@ -1,3 +1,8 @@
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
+
 const TARGET_PATTERNS = [
   /\bneo garden 23\b/i,
   /\bgarden party 30\b/i,
@@ -168,24 +173,7 @@ export async function fetchCategory(market, fetchImpl = fetch, now = Date.now())
   const tenMinuteBucket = Math.floor(now / (10 * 60 * 1000));
   url.searchParams.set("_hwatch", String(tenMinuteBucket));
 
-  const response = await fetchImpl(url, {
-    redirect: "follow",
-    signal: AbortSignal.timeout(30_000),
-    headers: {
-      accept:
-        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-      "accept-language": "en-US,en;q=0.9",
-      "cache-control": "no-cache",
-      pragma: "no-cache",
-      "user-agent": CHROME_USER_AGENT,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`${market.code}: Hermès returned HTTP ${response.status}`);
-  }
-
-  return response.text();
+  return fetchHtml(url, `${market.code}: Hermès`, fetchImpl);
 }
 
 export async function fetchProductPage(
@@ -197,6 +185,10 @@ export async function fetchProductPage(
   const tenMinuteBucket = Math.floor(now / (10 * 60 * 1000));
   url.searchParams.set("_hwatch", String(tenMinuteBucket));
 
+  return fetchHtml(url, `${product.market}: product page`, fetchImpl);
+}
+
+async function fetchHtml(url, label, fetchImpl) {
   const response = await fetchImpl(url, {
     redirect: "follow",
     signal: AbortSignal.timeout(30_000),
@@ -206,15 +198,55 @@ export async function fetchProductPage(
       "accept-language": "en-US,en;q=0.9",
       "cache-control": "no-cache",
       pragma: "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "upgrade-insecure-requests": "1",
       "user-agent": CHROME_USER_AGENT,
     },
   });
 
-  if (!response.ok) {
-    throw new Error(`${product.market}: product page returned HTTP ${response.status}`);
+  if (response.ok) return response.text();
+
+  if (
+    fetchImpl === fetch &&
+    process.env.GITHUB_ACTIONS === "true" &&
+    [403, 429].includes(response.status)
+  ) {
+    return fetchWithChrome(url, label);
   }
 
-  return response.text();
+  throw new Error(`${label} returned HTTP ${response.status}`);
+}
+
+async function fetchWithChrome(url, label) {
+  const chromePath = process.env.CHROME_PATH || "/usr/bin/google-chrome";
+  try {
+    const { stdout } = await execFileAsync(
+      chromePath,
+      [
+        "--headless=new",
+        "--no-sandbox",
+        "--disable-gpu",
+        "--disable-dev-shm-usage",
+        "--disable-background-networking",
+        "--disable-features=Translate,OptimizationHints,MediaRouter",
+        "--window-size=1440,1200",
+        "--virtual-time-budget=10000",
+        `--user-agent=${CHROME_USER_AGENT}`,
+        "--dump-dom",
+        String(url),
+      ],
+      { timeout: 45_000, maxBuffer: 25 * 1024 * 1024 },
+    );
+
+    if (!stdout || stdout.length < 5_000) {
+      throw new Error(`Chrome returned only ${stdout?.length || 0} characters`);
+    }
+    return stdout;
+  } catch (error) {
+    throw new Error(`${label} browser fallback failed: ${error.message}`);
+  }
 }
 
 function extractText(source, pattern) {

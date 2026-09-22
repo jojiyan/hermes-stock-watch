@@ -111,6 +111,60 @@ export function parseCategoryHtml(html, market) {
   return products;
 }
 
+export function parseCategoryDocument(document, market) {
+  if (/grid-product-/i.test(document)) {
+    return parseCategoryHtml(document, market);
+  }
+
+  return parseCategoryMarkdown(document, market);
+}
+
+export function parseCategoryMarkdown(markdown, market) {
+  if (typeof markdown !== "string" || markdown.length < 1_000) {
+    throw new Error(`${market.code}: Reader category response is unexpectedly short`);
+  }
+
+  if (/sorry, you have been blocked|access denied|verify you are human|captcha/i.test(markdown)) {
+    throw new Error(`${market.code}: Reader received an access-block page`);
+  }
+
+  const links = [...markdown.matchAll(/\[([^\]\n]+)\]\((https?:\/\/www\.hermes\.com\/(?:us|ca)\/en\/product\/[^)\s]+)(?:\s+"[^"]*")?\)/gi)];
+  const products = [];
+
+  for (let index = 0; index < links.length; index += 1) {
+    const match = links[index];
+    const name = normalizeDetail(match[1]);
+    const url = match[2];
+    const sku = url.match(/-([A-Z0-9]{6,})\/?(?:\?|$)/i)?.[1]?.toUpperCase() || "";
+    if (!name || !sku) continue;
+
+    const segmentEnd = links[index + 1]?.index ?? Math.min(markdown.length, match.index + 800);
+    const segment = markdown.slice(match.index, segmentEnd);
+    const color = normalizeDetail(segment.match(/\bColor\s*:\s*([^\n,]+(?:\s*\/\s*[^\n,]+)?)/i)?.[1]);
+    const price = normalizeDetail(segment.match(/\bPrice\s+((?:CA|US)?\s*\$\s*[\d,]+(?:\.\d{2})?)/i)?.[1]);
+    const explicitlyUnavailable = /\bDiscover\b|\bUnavailable\b|\bSold out\b/i.test(segment);
+
+    products.push({
+      key: `${market.code}:${sku}`,
+      market: market.code,
+      marketName: market.name,
+      sku,
+      name,
+      color,
+      price,
+      url,
+      available: !explicitlyUnavailable,
+      target: isTargetProduct(name),
+    });
+  }
+
+  const uniqueProducts = [...new Map(products.map((product) => [product.key, product])).values()];
+  if (uniqueProducts.length < 5) {
+    throw new Error(`${market.code}: Reader parsed only ${uniqueProducts.length} products`);
+  }
+  return uniqueProducts;
+}
+
 export function parseProductPageHtml(html, candidate) {
   if (typeof html !== "string" || html.length < 5_000) {
     throw new Error(`${candidate.market}: product response is unexpectedly short`);
@@ -213,10 +267,43 @@ async function fetchHtml(url, label, fetchImpl) {
     process.env.GITHUB_ACTIONS === "true" &&
     [403, 429].includes(response.status)
   ) {
-    return fetchWithChrome(url, label);
+    try {
+      return await fetchWithChrome(url, label);
+    } catch (chromeError) {
+      return fetchWithReader(url, label, fetchImpl, chromeError);
+    }
   }
 
   throw new Error(`${label} returned HTTP ${response.status}`);
+}
+
+async function fetchWithReader(url, label, fetchImpl, chromeError) {
+  const readerUrl = `https://r.jina.ai/${url.href}`;
+  const response = await fetchImpl(readerUrl, {
+    redirect: "follow",
+    signal: AbortSignal.timeout(60_000),
+    headers: {
+      accept: "application/json",
+      "x-engine": "cf-browser-rendering",
+      "x-proxy": "auto",
+      "x-no-cache": "true",
+      "x-cache-tolerance": "0",
+      "x-retain-links": "all",
+      "x-timeout": "45",
+      "x-user-agent": CHROME_USER_AGENT,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`${label} fallbacks failed: ${chromeError.message}; Reader HTTP ${response.status}`);
+  }
+
+  const payload = await response.json();
+  const content = payload?.data?.content || payload?.content || "";
+  if (typeof content !== "string" || content.length < 1_000) {
+    throw new Error(`${label} Reader returned only ${content?.length || 0} characters`);
+  }
+  return content;
 }
 
 async function fetchWithChrome(url, label) {

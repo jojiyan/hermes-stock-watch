@@ -1,0 +1,266 @@
+const TARGET_PATTERNS = [
+  /\bneo garden 23\b/i,
+  /\bgarden party 30\b/i,
+  /\blindy(?: ii)? mini\b/i,
+  /\bmini lindy\b/i,
+  /\bbirkin\b/i,
+  /\bkelly\b/i,
+  /\bconstance\b/i,
+];
+
+export const MARKETS = [
+  {
+    code: "US",
+    name: "Hermès USA",
+    origin: "https://www.hermes.com",
+    categoryUrl:
+      "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
+  },
+  {
+    code: "CA",
+    name: "Hermès Canada",
+    origin: "https://www.hermes.com",
+    categoryUrl:
+      "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
+  },
+];
+
+const CHROME_USER_AGENT =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) " +
+  "AppleWebKit/537.36 (KHTML, like Gecko) " +
+  "Chrome/140.0.0.0 Safari/537.36";
+
+export function isTargetProduct(name) {
+  const normalized = decodeHtml(name)
+    .normalize("NFKD")
+    .replace(/[’']/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+  return TARGET_PATTERNS.some((pattern) => pattern.test(normalized));
+}
+
+export function parseCategoryHtml(html, market) {
+  if (typeof html !== "string" || html.length < 25_000) {
+    throw new Error(`${market.code}: category response is unexpectedly short`);
+  }
+
+  if (
+    /sorry, you have been blocked|access denied|verify you are human|captcha/i.test(
+      html,
+    )
+  ) {
+    throw new Error(`${market.code}: Hermès returned an access-block page`);
+  }
+
+  const products = [];
+  const blockPattern =
+    /<div\b[^>]*\bid="grid-product-([^"]+)"[^>]*>([\s\S]*?)<\/h-grid-result-item>\s*<\/div>/gi;
+  let match;
+
+  while ((match = blockPattern.exec(html)) !== null) {
+    const sku = decodeHtml(match[1]).trim();
+    const block = match[2];
+    const name = extractText(
+      block,
+      /class="product-title[^"]*"[^>]*>([\s\S]*?)<\/span>/i,
+    );
+    const anchor =
+      block.match(/<a\b[^>]*class="product-item-name[^"]*"[^>]*>/i)?.[0] ||
+      "";
+    const href = extractAttribute(anchor, "href");
+    const fullTitle = extractAttribute(anchor, "title");
+    const color = extractColor(fullTitle, name);
+    const price = extractText(
+      block,
+      /class="price[^"]*"[^>]*>([\s\S]*?)<\/span>/i,
+    );
+
+    if (!sku || !name || !href) continue;
+
+    const explicitlyUnavailable =
+      /<h-out-of-stock-label\b/i.test(block) ||
+      /\btag-unavailable\b/i.test(block) ||
+      />\s*Discover\s*</i.test(block);
+    const retailOnly = /product-item-retail-only-sticker/i.test(block);
+
+    products.push({
+      key: `${market.code}:${sku}`,
+      market: market.code,
+      marketName: market.name,
+      sku,
+      name,
+      color,
+      price,
+      url: new URL(href, market.origin).href,
+      available: !explicitlyUnavailable && !retailOnly,
+      target: isTargetProduct(name),
+    });
+  }
+
+  if (products.length < 5) {
+    throw new Error(
+      `${market.code}: parsed only ${products.length} products; refusing to trust the page`,
+    );
+  }
+
+  return products;
+}
+
+export function parseProductPageHtml(html, candidate) {
+  if (typeof html !== "string" || html.length < 5_000) {
+    throw new Error(`${candidate.market}: product response is unexpectedly short`);
+  }
+
+  if (
+    /sorry, you have been blocked|access denied|verify you are human|captcha/i.test(
+      html,
+    )
+  ) {
+    throw new Error(`${candidate.market}: Hermès returned an access-block page`);
+  }
+
+  const text = htmlToText(html);
+  const pageSku =
+    text.match(/Product reference\s*:\s*([A-Z0-9]+)/i)?.[1]?.trim() || "";
+
+  if (pageSku && candidate.sku && pageSku !== candidate.sku) {
+    throw new Error(
+      `${candidate.market}: product page SKU ${pageSku} did not match ${candidate.sku}`,
+    );
+  }
+
+  const name =
+    extractText(html, /<h1\b[^>]*>([\s\S]*?)<\/h1>/i) || candidate.name;
+  const price =
+    normalizeDetail(
+      text.match(/\bPrice\s+((?:CA|US)?\s*\$\s*[\d,]+(?:\.\d{2})?)/i)?.[1],
+    ) || candidate.price;
+  const color =
+    normalizeDetail(text.match(/\bColor\s*,?\s*(.+?)\s+selected\b/i)?.[1]) ||
+    candidate.color;
+  const material = normalizeDetail(
+    text.match(
+      /\bBag in\s+(.+?)(?=\s+-\s+|\s+As this product|\s+Made in\b|\s+Metallic finish\b|\s+Dimensions\b|\s+Product reference\b)/i,
+    )?.[1],
+  );
+
+  const unavailable =
+    /Unfortunately this product is no longer available/i.test(text) ||
+    /This product is currently unavailable/i.test(text) ||
+    /This item is currently unavailable/i.test(text) ||
+    /\bSold out\b/i.test(text);
+  const hasPurchaseAction = /\bAdd to (?:cart|bag)\b/i.test(text);
+
+  return {
+    ...candidate,
+    sku: pageSku || candidate.sku,
+    name,
+    color,
+    material,
+    price,
+    available: hasPurchaseAction && !unavailable,
+    purchaseAction: hasPurchaseAction ? "Add to cart / Add to bag" : "",
+  };
+}
+
+export async function fetchCategory(market, fetchImpl = fetch, now = Date.now()) {
+  const url = new URL(market.categoryUrl);
+  const tenMinuteBucket = Math.floor(now / (10 * 60 * 1000));
+  url.searchParams.set("_hwatch", String(tenMinuteBucket));
+
+  const response = await fetchImpl(url, {
+    redirect: "follow",
+    signal: AbortSignal.timeout(30_000),
+    headers: {
+      accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      "accept-language": "en-US,en;q=0.9",
+      "cache-control": "no-cache",
+      pragma: "no-cache",
+      "user-agent": CHROME_USER_AGENT,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`${market.code}: Hermès returned HTTP ${response.status}`);
+  }
+
+  return response.text();
+}
+
+export async function fetchProductPage(
+  product,
+  fetchImpl = fetch,
+  now = Date.now(),
+) {
+  const url = new URL(product.url);
+  const tenMinuteBucket = Math.floor(now / (10 * 60 * 1000));
+  url.searchParams.set("_hwatch", String(tenMinuteBucket));
+
+  const response = await fetchImpl(url, {
+    redirect: "follow",
+    signal: AbortSignal.timeout(30_000),
+    headers: {
+      accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      "accept-language": "en-US,en;q=0.9",
+      "cache-control": "no-cache",
+      pragma: "no-cache",
+      "user-agent": CHROME_USER_AGENT,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`${product.market}: product page returned HTTP ${response.status}`);
+  }
+
+  return response.text();
+}
+
+function extractText(source, pattern) {
+  const value = source.match(pattern)?.[1] || "";
+  return decodeHtml(value.replace(/<[^>]*>/g, " "))
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractAttribute(tag, name) {
+  const pattern = new RegExp(`\\b${name}="([^"]*)"`, "i");
+  return decodeHtml(tag.match(pattern)?.[1] || "").trim();
+}
+
+function extractColor(fullTitle, name) {
+  if (!fullTitle) return "";
+  const prefix = `${name},`;
+  return fullTitle.toLowerCase().startsWith(prefix.toLowerCase())
+    ? fullTitle.slice(prefix.length).trim()
+    : "";
+}
+
+function htmlToText(value) {
+  return decodeHtml(
+    String(value)
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+      .replace(/<!--([\s\S]*?)-->/g, " ")
+      .replace(/<[^>]*>/g, " "),
+  )
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeDetail(value) {
+  return decodeHtml(value || "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function decodeHtml(value) {
+  return String(value)
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;|&#34;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">");
+}

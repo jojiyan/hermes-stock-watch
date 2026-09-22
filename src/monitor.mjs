@@ -5,7 +5,7 @@ import {
   MARKETS,
   fetchCategory,
   fetchProductPage,
-  parseCategoryHtml,
+  parseCategoryDocument,
   parseProductPageHtml,
 } from "./hermes.mjs";
 
@@ -32,7 +32,7 @@ const initializedMarkets = new Set(state.meta.initializedMarkets || []);
 for (const market of MARKETS) {
   try {
     const html = await fetchCategory(market);
-    const products = parseCategoryHtml(html, market);
+    const products = parseCategoryDocument(html, market);
     const candidates = products.filter((product) => product.target);
     const targets = [];
     const verificationErrors = [];

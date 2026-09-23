@@ -347,7 +347,9 @@ async function fetchWithReader(url, label, fetchImpl, chromeError) {
 
   const content = await response.text();
   if (typeof content !== "string" || content.length < 1_000) {
-    throw new Error(`${label} Reader returned only ${content?.length || 0} characters`);
+    throw new Error(
+      `${label} fallbacks failed: ${chromeError.message}; Reader returned only ${content?.length || 0} characters`,
+    );
   }
   return content;
 }

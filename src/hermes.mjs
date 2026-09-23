@@ -284,8 +284,6 @@ async function fetchWithReader(url, label, fetchImpl, chromeError) {
     signal: AbortSignal.timeout(60_000),
     headers: {
       accept: "application/json",
-      "x-engine": "cf-browser-rendering",
-      "x-proxy": "auto",
       "x-no-cache": "true",
       "x-cache-tolerance": "0",
       "x-retain-links": "all",

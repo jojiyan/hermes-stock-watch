@@ -96,7 +96,7 @@ export function parseCategoryHtml(html, market) {
       name,
       color,
       price,
-      url: new URL(href, market.origin).href,
+      url: canonicalizeHermesUrl(href, market.origin),
       available: !explicitlyUnavailable && !retailOnly,
       target: isTargetProduct(name),
     });
@@ -270,11 +270,60 @@ async function fetchHtml(url, label, fetchImpl) {
     try {
       return await fetchWithChrome(url, label);
     } catch (chromeError) {
-      return fetchWithReader(url, label, fetchImpl, chromeError);
+      try {
+        return await fetchWithTranslate(url, label, fetchImpl);
+      } catch (translateError) {
+        return fetchWithReader(
+          url,
+          label,
+          fetchImpl,
+          new Error(`${chromeError.message}; ${translateError.message}`),
+        );
+      }
     }
   }
 
   throw new Error(`${label} returned HTTP ${response.status}`);
+}
+
+async function fetchWithTranslate(url, label, fetchImpl) {
+  const translatedUrl = new URL(url);
+  translatedUrl.hostname = `${url.hostname.replaceAll(".", "-")}.translate.goog`;
+  translatedUrl.searchParams.set("_x_tr_sl", "auto");
+  translatedUrl.searchParams.set("_x_tr_tl", "en");
+  translatedUrl.searchParams.set("_x_tr_hl", "en");
+
+  const response = await fetchImpl(translatedUrl, {
+    redirect: "follow",
+    signal: AbortSignal.timeout(60_000),
+    headers: {
+      accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "accept-language": "en-US,en;q=0.9",
+      "cache-control": "no-cache",
+      "user-agent": CHROME_USER_AGENT,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`${label} Translate proxy returned HTTP ${response.status}`);
+  }
+
+  const html = await response.text();
+  if (html.length < 5_000) {
+    throw new Error(`${label} Translate proxy returned only ${html.length} characters`);
+  }
+  return html;
+}
+
+function canonicalizeHermesUrl(href, origin) {
+  const url = new URL(href, origin);
+  if (url.hostname.endsWith(".translate.goog")) {
+    url.hostname = "www.hermes.com";
+  }
+  for (const key of [...url.searchParams.keys()]) {
+    if (key.startsWith("_x_tr_")) url.searchParams.delete(key);
+  }
+  return url.href;
 }
 
 async function fetchWithReader(url, label, fetchImpl, chromeError) {

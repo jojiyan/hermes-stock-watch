@@ -283,7 +283,7 @@ async function fetchWithReader(url, label, fetchImpl, chromeError) {
     redirect: "follow",
     signal: AbortSignal.timeout(60_000),
     headers: {
-      accept: "application/json",
+      accept: "text/plain",
       "x-no-cache": "true",
       "x-cache-tolerance": "0",
       "x-retain-links": "all",
@@ -296,8 +296,7 @@ async function fetchWithReader(url, label, fetchImpl, chromeError) {
     throw new Error(`${label} fallbacks failed: ${chromeError.message}; Reader HTTP ${response.status}`);
   }
 
-  const payload = await response.json();
-  const content = payload?.data?.content || payload?.content || "";
+  const content = await response.text();
   if (typeof content !== "string" || content.length < 1_000) {
     throw new Error(`${label} Reader returned only ${content?.length || 0} characters`);
   }

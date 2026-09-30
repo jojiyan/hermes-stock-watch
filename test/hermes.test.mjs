@@ -294,7 +294,9 @@ test("Firecrawl product verification accepts a matching official purchasable pag
       markdown:
         "# Garden Party 30 bag\nColor: Noir\nAdd to bag\nBag in Negonda calfskin" +
         " ".repeat(2_000),
-      rawHtml: "<html>Hermès Add to bag H069573CKAC</html>" + " ".repeat(6_000),
+      rawHtml:
+        '<html>H069573CKAC<button name="add-to-cart" data-testid="Add to bag"><span>Add to bag</span></button></html>' +
+        " ".repeat(6_000),
       metadata: {
         statusCode: 200,
         sourceURL: candidate.url,

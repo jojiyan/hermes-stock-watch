@@ -210,13 +210,13 @@ test("requires the official product reference before accepting a purchasable pag
 
 test("parses trusted Firecrawl category markdown and preserves category availability", () => {
   const markdown = [
-    "[Neo Garden 23 bag](https://www.hermes.com/us/en/product/neo-garden-23-bag-H123456/)\\nColor: Green\\nPrice $3,000\\nDiscover",
-    "[Kelly Pochette bag](https://www.hermes.com/us/en/product/kelly-pochette-bag-H223456/)\\nColor: Noir\\nPrice $9,000",
-    "[Picotin Lock 18 bag](https://www.hermes.com/us/en/product/picotin-lock-18-bag-H323456/)\\nColor: Gold\\nPrice $4,000",
-    "[Bolide mini bag](https://www.hermes.com/us/en/product/bolide-mini-bag-H423456/)\\nColor: Red\\nPrice $7,000",
-    "[So Medor bag](https://www.hermes.com/us/en/product/so-medor-bag-H523456/)\\nColor: Grey\\nPrice $8,000",
+    "[Neo Garden 23 bag](https://www.hermes.com/us/en/product/neo-garden-23-bag-H123456/)\nColor: Green\nPrice $3,000\nDiscover",
+    "[Kelly Pochette bag](https://www.hermes.com/us/en/product/kelly-pochette-bag-H223456/)\nColor: Noir\nPrice $9,000",
+    "[Picotin Lock 18 bag](https://www.hermes.com/us/en/product/picotin-lock-18-bag-H323456/)\nColor: Gold\nPrice $4,000",
+    "[Bolide mini bag](https://www.hermes.com/us/en/product/bolide-mini-bag-H423456/)\nColor: Red\nPrice $7,000",
+    "[So Medor bag](https://www.hermes.com/us/en/product/so-medor-bag-H523456/)\nColor: Grey\nPrice $8,000",
     " ".repeat(2_000),
-  ].join("\\n\\n");
+  ].join("\n\n");
 
   const products = parseCategoryDocument(
     {
@@ -257,7 +257,7 @@ test("Firecrawl product verification rejects stale purchase text when unavailabl
     {
       source: "firecrawl",
       markdown:
-        "# Neo Garden 23 bag\\nAdd to cart\\nUnfortunately this product is no longer available" +
+        "# Neo Garden 23 bag\nAdd to cart\nUnfortunately this product is no longer available" +
         " ".repeat(2_000),
       rawHtml: "<html>Hermès Add to cart Unfortunately this product is no longer available</html>" +
         " ".repeat(6_000),
@@ -292,7 +292,7 @@ test("Firecrawl product verification accepts a matching official purchasable pag
     {
       source: "firecrawl",
       markdown:
-        "# Garden Party 30 bag\\nColor: Noir\\nAdd to bag\\nBag in Negonda calfskin" +
+        "# Garden Party 30 bag\nColor: Noir\nAdd to bag\nBag in Negonda calfskin" +
         " ".repeat(2_000),
       rawHtml: "<html>Hermès Add to bag H069573CKAC</html>" + " ".repeat(6_000),
       metadata: {
@@ -328,7 +328,7 @@ test("Firecrawl product verification rejects a mismatched SKU", () => {
       parseProductPageDocument(
         {
           source: "firecrawl",
-          markdown: "# Kelly 25 bag\\nAdd to cart" + " ".repeat(2_000),
+          markdown: "# Kelly 25 bag\nAdd to cart" + " ".repeat(2_000),
           rawHtml: "<html>Hermès Add to cart</html>" + " ".repeat(6_000),
           metadata: {
             statusCode: 200,

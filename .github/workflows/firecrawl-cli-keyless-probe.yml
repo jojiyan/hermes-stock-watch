@@ -1,0 +1,24 @@
+name: Firecrawl CLI keyless probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/firecrawl-cli-keyless-probe.yml"
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Probe Firecrawl CLI without API key
+        shell: bash
+        run: |
+          rm -f /tmp/hermes.md
+          npx -y firecrawl-cli@latest scrape "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/" -o /tmp/hermes.md
+          echo "BYTES=$(wc -c < /tmp/hermes.md)"
+          grep -E -m 5 "Neo Garden|Lindy II mini|Women's bags and clutches" /tmp/hermes.md || true

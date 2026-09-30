@@ -61,7 +61,7 @@ jobs:
           git push
 
       - name: Send secondary QQ email alert
-        if: ${{ hashFiles('email-alerts.json') != '' && secrets.HERMES_EMAIL_CONFIG != '' }}
+        if: ${{ hashFiles('email-alerts.json') != '' }}
         continue-on-error: true
         shell: bash
         env:
@@ -73,7 +73,11 @@ jobs:
           import smtplib
           from email.message import EmailMessage
 
-          raw = os.environ["HERMES_EMAIL_CONFIG"]
+          raw = os.environ.get("HERMES_EMAIL_CONFIG", "").strip()
+          if not raw:
+              print("Secondary email is not configured; skipping.")
+              raise SystemExit(0)
+
           parts = raw.split("|", 2)
           if len(parts) != 3:
               raise SystemExit("HERMES_EMAIL_CONFIG must be FROM|TO|QQ_SMTP_AUTH_CODE")

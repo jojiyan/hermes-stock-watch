@@ -33,7 +33,7 @@ No `FIRECRAWL_API_KEY` repository secret is required.
 The workflow runs at minutes 7, 22, 37, and 52 of every hour (every 15 minutes). Each check:
 
 - fetches the Hermès US and Canada women's bags category pages;
-- filters for Neo Garden 23, Garden Party 30, Mini Lindy / Lindy II mini, and all Birkin, Kelly, and Constance bags;
+- filters for Neo Garden 23, Garden Party 30, Garden Party 36, Mini Bolide / Bolide mini, Mini Lindy / Lindy II mini, and all Birkin, Kelly, and Constance bags;
 - treats category-page `Discover` / unavailable markers only as a screening signal;
 - opens a target's official product page when the category page suggests it may be purchasable;
 - requires the expected SKU/reference;

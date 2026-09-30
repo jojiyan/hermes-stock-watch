@@ -192,7 +192,11 @@ async function createStockIssue(product) {
       "user-agent": "hermes-stock-watch",
       "x-github-api-version": "2022-11-28",
     },
-    body: JSON.stringify({ title: titleParts.join("｜"), body }),
+    body: JSON.stringify({
+      title: titleParts.join("｜"),
+      body,
+      assignees: [repositoryOwner],
+    }),
   });
 
   if (!response.ok) {

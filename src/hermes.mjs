@@ -221,12 +221,40 @@ export function parseProductPageFirecrawl(document, candidate) {
       ? `${currency === "CAD" ? "CA$" : currency === "USD" ? "$" : currency}${Number(amount).toLocaleString("en-US")}`
       : "");
 
-  const unavailable =
-    /Unfortunately this product is no longer available/i.test(combined) ||
-    /This product is currently unavailable/i.test(combined) ||
-    /This item is currently unavailable/i.test(combined) ||
-    /\bSold out\b/i.test(combined);
-  const hasPurchaseAction = /\bAdd to (?:cart|bag)\b/i.test(combined);
+  const unavailableInMarkdown =
+    /Unfortunately this product is no longer available/i.test(markdown) ||
+    /This product is currently unavailable/i.test(markdown) ||
+    /This item is currently unavailable/i.test(markdown) ||
+    /\bSold out\b/i.test(markdown);
+
+  const unavailableMessageBlock =
+    /class=["'][^"']*message-info[^"']*["'][^>]*>\s*(?:<[^>]+>\s*)*(?:Unfortunately this product is no longer available|This product is currently unavailable|This item is currently unavailable|Sold out)/i.test(
+      rawHtml,
+    );
+
+  const buttons = [...rawHtml.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)];
+  const purchaseButton = buttons.find((match) => {
+    const attrs = match[1] || "";
+    const label = htmlToText(match[2] || "");
+    return (
+      /name=["']add-to-cart["']/i.test(attrs) ||
+      /data-testid=["']Add to (?:cart|bag)["']/i.test(attrs) ||
+      /\bAdd to (?:cart|bag)\b/i.test(label)
+    );
+  });
+
+  const purchaseAttrs = purchaseButton?.[1] || "";
+  const purchaseLabel = purchaseButton ? htmlToText(purchaseButton[2] || "") : "";
+  const purchaseButtonDisabled =
+    /(?:^|\s)disabled(?:\s|=|$)/i.test(purchaseAttrs) ||
+    /aria-disabled=["']true["']/i.test(purchaseAttrs);
+
+  const hasEnabledPurchaseAction =
+    Boolean(purchaseButton) &&
+    /\bAdd to (?:cart|bag)\b/i.test(purchaseLabel) &&
+    !purchaseButtonDisabled;
+
+  const unavailable = unavailableInMarkdown || unavailableMessageBlock;
 
   return {
     ...candidate,
@@ -235,8 +263,9 @@ export function parseProductPageFirecrawl(document, candidate) {
     color,
     material,
     price,
-    available: hasPurchaseAction && !unavailable,
-    purchaseAction: hasPurchaseAction ? "Add to cart / Add to bag" : "",
+    available: hasEnabledPurchaseAction && !unavailable,
+    purchaseAction: hasEnabledPurchaseAction ? "Add to cart / Add to bag" : "",
+    purchaseButtonDisabled,
   };
 }
 
@@ -346,7 +375,7 @@ async function fetchWithFirecrawl(url, label, marketCode, fetchImpl) {
     body: JSON.stringify({
       url: String(url),
       formats: ["markdown", "rawHtml"],
-      proxy: "stealth",
+      proxy: "basic",
       waitFor: 3000,
       maxAge: 0,
       onlyMainContent: false,

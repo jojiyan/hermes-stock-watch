@@ -112,16 +112,21 @@ export function parseCategoryHtml(html, market) {
 }
 
 export function parseCategoryDocument(document, market) {
+  if (document && typeof document === "object" && document.source === "firecrawl") {
+    validateFirecrawlDocument(document, market, "category");
+    return parseCategoryMarkdown(document.markdown, market);
+  }
+
   return parseCategoryHtml(document, market);
 }
 
 export function parseCategoryMarkdown(markdown, market) {
   if (typeof markdown !== "string" || markdown.length < 1_000) {
-    throw new Error(`${market.code}: Reader category response is unexpectedly short`);
+    throw new Error(`${market.code}: category markdown response is unexpectedly short`);
   }
 
   if (/sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(markdown)) {
-    throw new Error(`${market.code}: Reader received an access-block page`);
+    throw new Error(`${market.code}: category markdown is an access-block page`);
   }
 
   const links = [...markdown.matchAll(/\[([^\]\n]+)\]\((https?:\/\/www\.hermes\.com\/(?:us|ca)\/en\/product\/[^)\s]+)(?:\s+"[^"]*")?\)/gi)];
@@ -156,9 +161,83 @@ export function parseCategoryMarkdown(markdown, market) {
 
   const uniqueProducts = [...new Map(products.map((product) => [product.key, product])).values()];
   if (uniqueProducts.length < 5) {
-    throw new Error(`${market.code}: Reader parsed only ${uniqueProducts.length} products`);
+    throw new Error(`${market.code}: parsed only ${uniqueProducts.length} products from category markdown`);
   }
   return uniqueProducts;
+}
+
+export function parseProductPageDocument(document, candidate) {
+  if (document && typeof document === "object" && document.source === "firecrawl") {
+    return parseProductPageFirecrawl(document, candidate);
+  }
+
+  return parseProductPageHtml(document, candidate);
+}
+
+export function parseProductPageFirecrawl(document, candidate) {
+  validateFirecrawlDocument(document, candidate, "product");
+
+  const markdown = document.markdown || "";
+  const rawHtml = document.rawHtml || "";
+  const metadata = document.metadata || {};
+  const combined = `${markdown}\n${rawHtml}`;
+
+  const pageSku =
+    normalizeDetail(metadata["product:retailer_item_id"]) ||
+    normalizeDetail(
+      rawHtml.match(
+        /<meta\b[^>]*(?:property|name)=["']product:retailer_item_id["'][^>]*content=["']([^"']+)["']/i,
+      )?.[1],
+    );
+
+  if (!pageSku) {
+    throw new Error(`${candidate.market}: Firecrawl product page is incomplete; SKU metadata is missing`);
+  }
+
+  if (candidate.sku && pageSku.toUpperCase() !== candidate.sku.toUpperCase()) {
+    throw new Error(
+      `${candidate.market}: Firecrawl product page SKU ${pageSku} did not match ${candidate.sku}`,
+    );
+  }
+
+  const name =
+    normalizeDetail(metadata.name || metadata.ogTitle || metadata["og:title"]) ||
+    candidate.name;
+  const color =
+    normalizeDetail(
+      markdown.match(/\bColor\s*:\s*([^\n]+)/i)?.[1] ||
+      markdown.match(/\bColor\s*,?\s*([^\n]+?)\s+selected\b/i)?.[1],
+    ) || candidate.color;
+  const material = normalizeDetail(
+    markdown.match(
+      /\bBag in\s+(.+?)(?=\s+-\s+|\s+As this product|\s+Made in\b|\s+Metallic finish\b|\s+Dimensions\b|\n)/i,
+    )?.[1],
+  );
+  const amount = normalizeDetail(metadata["product:price:amount"]);
+  const currency = normalizeDetail(metadata["product:price:currency"]);
+  const price =
+    candidate.price ||
+    (amount
+      ? `${currency === "CAD" ? "CA$" : currency === "USD" ? "$" : currency}${Number(amount).toLocaleString("en-US")}`
+      : "");
+
+  const unavailable =
+    /Unfortunately this product is no longer available/i.test(combined) ||
+    /This product is currently unavailable/i.test(combined) ||
+    /This item is currently unavailable/i.test(combined) ||
+    /\bSold out\b/i.test(combined);
+  const hasPurchaseAction = /\bAdd to (?:cart|bag)\b/i.test(combined);
+
+  return {
+    ...candidate,
+    sku: pageSku.toUpperCase(),
+    name,
+    color,
+    material,
+    price,
+    available: hasPurchaseAction && !unavailable,
+    purchaseAction: hasPurchaseAction ? "Add to cart / Add to bag" : "",
+  };
 }
 
 export function parseProductPageHtml(html, candidate) {
@@ -227,6 +306,10 @@ export async function fetchCategory(market, fetchImpl = fetch, now = Date.now())
   const tenMinuteBucket = Math.floor(now / (10 * 60 * 1000));
   url.searchParams.set("_hwatch", String(tenMinuteBucket));
 
+  if (process.env.FIRECRAWL_API_KEY && fetchImpl === fetch) {
+    return fetchWithFirecrawl(url, `${market.code}: Hermès`, market.code, fetchImpl);
+  }
+
   return fetchHtml(url, `${market.code}: Hermès`, fetchImpl);
 }
 
@@ -239,7 +322,102 @@ export async function fetchProductPage(
   const tenMinuteBucket = Math.floor(now / (10 * 60 * 1000));
   url.searchParams.set("_hwatch", String(tenMinuteBucket));
 
+  if (process.env.FIRECRAWL_API_KEY && fetchImpl === fetch) {
+    return fetchWithFirecrawl(
+      url,
+      `${product.market}: product page`,
+      product.market,
+      fetchImpl,
+    );
+  }
+
   return fetchHtml(url, `${product.market}: product page`, fetchImpl);
+}
+
+async function fetchWithFirecrawl(url, label, marketCode, fetchImpl) {
+  const response = await fetchImpl("https://api.firecrawl.dev/v2/scrape", {
+    method: "POST",
+    signal: AbortSignal.timeout(90_000),
+    headers: {
+      accept: "application/json",
+      authorization: `Bearer ${process.env.FIRECRAWL_API_KEY}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      url: String(url),
+      formats: ["markdown", "rawHtml"],
+      proxy: "stealth",
+      waitFor: 3000,
+      maxAge: 0,
+      onlyMainContent: false,
+      location: {
+        country: marketCode === "CA" ? "CA" : "US",
+        languages: ["en"],
+      },
+    }),
+  });
+
+  const text = await response.text();
+  if (!response.ok) {
+    throw new Error(
+      `${label} Firecrawl returned HTTP ${response.status}: ${text.slice(0, 300)}`,
+    );
+  }
+
+  let payload;
+  try {
+    payload = JSON.parse(text);
+  } catch {
+    throw new Error(`${label} Firecrawl returned invalid JSON`);
+  }
+
+  const data = payload?.data || payload;
+  const document = {
+    source: "firecrawl",
+    markdown: data?.markdown || "",
+    rawHtml: data?.rawHtml || "",
+    metadata: data?.metadata || {},
+  };
+
+  validateFirecrawlDocument(document, { code: marketCode, market: marketCode }, label);
+  return document;
+}
+
+function validateFirecrawlDocument(document, marketLike, label) {
+  const code = marketLike?.code || marketLike?.market || "UNKNOWN";
+  const markdown = document?.markdown || "";
+  const rawHtml = document?.rawHtml || "";
+  const metadata = document?.metadata || {};
+  const content = `${markdown}\n${rawHtml}`;
+
+  if (Number(metadata.statusCode || 200) !== 200) {
+    throw new Error(`${code}: ${label} Firecrawl page returned HTTP ${metadata.statusCode}`);
+  }
+
+  if (
+    /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge|attention required\s*!?\s*\|\s*cloudflare/i.test(
+      content,
+    )
+  ) {
+    throw new Error(`${code}: ${label} Firecrawl returned an access/challenge page`);
+  }
+
+  if (markdown.length < 1_000 && rawHtml.length < 5_000) {
+    throw new Error(`${code}: ${label} Firecrawl response is unexpectedly short`);
+  }
+
+  const sourceUrl = metadata.sourceURL || metadata.url || "";
+  if (sourceUrl) {
+    let parsed;
+    try {
+      parsed = new URL(sourceUrl);
+    } catch {
+      throw new Error(`${code}: ${label} Firecrawl returned an invalid source URL`);
+    }
+    if (parsed.hostname !== "www.hermes.com") {
+      throw new Error(`${code}: ${label} Firecrawl source was not official Hermès`);
+    }
+  }
 }
 
 async function fetchHtml(url, label, fetchImpl) {

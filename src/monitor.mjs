@@ -6,7 +6,7 @@ import {
   fetchCategory,
   fetchProductPage,
   parseCategoryDocument,
-  parseProductPageHtml,
+  parseProductPageDocument,
 } from "./hermes.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -45,13 +45,23 @@ for (const market of MARKETS) {
       marketSeenTargetKeys.add(candidate.key);
 
       let product;
-      try {
-        const productHtml = await fetchProductPage(candidate);
-        product = parseProductPageHtml(productHtml, candidate);
+      if (!candidate.available) {
+        product = {
+          ...candidate,
+          material: "",
+          available: false,
+          purchaseAction: "",
+        };
         targets.push(product);
-      } catch (error) {
-        verificationErrors.push({ sku: candidate.sku, error: error.message });
-        continue;
+      } else {
+        try {
+          const productDocument = await fetchProductPage(candidate);
+          product = parseProductPageDocument(productDocument, candidate);
+          targets.push(product);
+        } catch (error) {
+          verificationErrors.push({ sku: candidate.sku, error: error.message });
+          continue;
+        }
       }
 
       const nextStatus = product.available ? "in_stock" : "out_of_stock";

@@ -1,3 +1,4 @@
+import { fetchWithFirecrawl } from "./firecrawl.mjs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 
@@ -440,6 +441,16 @@ async function fetchHtml(url, label, fetchImpl) {
 
   if (response.ok) {
     const html = await response.text();
+    validateOfficialHermesHtml(html, label);
+    return html;
+  }
+
+  if (
+    fetchImpl === fetch &&
+    process.env.FIRECRAWL_API_KEY &&
+    [403, 429].includes(response.status)
+  ) {
+    const html = await fetchWithFirecrawl(url, label);
     validateOfficialHermesHtml(html, label);
     return html;
   }

@@ -343,3 +343,69 @@ test("Firecrawl product verification rejects a mismatched SKU", () => {
   );
 });
 
+
+test("Firecrawl product verification rejects a disabled real Add to cart button", () => {
+  const candidate = {
+    key: "US:H088612CKAO",
+    market: "US",
+    marketName: "Hermès USA",
+    sku: "H088612CKAO",
+    name: "Neo Garden 23 bag",
+    color: "Green",
+    price: "$3,000",
+    url: "https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/",
+  };
+
+  const product = parseProductPageDocument(
+    {
+      source: "firecrawl",
+      markdown: "# Neo Garden 23 bag\nAdd to cart" + " ".repeat(2_000),
+      rawHtml:
+        '<html>H088612CKAO<button name="add-to-cart" data-testid="Add to cart" disabled="true" aria-disabled="true"><span>Add to cart</span></button></html>' +
+        " ".repeat(6_000),
+      metadata: {
+        statusCode: 200,
+        sourceURL: candidate.url,
+        name: "Neo Garden 23 bag",
+        "product:retailer_item_id": "H088612CKAO",
+      },
+    },
+    candidate,
+  );
+
+  assert.equal(product.available, false);
+  assert.equal(product.purchaseButtonDisabled, true);
+});
+
+test("Firecrawl product verification ignores unavailable text inside translation scripts", () => {
+  const candidate = {
+    key: "US:H088914CKP0",
+    market: "US",
+    marketName: "Hermès USA",
+    sku: "H088914CKP0",
+    name: "Hermès Videpoches bag",
+    color: "Grey",
+    price: "$5,500",
+    url: "https://www.hermes.com/us/en/product/hermes-videpoches-bag-H088914CKP0/",
+  };
+
+  const product = parseProductPageDocument(
+    {
+      source: "firecrawl",
+      markdown: "# Hermès Videpoches bag\nAdd to cart" + " ".repeat(2_000),
+      rawHtml:
+        '<html>H088914CKP0<script>{"translation":"This product is currently unavailable in store"}</script><button name="add-to-cart" data-testid="Add to cart"><span>Add to cart</span></button></html>' +
+        " ".repeat(6_000),
+      metadata: {
+        statusCode: 200,
+        sourceURL: candidate.url,
+        name: "Hermès Videpoches bag",
+        "product:retailer_item_id": "H088914CKP0",
+      },
+    },
+    candidate,
+  );
+
+  assert.equal(product.available, true);
+  assert.equal(product.purchaseButtonDisabled, false);
+});

@@ -23,9 +23,9 @@ concurrency:
 jobs:
   check-stock:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     env:
-      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      FIRECRAWL_CLI: "1"
     steps:
       - name: Check out monitor
         uses: actions/checkout@v4
@@ -35,15 +35,13 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Install Firecrawl CLI
+        run: npm install --global firecrawl-cli@latest
+
       - name: Run safety tests
         run: npm test
 
-      - name: Firecrawl not configured yet
-        if: env.FIRECRAWL_API_KEY == ''
-        run: echo "FIRECRAWL_API_KEY is not configured; live stock check skipped."
-
       - name: Check Hermes US and Canada through Firecrawl
-        if: env.FIRECRAWL_API_KEY != ''
         run: node src/monitor.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,7 +49,6 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
       - name: Save stock state
-        if: env.FIRECRAWL_API_KEY != ''
         shell: bash
         run: |
           if git diff --quiet -- state.json; then

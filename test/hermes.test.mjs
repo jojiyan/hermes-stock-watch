@@ -143,3 +143,65 @@ test("rejects stale Add to cart text when the page says unavailable", () => {
 
   assert.equal(parseProductPageHtml(html, candidate).available, false);
 });
+
+test("rejects a challenge page even if it contains stale Add to cart text", () => {
+  const candidate = {
+    key: "US:H123456",
+    market: "US",
+    marketName: "Hermès USA",
+    sku: "H123456",
+    name: "Kelly 25 bag",
+    color: "Noir",
+    price: "$12,000",
+    url: "https://www.hermes.com/us/en/product/kelly-25-bag-H123456/",
+  };
+  const html = `<html><body><h1>Just a moment...</h1><div>cf-chl</div><button>Add to cart</button>${" ".repeat(6000)}</body></html>`;
+
+  assert.throws(
+    () => parseProductPageHtml(html, candidate),
+    /access-block page/,
+  );
+});
+
+test("rejects incomplete product HTML instead of interpreting Add to bag as stock", () => {
+  const candidate = {
+    key: "CA:H123456",
+    market: "CA",
+    marketName: "Hermès Canada",
+    sku: "H123456",
+    name: "Constance 18 bag",
+    color: "Gold",
+    price: "CA$12,000",
+    url: "https://www.hermes.com/ca/en/product/constance-18-bag-H123456/",
+  };
+
+  assert.throws(
+    () => parseProductPageHtml("<html><button>Add to bag</button></html>", candidate),
+    /unexpectedly short/,
+  );
+});
+
+test("requires the official product reference before accepting a purchasable page", () => {
+  const candidate = {
+    key: "US:H123456",
+    market: "US",
+    marketName: "Hermès USA",
+    sku: "H123456",
+    name: "Birkin 25 bag",
+    color: "Gold",
+    price: "$12,000",
+    url: "https://www.hermes.com/us/en/product/birkin-25-bag-H123456/",
+  };
+  const html = page([
+    `<h1>Birkin 25 bag</h1>
+     <div>Price $12,000</div>
+     <div>Color, Gold selected</div>
+     <button>Add to cart</button>
+     <p>Bag in Togo calfskin</p>`,
+  ]);
+
+  assert.throws(
+    () => parseProductPageHtml(html, candidate),
+    /product reference is missing/,
+  );
+});

@@ -47,6 +47,9 @@ test("matches only the requested Hermès bag families", () => {
   const wanted = [
     "Neo Garden 23 bag",
     "Garden Party 30 bag",
+    "Garden Party 36 bag",
+    "Bolide mini bag",
+    "Mini Bolide bag",
     "Lindy II mini bag",
     "Lindy mini bag",
     "Mini Lindy bag",
@@ -57,7 +60,7 @@ test("matches only the requested Hermès bag families", () => {
   const unwanted = [
     "Garden Party 23 bag",
     "Mini Garden Party bag",
-    "Garden Party 36 bag",
+    "Garden Party 49 voyage bag",
     "Picotin Lock 18 bag",
     "Lindy 26 bag",
   ];
@@ -90,6 +93,7 @@ test("uses the category availability marker and extracts product data", () => {
   assert.equal(products[1].target, true);
   assert.equal(products[1].price, "$3,000");
   assert.equal(products[2].target, false);
+  assert.equal(products[4].target, true);
 });
 
 test("confirms a product page and extracts exact alert details", () => {

@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import {
   isTargetProduct,
   parseCategoryHtml,
+  parseCategoryDocument,
+  parseProductPageDocument,
   parseProductPageHtml,
 } from "../src/hermes.mjs";
 
@@ -203,5 +205,140 @@ test("requires the official product reference before accepting a purchasable pag
   assert.throws(
     () => parseProductPageHtml(html, candidate),
     /product reference is missing/,
+  );
+});
+
+test("parses trusted Firecrawl category markdown and preserves category availability", () => {
+  const markdown = [
+    "[Neo Garden 23 bag](https://www.hermes.com/us/en/product/neo-garden-23-bag-H123456/)\\nColor: Green\\nPrice $3,000\\nDiscover",
+    "[Kelly Pochette bag](https://www.hermes.com/us/en/product/kelly-pochette-bag-H223456/)\\nColor: Noir\\nPrice $9,000",
+    "[Picotin Lock 18 bag](https://www.hermes.com/us/en/product/picotin-lock-18-bag-H323456/)\\nColor: Gold\\nPrice $4,000",
+    "[Bolide mini bag](https://www.hermes.com/us/en/product/bolide-mini-bag-H423456/)\\nColor: Red\\nPrice $7,000",
+    "[So Medor bag](https://www.hermes.com/us/en/product/so-medor-bag-H523456/)\\nColor: Grey\\nPrice $8,000",
+    " ".repeat(2_000),
+  ].join("\\n\\n");
+
+  const products = parseCategoryDocument(
+    {
+      source: "firecrawl",
+      markdown,
+      rawHtml: "",
+      metadata: {
+        statusCode: 200,
+        sourceURL:
+          "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
+      },
+    },
+    MARKET,
+  );
+
+  assert.equal(products.length, 5);
+  assert.equal(products[0].name, "Neo Garden 23 bag");
+  assert.equal(products[0].available, false);
+  assert.equal(products[0].target, true);
+  assert.equal(products[1].name, "Kelly Pochette bag");
+  assert.equal(products[1].available, true);
+  assert.equal(products[1].target, true);
+});
+
+test("Firecrawl product verification rejects stale purchase text when unavailable", () => {
+  const candidate = {
+    key: "US:H088612CKAO",
+    market: "US",
+    marketName: "Hermès USA",
+    sku: "H088612CKAO",
+    name: "Neo Garden 23 bag",
+    color: "Green",
+    price: "$3,000",
+    url: "https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/",
+  };
+
+  const product = parseProductPageDocument(
+    {
+      source: "firecrawl",
+      markdown:
+        "# Neo Garden 23 bag\\nAdd to cart\\nUnfortunately this product is no longer available" +
+        " ".repeat(2_000),
+      rawHtml: "<html>Hermès Add to cart Unfortunately this product is no longer available</html>" +
+        " ".repeat(6_000),
+      metadata: {
+        statusCode: 200,
+        sourceURL: candidate.url,
+        name: "Neo Garden 23 bag",
+        "product:retailer_item_id": "H088612CKAO",
+        "product:price:amount": "3000",
+        "product:price:currency": "USD",
+      },
+    },
+    candidate,
+  );
+
+  assert.equal(product.available, false);
+});
+
+test("Firecrawl product verification accepts a matching official purchasable page", () => {
+  const candidate = {
+    key: "CA:H069573CKAC",
+    market: "CA",
+    marketName: "Hermès Canada",
+    sku: "H069573CKAC",
+    name: "Garden Party 30 bag",
+    color: "Noir",
+    price: "CA$4,000",
+    url: "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKAC/",
+  };
+
+  const product = parseProductPageDocument(
+    {
+      source: "firecrawl",
+      markdown:
+        "# Garden Party 30 bag\\nColor: Noir\\nAdd to bag\\nBag in Negonda calfskin" +
+        " ".repeat(2_000),
+      rawHtml: "<html>Hermès Add to bag H069573CKAC</html>" + " ".repeat(6_000),
+      metadata: {
+        statusCode: 200,
+        sourceURL: candidate.url,
+        name: "Garden Party 30 bag",
+        "product:retailer_item_id": "H069573CKAC",
+        "product:price:amount": "4000",
+        "product:price:currency": "CAD",
+      },
+    },
+    candidate,
+  );
+
+  assert.equal(product.available, true);
+  assert.equal(product.sku, "H069573CKAC");
+});
+
+test("Firecrawl product verification rejects a mismatched SKU", () => {
+  const candidate = {
+    key: "US:H123456",
+    market: "US",
+    marketName: "Hermès USA",
+    sku: "H123456",
+    name: "Kelly 25 bag",
+    color: "Noir",
+    price: "$12,000",
+    url: "https://www.hermes.com/us/en/product/kelly-25-bag-H123456/",
+  };
+
+  assert.throws(
+    () =>
+      parseProductPageDocument(
+        {
+          source: "firecrawl",
+          markdown: "# Kelly 25 bag\\nAdd to cart" + " ".repeat(2_000),
+          rawHtml: "<html>Hermès Add to cart</html>" + " ".repeat(6_000),
+          metadata: {
+            statusCode: 200,
+            sourceURL: candidate.url,
+            name: "Kelly 25 bag",
+            "product:retailer_item_id": "H999999",
+          },
+        },
+        candidate,
+      ),
+    /did not match/,
   );
 });

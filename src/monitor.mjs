@@ -11,6 +11,7 @@ import {
 
 const here = dirname(fileURLToPath(import.meta.url));
 const statePath = resolve(here, "../state.json");
+const emailAlertsPath = resolve(here, "../email-alerts.json");
 const dryRun = /^(1|true|yes)$/i.test(process.env.DRY_RUN || "");
 const repository = process.env.GITHUB_REPOSITORY || "";
 const token = process.env.GITHUB_TOKEN || "";
@@ -152,6 +153,14 @@ if (!repository || !token || !repositoryOwner) {
 
 for (const product of alerts) {
   await createStockIssue(product);
+}
+
+if (alerts.length > 0) {
+  await writeFile(
+    emailAlertsPath,
+    `${JSON.stringify({ checkedAt: nowIso, alerts }, null, 2)}\n`,
+    "utf8",
+  );
 }
 
 await writeFile(statePath, `${JSON.stringify(state, null, 2)}\n`, "utf8");

@@ -335,6 +335,10 @@ export async function fetchCategory(market, fetchImpl = fetch, now = Date.now())
   const tenMinuteBucket = Math.floor(now / (10 * 60 * 1000));
   url.searchParams.set("_hwatch", String(tenMinuteBucket));
 
+  if (process.env.FIRECRAWL_CLI === "1" && fetchImpl === fetch) {
+    return fetchWithFirecrawlCli(url, `${market.code}: Hermès`, market.code);
+  }
+
   if (process.env.FIRECRAWL_API_KEY && fetchImpl === fetch) {
     return fetchWithFirecrawl(url, `${market.code}: Hermès`, market.code, fetchImpl);
   }
@@ -351,6 +355,14 @@ export async function fetchProductPage(
   const tenMinuteBucket = Math.floor(now / (10 * 60 * 1000));
   url.searchParams.set("_hwatch", String(tenMinuteBucket));
 
+  if (process.env.FIRECRAWL_CLI === "1" && fetchImpl === fetch) {
+    return fetchWithFirecrawlCli(
+      url,
+      `${product.market}: product page`,
+      product.market,
+    );
+  }
+
   if (process.env.FIRECRAWL_API_KEY && fetchImpl === fetch) {
     return fetchWithFirecrawl(
       url,
@@ -361,6 +373,53 @@ export async function fetchProductPage(
   }
 
   return fetchHtml(url, `${product.market}: product page`, fetchImpl);
+}
+
+async function fetchWithFirecrawlCli(url, label, marketCode) {
+  try {
+    const { stdout, stderr } = await execFileAsync(
+      "firecrawl",
+      [
+        "scrape",
+        String(url),
+        "--format",
+        "markdown,rawHtml",
+      ],
+      {
+        timeout: 90_000,
+        maxBuffer: 30 * 1024 * 1024,
+        env: {
+          ...process.env,
+          NO_COLOR: "1",
+        },
+      },
+    );
+
+    let data;
+    try {
+      data = JSON.parse(stdout);
+    } catch {
+      throw new Error(
+        `CLI returned invalid JSON: ${stdout.slice(0, 300)}${stderr ? ` | ${stderr.slice(0, 200)}` : ""}`,
+      );
+    }
+
+    const document = {
+      source: "firecrawl",
+      markdown: data?.markdown || data?.data?.markdown || "",
+      rawHtml: data?.rawHtml || data?.data?.rawHtml || "",
+      metadata: data?.metadata || data?.data?.metadata || {},
+    };
+
+    validateFirecrawlDocument(
+      document,
+      { code: marketCode, market: marketCode },
+      label,
+    );
+    return document;
+  } catch (error) {
+    throw new Error(`${label} Firecrawl CLI failed: ${error.message}`);
+  }
 }
 
 async function fetchWithFirecrawl(url, label, marketCode, fetchImpl) {

@@ -1,0 +1,21 @@
+name: Hermes official backend probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/bck-diagnostic.mjs"
+      - ".github/workflows/hermes-bck-probe.yml"
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Probe official backend
+        run: node src/bck-diagnostic.mjs

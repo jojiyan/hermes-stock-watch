@@ -1,5 +1,38 @@
 {
   "version": 1,
-  "products": {},
-  "meta": {}
+  "products": {
+    "US:H085956CK3Q": {
+      "market": "US",
+      "sku": "H085956CK3Q",
+      "name": "Lindy II mini bag",
+      "color": "Pink",
+      "material": "",
+      "price": "$9,050",
+      "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK3Q/",
+      "status": "out_of_stock",
+      "changedAt": "2026-09-30T04:51:41.103Z"
+    },
+    "US:H088612CKAO": {
+      "market": "US",
+      "sku": "H088612CKAO",
+      "name": "Neo Garden 23 bag",
+      "color": "Green",
+      "material": "",
+      "price": "$3,000",
+      "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/",
+      "status": "out_of_stock",
+      "changedAt": "2026-09-30T04:51:41.103Z"
+    }
+  },
+  "meta": {
+    "keepAliveAt": "2026-09-30T04:51:41.103Z",
+    "lastSuccessfulMarkets": [
+      "US",
+      "CA"
+    ],
+    "initializedMarkets": [
+      "US",
+      "CA"
+    ]
+  }
 }

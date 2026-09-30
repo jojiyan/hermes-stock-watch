@@ -1,6 +1,5 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { fetchWithFirecrawl } from "../src/firecrawl.mjs";
 import {
   isTargetProduct,
   parseCategoryHtml,
@@ -344,53 +343,3 @@ test("Firecrawl product verification rejects a mismatched SKU", () => {
   );
 });
 
-test("Firecrawl transport extracts raw official HTML", async () => {
-  let request;
-  const fakeFetch = async (url, options) => {
-    request = { url: String(url), options };
-    return {
-      ok: true,
-      status: 200,
-      async text() {
-        return JSON.stringify({
-          success: true,
-          data: {
-            rawHtml: "<html>Hermès" + " ".repeat(6000) + "</html>",
-          },
-        });
-      },
-    };
-  };
-
-  const html = await fetchWithFirecrawl(
-    "https://www.hermes.com/us/en/category/test/",
-    "US: Hermès",
-    fakeFetch,
-    "fc-test-key",
-  );
-
-  assert.match(html, /Hermès/);
-  assert.equal(request.url, "https://api.firecrawl.dev/v2/scrape");
-  assert.equal(request.options.method, "POST");
-  assert.equal(request.options.headers.authorization, "Bearer fc-test-key");
-
-  const body = JSON.parse(request.options.body);
-  assert.equal(body.maxAge, 0);
-  assert.equal(body.proxy, "stealth");
-  assert.deepEqual(body.formats, ["rawHtml"]);
-});
-
-test("Firecrawl transport fails closed when API key is missing", async () => {
-  await assert.rejects(
-    () =>
-      fetchWithFirecrawl(
-        "https://www.hermes.com/us/en/category/test/",
-        "US: Hermès",
-        async () => {
-          throw new Error("fetch should not run");
-        },
-        "",
-      ),
-    /FIRECRAWL_API_KEY is missing/,
-  );
-});

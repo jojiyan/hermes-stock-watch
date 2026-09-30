@@ -50,7 +50,7 @@ export function parseCategoryHtml(html, market) {
   }
 
   if (
-    /sorry, you have been blocked|access denied|verify you are human|captcha/i.test(
+    /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(
       html,
     )
   ) {
@@ -112,11 +112,7 @@ export function parseCategoryHtml(html, market) {
 }
 
 export function parseCategoryDocument(document, market) {
-  if (/grid-product-/i.test(document)) {
-    return parseCategoryHtml(document, market);
-  }
-
-  return parseCategoryMarkdown(document, market);
+  return parseCategoryHtml(document, market);
 }
 
 export function parseCategoryMarkdown(markdown, market) {
@@ -124,7 +120,7 @@ export function parseCategoryMarkdown(markdown, market) {
     throw new Error(`${market.code}: Reader category response is unexpectedly short`);
   }
 
-  if (/sorry, you have been blocked|access denied|verify you are human|captcha/i.test(markdown)) {
+  if (/sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(markdown)) {
     throw new Error(`${market.code}: Reader received an access-block page`);
   }
 
@@ -171,7 +167,7 @@ export function parseProductPageHtml(html, candidate) {
   }
 
   if (
-    /sorry, you have been blocked|access denied|verify you are human|captcha/i.test(
+    /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(
       html,
     )
   ) {
@@ -182,7 +178,11 @@ export function parseProductPageHtml(html, candidate) {
   const pageSku =
     text.match(/Product reference\s*:\s*([A-Z0-9]+)/i)?.[1]?.trim() || "";
 
-  if (pageSku && candidate.sku && pageSku !== candidate.sku) {
+  if (!pageSku) {
+    throw new Error(`${candidate.market}: product page is incomplete; product reference is missing`);
+  }
+
+  if (candidate.sku && pageSku !== candidate.sku) {
     throw new Error(
       `${candidate.market}: product page SKU ${pageSku} did not match ${candidate.sku}`,
     );
@@ -260,59 +260,41 @@ async function fetchHtml(url, label, fetchImpl) {
     },
   });
 
-  if (response.ok) return response.text();
+  if (response.ok) {
+    const html = await response.text();
+    validateOfficialHermesHtml(html, label);
+    return html;
+  }
 
   if (
     fetchImpl === fetch &&
     process.env.GITHUB_ACTIONS === "true" &&
     [403, 429].includes(response.status)
   ) {
-    try {
-      return await fetchWithChrome(url, label);
-    } catch (chromeError) {
-      try {
-        return await fetchWithTranslate(url, label, fetchImpl);
-      } catch (translateError) {
-        return fetchWithReader(
-          url,
-          label,
-          fetchImpl,
-          new Error(`${chromeError.message}; ${translateError.message}`),
-        );
-      }
-    }
+    const html = await fetchWithChrome(url, label);
+    validateOfficialHermesHtml(html, label);
+    return html;
   }
 
   throw new Error(`${label} returned HTTP ${response.status}`);
 }
 
-async function fetchWithTranslate(url, label, fetchImpl) {
-  const translatedUrl = new URL(url);
-  translatedUrl.hostname = `${url.hostname.replaceAll(".", "-")}.translate.goog`;
-  translatedUrl.searchParams.set("_x_tr_sl", "auto");
-  translatedUrl.searchParams.set("_x_tr_tl", "en");
-  translatedUrl.searchParams.set("_x_tr_hl", "en");
-
-  const response = await fetchImpl(translatedUrl, {
-    redirect: "follow",
-    signal: AbortSignal.timeout(60_000),
-    headers: {
-      accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "accept-language": "en-US,en;q=0.9",
-      "cache-control": "no-cache",
-      "user-agent": CHROME_USER_AGENT,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`${label} Translate proxy returned HTTP ${response.status}`);
+function validateOfficialHermesHtml(html, label) {
+  if (typeof html !== "string" || html.length < 5_000) {
+    throw new Error(`${label} returned only ${html?.length || 0} characters`);
   }
 
-  const html = await response.text();
-  if (html.length < 5_000) {
-    throw new Error(`${label} Translate proxy returned only ${html.length} characters`);
+  if (
+    /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(
+      html,
+    )
+  ) {
+    throw new Error(`${label} returned an access/challenge page`);
   }
-  return html;
+
+  if (!/<html\b/i.test(html) || !/herm[eè]s/i.test(html)) {
+    throw new Error(`${label} did not return a recognizable Hermès HTML page`);
+  }
 }
 
 function canonicalizeHermesUrl(href, origin) {
@@ -326,36 +308,14 @@ function canonicalizeHermesUrl(href, origin) {
   return url.href;
 }
 
-async function fetchWithReader(url, label, fetchImpl, chromeError) {
-  const readerUrl = `https://r.jina.ai/${url.href}`;
-  const response = await fetchImpl(readerUrl, {
-    redirect: "follow",
-    signal: AbortSignal.timeout(60_000),
-    headers: {
-      accept: "text/plain",
-      "x-no-cache": "true",
-      "x-cache-tolerance": "0",
-      "x-retain-links": "all",
-      "x-timeout": "45",
-      "x-user-agent": CHROME_USER_AGENT,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`${label} fallbacks failed: ${chromeError.message}; Reader HTTP ${response.status}`);
-  }
-
-  const content = await response.text();
-  if (typeof content !== "string" || content.length < 1_000) {
-    throw new Error(
-      `${label} fallbacks failed: ${chromeError.message}; Reader returned only ${content?.length || 0} characters`,
-    );
-  }
-  return content;
-}
-
 async function fetchWithChrome(url, label) {
-  const chromePath = process.env.CHROME_PATH || "/usr/bin/google-chrome";
+  const chromePath =
+    process.env.CHROME_PATH ||
+    (process.platform === "darwin"
+      ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      : process.platform === "win32"
+        ? "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+        : "/usr/bin/google-chrome");
   try {
     const { stdout } = await execFileAsync(
       chromePath,

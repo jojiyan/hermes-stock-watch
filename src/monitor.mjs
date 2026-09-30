@@ -37,10 +37,12 @@ for (const market of MARKETS) {
     const targets = [];
     const verificationErrors = [];
     const marketIsInitializing = !initializedMarkets.has(market.code);
-    successfulMarkets.add(market.code);
+    const marketSeenTargetKeys = new Set();
+    const marketUpdates = new Map();
+    const marketAlerts = [];
 
     for (const candidate of candidates) {
-      seenTargetKeys.add(candidate.key);
+      marketSeenTargetKeys.add(candidate.key);
 
       let product;
       try {
@@ -60,7 +62,7 @@ for (const market of MARKETS) {
         product.available &&
         previous?.status !== "in_stock"
       ) {
-        alerts.push(product);
+        marketAlerts.push(product);
       }
 
       if (
@@ -72,7 +74,7 @@ for (const market of MARKETS) {
         previous.price !== product.price ||
         previous.url !== product.url
       ) {
-        state.products[product.key] = {
+        marketUpdates.set(product.key, {
           market: product.market,
           sku: product.sku,
           name: product.name,
@@ -82,12 +84,17 @@ for (const market of MARKETS) {
           url: product.url,
           status: nextStatus,
           changedAt: nowIso,
-        };
+        });
       }
     }
 
     if (verificationErrors.length === 0) {
+      successfulMarkets.add(market.code);
       initializedMarkets.add(market.code);
+
+      for (const key of marketSeenTargetKeys) seenTargetKeys.add(key);
+      for (const [key, value] of marketUpdates) state.products[key] = value;
+      alerts.push(...marketAlerts);
     }
 
     summaries.push({
@@ -97,9 +104,10 @@ for (const market of MARKETS) {
       verifiedTargets: targets.length,
       availableTargets: targets.filter((product) => product.available).length,
       verificationErrors,
+      committed: verificationErrors.length === 0,
     });
   } catch (error) {
-    summaries.push({ market: market.code, error: error.message });
+    summaries.push({ market: market.code, error: error.message, committed: false });
   }
 }
 

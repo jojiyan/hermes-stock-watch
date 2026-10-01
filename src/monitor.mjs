@@ -1,13 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
-import {
-  MARKETS,
-  fetchCategory,
-  fetchProductPage,
-  parseCategoryDocument,
-  parseProductPageDocument,
-} from "./hermes.mjs";
+import { checkMarkets } from "./check.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const statePath = resolve(here, "../state.json");
@@ -21,130 +15,16 @@ state.version = 1;
 state.products ||= {};
 state.meta ||= {};
 
-const now = new Date();
-const nowIso = now.toISOString();
-const successfulMarkets = new Set();
-const seenTargetKeys = new Set();
-const alerts = [];
-const summaries = [];
-const initializedMarkets = new Set(state.meta.initializedMarkets || []);
-
-for (const market of MARKETS) {
-  try {
-    const html = await fetchCategory(market);
-    const products = parseCategoryDocument(html, market);
-    const candidates = products.filter((product) => product.target);
-    const targets = [];
-    const verificationErrors = [];
-    const marketIsInitializing = !initializedMarkets.has(market.code);
-    const marketSeenTargetKeys = new Set();
-    const marketUpdates = new Map();
-    const marketAlerts = [];
-
-    for (const candidate of candidates) {
-      marketSeenTargetKeys.add(candidate.key);
-
-      let product;
-      if (!candidate.available) {
-        product = {
-          ...candidate,
-          material: "",
-          available: false,
-          purchaseAction: "",
-        };
-        targets.push(product);
-      } else {
-        try {
-          const productDocument = await fetchProductPage(candidate);
-          product = parseProductPageDocument(productDocument, candidate);
-          targets.push(product);
-        } catch (error) {
-          verificationErrors.push({ sku: candidate.sku, error: error.message });
-          continue;
-        }
-      }
-
-      const nextStatus = product.available ? "in_stock" : "out_of_stock";
-      const previous = state.products[product.key];
-
-      if (
-        !marketIsInitializing &&
-        product.available &&
-        previous?.status !== "in_stock"
-      ) {
-        marketAlerts.push(product);
-      }
-
-      if (
-        !previous ||
-        previous.status !== nextStatus ||
-        previous.name !== product.name ||
-        previous.color !== product.color ||
-        previous.material !== product.material ||
-        previous.price !== product.price ||
-        previous.url !== product.url
-      ) {
-        marketUpdates.set(product.key, {
-          market: product.market,
-          sku: product.sku,
-          name: product.name,
-          color: product.color,
-          material: product.material,
-          price: product.price,
-          url: product.url,
-          status: nextStatus,
-          changedAt: nowIso,
-        });
-      }
-    }
-
-    if (verificationErrors.length === 0) {
-      successfulMarkets.add(market.code);
-      initializedMarkets.add(market.code);
-
-      for (const key of marketSeenTargetKeys) seenTargetKeys.add(key);
-      for (const [key, value] of marketUpdates) state.products[key] = value;
-      alerts.push(...marketAlerts);
-    }
-
-    summaries.push({
-      market: market.code,
-      products: products.length,
-      candidates: candidates.length,
-      verifiedTargets: targets.length,
-      availableTargets: targets.filter((product) => product.available).length,
-      verificationErrors,
-      committed: verificationErrors.length === 0,
-    });
-  } catch (error) {
-    summaries.push({ market: market.code, error: error.message, committed: false });
-  }
+const { checkedAt: nowIso, summaries, alerts, healthy, state: nextState } = await checkMarkets(state);
+const report = { checkedAt: nowIso, summaries, alerts, healthy };
+await writeFile(resolve(here, "../run-report.json"), JSON.stringify(report, null, 2) + "\n");
+if (process.env.GITHUB_STEP_SUMMARY) {
+  await writeFile(process.env.GITHUB_STEP_SUMMARY,
+    "## Market verification\n\n```json\n" + JSON.stringify(report, null, 2) + "\n```\n");
 }
-
-for (const [key, product] of Object.entries(state.products)) {
-  if (!successfulMarkets.has(product.market) || seenTargetKeys.has(key)) continue;
-  if (product.status !== "not_listed") {
-    product.status = "not_listed";
-    product.changedAt = nowIso;
-  }
-}
-
-const keepAliveAt = state.meta.keepAliveAt
-  ? new Date(state.meta.keepAliveAt).getTime()
-  : 0;
-if (!keepAliveAt || now.getTime() - keepAliveAt >= 30 * 24 * 60 * 60 * 1000) {
-  state.meta.keepAliveAt = nowIso;
-}
-state.meta.lastSuccessfulMarkets = [...successfulMarkets];
-state.meta.initializedMarkets = [...initializedMarkets];
-
 console.log(JSON.stringify({ checkedAt: nowIso, summaries, alerts }, null, 2));
 
-if (dryRun) process.exit(0);
-
-if (successfulMarkets.size === 0) {
-  throw new Error("Both Hermès markets failed; state was left unchanged");
-}
+if (dryRun) process.exit(healthy ? 0 : 1);
 
 if (!repository || !token || !repositoryOwner) {
   throw new Error("GitHub repository credentials are missing");
@@ -154,7 +34,11 @@ for (const product of alerts) {
   await createStockIssue(product);
 }
 
-await writeFile(statePath, `${JSON.stringify(state, null, 2)}\n`, "utf8");
+await writeFile(statePath, `${JSON.stringify(nextState, null, 2)}\n`, "utf8");
+
+if (!healthy) {
+  throw new Error("Incomplete market verification; inspect run-report.json. Successful market state was preserved.");
+}
 
 async function createStockIssue(product) {
   const titleParts = [
@@ -206,3 +90,4 @@ async function createStockIssue(product) {
     );
   }
 }
+

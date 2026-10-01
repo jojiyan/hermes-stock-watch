@@ -117,6 +117,7 @@ export function parseCategoryHtml(html, market) {
 export function parseCategoryDocument(document, market) {
   if (document && typeof document === "object" && document.source === "firecrawl") {
     validateFirecrawlDocument(document, market, "category");
+    validateMarketUrl(document.metadata.sourceURL || document.metadata.url, market.code, "category");
     return parseCategoryMarkdown(document.markdown, market);
   }
 
@@ -139,6 +140,7 @@ export function parseCategoryMarkdown(markdown, market) {
     const match = links[index];
     const name = normalizeDetail(match[1]);
     const url = match[2];
+    validateMarketUrl(url, market.code, "product");
     const sku = url.match(/-([A-Z0-9]{6,})\/?(?:\?|$)/i)?.[1]?.toUpperCase() || "";
     if (!name || !sku) continue;
 
@@ -258,6 +260,9 @@ export function parseProductPageFirecrawl(document, candidate) {
     !purchaseButtonDisabled;
 
   const unavailable = unavailableInMarkdown || unavailableMessageBlock;
+  if (!purchaseButton && !unavailable) {
+    throw new Error(`${candidate.market}: product purchase state is unknown; no button or sold-out evidence`);
+  }
 
   return {
     ...candidate,
@@ -319,7 +324,12 @@ export function parseProductPageHtml(html, candidate) {
     /This product is currently unavailable/i.test(text) ||
     /This item is currently unavailable/i.test(text) ||
     /\bSold out\b/i.test(text);
-  const hasPurchaseAction = /\bAdd to (?:cart|bag)\b/i.test(text);
+  const purchaseButton = [...html.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)]
+    .find(match => /\bAdd to (?:cart|bag)\b/i.test(htmlToText(match[2])));
+  const attrs = purchaseButton?.[1] || "";
+  const purchaseButtonDisabled = /(?:^|\s)disabled(?:\s|=|$)/i.test(attrs) || /aria-disabled=["']true["']/i.test(attrs);
+  const hasPurchaseAction = Boolean(purchaseButton) && !purchaseButtonDisabled;
+  if (!purchaseButton && !unavailable) throw new Error(`${candidate.market}: product purchase state is unknown`);
 
   return {
     ...candidate,
@@ -328,6 +338,7 @@ export function parseProductPageHtml(html, candidate) {
     color,
     material,
     price,
+    purchaseButtonDisabled,
     available: hasPurchaseAction && !unavailable,
     purchaseAction: hasPurchaseAction ? "Add to cart / Add to bag" : "",
   };
@@ -481,7 +492,7 @@ function validateFirecrawlDocument(document, marketLike, label) {
   const metadata = document?.metadata || {};
   const content = `${markdown}\n${rawHtml}`;
 
-  if (Number(metadata.statusCode || 200) !== 200) {
+  if (Number(metadata.statusCode) !== 200) {
     throw new Error(`${code}: ${label} Firecrawl page returned HTTP ${metadata.statusCode}`);
   }
 
@@ -498,16 +509,26 @@ function validateFirecrawlDocument(document, marketLike, label) {
   }
 
   const sourceUrl = metadata.sourceURL || metadata.url || "";
-  if (sourceUrl) {
-    let parsed;
-    try {
-      parsed = new URL(sourceUrl);
-    } catch {
-      throw new Error(`${code}: ${label} Firecrawl returned an invalid source URL`);
+  validateMarketUrl(sourceUrl, code, label === "product" ? "product" : null);
+  if (marketLike.url) {
+    const actual = new URL(sourceUrl);
+    const expected = new URL(marketLike.url);
+    if (actual.pathname !== expected.pathname) {
+      throw new Error(`${code}: product source URL did not match candidate`);
     }
-    if (parsed.hostname !== "www.hermes.com") {
-      throw new Error(`${code}: ${label} Firecrawl source was not official Hermès`);
-    }
+  }
+}
+
+function validateMarketUrl(value, code, kind) {
+  let url;
+  try { url = new URL(value); } catch {
+    throw new Error(`${code}: missing or invalid official source URL`);
+  }
+  const prefix = `/${code.toLowerCase()}/en/`;
+  if (url.protocol !== "https:" || url.hostname !== "www.hermes.com" ||
+      !url.pathname.startsWith(prefix) ||
+      (kind && !url.pathname.startsWith(`${prefix}${kind}/`))) {
+    throw new Error(`${code}: source URL is not the matching official market page`);
   }
 }
 
@@ -660,3 +681,4 @@ function decodeHtml(value) {
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">");
 }
+

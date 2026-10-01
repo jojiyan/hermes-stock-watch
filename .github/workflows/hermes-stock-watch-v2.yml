@@ -18,7 +18,7 @@ permissions:
 
 concurrency:
   group: hermes-stock-watch-v2
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   check-stock:
@@ -42,6 +42,8 @@ jobs:
         run: npm test
 
       - name: Check Hermes US and Canada through Firecrawl
+        id: monitor
+        continue-on-error: true
         run: node src/monitor.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,3 +61,18 @@ jobs:
           git add state.json
           git commit -m "chore: update stock state [skip ci]"
           git push
+
+
+      - name: Retain verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-verification-${{ github.run_id }}
+          path: run-report.json
+          retention-days: 7
+
+      - name: Require both markets to be verified
+        if: always()
+        env:
+          MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
+        run: test "$MONITOR_OUTCOME" = success

@@ -26,12 +26,56 @@
   },
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
-    "lastSuccessfulMarkets": [
-      "US"
-    ],
+    "lastSuccessfulMarkets": [],
     "initializedMarkets": [
       "US",
       "CA"
-    ]
+    ],
+    "lastCheckedAt": "2026-10-01T19:45:01.192Z",
+    "markets": {
+      "US": {
+        "lastCheckedAt": "2026-10-01T19:45:01.192Z",
+        "lastSuccessAt": null,
+        "status": "unknown",
+        "market": "US",
+        "products": 22,
+        "candidates": 2,
+        "verifiedTargets": 0,
+        "availableTargets": 0,
+        "verificationErrors": [
+          {
+            "sku": "H085956CK3Q",
+            "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK3Q/",
+            "error": "US: product page Firecrawl CLI failed: Command failed: firecrawl scrape https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK3Q/?_hwatch=2984806 --format markdown,rawHtml\nError: All scraping engines failed to retrieve content from this URL. Engines tried: [index, index;documents, fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens when: (1) The URL is invalid or the page doesn't exist (404), (2) The website is blocking automated access, (3) The website is down or unreachable, (4) The page requires authentication. Double check the URL is correct and accessible in a browser. If the issue persists, contact us at help@firecrawl.com with your request ID for investigation.\n"
+          },
+          {
+            "sku": "H088612CKAO",
+            "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/",
+            "error": "US: product page Firecrawl CLI failed: Command failed: firecrawl scrape https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/?_hwatch=2984806 --format markdown,rawHtml\nError: All scraping engines failed to retrieve content from this URL. Engines tried: [index, index;documents, fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens when: (1) The URL is invalid or the page doesn't exist (404), (2) The website is blocking automated access, (3) The website is down or unreachable, (4) The page requires authentication. Double check the URL is correct and accessible in a browser. If the issue persists, contact us at help@firecrawl.com with your request ID for investigation.\n"
+          }
+        ],
+        "evidence": [],
+        "committed": false
+      },
+      "CA": {
+        "lastCheckedAt": "2026-10-01T19:45:01.192Z",
+        "lastSuccessAt": null,
+        "status": "unknown",
+        "market": "CA",
+        "products": 48,
+        "candidates": 1,
+        "verifiedTargets": 0,
+        "availableTargets": 0,
+        "verificationErrors": [
+          {
+            "sku": "H085689CKAC",
+            "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
+            "error": "CA: product page Firecrawl CLI failed: Command failed: firecrawl scrape https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/?_hwatch=2984806 --format markdown,rawHtml\nError: All scraping engines failed to retrieve content from this URL. Engines tried: [index, index;documents, fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens when: (1) The URL is invalid or the page doesn't exist (404), (2) The website is blocking automated access, (3) The website is down or unreachable, (4) The page requires authentication. Double check the URL is correct and accessible in a browser. If the issue persists, contact us at help@firecrawl.com with your request ID for investigation.\n"
+          }
+        ],
+        "evidence": [],
+        "committed": false
+      }
+    }
   }
 }

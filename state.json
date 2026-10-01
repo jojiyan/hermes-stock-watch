@@ -31,10 +31,10 @@
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-01T20:50:13.558Z",
+    "lastCheckedAt": "2026-10-01T20:59:27.790Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-01T20:50:13.558Z",
+        "lastCheckedAt": "2026-10-01T20:59:27.790Z",
         "lastSuccessAt": null,
         "status": "unknown",
         "market": "US",
@@ -58,7 +58,7 @@
         "committed": false
       },
       "CA": {
-        "lastCheckedAt": "2026-10-01T20:50:13.558Z",
+        "lastCheckedAt": "2026-10-01T20:59:27.790Z",
         "lastSuccessAt": null,
         "status": "unknown",
         "market": "CA",

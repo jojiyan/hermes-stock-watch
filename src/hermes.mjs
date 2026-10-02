@@ -13,6 +13,7 @@ const TARGET_PATTERNS = [
   /\bmini lindy\b/i,
   /\bbirkin\b/i,
   /\bkelly\b/i,
+  /\bpicotin\b/i,
   /\bconstance\b/i,
 ];
 

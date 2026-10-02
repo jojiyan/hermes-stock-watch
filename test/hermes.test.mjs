@@ -53,6 +53,7 @@ test("matches only the requested Hermès bag families", () => {
     "Lindy II mini bag",
     "Lindy mini bag",
     "Mini Lindy bag",
+    "Picotin Lock 18 bag",
     "Birkin 25 bag",
     "Kelly Pochette bag",
     "Constance 18 bag",
@@ -61,7 +62,6 @@ test("matches only the requested Hermès bag families", () => {
     "Garden Party 23 bag",
     "Mini Garden Party bag",
     "Garden Party 49 voyage bag",
-    "Picotin Lock 18 bag",
     "Lindy 26 bag",
   ];
 
@@ -92,7 +92,7 @@ test("uses the category availability marker and extracts product data", () => {
   assert.equal(products[1].available, false);
   assert.equal(products[1].target, true);
   assert.equal(products[1].price, "$3,000");
-  assert.equal(products[2].target, false);
+  assert.equal(products[2].target, true);
   assert.equal(products[4].target, true);
 });
 

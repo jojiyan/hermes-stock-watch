@@ -6,7 +6,7 @@ import { parseProductPageDocument, parseCategoryDocument } from '../src/hermes.m
 const source = code => `https://www.hermes.com/${code.toLowerCase()}/en/`;
 function category(market, target = true) {
   return { source: 'firecrawl', rawHtml: '', metadata: { statusCode: 200, sourceURL: market.categoryUrl },
-    markdown: Array.from({length: 5}, (_, i) => `[${i === 0 && target ? 'Kelly 25 bag' : 'Picotin bag'}](${source(market.code)}product/bag-H12345${i}/)\nPrice $5,000\nDiscover`).join('\n\n') + ' '.repeat(1500) };
+    markdown: Array.from({length: 5}, (_, i) => `[${i === 0 && target ? 'Kelly 25 bag' : 'So Medor bag'}](${source(market.code)}product/bag-H12345${i}/)\nPrice $5,000\nDiscover`).join('\n\n') + ' '.repeat(1500) };
 }
 function product(candidate, enabled = true) {
   return { source: 'firecrawl', markdown: '# Kelly 25 bag\n' + ' '.repeat(1500),

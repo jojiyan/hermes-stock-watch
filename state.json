@@ -33,6 +33,17 @@
       "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
       "status": "in_stock",
       "changedAt": "2026-10-02T05:10:44.108Z"
+    },
+    "US:H084235CK8U": {
+      "market": "US",
+      "sku": "H084235CK8U",
+      "name": "Picotin Lock micro bag",
+      "color": "Blue \\\\",
+      "material": "ostrich",
+      "price": "$11,100",
+      "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
+      "status": "out_of_stock",
+      "changedAt": "2026-10-02T05:30:27.849Z"
     }
   },
   "meta": {
@@ -45,16 +56,16 @@
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-02T05:10:44.108Z",
+    "lastCheckedAt": "2026-10-02T05:30:27.849Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-02T05:10:44.108Z",
-        "lastSuccessAt": "2026-10-02T05:10:44.108Z",
+        "lastCheckedAt": "2026-10-02T05:30:27.849Z",
+        "lastSuccessAt": "2026-10-02T05:30:27.849Z",
         "status": "ok",
         "market": "US",
         "products": 21,
-        "candidates": 2,
-        "verifiedTargets": 2,
+        "candidates": 3,
+        "verifiedTargets": 3,
         "availableTargets": 0,
         "verificationErrors": [],
         "evidence": [
@@ -73,13 +84,21 @@
             "available": false,
             "purchaseAction": "",
             "purchaseButtonDisabled": true
+          },
+          {
+            "sku": "H084235CK8U",
+            "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
+            "sourceURL": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
+            "available": false,
+            "purchaseAction": "",
+            "purchaseButtonDisabled": true
           }
         ],
         "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-02T05:10:44.108Z",
-        "lastSuccessAt": "2026-10-02T05:10:44.108Z",
+        "lastCheckedAt": "2026-10-02T05:30:27.849Z",
+        "lastSuccessAt": "2026-10-02T05:30:27.849Z",
         "status": "ok",
         "market": "CA",
         "products": 48,

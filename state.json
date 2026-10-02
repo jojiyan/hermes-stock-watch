@@ -89,14 +89,14 @@
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-02T17:18:30.742Z",
+    "lastCheckedAt": "2026-10-02T17:38:17.086Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-02T17:18:30.742Z",
-        "lastSuccessAt": "2026-10-02T17:18:30.742Z",
+        "lastCheckedAt": "2026-10-02T17:38:17.086Z",
+        "lastSuccessAt": "2026-10-02T17:38:17.086Z",
         "status": "ok",
         "market": "US",
-        "products": 29,
+        "products": 28,
         "candidates": 3,
         "verifiedTargets": 3,
         "availableTargets": 0,
@@ -130,8 +130,8 @@
         "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-02T17:18:30.742Z",
-        "lastSuccessAt": "2026-10-02T17:18:30.742Z",
+        "lastCheckedAt": "2026-10-02T17:38:17.086Z",
+        "lastSuccessAt": "2026-10-02T17:38:17.086Z",
         "status": "ok",
         "market": "CA",
         "products": 48,

@@ -82,17 +82,18 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
-      "US"
+      "US",
+      "CA"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-02T16:50:25.474Z",
+    "lastCheckedAt": "2026-10-02T17:18:30.742Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-02T16:50:25.474Z",
-        "lastSuccessAt": "2026-10-02T16:50:25.474Z",
+        "lastCheckedAt": "2026-10-02T17:18:30.742Z",
+        "lastSuccessAt": "2026-10-02T17:18:30.742Z",
         "status": "ok",
         "market": "US",
         "products": 29,
@@ -129,23 +130,26 @@
         "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-02T16:50:25.474Z",
-        "lastSuccessAt": "2026-10-02T16:28:49.838Z",
-        "status": "unknown",
+        "lastCheckedAt": "2026-10-02T17:18:30.742Z",
+        "lastSuccessAt": "2026-10-02T17:18:30.742Z",
+        "status": "ok",
         "market": "CA",
         "products": 48,
         "candidates": 1,
-        "verifiedTargets": 0,
-        "availableTargets": 0,
-        "verificationErrors": [
+        "verifiedTargets": 1,
+        "availableTargets": 1,
+        "verificationErrors": [],
+        "evidence": [
           {
             "sku": "H085689CKAC",
             "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "error": "CA: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
+            "sourceURL": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
+            "available": true,
+            "purchaseAction": "Add to cart / Add to bag",
+            "purchaseButtonDisabled": false
           }
         ],
-        "evidence": [],
-        "committed": false
+        "committed": true
       }
     }
   }

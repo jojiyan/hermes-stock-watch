@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+real_cli="${FIRECRAWL_REAL_CLI:-}"
+if [[ -z "$real_cli" || ! -x "$real_cli" ]]; then
+  echo "FIRECRAWL_REAL_CLI is missing or not executable" >&2
+  exit 127
+fi
+
+args=("$@")
+attempts=1
+
+# Hermès product pages are more reliable through Firecrawl when the canonical
+# official URL is used. The monitor previously appended _hwatch only to defeat
+# cache, but that query can make Firecrawl's engines reject otherwise valid
+# product pages. Freshness is now requested through Firecrawl itself instead.
+if [[ "${args[0]:-}" == "scrape" ]]; then
+  if [[ "${args[1]:-}" == *"/product/"* ]]; then
+    args[1]="${args[1]%%\?*}"
+    args[1]="${args[1]%%\#*}"
+    attempts=3
+  else
+    attempts=2
+  fi
+
+  args+=("--max-age" "0" "--proxy" "auto" "--wait-for" "2500")
+fi
+
+last_rc=1
+for ((attempt = 1; attempt <= attempts; attempt++)); do
+  stdout_file="$(mktemp)"
+
+  if "$real_cli" "${args[@]}" >"$stdout_file"; then
+    cat "$stdout_file"
+    rm -f "$stdout_file"
+    exit 0
+  fi
+
+  last_rc=$?
+  # Keep failed-attempt output away from stdout so a later successful JSON
+  # response remains parseable by src/hermes.mjs.
+  cat "$stdout_file" >&2 || true
+  rm -f "$stdout_file"
+
+  if (( attempt < attempts )); then
+    echo "Firecrawl attempt ${attempt}/${attempts} failed; retrying..." >&2
+    sleep $((attempt * 2))
+  fi
+done
+
+exit "$last_rc"

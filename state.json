@@ -49,18 +49,17 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
-      "US",
-      "CA"
+      "US"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-02T07:40:42.825Z",
+    "lastCheckedAt": "2026-10-02T08:01:59.471Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-02T07:40:42.825Z",
-        "lastSuccessAt": "2026-10-02T07:40:42.825Z",
+        "lastCheckedAt": "2026-10-02T08:01:59.471Z",
+        "lastSuccessAt": "2026-10-02T08:01:59.471Z",
         "status": "ok",
         "market": "US",
         "products": 21,
@@ -97,26 +96,23 @@
         "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-02T07:40:42.825Z",
+        "lastCheckedAt": "2026-10-02T08:01:59.471Z",
         "lastSuccessAt": "2026-10-02T07:40:42.825Z",
-        "status": "ok",
+        "status": "unknown",
         "market": "CA",
         "products": 48,
         "candidates": 1,
-        "verifiedTargets": 1,
-        "availableTargets": 1,
-        "verificationErrors": [],
-        "evidence": [
+        "verifiedTargets": 0,
+        "availableTargets": 0,
+        "verificationErrors": [
           {
             "sku": "H085689CKAC",
             "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "sourceURL": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "available": true,
-            "purchaseAction": "Add to cart / Add to bag",
-            "purchaseButtonDisabled": false
+            "error": "CA: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
           }
         ],
-        "committed": true
+        "evidence": [],
+        "committed": false
       }
     }
   }

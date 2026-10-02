@@ -49,30 +49,25 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
+      "US",
       "CA"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-02T09:07:43.323Z",
+    "lastCheckedAt": "2026-10-02T09:32:03.534Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-02T09:07:43.323Z",
-        "lastSuccessAt": "2026-10-02T08:49:34.476Z",
-        "status": "unknown",
+        "lastCheckedAt": "2026-10-02T09:32:03.534Z",
+        "lastSuccessAt": "2026-10-02T09:32:03.534Z",
+        "status": "ok",
         "market": "US",
         "products": 21,
         "candidates": 3,
-        "verifiedTargets": 2,
+        "verifiedTargets": 3,
         "availableTargets": 0,
-        "verificationErrors": [
-          {
-            "sku": "H084235CK8U",
-            "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
-            "error": "US: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: The URL failed to load in the browser with error code \"ERR_TUNNEL_CONNECTION_FAILED\". Firecrawl encountered an internal proxy error while establishing the tunnel. This is an internal Firecrawl "
-          }
-        ],
+        "verificationErrors": [],
         "evidence": [
           {
             "sku": "H085956CK3Q",
@@ -89,13 +84,21 @@
             "available": false,
             "purchaseAction": "",
             "purchaseButtonDisabled": true
+          },
+          {
+            "sku": "H084235CK8U",
+            "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
+            "sourceURL": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
+            "available": false,
+            "purchaseAction": "",
+            "purchaseButtonDisabled": true
           }
         ],
-        "committed": false
+        "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-02T09:07:43.323Z",
-        "lastSuccessAt": "2026-10-02T09:07:43.323Z",
+        "lastCheckedAt": "2026-10-02T09:32:03.534Z",
+        "lastSuccessAt": "2026-10-02T09:32:03.534Z",
         "status": "ok",
         "market": "CA",
         "products": 48,

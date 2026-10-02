@@ -5,76 +5,99 @@
       "market": "US",
       "sku": "H085956CK3Q",
       "name": "Lindy II mini bag",
-      "color": "Pink",
-      "material": "",
+      "color": "Pink \\\\",
+      "material": "taurillon Clemence leather",
       "price": "$9,050",
       "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK3Q/",
       "status": "out_of_stock",
-      "changedAt": "2026-09-30T04:51:41.103Z"
+      "changedAt": "2026-10-02T05:10:44.108Z"
     },
     "US:H088612CKAO": {
       "market": "US",
       "sku": "H088612CKAO",
       "name": "Neo Garden 23 bag",
-      "color": "Green",
-      "material": "",
+      "color": "Green \\\\",
+      "material": "Officier canvas and Negonda calfskin",
       "price": "$3,000",
       "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/",
       "status": "out_of_stock",
-      "changedAt": "2026-09-30T04:51:41.103Z"
+      "changedAt": "2026-10-02T05:10:44.108Z"
+    },
+    "CA:H085689CKAC": {
+      "market": "CA",
+      "sku": "H085689CKAC",
+      "name": "Garden Party 36 bag",
+      "color": "Beige/Natural \\\\",
+      "material": "H canvas with \"H au Pas\" motif and Negonda calfskin",
+      "price": "CA$6,250",
+      "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
+      "status": "in_stock",
+      "changedAt": "2026-10-02T05:10:44.108Z"
     }
   },
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
-    "lastSuccessfulMarkets": [],
+    "lastSuccessfulMarkets": [
+      "US",
+      "CA"
+    ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-02T05:00:32.840Z",
+    "lastCheckedAt": "2026-10-02T05:10:44.108Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-02T05:00:32.840Z",
-        "lastSuccessAt": null,
-        "status": "unknown",
+        "lastCheckedAt": "2026-10-02T05:10:44.108Z",
+        "lastSuccessAt": "2026-10-02T05:10:44.108Z",
+        "status": "ok",
         "market": "US",
         "products": 21,
         "candidates": 2,
-        "verifiedTargets": 0,
+        "verifiedTargets": 2,
         "availableTargets": 0,
-        "verificationErrors": [
+        "verificationErrors": [],
+        "evidence": [
           {
             "sku": "H085956CK3Q",
             "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK3Q/",
-            "error": "US: product page Firecrawl CLI failed: Command failed: firecrawl scrape https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK3Q/?_hwatch=2984862 --format markdown,rawHtml\nError: All scraping engines failed to retrieve content from this URL. Engines tried: [index, index;documents, fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens when: (1) The URL is invalid or the page doesn't exist (404), (2) The website is blocking automated access, (3) The website is down or unreachable, (4) The page requires authentication. Double check the URL is correct and accessible in a browser. If the issue persists, contact us at help@firecrawl.com with your request ID for investigation.\n"
+            "sourceURL": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK3Q/",
+            "available": false,
+            "purchaseAction": "",
+            "purchaseButtonDisabled": true
           },
           {
             "sku": "H088612CKAO",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/",
-            "error": "US: product page Firecrawl CLI failed: Command failed: firecrawl scrape https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/?_hwatch=2984862 --format markdown,rawHtml\nError: All scraping engines failed to retrieve content from this URL. Engines tried: [index, index;documents, fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens when: (1) The URL is invalid or the page doesn't exist (404), (2) The website is blocking automated access, (3) The website is down or unreachable, (4) The page requires authentication. Double check the URL is correct and accessible in a browser. If the issue persists, contact us at help@firecrawl.com with your request ID for investigation.\n"
+            "sourceURL": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/",
+            "available": false,
+            "purchaseAction": "",
+            "purchaseButtonDisabled": true
           }
         ],
-        "evidence": [],
-        "committed": false
+        "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-02T05:00:32.840Z",
-        "lastSuccessAt": null,
-        "status": "unknown",
+        "lastCheckedAt": "2026-10-02T05:10:44.108Z",
+        "lastSuccessAt": "2026-10-02T05:10:44.108Z",
+        "status": "ok",
         "market": "CA",
         "products": 48,
         "candidates": 1,
-        "verifiedTargets": 0,
-        "availableTargets": 0,
-        "verificationErrors": [
+        "verifiedTargets": 1,
+        "availableTargets": 1,
+        "verificationErrors": [],
+        "evidence": [
           {
             "sku": "H085689CKAC",
             "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "error": "CA: product page Firecrawl CLI failed: Command failed: firecrawl scrape https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/?_hwatch=2984862 --format markdown,rawHtml\nError: All scraping engines failed to retrieve content from this URL. Engines tried: [index, index;documents, fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens when: (1) The URL is invalid or the page doesn't exist (404), (2) The website is blocking automated access, (3) The website is down or unreachable, (4) The page requires authentication. Double check the URL is correct and accessible in a browser. If the issue persists, contact us at help@firecrawl.com with your request ID for investigation.\n"
+            "sourceURL": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
+            "available": true,
+            "purchaseAction": "Add to cart / Add to bag",
+            "purchaseButtonDisabled": false
           }
         ],
-        "evidence": [],
-        "committed": false
+        "committed": true
       }
     }
   }

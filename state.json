@@ -88,11 +88,11 @@
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-02T21:55:44.002Z",
+    "lastCheckedAt": "2026-10-02T22:18:06.905Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-02T21:55:44.002Z",
-        "lastSuccessAt": "2026-10-02T21:55:44.002Z",
+        "lastCheckedAt": "2026-10-02T22:18:06.905Z",
+        "lastSuccessAt": "2026-10-02T22:18:06.905Z",
         "status": "ok",
         "market": "US",
         "products": 29,
@@ -129,7 +129,7 @@
         "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-02T21:55:44.002Z",
+        "lastCheckedAt": "2026-10-02T22:18:06.905Z",
         "lastSuccessAt": "2026-10-02T21:38:54.306Z",
         "status": "unknown",
         "market": "CA",
@@ -141,7 +141,7 @@
           {
             "sku": "H085689CKAC",
             "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "error": "CA: product page Firecrawl CLI failed: Command failed: firecrawl scrape https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/?_hwatch=2984963 --format markdown,rawHtml\n"
+            "error": "CA: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
           }
         ],
         "evidence": [],

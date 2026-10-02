@@ -49,30 +49,24 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
-      "CA"
+      "US"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-02T10:38:46.564Z",
+    "lastCheckedAt": "2026-10-02T10:56:38.457Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-02T10:38:46.564Z",
-        "lastSuccessAt": "2026-10-02T09:54:50.042Z",
-        "status": "unknown",
+        "lastCheckedAt": "2026-10-02T10:56:38.457Z",
+        "lastSuccessAt": "2026-10-02T10:56:38.457Z",
+        "status": "ok",
         "market": "US",
         "products": 21,
         "candidates": 3,
-        "verifiedTargets": 2,
+        "verifiedTargets": 3,
         "availableTargets": 0,
-        "verificationErrors": [
-          {
-            "sku": "H084235CK8U",
-            "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
-            "error": "US: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
-          }
-        ],
+        "verificationErrors": [],
         "evidence": [
           {
             "sku": "H085956CK3Q",
@@ -89,31 +83,36 @@
             "available": false,
             "purchaseAction": "",
             "purchaseButtonDisabled": true
-          }
-        ],
-        "committed": false
-      },
-      "CA": {
-        "lastCheckedAt": "2026-10-02T10:38:46.564Z",
-        "lastSuccessAt": "2026-10-02T10:38:46.564Z",
-        "status": "ok",
-        "market": "CA",
-        "products": 48,
-        "candidates": 1,
-        "verifiedTargets": 1,
-        "availableTargets": 1,
-        "verificationErrors": [],
-        "evidence": [
+          },
           {
-            "sku": "H085689CKAC",
-            "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "sourceURL": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "available": true,
-            "purchaseAction": "Add to cart / Add to bag",
-            "purchaseButtonDisabled": false
+            "sku": "H084235CK8U",
+            "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
+            "sourceURL": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
+            "available": false,
+            "purchaseAction": "",
+            "purchaseButtonDisabled": true
           }
         ],
         "committed": true
+      },
+      "CA": {
+        "lastCheckedAt": "2026-10-02T10:56:38.457Z",
+        "lastSuccessAt": "2026-10-02T10:38:46.564Z",
+        "status": "unknown",
+        "market": "CA",
+        "products": 48,
+        "candidates": 1,
+        "verifiedTargets": 0,
+        "availableTargets": 0,
+        "verificationErrors": [
+          {
+            "sku": "H085689CKAC",
+            "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
+            "error": "CA: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
+          }
+        ],
+        "evidence": [],
+        "committed": false
       }
     }
   }

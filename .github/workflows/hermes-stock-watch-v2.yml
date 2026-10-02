@@ -2,13 +2,14 @@ name: Hermes Stock Watch v2
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - "src/**"
       - "test/**"
+      - "bin/**"
       - "package.json"
       - ".github/workflows/hermes-stock-watch-v2.yml"
 
@@ -38,6 +39,15 @@ jobs:
       - name: Install Firecrawl CLI
         run: npm install --global firecrawl-cli@latest
 
+      - name: Configure resilient Firecrawl wrapper
+        shell: bash
+        run: |
+          real_cli="$(command -v firecrawl)"
+          test -n "$real_cli"
+          echo "FIRECRAWL_REAL_CLI=$real_cli" >> "$GITHUB_ENV"
+          chmod +x "$GITHUB_WORKSPACE/bin/firecrawl"
+          echo "$GITHUB_WORKSPACE/bin" >> "$GITHUB_PATH"
+
       - name: Run safety tests
         run: npm test
 
@@ -61,7 +71,6 @@ jobs:
           git add state.json
           git commit -m "chore: update stock state [skip ci]"
           git push
-
 
       - name: Retain verification evidence
         if: always()

@@ -49,34 +49,31 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
-      "US",
       "CA"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-03T02:24:46.768Z",
+    "lastCheckedAt": "2026-10-03T02:50:55.985Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-03T02:24:46.768Z",
+        "lastCheckedAt": "2026-10-03T02:50:55.985Z",
         "lastSuccessAt": "2026-10-03T02:24:46.768Z",
-        "status": "ok",
+        "status": "unknown",
         "market": "US",
         "products": 29,
         "candidates": 2,
-        "verifiedTargets": 2,
+        "verifiedTargets": 1,
         "availableTargets": 0,
-        "verificationErrors": [],
-        "evidence": [
+        "verificationErrors": [
           {
             "sku": "H085956CCY1",
             "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
-            "sourceURL": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
-            "available": false,
-            "purchaseAction": "",
-            "purchaseButtonDisabled": true
-          },
+            "error": "US: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
+          }
+        ],
+        "evidence": [
           {
             "sku": "H051551CKCM",
             "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
@@ -86,11 +83,11 @@
             "purchaseButtonDisabled": true
           }
         ],
-        "committed": true
+        "committed": false
       },
       "CA": {
-        "lastCheckedAt": "2026-10-03T02:24:46.768Z",
-        "lastSuccessAt": "2026-10-03T02:24:46.768Z",
+        "lastCheckedAt": "2026-10-03T02:50:55.985Z",
+        "lastSuccessAt": "2026-10-03T02:50:55.985Z",
         "status": "ok",
         "market": "CA",
         "products": 48,

@@ -49,31 +49,34 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
+      "US",
       "CA"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-03T07:40:44.334Z",
+    "lastCheckedAt": "2026-10-03T07:55:50.203Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-03T07:40:44.334Z",
-        "lastSuccessAt": "2026-10-03T06:27:55.194Z",
-        "status": "unknown",
+        "lastCheckedAt": "2026-10-03T07:55:50.203Z",
+        "lastSuccessAt": "2026-10-03T07:55:50.203Z",
+        "status": "ok",
         "market": "US",
         "products": 29,
         "candidates": 2,
-        "verifiedTargets": 1,
+        "verifiedTargets": 2,
         "availableTargets": 0,
-        "verificationErrors": [
+        "verificationErrors": [],
+        "evidence": [
           {
             "sku": "H085956CCY1",
             "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
-            "error": "US: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
-          }
-        ],
-        "evidence": [
+            "sourceURL": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
+            "available": false,
+            "purchaseAction": "",
+            "purchaseButtonDisabled": true
+          },
           {
             "sku": "H051551CKCM",
             "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
@@ -83,11 +86,11 @@
             "purchaseButtonDisabled": true
           }
         ],
-        "committed": false
+        "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-03T07:40:44.334Z",
-        "lastSuccessAt": "2026-10-03T07:40:44.334Z",
+        "lastCheckedAt": "2026-10-03T07:55:50.203Z",
+        "lastSuccessAt": "2026-10-03T07:55:50.203Z",
         "status": "ok",
         "market": "CA",
         "products": 48,

@@ -49,18 +49,17 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
-      "US",
-      "CA"
+      "US"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-03T04:41:32.427Z",
+    "lastCheckedAt": "2026-10-03T04:56:13.852Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-03T04:41:32.427Z",
-        "lastSuccessAt": "2026-10-03T04:41:32.427Z",
+        "lastCheckedAt": "2026-10-03T04:56:13.852Z",
+        "lastSuccessAt": "2026-10-03T04:56:13.852Z",
         "status": "ok",
         "market": "US",
         "products": 29,
@@ -89,17 +88,12 @@
         "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-03T04:41:32.427Z",
+        "lastCheckedAt": "2026-10-03T04:56:13.852Z",
         "lastSuccessAt": "2026-10-03T04:41:32.427Z",
-        "status": "ok",
+        "status": "unknown",
         "market": "CA",
-        "products": 48,
-        "candidates": 0,
-        "verifiedTargets": 0,
-        "availableTargets": 0,
-        "verificationErrors": [],
-        "evidence": [],
-        "committed": true
+        "error": "CA: Hermès Firecrawl CLI failed: CA: CA: Hermès Firecrawl page returned HTTP 400",
+        "committed": false
       }
     }
   }

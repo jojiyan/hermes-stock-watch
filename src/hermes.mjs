@@ -6,14 +6,10 @@ const execFileAsync = promisify(execFile);
 const TARGET_PATTERNS = [
   /\bneo garden 23\b/i,
   /\bgarden party 30\b/i,
-  /\bgarden party 36\b/i,
-  /\bbolide mini\b/i,
-  /\bmini bolide\b/i,
   /\blindy(?: ii)? mini\b/i,
   /\bmini lindy\b/i,
   /\bbirkin\b/i,
   /\bkelly\b/i,
-  /\bpicotin\b/i,
   /\bconstance\b/i,
 ];
 
@@ -670,6 +666,7 @@ function htmlToText(value) {
 function normalizeDetail(value) {
   return decodeHtml(value || "")
     .replace(/\s+/g, " ")
+    .replace(/\\+$/g, "")
     .trim();
 }
 
@@ -682,4 +679,3 @@ function decodeHtml(value) {
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">");
 }
-

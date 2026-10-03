@@ -5,7 +5,7 @@
       "market": "US",
       "sku": "H085956CK3Q",
       "name": "Lindy II mini bag",
-      "color": "Pink \\\\",
+      "color": "Pink",
       "material": "taurillon Clemence leather",
       "price": "$9,050",
       "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK3Q/",
@@ -16,54 +16,21 @@
       "market": "US",
       "sku": "H088612CKAO",
       "name": "Neo Garden 23 bag",
-      "color": "Green \\\\",
+      "color": "Green",
       "material": "Officier canvas and Negonda calfskin",
       "price": "$3,000",
       "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAO/",
       "status": "out_of_stock",
       "changedAt": "2026-10-02T05:10:44.108Z"
     },
-    "CA:H085689CKAC": {
-      "market": "CA",
-      "sku": "H085689CKAC",
-      "name": "Garden Party 36 bag",
-      "color": "Beige/Natural \\\\",
-      "material": "H canvas with \"H au Pas\" motif and Negonda calfskin",
-      "price": "CA$6,250",
-      "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-      "status": "in_stock",
-      "changedAt": "2026-10-02T05:10:44.108Z"
-    },
-    "US:H084235CK8U": {
-      "market": "US",
-      "sku": "H084235CK8U",
-      "name": "Picotin Lock micro bag",
-      "color": "Blue \\\\",
-      "material": "ostrich",
-      "price": "$11,100",
-      "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084235CK8U/",
-      "status": "out_of_stock",
-      "changedAt": "2026-10-02T05:30:27.849Z"
-    },
     "US:H085956CCY1": {
       "market": "US",
       "sku": "H085956CCY1",
       "name": "Lindy II mini bag",
-      "color": "Beige/Natural \\\\",
+      "color": "Beige/Natural",
       "material": "taurillon Clemence leather",
       "price": "$9,050",
       "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
-      "status": "out_of_stock",
-      "changedAt": "2026-10-02T15:49:02.770Z"
-    },
-    "US:H056289CKY1": {
-      "market": "US",
-      "sku": "H056289CKY1",
-      "name": "Picotin Lock 18 bag",
-      "color": "Beige/Natural \\\\",
-      "material": "taurillon Clemence leather",
-      "price": "$3,975",
-      "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
       "status": "out_of_stock",
       "changedAt": "2026-10-02T15:49:02.770Z"
     },
@@ -71,7 +38,7 @@
       "market": "US",
       "sku": "H051551CKCM",
       "name": "Garden Party 30 bag",
-      "color": "Beige/Natural \\\\",
+      "color": "Beige/Natural",
       "material": "Officier canvas and Negonda calfskin",
       "price": "$3,300",
       "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
@@ -111,14 +78,6 @@
             "purchaseButtonDisabled": true
           },
           {
-            "sku": "H056289CKY1",
-            "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
-            "sourceURL": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
-            "available": false,
-            "purchaseAction": "",
-            "purchaseButtonDisabled": true
-          },
-          {
             "sku": "H051551CKCM",
             "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
             "sourceURL": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
@@ -135,20 +94,11 @@
         "status": "ok",
         "market": "CA",
         "products": 48,
-        "candidates": 1,
-        "verifiedTargets": 1,
-        "availableTargets": 1,
+        "candidates": 0,
+        "verifiedTargets": 0,
+        "availableTargets": 0,
         "verificationErrors": [],
-        "evidence": [
-          {
-            "sku": "H085689CKAC",
-            "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "sourceURL": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
-            "available": true,
-            "purchaseAction": "Add to cart / Add to bag",
-            "purchaseButtonDisabled": false
-          }
-        ],
+        "evidence": [],
         "committed": true
       }
     }

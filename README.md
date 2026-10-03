@@ -11,7 +11,7 @@ It alerts only for:
 
 For every target candidate, the monitor opens the official product page and requires an `Add to cart` / `Add to bag` action with no current unavailable message. Other bags, stale category results, sold-out pages, and page-order changes are ignored. A GitHub issue mentions the repository owner when a target changes into the verified in-stock state. The first successful run only builds the baseline; no issue is created when nothing changes, and a restock after a sellout produces a new alert.
 
-The schedule runs at minutes 7, 17, 27, 37, 47, and 57 of every hour to avoid the busiest start-of-hour window.
+The workflow wakes every 5 minutes and uses an 8-minute freshness gate, so a real US/Canada verification is due about every 10 minutes even when GitHub skips an individual cron wake-up.
 
 ## Local verification
 
@@ -30,10 +30,10 @@ Hermès blocks direct requests from GitHub-hosted runner IPs. The active `Hermes
 
 No `FIRECRAWL_API_KEY` repository secret is required.
 
-The workflow runs at minutes 7, 22, 37, and 52 of every hour (every 15 minutes). Each check:
+The workflow wakes every 5 minutes and performs a real verification when the last complete US/Canada check is at least 8 minutes old. Each real check:
 
 - fetches the Hermès US and Canada women's bags category pages;
-- filters for Neo Garden 23, Garden Party 30, Garden Party 36, Mini Bolide / Bolide mini, Mini Lindy / Lindy II mini, and all Birkin, Kelly, and Constance bags;
+- filters only for Neo Garden 23, Garden Party 30, Mini Lindy / Lindy II mini, and all Birkin, Kelly, and Constance bags;
 - treats category-page `Discover` / unavailable markers only as a screening signal;
 - opens a target's official product page when the category page suggests it may be purchasable;
 - requires the expected SKU/reference;

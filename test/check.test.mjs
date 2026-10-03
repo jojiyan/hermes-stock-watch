@@ -40,12 +40,14 @@ test('both failures remain unhealthy with no product changes or alerts', async (
   assert.deepEqual(r.alerts, []);
   assert.deepEqual(r.state.meta.lastSuccessfulMarkets, []);
 });
-test('zero targets is unknown, not inventory removal', async () => {
+test('a complete category with zero requested targets is a healthy empty result', async () => {
   const input = initial();
   const r = await checkMarkets(input, { fetchCategory: async m => category(m, false) });
-  assert.equal(r.healthy, false);
+  assert.equal(r.healthy, true);
   assert.deepEqual(r.state.products, input.products);
+  assert.deepEqual(r.alerts, []);
   assert.equal(r.summaries[0].candidates, 0);
+  assert.equal(r.summaries[1].candidates, 0);
 });
 test('category Discover still fetches each target and detects enabled buttons; repeat is silent', async () => {
   let count = 0;

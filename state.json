@@ -49,48 +49,25 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
-      "US",
       "CA"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-04T22:50:22.071Z",
+    "lastCheckedAt": "2026-10-04T23:01:08.434Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-04T22:50:22.071Z",
+        "lastCheckedAt": "2026-10-04T23:01:08.434Z",
         "lastSuccessAt": "2026-10-04T22:50:22.071Z",
-        "status": "ok",
+        "status": "unknown",
         "market": "US",
-        "products": 28,
-        "candidates": 2,
-        "verifiedTargets": 2,
-        "availableTargets": 0,
-        "verificationErrors": [],
-        "evidence": [
-          {
-            "sku": "H085956CCY1",
-            "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
-            "sourceURL": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
-            "available": false,
-            "purchaseAction": "",
-            "purchaseButtonDisabled": true
-          },
-          {
-            "sku": "H051551CKCM",
-            "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
-            "sourceURL": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
-            "available": false,
-            "purchaseAction": "",
-            "purchaseButtonDisabled": true
-          }
-        ],
-        "committed": true
+        "error": "US: Hermès Firecrawl CLI failed: US: US: Hermès Firecrawl page returned HTTP 400",
+        "committed": false
       },
       "CA": {
-        "lastCheckedAt": "2026-10-04T22:50:22.071Z",
-        "lastSuccessAt": "2026-10-04T22:50:22.071Z",
+        "lastCheckedAt": "2026-10-04T23:01:08.434Z",
+        "lastSuccessAt": "2026-10-04T23:01:08.434Z",
         "status": "ok",
         "market": "CA",
         "products": 47,

@@ -55,10 +55,10 @@
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-04T02:16:28.820Z",
+    "lastCheckedAt": "2026-10-04T04:12:28.972Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-04T02:16:28.820Z",
+        "lastCheckedAt": "2026-10-04T04:12:28.972Z",
         "lastSuccessAt": "2026-10-03T18:38:57.489Z",
         "status": "unknown",
         "market": "US",
@@ -68,16 +68,16 @@
         "availableTargets": 0,
         "verificationErrors": [
           {
-            "sku": "H085956CCY1",
-            "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
+            "sku": "H051551CKCM",
+            "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
             "error": "US: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
           }
         ],
         "evidence": [
           {
-            "sku": "H051551CKCM",
-            "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
-            "sourceURL": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
+            "sku": "H085956CCY1",
+            "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
+            "sourceURL": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
             "available": false,
             "purchaseAction": "",
             "purchaseButtonDisabled": true
@@ -86,8 +86,8 @@
         "committed": false
       },
       "CA": {
-        "lastCheckedAt": "2026-10-04T02:16:28.820Z",
-        "lastSuccessAt": "2026-10-04T02:16:28.820Z",
+        "lastCheckedAt": "2026-10-04T04:12:28.972Z",
+        "lastSuccessAt": "2026-10-04T04:12:28.972Z",
         "status": "ok",
         "market": "CA",
         "products": 48,

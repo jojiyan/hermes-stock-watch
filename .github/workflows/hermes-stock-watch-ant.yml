@@ -1,0 +1,137 @@
+name: Hermes Stock Watch (low-credit)
+
+on:
+  schedule:
+    # Wake every 5 minutes; the freshness gate below performs a real check
+    # only when the last complete US+CA verification is at least 8 minutes old.
+    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/ant-monitor.mjs"
+      - "ant-state.json"
+      - ".github/workflows/hermes-stock-watch-ant.yml"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: hermes-stock-watch-ant
+  cancel-in-progress: false
+
+jobs:
+  check-stock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out monitor
+        uses: actions/checkout@v4
+
+      - name: Check ScrapingAnt configuration
+        id: configured
+        shell: bash
+        env:
+          SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
+        run: |
+          if [[ -n "$SCRAPINGANT_API_KEY" ]]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "SCRAPINGANT_API_KEY is not configured yet; skipping without using Firecrawl."
+          fi
+
+      - name: Decide whether verification is due
+        if: steps.configured.outputs.ready == 'true'
+        id: due
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [[ "$EVENT_NAME" != "schedule" ]]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "Manual/push run: verification is due."
+            exit 0
+          fi
+
+          python3 - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+
+          should_run = True
+          reason = "new or unhealthy state"
+          try:
+              with open("ant-state.json", "r", encoding="utf-8") as f:
+                  state = json.load(f)
+              success_times = []
+              for code in ("US", "CA"):
+                  market = state.get("markets", {}).get(code, {})
+                  if market.get("status") != "ok" or not market.get("lastSuccessAt"):
+                      raise ValueError(f"{code} is not healthy")
+                  success_times.append(datetime.fromisoformat(market["lastSuccessAt"].replace("Z", "+00:00")).astimezone(timezone.utc))
+              age = (datetime.now(timezone.utc) - min(success_times)).total_seconds()
+              if age < 8 * 60:
+                  should_run = False
+                  reason = f"both markets were verified {age:.0f}s ago"
+              else:
+                  reason = f"last complete verification is {age:.0f}s old"
+          except Exception as exc:
+              reason = f"verification due: {exc}"
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"should_run={'true' if should_run else 'false'}\n")
+          print(reason)
+          PY
+
+      - name: Use Node.js 22
+        if: steps.configured.outputs.ready == 'true' && steps.due.outputs.should_run == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Syntax check
+        if: steps.configured.outputs.ready == 'true' && steps.due.outputs.should_run == 'true'
+        run: node --check src/ant-monitor.mjs
+
+      - name: Check Hermes US and Canada through ScrapingAnt
+        if: steps.configured.outputs.ready == 'true' && steps.due.outputs.should_run == 'true'
+        id: monitor
+        continue-on-error: true
+        run: node src/ant-monitor.mjs
+        env:
+          SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+
+      - name: Save low-credit stock state
+        if: steps.configured.outputs.ready == 'true' && steps.due.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          if git diff --quiet -- ant-state.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ant-state.json
+          git commit -m "chore: update low-credit stock state [skip ci]"
+          git push
+
+      - name: Retain verification evidence
+        if: steps.configured.outputs.ready == 'true' && steps.due.outputs.should_run == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ant-market-verification-${{ github.run_id }}
+          path: ant-run-report.json
+          retention-days: 7
+
+      - name: Require both markets to be verified
+        if: steps.configured.outputs.ready == 'true' && steps.due.outputs.should_run == 'true' && always()
+        env:
+          MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
+        run: test "$MONITOR_OUTCOME" = success
+
+      - name: Verification still fresh
+        if: steps.configured.outputs.ready == 'true' && steps.due.outputs.should_run != 'true'
+        run: echo "Skipping this wake-up because US and CA were both verified recently."

@@ -49,25 +49,30 @@
   "meta": {
     "keepAliveAt": "2026-09-30T04:51:41.103Z",
     "lastSuccessfulMarkets": [
-      "US",
       "CA"
     ],
     "initializedMarkets": [
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-05T00:01:17.901Z",
+    "lastCheckedAt": "2026-10-05T00:31:39.767Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-05T00:01:17.901Z",
+        "lastCheckedAt": "2026-10-05T00:31:39.767Z",
         "lastSuccessAt": "2026-10-05T00:01:17.901Z",
-        "status": "ok",
+        "status": "unknown",
         "market": "US",
         "products": 28,
         "candidates": 2,
-        "verifiedTargets": 2,
+        "verifiedTargets": 1,
         "availableTargets": 0,
-        "verificationErrors": [],
+        "verificationErrors": [
+          {
+            "sku": "H051551CKCM",
+            "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
+            "error": "US: product page Firecrawl CLI failed: CLI returned invalid JSON:  | Error: All scraping engines failed to retrieve content from this URL. Engines tried: [fire-engine;chrome-cdp;stealth, fire-engine(retry);chrome-cdp;stealth, pdf, document, image]. This usually happens"
+          }
+        ],
         "evidence": [
           {
             "sku": "H085956CCY1",
@@ -76,21 +81,13 @@
             "available": false,
             "purchaseAction": "",
             "purchaseButtonDisabled": true
-          },
-          {
-            "sku": "H051551CKCM",
-            "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
-            "sourceURL": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
-            "available": false,
-            "purchaseAction": "",
-            "purchaseButtonDisabled": true
           }
         ],
-        "committed": true
+        "committed": false
       },
       "CA": {
-        "lastCheckedAt": "2026-10-05T00:01:17.901Z",
-        "lastSuccessAt": "2026-10-05T00:01:17.901Z",
+        "lastCheckedAt": "2026-10-05T00:31:39.767Z",
+        "lastSuccessAt": "2026-10-05T00:31:39.767Z",
         "status": "ok",
         "market": "CA",
         "products": 47,

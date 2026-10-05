@@ -1,4 +1,4 @@
-name: Hermes Stock Watch (direct browser)
+name: Hermes Stock Watch (direct stealth browser)
 
 on:
   schedule:
@@ -10,6 +10,8 @@ on:
     branches: [main]
     paths:
       - "src/direct-monitor.mjs"
+      - "src/scrapling_fetch.py"
+      - "bin/google-chrome-stealth"
       - ".github/workflows/hermes-stock-watch-ant.yml"
 
 permissions:
@@ -23,7 +25,7 @@ concurrency:
 jobs:
   check-stock:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Check out monitor
         uses: actions/checkout@v4
@@ -79,26 +81,28 @@ jobs:
         if: steps.due.outputs.should_run == 'true'
         shell: bash
         run: |
-          for c in /usr/bin/google-chrome-stable /usr/bin/google-chrome /usr/bin/chromium /usr/bin/chromium-browser; do
-            if [[ -x "$c" ]]; then
-              echo "Chrome found: $c"
-              "$c" --version
-              exit 0
-            fi
-          done
-          echo "No Chrome/Chromium binary found" >&2
-          exit 1
+          test -x /usr/bin/google-chrome-stable
+          /usr/bin/google-chrome-stable --version
+
+      - name: Install stealth fetcher
+        if: steps.due.outputs.should_run == 'true'
+        run: |
+          python3 -m pip install --disable-pip-version-check --quiet "scrapling[fetchers]"
+          chmod +x "$GITHUB_WORKSPACE/bin/google-chrome-stealth"
 
       - name: Syntax check
         if: steps.due.outputs.should_run == 'true'
-        run: node --check src/direct-monitor.mjs
+        run: |
+          node --check src/direct-monitor.mjs
+          python3 -m py_compile src/scrapling_fetch.py
 
-      - name: Check Hermes US and Canada directly with Chrome
+      - name: Check Hermes US and Canada with stealth Chrome
         if: steps.due.outputs.should_run == 'true'
         id: monitor
         continue-on-error: true
         run: node src/direct-monitor.mjs
         env:
+          CHROME_PATH: ${{ github.workspace }}/bin/google-chrome-stealth
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}

@@ -5,14 +5,14 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-05T09:52:40.822Z",
-      "error": "US: category returned an access-block/challenge page"
+      "lastCheckedAt": "2026-10-05T09:56:11.241Z",
+      "error": "Chrome failed for US-category: Traceback (most recent call last): File \"/home/runner/work/hermes-stock-watch/hermes-stock-watch/src/scrapling_fetch.py\", line 2, in <module> from scrapling.fetchers import DynamicFetcher ModuleNotFoundError: No module named 'scrapling' "
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-05T09:52:40.822Z",
-      "error": "CA: category returned an access-block/challenge page"
+      "lastCheckedAt": "2026-10-05T09:56:11.241Z",
+      "error": "Chrome failed for CA-category: Traceback (most recent call last): File \"/home/runner/work/hermes-stock-watch/hermes-stock-watch/src/scrapling_fetch.py\", line 2, in <module> from scrapling.fetchers import DynamicFetcher ModuleNotFoundError: No module named 'scrapling' "
     }
   },
-  "lastCheckedAt": "2026-10-05T09:52:40.822Z"
+  "lastCheckedAt": "2026-10-05T09:56:11.241Z"
 }

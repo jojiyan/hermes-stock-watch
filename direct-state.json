@@ -1,18 +1,67 @@
 {
   "version": 1,
-  "initializedMarkets": [],
-  "products": {},
+  "initializedMarkets": [
+    "US"
+  ],
+  "products": {
+    "US:H085956CCY1": {
+      "market": "US",
+      "sku": "H085956CCY1",
+      "name": "Lindy II mini bag",
+      "color": "Beige/Natural",
+      "material": "",
+      "price": "Price",
+      "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
+      "status": "out_of_stock",
+      "changedAt": "2026-10-05T09:57:20.836Z",
+      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
+      "missingHealthyChecks": 0
+    },
+    "US:H056289CKY1": {
+      "market": "US",
+      "sku": "H056289CKY1",
+      "name": "Picotin Lock 18 bag",
+      "color": "Beige/Natural",
+      "material": "",
+      "price": "Price",
+      "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
+      "status": "out_of_stock",
+      "changedAt": "2026-10-05T09:57:20.836Z",
+      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
+      "missingHealthyChecks": 0
+    },
+    "US:H051551CKCM": {
+      "market": "US",
+      "sku": "H051551CKCM",
+      "name": "Garden Party 30 bag",
+      "color": "Beige/Natural",
+      "material": "",
+      "price": "Price",
+      "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
+      "status": "out_of_stock",
+      "changedAt": "2026-10-05T09:57:20.836Z",
+      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
+      "missingHealthyChecks": 0
+    }
+  },
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-05T09:56:50.402Z",
-      "error": "Chrome failed for US-category: /home/runner/work/hermes-stock-watch/hermes-stock-watch/bin/google-chrome-stealth: line 4: /home/runner/work/hermes-stock-watch/hermes-stock-watch/.venv/bin/python: No such file or directory "
+      "status": "ok",
+      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
+      "lastSuccessAt": "2026-10-05T09:57:20.836Z",
+      "products": 28,
+      "candidates": 3,
+      "categoryAvailable": 0,
+      "verifiedTargets": 0,
+      "availableTargets": 0,
+      "verificationErrors": [],
+      "committed": true
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-05T09:56:50.402Z",
-      "error": "Chrome failed for CA-category: /home/runner/work/hermes-stock-watch/hermes-stock-watch/bin/google-chrome-stealth: line 4: /home/runner/work/hermes-stock-watch/hermes-stock-watch/.venv/bin/python: No such file or directory "
+      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
+      "error": "CA: category returned an access-block/challenge page"
     }
   },
-  "lastCheckedAt": "2026-10-05T09:56:50.402Z"
+  "lastCheckedAt": "2026-10-05T09:57:20.836Z"
 }

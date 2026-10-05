@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "src/direct-probe.py"
+      - "src/wreq-probe.mjs"
       - ".github/workflows/hermes-direct-probe.yml"
   workflow_dispatch:
 
@@ -14,10 +15,10 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.12"
-      - name: Install browser-fingerprint HTTP client
-        run: pip install --disable-pip-version-check curl_cffi
-      - name: Probe Hermès US and CA directly
-        run: python src/direct-probe.py
+          node-version: "22"
+      - name: Install wreq browser-fingerprint client
+        run: npm install --no-save wreq-js
+      - name: Probe Hermès official JSON API
+        run: node src/wreq-probe.mjs

@@ -18,7 +18,8 @@ for (const [code, cfg] of Object.entries(markets)) {
   const url = `https://bck.hermes.com/products?category=WOMEN&sort=relevance&pagesize=144&locale=${cfg.locale}`;
   try {
     const res = await fetch(url, {
-      browser: { profile: 'chrome_149', platform: 'windows', http2: true, headers: true },
+      browser: 'chrome_149',
+      os: 'windows',
       headers: {
         accept: 'application/json, text/plain, */*',
         'accept-language': 'en-US,en;q=0.9',

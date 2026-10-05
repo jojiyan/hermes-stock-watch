@@ -87,14 +87,15 @@ jobs:
       - name: Install stealth fetcher
         if: steps.due.outputs.should_run == 'true'
         run: |
-          python3 -m pip install --disable-pip-version-check --quiet "scrapling[fetchers]"
+          python3 -m venv "$GITHUB_WORKSPACE/.venv"
+          "$GITHUB_WORKSPACE/.venv/bin/python" -m pip install --disable-pip-version-check --quiet "scrapling[fetchers]"
           chmod +x "$GITHUB_WORKSPACE/bin/google-chrome-stealth"
 
       - name: Syntax check
         if: steps.due.outputs.should_run == 'true'
         run: |
           node --check src/direct-monitor.mjs
-          python3 -m py_compile src/scrapling_fetch.py
+          "$GITHUB_WORKSPACE/.venv/bin/python" -m py_compile src/scrapling_fetch.py
 
       - name: Check Hermes US and Canada with stealth Chrome
         if: steps.due.outputs.should_run == 'true'

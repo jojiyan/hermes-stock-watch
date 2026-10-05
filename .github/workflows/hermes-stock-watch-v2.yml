@@ -1,20 +1,7 @@
-name: Hermes Stock Watch v2
+name: Hermes Stock Watch v2 (legacy Firecrawl manual fallback)
 
 on:
-  schedule:
-    # Wake up every 5 minutes at an offset from the top of the hour.
-    # A freshness gate below performs a real scrape only when both markets
-    # have not been successfully verified for at least 8 minutes.
-    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "src/**"
-      - "test/**"
-      - "bin/**"
-      - "package.json"
-      - ".github/workflows/hermes-stock-watch-v2.yml"
 
 permissions:
   contents: write
@@ -34,67 +21,15 @@ jobs:
       - name: Check out monitor
         uses: actions/checkout@v4
 
-      - name: Decide whether scheduled verification is due
-        id: due
-        shell: bash
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-        run: |
-          if [[ "$EVENT_NAME" != "schedule" ]]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "Manual/push run: verification is always due."
-            exit 0
-          fi
-
-          python3 - <<'PY'
-          import json
-          import os
-          from datetime import datetime, timezone
-
-          should_run = True
-          reason = "state unavailable or previous verification unhealthy"
-
-          try:
-              with open("state.json", "r", encoding="utf-8") as f:
-                  state = json.load(f)
-              markets = state.get("meta", {}).get("markets", {})
-              success_times = []
-              for code in ("US", "CA"):
-                  market = markets.get(code, {})
-                  if market.get("status") != "ok" or not market.get("lastSuccessAt"):
-                      raise ValueError(f"{code} is not healthy")
-                  stamp = market["lastSuccessAt"].replace("Z", "+00:00")
-                  success_times.append(datetime.fromisoformat(stamp).astimezone(timezone.utc))
-
-              # Use the older of the two market success times so a stale market
-              # can never be hidden by a fresher market.
-              common_success = min(success_times)
-              age_seconds = (datetime.now(timezone.utc) - common_success).total_seconds()
-              if age_seconds < 8 * 60:
-                  should_run = False
-                  reason = f"both markets were verified {age_seconds:.0f}s ago"
-              else:
-                  reason = f"last complete verification is {age_seconds:.0f}s old"
-          except Exception as exc:
-              reason = f"verification due because state is not fully healthy: {exc}"
-
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write(f"should_run={'true' if should_run else 'false'}\n")
-          print(reason)
-          PY
-
       - name: Use Node.js 22
-        if: steps.due.outputs.should_run == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
       - name: Install Firecrawl CLI
-        if: steps.due.outputs.should_run == 'true'
         run: npm install --global firecrawl-cli@latest
 
       - name: Configure resilient Firecrawl wrapper
-        if: steps.due.outputs.should_run == 'true'
         shell: bash
         run: |
           real_cli="$(command -v firecrawl)"
@@ -104,11 +39,9 @@ jobs:
           echo "$GITHUB_WORKSPACE/bin" >> "$GITHUB_PATH"
 
       - name: Run safety tests
-        if: steps.due.outputs.should_run == 'true'
         run: npm test
 
       - name: Check Hermes US and Canada through Firecrawl
-        if: steps.due.outputs.should_run == 'true'
         id: monitor
         continue-on-error: true
         run: node src/monitor.mjs
@@ -118,7 +51,6 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
       - name: Save stock state
-        if: steps.due.outputs.should_run == 'true'
         shell: bash
         run: |
           if git diff --quiet -- state.json; then
@@ -131,7 +63,7 @@ jobs:
           git push
 
       - name: Retain verification evidence
-        if: steps.due.outputs.should_run == 'true' && always()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: market-verification-${{ github.run_id }}
@@ -139,11 +71,7 @@ jobs:
           retention-days: 7
 
       - name: Require both markets to be verified
-        if: steps.due.outputs.should_run == 'true' && always()
+        if: always()
         env:
           MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
         run: test "$MONITOR_OUTCOME" = success
-
-      - name: Scheduled verification is still fresh
-        if: steps.due.outputs.should_run != 'true'
-        run: echo "Skipping this wake-up because US and CA were both verified recently."

@@ -60,8 +60,8 @@
   },
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-05T21:53:11.225Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-05T22:01:58.973Z",
       "lastSuccessAt": "2026-10-05T21:53:11.225Z",
       "products": 32,
       "candidates": 3,
@@ -69,11 +69,12 @@
       "verifiedTargets": 0,
       "availableTargets": 0,
       "verificationErrors": [],
-      "committed": true
+      "committed": true,
+      "error": "US: category returned an access-block/challenge page"
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-05T21:53:11.225Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-05T22:01:58.973Z",
       "lastSuccessAt": "2026-10-05T21:53:11.225Z",
       "products": 48,
       "candidates": 1,
@@ -81,8 +82,9 @@
       "verifiedTargets": 1,
       "availableTargets": 1,
       "verificationErrors": [],
-      "committed": true
+      "committed": true,
+      "error": "CA: category returned an access-block/challenge page"
     }
   },
-  "lastCheckedAt": "2026-10-05T21:53:11.225Z"
+  "lastCheckedAt": "2026-10-05T22:01:58.973Z"
 }

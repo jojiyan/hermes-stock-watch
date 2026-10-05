@@ -1,7 +1,8 @@
 {
   "version": 1,
   "initializedMarkets": [
-    "US"
+    "US",
+    "CA"
   ],
   "products": {
     "US:H085956CCY1": {
@@ -14,7 +15,7 @@
       "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
+      "lastCheckedAt": "2026-10-05T10:00:21.240Z",
       "missingHealthyChecks": 0
     },
     "US:H056289CKY1": {
@@ -27,7 +28,7 @@
       "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
+      "lastCheckedAt": "2026-10-05T10:00:21.240Z",
       "missingHealthyChecks": 0
     },
     "US:H051551CKCM": {
@@ -40,15 +41,28 @@
       "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
+      "lastCheckedAt": "2026-10-05T10:00:21.240Z",
+      "missingHealthyChecks": 0
+    },
+    "CA:H085689CKAC": {
+      "market": "CA",
+      "sku": "H085689CKAC",
+      "name": "Garden Party 36 bag",
+      "color": "Écru / Beige / Gold",
+      "material": "H canvas with \"H au Pas\" motif and Negonda calfskin",
+      "price": "CA$6,250",
+      "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
+      "status": "in_stock",
+      "changedAt": "2026-10-05T10:00:21.240Z",
+      "lastCheckedAt": "2026-10-05T10:00:21.240Z",
       "missingHealthyChecks": 0
     }
   },
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
-      "lastSuccessAt": "2026-10-05T09:57:20.836Z",
+      "lastCheckedAt": "2026-10-05T10:00:21.240Z",
+      "lastSuccessAt": "2026-10-05T10:00:21.240Z",
       "products": 28,
       "candidates": 3,
       "categoryAvailable": 0,
@@ -58,10 +72,17 @@
       "committed": true
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-05T09:57:20.836Z",
-      "error": "CA: category returned an access-block/challenge page"
+      "status": "ok",
+      "lastCheckedAt": "2026-10-05T10:00:21.240Z",
+      "lastSuccessAt": "2026-10-05T10:00:21.240Z",
+      "products": 47,
+      "candidates": 1,
+      "categoryAvailable": 1,
+      "verifiedTargets": 1,
+      "availableTargets": 1,
+      "verificationErrors": [],
+      "committed": true
     }
   },
-  "lastCheckedAt": "2026-10-05T09:57:20.836Z"
+  "lastCheckedAt": "2026-10-05T10:00:21.240Z"
 }

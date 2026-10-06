@@ -60,8 +60,8 @@
   },
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-06T02:59:05.483Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-06T03:10:33.296Z",
       "lastSuccessAt": "2026-10-06T02:59:05.483Z",
       "products": 31,
       "candidates": 3,
@@ -69,11 +69,12 @@
       "verifiedTargets": 0,
       "availableTargets": 0,
       "verificationErrors": [],
-      "committed": true
+      "committed": true,
+      "error": "US: category returned an access-block/challenge page"
     },
     "CA": {
-      "status": "partial",
-      "lastCheckedAt": "2026-10-06T02:59:05.483Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-06T03:10:33.296Z",
       "lastSuccessAt": "2026-10-06T02:48:52.142Z",
       "products": 48,
       "candidates": 1,
@@ -87,8 +88,9 @@
           "error": "CA: product DOM is unexpectedly short (1896 chars)"
         }
       ],
-      "committed": false
+      "committed": false,
+      "error": "CA: category returned an access-block/challenge page"
     }
   },
-  "lastCheckedAt": "2026-10-06T02:59:05.483Z"
+  "lastCheckedAt": "2026-10-06T03:10:33.296Z"
 }

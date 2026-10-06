@@ -15,7 +15,7 @@
       "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-06T12:58:10.669Z",
+      "lastCheckedAt": "2026-10-06T13:10:31.692Z",
       "missingHealthyChecks": 0
     },
     "US:H056289CKY1": {
@@ -28,7 +28,7 @@
       "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-06T12:58:10.669Z",
+      "lastCheckedAt": "2026-10-06T13:10:31.692Z",
       "missingHealthyChecks": 0
     },
     "US:H051551CKCM": {
@@ -41,7 +41,7 @@
       "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-06T12:58:10.669Z",
+      "lastCheckedAt": "2026-10-06T13:10:31.692Z",
       "missingHealthyChecks": 0
     },
     "CA:H085689CKAC": {
@@ -61,8 +61,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-06T12:58:10.669Z",
-      "lastSuccessAt": "2026-10-06T12:58:10.669Z",
+      "lastCheckedAt": "2026-10-06T13:10:31.692Z",
+      "lastSuccessAt": "2026-10-06T13:10:31.692Z",
       "products": 31,
       "candidates": 3,
       "categoryAvailable": 0,
@@ -73,7 +73,7 @@
     },
     "CA": {
       "status": "partial",
-      "lastCheckedAt": "2026-10-06T12:58:10.669Z",
+      "lastCheckedAt": "2026-10-06T13:10:31.692Z",
       "lastSuccessAt": "2026-10-06T12:42:27.101Z",
       "products": 48,
       "candidates": 1,
@@ -90,5 +90,5 @@
       "committed": false
     }
   },
-  "lastCheckedAt": "2026-10-06T12:58:10.669Z"
+  "lastCheckedAt": "2026-10-06T13:10:31.692Z"
 }

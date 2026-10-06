@@ -61,7 +61,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-06T18:01:43.395Z",
+      "lastCheckedAt": "2026-10-06T18:17:45.554Z",
       "lastSuccessAt": "2026-10-06T16:35:15.129Z",
       "products": 35,
       "candidates": 3,
@@ -74,7 +74,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-06T18:01:43.395Z",
+      "lastCheckedAt": "2026-10-06T18:17:45.554Z",
       "lastSuccessAt": "2026-10-06T16:35:15.129Z",
       "products": 47,
       "candidates": 1,
@@ -86,5 +86,5 @@
       "error": "CA: category returned an access-block/challenge page"
     }
   },
-  "lastCheckedAt": "2026-10-06T18:01:43.395Z"
+  "lastCheckedAt": "2026-10-06T18:17:45.554Z"
 }

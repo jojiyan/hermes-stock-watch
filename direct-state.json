@@ -15,7 +15,7 @@
       "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-06T11:26:36.416Z",
+      "lastCheckedAt": "2026-10-06T11:40:05.284Z",
       "missingHealthyChecks": 0
     },
     "US:H056289CKY1": {
@@ -28,7 +28,7 @@
       "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-06T11:26:36.416Z",
+      "lastCheckedAt": "2026-10-06T11:40:05.284Z",
       "missingHealthyChecks": 0
     },
     "US:H051551CKCM": {
@@ -41,7 +41,7 @@
       "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
       "status": "out_of_stock",
       "changedAt": "2026-10-05T09:57:20.836Z",
-      "lastCheckedAt": "2026-10-06T11:26:36.416Z",
+      "lastCheckedAt": "2026-10-06T11:40:05.284Z",
       "missingHealthyChecks": 0
     },
     "CA:H085689CKAC": {
@@ -61,8 +61,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-06T11:26:36.416Z",
-      "lastSuccessAt": "2026-10-06T11:26:36.416Z",
+      "lastCheckedAt": "2026-10-06T11:40:05.284Z",
+      "lastSuccessAt": "2026-10-06T11:40:05.284Z",
       "products": 31,
       "candidates": 3,
       "categoryAvailable": 0,
@@ -72,17 +72,23 @@
       "committed": true
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-06T11:26:36.416Z",
+      "status": "partial",
+      "lastCheckedAt": "2026-10-06T11:40:05.284Z",
       "lastSuccessAt": "2026-10-06T11:26:36.416Z",
       "products": 47,
       "candidates": 1,
       "categoryAvailable": 1,
-      "verifiedTargets": 1,
-      "availableTargets": 1,
-      "verificationErrors": [],
-      "committed": true
+      "verifiedTargets": 0,
+      "availableTargets": 0,
+      "verificationErrors": [
+        {
+          "sku": "H085689CKAC",
+          "url": "https://www.hermes.com/ca/en/product/garden-party-36-bag-H085689CKAC/",
+          "error": "CA: product DOM is unexpectedly short (1896 chars)"
+        }
+      ],
+      "committed": false
     }
   },
-  "lastCheckedAt": "2026-10-06T11:26:36.416Z"
+  "lastCheckedAt": "2026-10-06T11:40:05.284Z"
 }

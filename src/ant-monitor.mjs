@@ -198,7 +198,7 @@ function parseCategoryMarkdown(markdown, market) {
       color,
       price,
       url,
-      categoryAvailable: hasBuy && !negative,
+      categoryAvailable: !negative,
       target: isTargetProduct(name),
     });
   }

@@ -1,18 +1,7 @@
-name: Hermes Stock Watch (Firecrawl)
+name: Hermes Stock Watch (Firecrawl - manual only)
 
 on:
-  schedule:
-    - cron: "3,13,23,33,43,53 * * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "src/hermes.mjs"
-      - "src/check.mjs"
-      - "src/monitor.mjs"
-      - "bin/firecrawl"
-      - "test/**"
-      - ".github/workflows/hermes-stock-watch-v2.yml"
 
 permissions:
   contents: write

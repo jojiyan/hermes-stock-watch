@@ -53,9 +53,10 @@ const ANT_TARGET_HEADERS = {
 };
 
 const CHEAP_FETCH_MODES = [
-  { browser: false, rawSource: false, proxyType: "datacenter", label: "direct-random-datacenter" },
-  { browser: true, rawSource: true, proxyType: "datacenter", label: "browser-raw-random-datacenter" },
-  { browser: true, rawSource: false, proxyType: "datacenter", label: "browser-js-random-datacenter" },
+  { browser: false, rawSource: false, proxyType: "datacenter", label: "direct-local-datacenter" },
+  { browser: true, rawSource: false, proxyType: "datacenter", label: "browser-local-datacenter" },
+  { browser: false, rawSource: false, proxyType: "residential", label: "direct-local-residential" },
+  { browser: true, rawSource: false, proxyType: "residential", label: "browser-local-residential" },
 ];
 
 const PRODUCT_FETCH_MODES = [
@@ -280,6 +281,7 @@ async function fetchAntMarkdown(targetUrl, market) {
       url: targetUrl,
       browser: mode.browser ? "true" : "false",
       proxy_type: mode.proxyType,
+      proxy_country: market.country,
       timeout: "60",
     });
     if (mode.rawSource) params.set("return_page_source", "true");
@@ -312,7 +314,7 @@ async function fetchAntMarkdown(targetUrl, market) {
     return { markdown: data.markdown, url: data.url || targetUrl, credits, mode: mode.label };
   }
 
-  throw new Error(`${market.code}: ScrapingAnt category failed in all low-credit datacenter modes: ${failures.join(" | ")}`);
+  throw new Error(`${market.code}: ScrapingAnt category failed in all local proxy modes: ${failures.join(" | ")}`);
 }
 
 async function fetchAntWarmCookies(market, proxyType, sessionId) {
@@ -320,6 +322,7 @@ async function fetchAntWarmCookies(market, proxyType, sessionId) {
     url: market.categoryUrl,
     browser: "false",
     proxy_type: proxyType,
+    proxy_country: market.country,
     timeout: "60",
     session: sessionId,
   });
@@ -355,6 +358,7 @@ async function fetchAntHtml(targetUrl, market) {
       url: targetUrl,
       browser: mode.browser ? "true" : "false",
       proxy_type: mode.proxyType,
+      proxy_country: market.country,
       timeout: "60",
       session: sessionId,
     });
@@ -435,6 +439,7 @@ async function fetchProductThroughCategoryBrowser(targetUrl, market) {
       url: market.categoryUrl,
       browser: "true",
       proxy_type: attempt.proxyType,
+      proxy_country: market.country,
       timeout: "60",
       js_snippet: snippet,
     });

@@ -53,9 +53,16 @@ const ANT_TARGET_HEADERS = {
 };
 
 const CHEAP_FETCH_MODES = [
-  { browser: false, rawSource: false, label: "direct-random-datacenter" },
-  { browser: true, rawSource: true, label: "browser-raw-random-datacenter" },
-  { browser: true, rawSource: false, label: "browser-js-random-datacenter" },
+  { browser: false, rawSource: false, proxyType: "datacenter", label: "direct-random-datacenter" },
+  { browser: true, rawSource: true, proxyType: "datacenter", label: "browser-raw-random-datacenter" },
+  { browser: true, rawSource: false, proxyType: "datacenter", label: "browser-js-random-datacenter" },
+];
+
+const PRODUCT_FETCH_MODES = [
+  ...CHEAP_FETCH_MODES,
+  { browser: false, rawSource: false, proxyType: "residential", label: "direct-random-residential" },
+  { browser: true, rawSource: true, proxyType: "residential", label: "browser-raw-random-residential" },
+  { browser: true, rawSource: false, proxyType: "residential", label: "browser-js-random-residential" },
 ];
 
 const state = JSON.parse(await readFile(statePath, "utf8").catch(() => '{"version":1,"markets":{}}'));
@@ -272,7 +279,7 @@ async function fetchAntMarkdown(targetUrl, market) {
     const params = new URLSearchParams({
       url: targetUrl,
       browser: mode.browser ? "true" : "false",
-      proxy_type: "datacenter",
+      proxy_type: mode.proxyType,
       timeout: "60",
     });
     if (mode.rawSource) params.set("return_page_source", "true");
@@ -311,11 +318,11 @@ async function fetchAntMarkdown(targetUrl, market) {
 async function fetchAntHtml(targetUrl, market) {
   const failures = [];
 
-  for (const mode of CHEAP_FETCH_MODES) {
+  for (const mode of PRODUCT_FETCH_MODES) {
     const params = new URLSearchParams({
       url: targetUrl,
       browser: mode.browser ? "true" : "false",
-      proxy_type: "datacenter",
+      proxy_type: mode.proxyType,
       timeout: "60",
     });
     if (mode.rawSource) params.set("return_page_source", "true");

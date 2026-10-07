@@ -16,6 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Firecrawl fallback smoke test after target sync
   check-stock:
     runs-on: ubuntu-latest
     timeout-minutes: 10

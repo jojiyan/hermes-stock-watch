@@ -4,14 +4,14 @@
     "US": {
       "available": {},
       "status": "unknown",
-      "lastCheckedAt": "2026-10-07T10:40:35.503Z",
-      "error": "Cannot access 'CHEAP_FETCH_MODES' before initialization"
+      "lastCheckedAt": "2026-10-07T10:41:28.923Z",
+      "error": "US: parsed only 0 products from category"
     },
     "CA": {
       "available": {},
       "status": "unknown",
-      "lastCheckedAt": "2026-10-07T10:40:35.503Z",
-      "error": "Cannot access 'CHEAP_FETCH_MODES' before initialization"
+      "lastCheckedAt": "2026-10-07T10:41:28.923Z",
+      "error": "CA: parsed only 0 products from category"
     }
   }
 }

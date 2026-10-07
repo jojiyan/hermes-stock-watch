@@ -4,11 +4,6 @@ on:
   schedule:
     - cron: "3,13,23,33,43,53 * * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "src/ant-monitor.mjs"
-      - ".github/workflows/hermes-stock-watch-scrapingant.yml"
 
 permissions:
   contents: write

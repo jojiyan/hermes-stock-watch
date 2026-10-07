@@ -47,7 +47,7 @@
   },
   "markets": {
     "US": {
-      "lastCheckedAt": "2026-10-07T10:17:29.383Z",
+      "lastCheckedAt": "2026-10-07T10:18:41.171Z",
       "lastSuccessAt": "2026-10-06T16:35:15.129Z",
       "status": "unknown",
       "market": "US",
@@ -55,15 +55,15 @@
       "committed": false
     },
     "CA": {
-      "lastCheckedAt": "2026-10-07T10:17:29.383Z",
+      "lastCheckedAt": "2026-10-07T10:18:41.171Z",
       "lastSuccessAt": "2026-10-06T16:35:15.129Z",
       "status": "unknown",
       "market": "CA",
-      "error": "CA: It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead.",
+      "error": "CA: Hermès returned an access-block page",
       "committed": false
     }
   },
-  "lastCheckedAt": "2026-10-07T10:17:29.383Z",
+  "lastCheckedAt": "2026-10-07T10:18:41.171Z",
   "meta": {
     "initializedMarkets": [
       "US",
@@ -71,7 +71,7 @@
     ],
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-07T10:17:29.383Z",
+        "lastCheckedAt": "2026-10-07T10:18:41.171Z",
         "lastSuccessAt": "2026-10-06T16:35:15.129Z",
         "status": "unknown",
         "market": "US",
@@ -79,16 +79,16 @@
         "committed": false
       },
       "CA": {
-        "lastCheckedAt": "2026-10-07T10:17:29.383Z",
+        "lastCheckedAt": "2026-10-07T10:18:41.171Z",
         "lastSuccessAt": "2026-10-06T16:35:15.129Z",
         "status": "unknown",
         "market": "CA",
-        "error": "CA: It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead.",
+        "error": "CA: Hermès returned an access-block page",
         "committed": false
       }
     },
     "keepAliveAt": "2026-10-07T10:17:29.383Z",
     "lastSuccessfulMarkets": [],
-    "lastCheckedAt": "2026-10-07T10:17:29.383Z"
+    "lastCheckedAt": "2026-10-07T10:18:41.171Z"
   }
 }

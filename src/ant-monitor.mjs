@@ -57,7 +57,7 @@ for (const market of MARKETS) {
   const previousAvailable = previousMarket.available || {};
 
   try {
-    const categoryDoc = await fetchAntMarkdown(market.categoryUrl, market, false);
+    const categoryDoc = await fetchAntMarkdown(market.categoryUrl, market);
     const products = parseCategoryMarkdown(categoryDoc.markdown, market);
     const targets = products.filter((product) => product.target);
     const categoryAvailable = targets.filter((product) => product.categoryAvailable);
@@ -76,7 +76,7 @@ for (const market of MARKETS) {
       }
 
       try {
-        const html = await fetchAntHtml(product.url, market, true);
+        const html = await fetchAntHtml(product.url, market);
         const verified = parseProductHtml(html, product);
         evidence.push({
           sku: product.sku,
@@ -226,44 +226,99 @@ function parseProductHtml(html, candidate) {
   };
 }
 
-async function fetchAntMarkdown(targetUrl, market, browser) {
-  const params = new URLSearchParams({
-    url: withFreshBucket(targetUrl),
-    browser: browser ? "true" : "false",
-    proxy_type: "datacenter",
-    proxy_country: market.country,
-    timeout: "60",
-  });
-  const response = await fetch(`https://api.scrapingant.com/v2/markdown?${params}`, {
-    headers: { "x-api-key": apiKey, accept: "application/json" },
-  });
-  const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
-  if (!response.ok) throw new Error(`${market.code}: ScrapingAnt category request failed (${response.status}): ${(await response.text()).slice(0, 300)}`);
-  const data = await response.json();
-  if (!data?.markdown) throw new Error(`${market.code}: ScrapingAnt markdown response is incomplete`);
-  return { markdown: data.markdown, url: data.url || targetUrl, credits };
+const ANT_TARGET_HEADERS = {
+  "x-api-key": apiKey,
+  "ant-user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "ant-accept-language": "en-US,en;q=0.9",
+  "ant-cache-control": "no-cache",
+  "ant-pragma": "no-cache",
+  "ant-upgrade-insecure-requests": "1",
+};
+
+const CHEAP_FETCH_MODES = [
+  { browser: false, rawSource: false, label: "direct-random-datacenter" },
+  { browser: true, rawSource: true, label: "browser-raw-random-datacenter" },
+  { browser: true, rawSource: false, label: "browser-js-random-datacenter" },
+];
+
+async function fetchAntMarkdown(targetUrl, market) {
+  const failures = [];
+
+  for (const mode of CHEAP_FETCH_MODES) {
+    const params = new URLSearchParams({
+      url: targetUrl,
+      browser: mode.browser ? "true" : "false",
+      proxy_type: "datacenter",
+      timeout: "60",
+    });
+    if (mode.rawSource) params.set("return_page_source", "true");
+    if (mode.browser) params.set("block_resource", "image,media,font");
+
+    const response = await fetch(`https://api.scrapingant.com/v2/markdown?${params}`, {
+      headers: { ...ANT_TARGET_HEADERS, accept: "application/json" },
+    });
+    const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
+
+    if (!response.ok) {
+      failures.push(`${mode.label} HTTP ${response.status}: ${(await response.text()).slice(0, 180)}`);
+      continue;
+    }
+
+    const data = await response.json();
+    if (typeof data?.markdown !== "string" || data.markdown.length < 1000 || BLOCK_RE.test(data.markdown)) {
+      failures.push(`${mode.label}: unusable markdown`);
+      continue;
+    }
+
+    console.log(`[${market.code}] category fetched via ${mode.label}; credits=${credits ?? "unknown"}`);
+    return { markdown: data.markdown, url: data.url || targetUrl, credits, mode: mode.label };
+  }
+
+  throw new Error(`${market.code}: ScrapingAnt category failed in all low-credit datacenter modes: ${failures.join(" | ")}`);
 }
 
-async function fetchAntHtml(targetUrl, market, browser) {
-  const params = new URLSearchParams({
-    url: withFreshBucket(targetUrl),
-    browser: browser ? "true" : "false",
-    proxy_type: "datacenter",
-    proxy_country: market.country,
-    timeout: "60",
-  });
-  if (browser) params.set("block_resource", "image,media,font");
-  const response = await fetch(`https://api.scrapingant.com/v2/general?${params}`, {
-    headers: { "x-api-key": apiKey, accept: "text/html,*/*" },
-  });
-  if (!response.ok) throw new Error(`${market.code}: ScrapingAnt product request failed (${response.status}): ${(await response.text()).slice(0, 300)}`);
-  return response.text();
-}
+async function fetchAntHtml(targetUrl, market) {
+  const failures = [];
 
-function withFreshBucket(raw) {
-  const url = new URL(raw);
-  url.searchParams.set("_hwatch", String(Math.floor(Date.now() / (10 * 60 * 1000))));
-  return url.toString();
+  for (const mode of CHEAP_FETCH_MODES) {
+    const params = new URLSearchParams({
+      url: targetUrl,
+      browser: mode.browser ? "true" : "false",
+      proxy_type: "datacenter",
+      timeout: "60",
+    });
+    if (mode.rawSource) params.set("return_page_source", "true");
+    if (mode.browser) params.set("block_resource", "image,media,font");
+
+    const response = await fetch(`https://api.scrapingant.com/v2/general?${params}`, {
+      headers: { ...ANT_TARGET_HEADERS, accept: "text/html,*/*" },
+    });
+    const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
+
+    if (!response.ok) {
+      failures.push(`${mode.label} HTTP ${response.status}: ${(await response.text()).slice(0, 180)}`);
+      continue;
+    }
+
+    const html = await response.text();
+    if (html.length < 5000 || BLOCK_RE.test(html)) {
+      failures.push(`${mode.label}: unusable HTML`);
+      continue;
+    }
+
+    try {
+      const verified = parseProductHtml(html, {
+        market: market.code,
+        sku: targetUrl.match(/-([A-Z0-9]{6,})\/?(?:\?|$)/i)?.[1]?.toUpperCase() || "",
+      });
+      console.log(`[${market.code}] product fetched via ${mode.label}; credits=${credits ?? "unknown"}`);
+      return html;
+    } catch (error) {
+      failures.push(`${mode.label}: ${error.message}`);
+    }
+  }
+
+  throw new Error(`${market.code}: ScrapingAnt product failed in all low-credit datacenter modes: ${failures.join(" | ")}`);
 }
 
 function pickStateFields(product) {

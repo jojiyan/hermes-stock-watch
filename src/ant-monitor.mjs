@@ -277,7 +277,11 @@ async function fetchAntMarkdown(targetUrl, market) {
       continue;
     }
 
+    const firstProductIndex = data.markdown.search(/\/(?:us|ca)\/en\/product\//i);
+    const sampleStart = Math.max(0, firstProductIndex - 500);
+    const sampleEnd = Math.min(data.markdown.length, firstProductIndex + 1200);
     console.log(`[${market.code}] category fetched via ${mode.label}; productLinks=${productLinkCount}; credits=${credits ?? "unknown"}`);
+    console.log(`[${market.code}] MARKDOWN_SAMPLE_START\n${data.markdown.slice(sampleStart, sampleEnd)}\n[${market.code}] MARKDOWN_SAMPLE_END`);
     return { markdown: data.markdown, url: data.url || targetUrl, credits, mode: mode.label };
   }
 

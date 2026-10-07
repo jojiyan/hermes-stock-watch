@@ -315,16 +315,50 @@ async function fetchAntMarkdown(targetUrl, market) {
   throw new Error(`${market.code}: ScrapingAnt category failed in all low-credit datacenter modes: ${failures.join(" | ")}`);
 }
 
+async function fetchAntWarmCookies(market, proxyType, sessionId) {
+  const params = new URLSearchParams({
+    url: market.categoryUrl,
+    browser: "false",
+    proxy_type: proxyType,
+    timeout: "60",
+    session: sessionId,
+  });
+
+  const response = await fetch(`https://api.scrapingant.com/v2/extended?${params}`, {
+    headers: { ...ANT_TARGET_HEADERS, accept: "application/json" },
+  });
+  const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
+
+  if (!response.ok) {
+    console.log(`[${market.code}] warm-up ${proxyType} failed HTTP ${response.status}; credits=${credits ?? "unknown"}`);
+    return "";
+  }
+
+  const data = await response.json();
+  const cookies = typeof data?.cookies === "string" ? data.cookies : "";
+  console.log(`[${market.code}] warm-up ${proxyType} succeeded; cookies=${cookies ? "yes" : "no"}; credits=${credits ?? "unknown"}`);
+  return cookies;
+}
+
 async function fetchAntHtml(targetUrl, market) {
   const failures = [];
+  const warmups = new Map();
 
   for (const mode of PRODUCT_FETCH_MODES) {
+    const sessionId = `hwatch-${market.code.toLowerCase()}-${mode.proxyType}-${Math.floor(Date.now() / (10 * 60 * 1000))}`;
+    if (!warmups.has(mode.proxyType)) {
+      warmups.set(mode.proxyType, await fetchAntWarmCookies(market, mode.proxyType, sessionId));
+    }
+    const cookies = warmups.get(mode.proxyType) || "";
+
     const params = new URLSearchParams({
       url: targetUrl,
       browser: mode.browser ? "true" : "false",
       proxy_type: mode.proxyType,
       timeout: "60",
+      session: sessionId,
     });
+    if (cookies) params.set("cookies", cookies);
     if (mode.rawSource) params.set("return_page_source", "true");
     if (mode.browser) { params.append("block_resource", "image"); params.append("block_resource", "media"); params.append("block_resource", "font"); }
 

@@ -50,6 +50,8 @@ test("matches only the requested Hermès bag families", () => {
     "Lindy II mini bag",
     "Lindy mini bag",
     "Mini Lindy bag",
+    "Picotin Lock 18 bag",
+    "Picotin bag",
     "Birkin 25 bag",
     "Kelly Pochette bag",
     "Constance 18 bag",
@@ -62,8 +64,6 @@ test("matches only the requested Hermès bag families", () => {
     "Bolide mini bag",
     "Mini Bolide bag",
     "Lindy 26 bag",
-    "Picotin Lock 18 bag",
-    "Picotin bag",
   ];
 
   wanted.forEach((name) => assert.equal(isTargetProduct(name), true, name));
@@ -93,7 +93,7 @@ test("uses the category availability marker and extracts product data", () => {
   assert.equal(products[1].available, false);
   assert.equal(products[1].target, true);
   assert.equal(products[1].price, "$3,000");
-  assert.equal(products[2].target, false);
+  assert.equal(products[2].target, true);
   assert.equal(products[4].target, false);
 });
 
@@ -244,7 +244,7 @@ test("parses trusted Firecrawl category markdown and preserves category availabi
   assert.equal(products[1].name, "Kelly Pochette bag");
   assert.equal(products[1].available, true);
   assert.equal(products[1].target, true);
-  assert.equal(products[2].target, false);
+  assert.equal(products[2].target, true);
   assert.equal(products[3].target, false);
 });
 

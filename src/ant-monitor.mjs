@@ -43,6 +43,21 @@ const BLOCK_RE = /sorry, you have been blocked|access denied|verify you are huma
 const NEGATIVE_RE = /\bDiscover\b|\bAvailable soon\b|\bUnavailable\b|\bSold out\b|no longer available|currently unavailable/i;
 const BUY_RE = /\bAdd to (?:cart|bag)\b/i;
 
+const ANT_TARGET_HEADERS = {
+  "x-api-key": apiKey,
+  "ant-user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "ant-accept-language": "en-US,en;q=0.9",
+  "ant-cache-control": "no-cache",
+  "ant-pragma": "no-cache",
+  "ant-upgrade-insecure-requests": "1",
+};
+
+const CHEAP_FETCH_MODES = [
+  { browser: false, rawSource: false, label: "direct-random-datacenter" },
+  { browser: true, rawSource: true, label: "browser-raw-random-datacenter" },
+  { browser: true, rawSource: false, label: "browser-js-random-datacenter" },
+];
+
 const state = JSON.parse(await readFile(statePath, "utf8").catch(() => '{"version":1,"markets":{}}'));
 state.version = 1;
 state.markets ||= {};
@@ -225,21 +240,6 @@ function parseProductHtml(html, candidate) {
     purchaseButtonDisabled: disabled,
   };
 }
-
-const ANT_TARGET_HEADERS = {
-  "x-api-key": apiKey,
-  "ant-user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-  "ant-accept-language": "en-US,en;q=0.9",
-  "ant-cache-control": "no-cache",
-  "ant-pragma": "no-cache",
-  "ant-upgrade-insecure-requests": "1",
-};
-
-const CHEAP_FETCH_MODES = [
-  { browser: false, rawSource: false, label: "direct-random-datacenter" },
-  { browser: true, rawSource: true, label: "browser-raw-random-datacenter" },
-  { browser: true, rawSource: false, label: "browser-js-random-datacenter" },
-];
 
 async function fetchAntMarkdown(targetUrl, market) {
   const failures = [];

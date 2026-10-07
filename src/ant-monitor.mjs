@@ -270,7 +270,14 @@ async function fetchAntMarkdown(targetUrl, market) {
       continue;
     }
 
-    console.log(`[${market.code}] category fetched via ${mode.label}; credits=${credits ?? "unknown"}`);
+    const productLinkCount = (data.markdown.match(/https?:\\/\\/www\\.hermes\\.com\\/(?:us|ca)\\/en\\/product\\//gi) || []).length;
+    if (productLinkCount < 5) {
+      failures.push(`${mode.label}: only ${productLinkCount} product links`);
+      console.log(`[${market.code}] ${mode.label} returned only ${productLinkCount} product links; trying next mode; credits=${credits ?? "unknown"}`);
+      continue;
+    }
+
+    console.log(`[${market.code}] category fetched via ${mode.label}; productLinks=${productLinkCount}; credits=${credits ?? "unknown"}`);
     return { markdown: data.markdown, url: data.url || targetUrl, credits, mode: mode.label };
   }
 

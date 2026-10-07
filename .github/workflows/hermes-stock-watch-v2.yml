@@ -1,10 +1,17 @@
-name: Hermes Stock Watch v2 (legacy Firecrawl manual fallback)
+name: Hermes Stock Watch (Firecrawl)
 
 on:
+  schedule:
+    - cron: "3,13,23,33,43,53 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
     paths:
+      - "src/hermes.mjs"
+      - "src/check.mjs"
+      - "src/monitor.mjs"
+      - "bin/firecrawl"
+      - "test/**"
       - ".github/workflows/hermes-stock-watch-v2.yml"
 
 permissions:
@@ -12,11 +19,10 @@ permissions:
   issues: write
 
 concurrency:
-  group: hermes-stock-watch-v2
+  group: hermes-stock-watch-firecrawl
   cancel-in-progress: false
 
 jobs:
-  # Firecrawl fallback smoke test after target sync
   check-stock:
     runs-on: ubuntu-latest
     timeout-minutes: 10

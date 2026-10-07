@@ -1,0 +1,23 @@
+name: Hermes official backend via ScrapingAnt probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/bck-ant-probe.mjs"
+      - ".github/workflows/hermes-bck-ant-probe.yml"
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Probe Hermes official backend through ScrapingAnt
+        env:
+          SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
+        run: node src/bck-ant-probe.mjs

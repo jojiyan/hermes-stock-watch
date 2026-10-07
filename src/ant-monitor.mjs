@@ -59,12 +59,7 @@ const CHEAP_FETCH_MODES = [
   { browser: true, rawSource: false, proxyType: "residential", label: "browser-local-residential" },
 ];
 
-const PRODUCT_FETCH_MODES = [
-  ...CHEAP_FETCH_MODES,
-  { browser: false, rawSource: false, proxyType: "residential", label: "direct-random-residential" },
-  { browser: true, rawSource: true, proxyType: "residential", label: "browser-raw-random-residential" },
-  { browser: true, rawSource: false, proxyType: "residential", label: "browser-js-random-residential" },
-];
+const PRODUCT_FETCH_MODES = [...CHEAP_FETCH_MODES];
 
 const state = JSON.parse(await readFile(statePath, "utf8").catch(() => '{"version":1,"markets":{}}'));
 state.version = 1;
@@ -407,30 +402,38 @@ async function fetchProductThroughCategoryBrowser(targetUrl, market) {
   const sku = targetUrl.match(/-([A-Z0-9]{6,})\/?(?:\?|$)/i)?.[1]?.toUpperCase() || "";
   const js = `
     const target = ${JSON.stringify(targetUrl)};
-    const response = await fetch(target, { credentials: "include", redirect: "follow" });
-    const productHtml = await response.text();
-    const doc = new DOMParser().parseFromString(productHtml, "text/html");
-    const meta = doc.querySelector('meta[property="product:retailer_item_id"], meta[name="product:retailer_item_id"]');
-    const buttons = Array.from(doc.querySelectorAll("button"));
-    const button = buttons.find((b) => /Add to (cart|bag)/i.test((b.innerText || b.textContent || "").trim()) || /add-to-cart/i.test(b.getAttribute("name") || ""));
-    const label = button ? (button.innerText || button.textContent || "").replace(/\\s+/g, " ").trim() : "";
-    const disabled = !!button && (button.disabled || button.hasAttribute("disabled") || button.getAttribute("aria-disabled") === "true");
-    const text = (doc.body?.innerText || doc.body?.textContent || "").replace(/\\s+/g, " ");
-    const unavailable = /\\bDiscover\\b|\\bAvailable soon\\b|\\bUnavailable\\b|\\bSold out\\b|no longer available|currently unavailable|back in stock/i.test(text);
-    const result = {
-      status: response.status,
-      sku: (meta?.getAttribute("content") || "").trim(),
-      hasButton: !!button,
-      label,
-      disabled,
-      unavailable,
-    };
-    document.title = "HWATCH:" + btoa(JSON.stringify(result));
+    const wanted = new URL(target).pathname;
+    const anchor = Array.from(document.querySelectorAll("a")).find((a) => {
+      try { return new URL(a.href, location.href).pathname === wanted; } catch { return false; }
+    });
+    if (!anchor) {
+      document.title = "HWATCH:" + btoa(JSON.stringify({ status: 0, sku: "", hasButton: false, label: "", disabled: false, unavailable: false, error: "link-not-found" }));
+    } else {
+      anchor.click();
+      await new Promise((resolve) => setTimeout(resolve, 7000));
+      const meta = document.querySelector('meta[property="product:retailer_item_id"], meta[name="product:retailer_item_id"]');
+      const buttons = Array.from(document.querySelectorAll("button"));
+      const button = buttons.find((b) => /Add to (cart|bag)/i.test((b.innerText || b.textContent || "").trim()) || /add-to-cart/i.test(b.getAttribute("name") || ""));
+      const label = button ? (button.innerText || button.textContent || "").replace(/\\s+/g, " ").trim() : "";
+      const disabled = !!button && (button.disabled || button.hasAttribute("disabled") || button.getAttribute("aria-disabled") === "true");
+      const text = (document.body?.innerText || document.body?.textContent || "").replace(/\\s+/g, " ");
+      const unavailable = /\\bDiscover\\b|\\bAvailable soon\\b|\\bUnavailable\\b|\\bSold out\\b|no longer available|currently unavailable|back in stock|notify you when this product is back in stock/i.test(text);
+      const result = {
+        status: location.pathname === wanted ? 200 : 0,
+        sku: (meta?.getAttribute("content") || "").trim(),
+        hasButton: !!button,
+        label,
+        disabled,
+        unavailable,
+        path: location.pathname,
+      };
+      document.title = "HWATCH:" + btoa(JSON.stringify(result));
+    }
   `;
   const snippet = Buffer.from(js, "utf8").toString("base64");
   const attempts = [
     { proxyType: "datacenter", label: "category-browser-datacenter" },
-    { proxyType: "residential", label: "category-browser-residential" },
+    ...(process.env.GITHUB_EVENT_NAME === "push" ? [] : [{ proxyType: "residential", label: "category-browser-residential" }]),
   ];
   const failures = [];
 
@@ -474,7 +477,7 @@ async function fetchProductThroughCategoryBrowser(targetUrl, market) {
 
     const pageSku = String(result.sku || "").toUpperCase();
     if (result.status !== 200 || !pageSku || pageSku !== sku) {
-      failures.push(`${attempt.label}: product fetch status/SKU mismatch`);
+      failures.push(`${attempt.label}: product fetch status/SKU mismatch (status=${result.status}, sku=${pageSku || "missing"}, path=${result.path || "unknown"}, error=${result.error || "none"})`);
       continue;
     }
     if (!result.hasButton && !result.unavailable) {

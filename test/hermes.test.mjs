@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   isTargetProduct,
+  isAccessBlockedHtml,
   parseCategoryHtml,
   parseCategoryDocument,
   parseProductPageDocument,
@@ -417,4 +418,12 @@ test("Firecrawl product verification ignores unavailable text inside translation
 
   assert.equal(product.available, true);
   assert.equal(product.purchaseButtonDisabled, false);
+});
+
+
+test("ordinary anti-bot scripts are not rendered challenge pages", () => {
+  const normal = '<html><script src="https://js.datadome.co/tags.js"></script><script>const text="captcha cf-chl turnstile access denied";</script><body>Hermès bags</body></html>';
+  assert.equal(isAccessBlockedHtml(normal), false);
+  assert.equal(isAccessBlockedHtml(normal.replace('Hermès bags', 'Verify you are human')), true);
+  assert.equal(isAccessBlockedHtml(normal.replace('Hermès bags', '<iframe src="https://geo.captcha-delivery.com/captcha/"></iframe>')), true);
 });

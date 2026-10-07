@@ -45,16 +45,22 @@ export function isTargetProduct(name) {
   return TARGET_PATTERNS.some((pattern) => pattern.test(normalized));
 }
 
+// Anti-bot script names occur on ordinary product pages too. Reject rendered
+// challenge text and challenge frames, not dormant JavaScript string literals.
+export function isAccessBlockedHtml(html) {
+  const markup = String(html).replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<!--([\s\S]*?)-->/g, " ");
+  return /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(htmlToText(markup))
+    || /<iframe\b[^>]*src=["'][^"']*(?:captcha-delivery\.com|challenges\.cloudflare\.com)/i.test(markup);
+}
+
 export function parseCategoryHtml(html, market) {
   if (typeof html !== "string" || html.length < 25_000) {
     throw new Error(`${market.code}: category response is unexpectedly short`);
   }
 
-  if (
-    /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(
-      html,
-    )
-  ) {
+  if (isAccessBlockedHtml(html)) {
     throw new Error(`${market.code}: Hermès returned an access-block page`);
   }
 
@@ -280,11 +286,7 @@ export function parseProductPageHtml(html, candidate) {
     throw new Error(`${candidate.market}: product response is unexpectedly short`);
   }
 
-  if (
-    /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(
-      html,
-    )
-  ) {
+  if (isAccessBlockedHtml(html)) {
     throw new Error(`${candidate.market}: Hermès returned an access-block page`);
   }
 
@@ -572,11 +574,7 @@ function validateOfficialHermesHtml(html, label) {
     throw new Error(`${label} returned only ${html?.length || 0} characters`);
   }
 
-  if (
-    /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(
-      html,
-    )
-  ) {
+  if (isAccessBlockedHtml(html)) {
     throw new Error(`${label} returned an access/challenge page`);
   }
 

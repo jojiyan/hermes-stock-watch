@@ -1,45 +1,50 @@
 # Hermès Stock Watch
 
-Checks the official Hermès United States and Canada women's bags pages every 10 minutes.
+The active workflow is **Hermes Stock Watch (Scrapling - zero credits)** in
+`.github/workflows/hermes-stock-watch-ant.yml`. It runs on GitHub's cloud
+runner with open-source Scrapling 0.4.15 and Chrome. No Firecrawl, ScrapingAnt,
+AI calls, scraper API keys, or per-page credits are used by this workflow.
+Legacy paid-provider workflows remain manual-only.
 
-It alerts only for:
+Configured cadence: every 10 minutes, at minutes 03/13/23/33/43/53. GitHub
+scheduled jobs can be delayed. No personal computer needs to stay on.
 
-- Neo Garden 23
-- Garden Party 30
-- Lindy II mini / Mini Lindy
-- Birkin, Kelly, and Constance in every size, style, and color, including Kelly Pochette
+Targets: Neo Garden 23, Garden Party 30, Mini Lindy/Lindy II mini, Picotin
+(菜篮子), and all Birkin, Kelly, Constance including Kelly Pochette.
+Garden Party 36 and Bolide are excluded.
 
-For every target candidate, the monitor opens the official product page and requires an `Add to cart` / `Add to bag` action with no current unavailable message. Other bags, stale category results, sold-out pages, and page-order changes are ignored. A GitHub issue mentions the repository owner when a target changes into the verified in-stock state. The first successful run only builds the baseline; no issue is created when nothing changes, and a restock after a sellout produces a new alert.
+A target's official product page must have the expected SKU and an enabled
+Add to cart / Add to bag button, without a sold-out message. Category labels
+alone never establish stock. Challenge pages, HTTP failures, short or incomplete
+pages, and market redirects are rejected. Ordinary anti-bot script names alone
+are not proof that a page is blocked.
 
-The workflow wakes every 5 minutes and uses an 8-minute freshness gate, so a real US/Canada verification is due about every 10 minutes even when GitHub skips an individual cron wake-up.
+US and Canada keep independent baselines. A failed region preserves its old
+stock and does not suppress a confirmed alert from the other region. Missing
+category links alone do not mean sold out. The first verified check establishes
+a baseline; unchanged stock is silent; a verified sellout followed by a restock
+can notify again. Notifications are GitHub issues mentioning the repository owner.
+Email/push delivery depends on the owner's GitHub notification settings.
 
-## Local verification
+## Health is separate from workflow completion
+
+A scheduled run records failed access as **unknown** in `direct-state.json`
+and `direct-run-report.json`, without creating failure/out-of-stock alerts.
+A green scheduled workflow means the process completed, not that both markets
+were readable. Inspect `healthy`, each market's status, and `lastSuccessAt`.
+Manual and push validation exit nonzero unless both markets are verified.
+
+Scrapling has no scraping-credit bill, but it cannot guarantee that Hermès
+accepts the runner's network address. A genuine block remains unknown, never
+"out of stock". Free software does not guarantee uninterrupted website access.
+
+## Checks
 
 ```bash
 npm test
-DRY_RUN=1 npm run check
+DRY_RUN=1 SCRAPLING_PYTHON=.venv/bin/python node src/direct-monitor.mjs
 ```
 
-## Notification delivery
-
-GitHub sends the owner an email or push notification for the mention, according to the owner's GitHub notification settings. To receive alerts at `313418297@qq.com`, add and verify that address in GitHub Settings → Emails and select it as the notification email. The repository should remain public for no-cost scheduled runner minutes; it contains no credentials or personal information.
-
-## Firecrawl live access
-
-Hermès blocks direct requests from GitHub-hosted runner IPs. The active `Hermes Stock Watch v2` workflow therefore installs the official Firecrawl CLI and uses its keyless client mode to fetch the official Hermès US and Canada pages.
-
-No `FIRECRAWL_API_KEY` repository secret is required.
-
-The workflow wakes every 5 minutes and performs a real verification when the last complete US/Canada check is at least 8 minutes old. Each real check:
-
-- fetches the Hermès US and Canada women's bags category pages;
-- filters only for Neo Garden 23, Garden Party 30, Mini Lindy / Lindy II mini, and all Birkin, Kelly, and Constance bags;
-- treats category-page `Discover` / unavailable markers only as a screening signal;
-- opens a target's official product page when the category page suggests it may be purchasable;
-- requires the expected SKU/reference;
-- requires a real `Add to cart` or `Add to bag` button that is not `disabled` and does not have `aria-disabled="true"`;
-- rejects visible unavailable / sold-out states;
-- preserves a market's previous state when that market cannot be fully verified;
-- does not let a US failure overwrite CA state, or vice versa.
-
-Only a confirmed transition into an in-stock state creates an alert. Duplicate in-stock checks do not alert again; a later sell-out followed by a new restock can alert again.
+Dry runs save only the report, not stock state or notifications. Tests cover
+wrong/missing SKUs, disabled buttons, challenge pages, single-region failure,
+state preservation, target filtering, restocks, and duplicate suppression.

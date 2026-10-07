@@ -1,6 +1,16 @@
-name: Hermes Stock Watch (direct stealth browser - manual backup)
+name: Hermes Stock Watch (Scrapling - zero credits)
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - src/direct-monitor.mjs
+      - src/scrapling_fetch.py
+      - src/hermes.mjs
+      - src/check.mjs
+      - .github/workflows/hermes-stock-watch-ant.yml
+  schedule:
+    - cron: '3-53/10 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -8,122 +18,57 @@ permissions:
   issues: write
 
 concurrency:
-  group: hermes-stock-watch-direct
+  group: hermes-stock-watch-scrapling
   cancel-in-progress: false
 
 jobs:
   check-stock:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 9
     steps:
-      - name: Check out monitor
-        uses: actions/checkout@v4
-
-      - name: Decide whether verification is due
-        id: due
-        shell: bash
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-        run: |
-          if [[ "$EVENT_NAME" != "schedule" ]]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "Manual/push run: verification is due."
-            exit 0
-          fi
-
-          python3 - <<'PY'
-          import json, os
-          from datetime import datetime, timezone
-
-          should_run = True
-          reason = "new or unhealthy state"
-          try:
-              with open("direct-state.json", "r", encoding="utf-8") as f:
-                  state = json.load(f)
-              success_times = []
-              for code in ("US", "CA"):
-                  market = state.get("markets", {}).get(code, {})
-                  if market.get("status") != "ok" or not market.get("lastSuccessAt"):
-                      raise ValueError(f"{code} is not healthy")
-                  success_times.append(datetime.fromisoformat(market["lastSuccessAt"].replace("Z", "+00:00")).astimezone(timezone.utc))
-              age = (datetime.now(timezone.utc) - min(success_times)).total_seconds()
-              if age < 8 * 60:
-                  should_run = False
-                  reason = f"both markets were verified {age:.0f}s ago"
-              else:
-                  reason = f"last complete verification is {age:.0f}s old"
-          except Exception as exc:
-              reason = f"verification due: {exc}"
-
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write(f"should_run={'true' if should_run else 'false'}\n")
-          print(reason)
-          PY
-
-      - name: Use Node.js 22
-        if: steps.due.outputs.should_run == 'true'
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "22"
-
-      - name: Confirm Chrome is available
-        if: steps.due.outputs.should_run == 'true'
-        shell: bash
+          node-version: '22'
+      - name: Install pinned open-source fetcher
         run: |
           test -x /usr/bin/google-chrome-stable
-          /usr/bin/google-chrome-stable --version
-
-      - name: Install stealth fetcher
-        if: steps.due.outputs.should_run == 'true'
+          python3 -m venv .venv
+          .venv/bin/python -m pip install --quiet 'scrapling[fetchers]==0.4.15'
+      - name: Check stock safety rules
         run: |
-          python3 -m venv "$GITHUB_WORKSPACE/.venv"
-          "$GITHUB_WORKSPACE/.venv/bin/python" -m pip install --disable-pip-version-check --quiet "scrapling[fetchers]"
-          chmod +x "$GITHUB_WORKSPACE/bin/google-chrome-stealth"
-
-      - name: Syntax check
-        if: steps.due.outputs.should_run == 'true'
-        run: |
-          node --check src/direct-monitor.mjs
-          "$GITHUB_WORKSPACE/.venv/bin/python" -m py_compile src/scrapling_fetch.py
-
-      - name: Check Hermes US and Canada with stealth Chrome
-        if: steps.due.outputs.should_run == 'true'
+          npm test
+          .venv/bin/python -m py_compile src/scrapling_fetch.py
+      - name: Verify US and Canada with Scrapling
         id: monitor
         continue-on-error: true
         run: node src/direct-monitor.mjs
         env:
-          CHROME_PATH: ${{ github.workspace }}/bin/google-chrome-stealth
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-
-      - name: Save direct-browser stock state
-        if: steps.due.outputs.should_run == 'true'
+      - name: Save verified stock and market health
+        if: always() && steps.monitor.outcome != 'skipped'
         shell: bash
         run: |
-          if git diff --quiet -- direct-state.json; then
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- direct-state.json; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add direct-state.json
-          git commit -m "chore: update direct-browser stock state [skip ci]"
-          git push
-
+          git commit -m 'chore: update Scrapling stock state [skip ci]'
+          if ! git push; then
+            git pull --rebase origin main
+            git push
+          fi
       - name: Retain verification evidence
-        if: steps.due.outputs.should_run == 'true' && always()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: direct-market-verification-${{ github.run_id }}
+          name: scrapling-verification-${{ github.run_id }}
           path: direct-run-report.json
-          retention-days: 7
-
-      - name: Require both markets to be verified
-        if: steps.due.outputs.should_run == 'true' && always()
+          retention-days: 3
+      - name: Require a completed monitor process
+        if: always()
         env:
           MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
         run: test "$MONITOR_OUTCOME" = success
-
-      - name: Verification still fresh
-        if: steps.due.outputs.should_run != 'true'
-        run: echo "Skipping this wake-up because US and CA were both verified recently."

@@ -4,13 +4,13 @@
     "US": {
       "available": {},
       "status": "unknown",
-      "lastCheckedAt": "2026-10-07T10:42:57.328Z",
+      "lastCheckedAt": "2026-10-07T10:43:53.731Z",
       "error": "US: parsed only 0 products from category"
     },
     "CA": {
       "available": {},
       "status": "unknown",
-      "lastCheckedAt": "2026-10-07T10:42:57.328Z",
+      "lastCheckedAt": "2026-10-07T10:43:53.731Z",
       "error": "CA: parsed only 0 products from category"
     }
   }

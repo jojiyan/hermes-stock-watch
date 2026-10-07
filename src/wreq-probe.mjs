@@ -11,7 +11,7 @@ const markets = {
   },
 };
 
-const targetRe = /neo garden 23|garden party 30|garden party 36|bolide.*mini|mini.*bolide|lindy(?: ii)? mini|mini lindy|picotin|birkin|kelly|constance/i;
+const targetRe = /neo garden 23|garden party 30|bolide.*mini|mini.*bolide|lindy(?: ii)? mini|mini lindy|picotin|birkin|kelly|constance/i;
 const result = {};
 
 for (const [code, cfg] of Object.entries(markets)) {

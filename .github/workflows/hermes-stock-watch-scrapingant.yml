@@ -1,6 +1,8 @@
-name: Hermes Stock Watch (ScrapingAnt - waiting for API key)
+name: Hermes Stock Watch (ScrapingAnt)
 
 on:
+  schedule:
+    - cron: "3,13,23,33,43,53 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -29,7 +31,7 @@ jobs:
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "SCRAPINGANT_API_KEY is not configured; monitor cannot perform a stock check."
+            echo "SCRAPINGANT_API_KEY is not configured; skipping without failing."
           fi
 
       - name: Use Node.js 22
@@ -83,8 +85,6 @@ jobs:
           MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
         run: test "$MONITOR_OUTCOME" = success
 
-      - name: Missing ScrapingAnt key
+      - name: ScrapingAnt key not configured
         if: steps.configured.outputs.ready != 'true'
-        run: |
-          echo "::error::SCRAPINGANT_API_KEY is missing. Scheduled monitoring is not active."
-          exit 1
+        run: echo "SCRAPINGANT_API_KEY missing; scheduled run skipped."

@@ -2,16 +2,24 @@
   "version": 1,
   "markets": {
     "US": {
+      "status": "ok",
+      "lastCheckedAt": "2026-10-07T10:44:38.875Z",
+      "lastSuccessAt": "2026-10-07T10:44:38.875Z",
+      "products": 28,
+      "targets": 3,
+      "categoryAvailable": 0,
       "available": {},
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-07T10:43:53.731Z",
-      "error": "US: parsed only 0 products from category"
+      "verificationErrors": []
     },
     "CA": {
+      "status": "ok",
+      "lastCheckedAt": "2026-10-07T10:44:38.875Z",
+      "lastSuccessAt": "2026-10-07T10:44:38.875Z",
+      "products": 32,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {},
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-07T10:43:53.731Z",
-      "error": "CA: parsed only 0 products from category"
+      "verificationErrors": []
     }
   }
 }

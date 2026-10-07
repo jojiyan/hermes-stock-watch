@@ -240,7 +240,7 @@ function parseCategoryMarkdown(markdown, market) {
 }
 
 function parseProductHtml(html, candidate) {
-  if (typeof html !== "string" || html.length < 5000) {
+  if (typeof html !== "string" || (html.length < 5000 && !html.includes('data-hwatch-probe="true"'))) {
     throw new Error(`${candidate.market}: product HTML is unexpectedly short`);
   }
   if (BLOCK_RE.test(html)) throw new Error(`${candidate.market}: product returned an access-block page`);
@@ -390,7 +390,103 @@ async function fetchAntHtml(targetUrl, market) {
     }
   }
 
-  throw new Error(`${market.code}: ScrapingAnt product failed in all low-credit datacenter modes: ${failures.join(" | ")}`);
+  try {
+    return await fetchProductThroughCategoryBrowser(targetUrl, market);
+  } catch (error) {
+    failures.push(`category-browser-bridge: ${error.message}`);
+  }
+
+  throw new Error(`${market.code}: ScrapingAnt product verification failed in all modes: ${failures.join(" | ")}`);
+}
+
+async function fetchProductThroughCategoryBrowser(targetUrl, market) {
+  const sku = targetUrl.match(/-([A-Z0-9]{6,})\/?(?:\?|$)/i)?.[1]?.toUpperCase() || "";
+  const js = `
+    const target = ${JSON.stringify(targetUrl)};
+    const response = await fetch(target, { credentials: "include", redirect: "follow" });
+    const productHtml = await response.text();
+    const doc = new DOMParser().parseFromString(productHtml, "text/html");
+    const meta = doc.querySelector('meta[property="product:retailer_item_id"], meta[name="product:retailer_item_id"]');
+    const buttons = Array.from(doc.querySelectorAll("button"));
+    const button = buttons.find((b) => /Add to (cart|bag)/i.test((b.innerText || b.textContent || "").trim()) || /add-to-cart/i.test(b.getAttribute("name") || ""));
+    const label = button ? (button.innerText || button.textContent || "").replace(/\\s+/g, " ").trim() : "";
+    const disabled = !!button && (button.disabled || button.hasAttribute("disabled") || button.getAttribute("aria-disabled") === "true");
+    const text = (doc.body?.innerText || doc.body?.textContent || "").replace(/\\s+/g, " ");
+    const unavailable = /\\bDiscover\\b|\\bAvailable soon\\b|\\bUnavailable\\b|\\bSold out\\b|no longer available|currently unavailable|back in stock/i.test(text);
+    const result = {
+      status: response.status,
+      sku: (meta?.getAttribute("content") || "").trim(),
+      hasButton: !!button,
+      label,
+      disabled,
+      unavailable,
+    };
+    document.title = "HWATCH:" + btoa(JSON.stringify(result));
+  `;
+  const snippet = Buffer.from(js, "utf8").toString("base64");
+  const attempts = [
+    { proxyType: "datacenter", label: "category-browser-datacenter" },
+    { proxyType: "residential", label: "category-browser-residential" },
+  ];
+  const failures = [];
+
+  for (const attempt of attempts) {
+    const params = new URLSearchParams({
+      url: market.categoryUrl,
+      browser: "true",
+      proxy_type: attempt.proxyType,
+      timeout: "60",
+      js_snippet: snippet,
+    });
+    params.append("block_resource", "image");
+    params.append("block_resource", "media");
+    params.append("block_resource", "font");
+
+    const response = await fetch(`https://api.scrapingant.com/v2/general?${params}`, {
+      headers: { "x-api-key": apiKey, accept: "text/html,*/*" },
+    });
+    const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
+
+    if (!response.ok) {
+      failures.push(`${attempt.label} HTTP ${response.status}: ${(await response.text()).slice(0, 180)}`);
+      continue;
+    }
+
+    const outerHtml = await response.text();
+    const payload = outerHtml.match(/<title>HWATCH:([^<]+)<\/title>/i)?.[1];
+    if (!payload) {
+      failures.push(`${attempt.label}: result marker missing`);
+      continue;
+    }
+
+    let result;
+    try {
+      result = JSON.parse(Buffer.from(payload, "base64").toString("utf8"));
+    } catch {
+      failures.push(`${attempt.label}: result marker invalid`);
+      continue;
+    }
+
+    const pageSku = String(result.sku || "").toUpperCase();
+    if (result.status !== 200 || !pageSku || pageSku !== sku) {
+      failures.push(`${attempt.label}: product fetch status/SKU mismatch`);
+      continue;
+    }
+    if (!result.hasButton && !result.unavailable) {
+      failures.push(`${attempt.label}: purchase state unknown`);
+      continue;
+    }
+
+    console.log(`[${market.code}] product verified via ${attempt.label}; credits=${credits ?? "unknown"}; button=${result.label || "none"}; disabled=${result.disabled}`);
+
+    const unavailableText = result.unavailable ? "<p>Unavailable</p>" : "";
+    const buttonHtml = result.hasButton
+      ? `<button name="add-to-cart"${result.disabled ? ' disabled aria-disabled="true"' : ""}>${result.label || "Add to cart"}</button>`
+      : "";
+    return `<html data-hwatch-probe="true"><head><meta property="product:retailer_item_id" content="${pageSku}"></head><body>${unavailableText}${buttonHtml}</body></html>`;
+  }
+
+  throw new Error(failures.join(" | "));
 }
 
 function pickStateFields(product) {

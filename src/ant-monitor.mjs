@@ -276,7 +276,7 @@ async function fetchAntMarkdown(targetUrl, market) {
       timeout: "60",
     });
     if (mode.rawSource) params.set("return_page_source", "true");
-    if (mode.browser) params.set("block_resource", "image,media,font");
+    if (mode.browser) { params.append("block_resource", "image"); params.append("block_resource", "media"); params.append("block_resource", "font"); }
 
     const response = await fetch(`https://api.scrapingant.com/v2/markdown?${params}`, {
       headers: { ...ANT_TARGET_HEADERS, accept: "application/json" },
@@ -319,7 +319,7 @@ async function fetchAntHtml(targetUrl, market) {
       timeout: "60",
     });
     if (mode.rawSource) params.set("return_page_source", "true");
-    if (mode.browser) params.set("block_resource", "image,media,font");
+    if (mode.browser) { params.append("block_resource", "image"); params.append("block_resource", "media"); params.append("block_resource", "font"); }
 
     const response = await fetch(`https://api.scrapingant.com/v2/general?${params}`, {
       headers: { ...ANT_TARGET_HEADERS, accept: "text/html,*/*" },

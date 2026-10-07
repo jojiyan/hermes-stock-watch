@@ -362,7 +362,9 @@ async function fetchAntHtml(targetUrl, market) {
     if (mode.browser) { params.append("block_resource", "image"); params.append("block_resource", "media"); params.append("block_resource", "font"); }
 
     const response = await fetch(`https://api.scrapingant.com/v2/general?${params}`, {
-      headers: { ...ANT_TARGET_HEADERS, accept: "text/html,*/*" },
+      headers: mode.browser
+        ? { "x-api-key": apiKey, accept: "text/html,*/*" }
+        : { ...ANT_TARGET_HEADERS, accept: "text/html,*/*" },
     });
     const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
 

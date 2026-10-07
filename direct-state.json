@@ -47,31 +47,48 @@
   },
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-07T09:24:03.284Z",
+      "lastCheckedAt": "2026-10-07T10:17:29.383Z",
       "lastSuccessAt": "2026-10-06T16:35:15.129Z",
-      "products": 35,
-      "candidates": 3,
-      "categoryAvailable": 0,
-      "verifiedTargets": 0,
-      "availableTargets": 0,
-      "verificationErrors": [],
-      "committed": true,
-      "error": "US: category returned an access-block/challenge page"
+      "status": "unknown",
+      "market": "US",
+      "error": "US: Hermès returned an access-block page",
+      "committed": false
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-07T09:24:03.284Z",
+      "lastCheckedAt": "2026-10-07T10:17:29.383Z",
       "lastSuccessAt": "2026-10-06T16:35:15.129Z",
-      "products": 47,
-      "candidates": 1,
-      "categoryAvailable": 1,
-      "verifiedTargets": 1,
-      "availableTargets": 1,
-      "verificationErrors": [],
-      "committed": true,
-      "error": "CA: category returned an access-block/challenge page"
+      "status": "unknown",
+      "market": "CA",
+      "error": "CA: It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead.",
+      "committed": false
     }
   },
-  "lastCheckedAt": "2026-10-07T09:24:03.284Z"
+  "lastCheckedAt": "2026-10-07T10:17:29.383Z",
+  "meta": {
+    "initializedMarkets": [
+      "US",
+      "CA"
+    ],
+    "markets": {
+      "US": {
+        "lastCheckedAt": "2026-10-07T10:17:29.383Z",
+        "lastSuccessAt": "2026-10-06T16:35:15.129Z",
+        "status": "unknown",
+        "market": "US",
+        "error": "US: Hermès returned an access-block page",
+        "committed": false
+      },
+      "CA": {
+        "lastCheckedAt": "2026-10-07T10:17:29.383Z",
+        "lastSuccessAt": "2026-10-06T16:35:15.129Z",
+        "status": "unknown",
+        "market": "CA",
+        "error": "CA: It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead.",
+        "committed": false
+      }
+    },
+    "keepAliveAt": "2026-10-07T10:17:29.383Z",
+    "lastSuccessfulMarkets": [],
+    "lastCheckedAt": "2026-10-07T10:17:29.383Z"
+  }
 }

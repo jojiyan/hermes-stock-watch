@@ -1,11 +1,9 @@
 const apiKey = process.env.SCRAPINGANT_API_KEY || "";
 if (!apiKey) throw new Error("SCRAPINGANT_API_KEY missing");
 
-const cases = [
-  { market: "US-DISCOVER", locale: "us_en", preferredCountry: "us", sku: "H085956CCY1", note: "Lindy II mini; category currently shows Discover" },
-  { market: "US-NO-DISCOVER", locale: "us_en", preferredCountry: "us", sku: "H085933CKAB", note: "Silkycity 33; category currently has no Discover" },
-  { market: "CA-NO-DISCOVER", locale: "ca_en", preferredCountry: "ca", sku: "H087968CC55", note: "Le Petit Sac; category currently has no Discover" },
-  { market: "CA-NO-DISCOVER-2", locale: "ca_en", preferredCountry: "ca", sku: "H087987CK2D", note: "Hermes Videpoches; category currently has no Discover" },
+const targets = [
+  { sku: "H087968CC55", locale: "ca_en", note: "CA Le Petit Sac; category no Discover" },
+  { sku: "H087987CK2D", locale: "ca_en", note: "CA Hermes Videpoches; category no Discover" },
 ];
 
 const headers = {
@@ -21,50 +19,37 @@ const headers = {
   "ant-sec-fetch-site": "same-site",
 };
 
-for (const item of cases) {
+for (const item of targets) {
   const target = `https://bck.hermes.com/product?productsku=${item.sku}&locale=${item.locale}`;
-  const countries = [item.preferredCountry, "", item.preferredCountry === "ca" ? "us" : "ca"];
   const attempts = [];
   let data = null;
 
-  for (const country of countries) {
+  for (let i = 1; i <= 12; i += 1) {
     const params = new URLSearchParams({
       url: target,
       browser: "false",
       proxy_type: "datacenter",
       timeout: "60",
     });
-    if (country) params.set("proxy_country", country);
-
     const response = await fetch(`https://api.scrapingant.com/v2/general?${params}`, { headers });
     const text = await response.text();
     const credits = response.headers.get("ant-credits-cost");
-    attempts.push({ country: country || "random", status: response.status, credits });
+    attempts.push({ attempt: i, status: response.status, credits });
 
     if (!response.ok) continue;
     try { data = JSON.parse(text); } catch {}
-    if (data?.sku) break;
+    if (data?.sku === item.sku) break;
   }
 
-  const variants = Array.isArray(data?.variants?.colors)
-    ? data.variants.colors.map((v) => ({
-        sku: v.sku,
-        stock: v.stock,
-        price: v.price,
-        title: v.title,
-      }))
-    : [];
-
   console.log(JSON.stringify({
-    market: item.market,
     note: item.note,
     sku: item.sku,
     attempts,
-    responseSku: data?.sku || null,
+    success: data?.sku === item.sku,
     title: data?.title || null,
     stock: data?.stock || null,
     displayMode: data?.displayMode ?? null,
     labelDisplayOnly: data?.labelDisplayOnly ?? null,
-    variants,
+    variant: data?.variants?.colors?.find?.((v) => v.sku === item.sku) || null,
   }, null, 2));
 }

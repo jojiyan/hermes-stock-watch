@@ -1,18 +1,7 @@
-name: Hermes Stock Watch (direct stealth browser)
+name: Hermes Stock Watch (direct stealth browser - manual backup)
 
 on:
-  schedule:
-    # Wake every 5 minutes; the freshness gate runs a real US+CA check only
-    # when the older successful market check is at least 8 minutes old.
-    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "src/direct-monitor.mjs"
-      - "src/scrapling_fetch.py"
-      - "bin/google-chrome-stealth"
-      - ".github/workflows/hermes-stock-watch-ant.yml"
 
 permissions:
   contents: write

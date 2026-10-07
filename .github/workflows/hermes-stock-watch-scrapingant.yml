@@ -1,0 +1,98 @@
+name: Hermes Stock Watch (ScrapingAnt)
+
+on:
+  schedule:
+    - cron: "3,13,23,33,43,53 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/ant-monitor.mjs"
+      - "ant-state.json"
+      - ".github/workflows/hermes-stock-watch-scrapingant.yml"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: hermes-stock-watch-scrapingant
+  cancel-in-progress: false
+
+jobs:
+  check-stock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out monitor
+        uses: actions/checkout@v4
+
+      - name: Check ScrapingAnt configuration
+        id: configured
+        shell: bash
+        env:
+          SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
+        run: |
+          if [[ -n "$SCRAPINGANT_API_KEY" ]]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "SCRAPINGANT_API_KEY is not configured; monitor cannot perform a stock check."
+          fi
+
+      - name: Use Node.js 22
+        if: steps.configured.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Syntax check
+        if: steps.configured.outputs.ready == 'true'
+        run: node --check src/ant-monitor.mjs
+
+      - name: Check Hermes US and Canada through ScrapingAnt
+        if: steps.configured.outputs.ready == 'true'
+        id: monitor
+        continue-on-error: true
+        run: node src/ant-monitor.mjs
+        env:
+          SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+
+      - name: Save ScrapingAnt stock state
+        if: steps.configured.outputs.ready == 'true'
+        shell: bash
+        run: |
+          if git diff --quiet -- ant-state.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ant-state.json
+          git commit -m "chore: update ScrapingAnt stock state [skip ci]"
+          if ! git push; then
+            git pull --rebase origin main
+            git push
+          fi
+
+      - name: Retain verification evidence
+        if: steps.configured.outputs.ready == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scrapingant-market-verification-${{ github.run_id }}
+          path: ant-run-report.json
+          retention-days: 7
+
+      - name: Require both markets to be verified
+        if: steps.configured.outputs.ready == 'true' && always()
+        env:
+          MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
+        run: test "$MONITOR_OUTCOME" = success
+
+      - name: Missing ScrapingAnt key
+        if: steps.configured.outputs.ready != 'true'
+        run: |
+          echo "::error::SCRAPINGANT_API_KEY is missing. Scheduled monitoring is not active."
+          exit 1

@@ -44,6 +44,17 @@
       "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCM/",
       "status": "out_of_stock",
       "changedAt": "2026-10-02T15:49:02.770Z"
+    },
+    "US:H056289CKY1": {
+      "market": "US",
+      "sku": "H056289CKY1",
+      "name": "Picotin Lock 18 bag",
+      "color": "Beige/Natural",
+      "material": "taurillon Clemence leather",
+      "price": "$3,975",
+      "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
+      "status": "out_of_stock",
+      "changedAt": "2026-10-07T09:32:43.829Z"
     }
   },
   "meta": {
@@ -56,16 +67,16 @@
       "US",
       "CA"
     ],
-    "lastCheckedAt": "2026-10-05T01:35:59.983Z",
+    "lastCheckedAt": "2026-10-07T09:32:43.829Z",
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-05T01:35:59.983Z",
-        "lastSuccessAt": "2026-10-05T01:35:59.983Z",
+        "lastCheckedAt": "2026-10-07T09:32:43.829Z",
+        "lastSuccessAt": "2026-10-07T09:32:43.829Z",
         "status": "ok",
         "market": "US",
-        "products": 28,
-        "candidates": 2,
-        "verifiedTargets": 2,
+        "products": 32,
+        "candidates": 3,
+        "verifiedTargets": 3,
         "availableTargets": 0,
         "verificationErrors": [],
         "evidence": [
@@ -73,6 +84,14 @@
             "sku": "H085956CCY1",
             "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
             "sourceURL": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/",
+            "available": false,
+            "purchaseAction": "",
+            "purchaseButtonDisabled": true
+          },
+          {
+            "sku": "H056289CKY1",
+            "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
+            "sourceURL": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CKY1/",
             "available": false,
             "purchaseAction": "",
             "purchaseButtonDisabled": true
@@ -89,8 +108,8 @@
         "committed": true
       },
       "CA": {
-        "lastCheckedAt": "2026-10-05T01:35:59.983Z",
-        "lastSuccessAt": "2026-10-05T01:35:59.983Z",
+        "lastCheckedAt": "2026-10-07T09:32:43.829Z",
+        "lastSuccessAt": "2026-10-07T09:32:43.829Z",
         "status": "ok",
         "market": "CA",
         "products": 47,

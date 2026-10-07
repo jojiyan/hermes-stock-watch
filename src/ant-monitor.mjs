@@ -92,14 +92,16 @@ for (const market of MARKETS) {
       }
 
       try {
-        const html = await fetchAntHtml(product.url, market);
-        const verified = parseProductHtml(html, product);
+        const productDoc = await fetchAntProductMarkdown(product.url, market);
+        const verified = parseProductMarkdown(productDoc.markdown, product);
         evidence.push({
           sku: product.sku,
           url: product.url,
           available: verified.available,
           purchaseAction: verified.purchaseAction,
           purchaseButtonDisabled: verified.purchaseButtonDisabled,
+          productCredits: productDoc.credits,
+          productMode: productDoc.mode,
         });
 
         if (!verified.available) continue;
@@ -199,7 +201,7 @@ function parseCategoryMarkdown(markdown, market) {
       color,
       price,
       url,
-      categoryAvailable: !negative,
+      categoryAvailable: hasBuy && !negative,
       target: isTargetProduct(name),
     });
   }
@@ -209,36 +211,35 @@ function parseCategoryMarkdown(markdown, market) {
   return unique;
 }
 
-function parseProductHtml(html, candidate) {
-  if (typeof html !== "string" || (html.length < 5000 && !html.includes('data-hwatch-probe="true"'))) {
-    throw new Error(`${candidate.market}: product HTML is unexpectedly short`);
+function parseProductMarkdown(markdown, candidate) {
+  if (typeof markdown !== "string" || markdown.length < 1000) {
+    throw new Error(`${candidate.market}: product markdown is unexpectedly short`);
   }
-  if (BLOCK_RE.test(html)) throw new Error(`${candidate.market}: product returned an access-block page`);
+  if (BLOCK_RE.test(markdown)) throw new Error(`${candidate.market}: product returned an access-block page`);
 
-  const text = htmlToText(html);
-  const metaSku = html.match(/<meta\b[^>]*(?:property|name)=["']product:retailer_item_id["'][^>]*content=["']([^"']+)["']/i)?.[1];
-  const textSku = text.match(/Product reference\s*:\s*([A-Z0-9]+)/i)?.[1];
-  const pageSku = normalize(metaSku || textSku).toUpperCase();
+  const pageSku = normalize(
+    markdown.match(/Product reference\s*:?\s*([A-Z0-9]+)/i)?.[1] || ""
+  ).toUpperCase();
   if (!pageSku) throw new Error(`${candidate.market}: product reference is missing`);
   if (pageSku !== candidate.sku.toUpperCase()) {
     throw new Error(`${candidate.market}: product SKU ${pageSku} did not match ${candidate.sku}`);
   }
 
-  const unavailable = NEGATIVE_RE.test(text);
-  const buttons = [...html.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)];
-  const purchaseButton = buttons.find((m) => BUY_RE.test(htmlToText(m[2] || "")) || /name=["']add-to-cart["']/i.test(m[1] || ""));
-  const attrs = purchaseButton?.[1] || "";
-  const label = purchaseButton ? htmlToText(purchaseButton[2] || "") : "";
-  const disabled = /(?:^|\s)disabled(?:\s|=|$)/i.test(attrs) || /aria-disabled=["']true["']/i.test(attrs);
-  const enabledBuy = Boolean(purchaseButton) && BUY_RE.test(label) && !disabled;
+  const hasBuy = BUY_RE.test(markdown);
+  const unavailable =
+    NEGATIVE_RE.test(markdown) ||
+    /we will notify you when this product is back in stock|back in stock/i.test(markdown);
+  const available = hasBuy && !unavailable;
 
-  if (!purchaseButton && !unavailable) throw new Error(`${candidate.market}: product purchase state is unknown`);
+  if (!hasBuy && !unavailable) {
+    throw new Error(`${candidate.market}: product purchase state is unknown`);
+  }
 
   return {
     ...candidate,
-    available: enabledBuy && !unavailable,
-    purchaseAction: enabledBuy && !unavailable ? "Add to cart / Add to bag" : "",
-    purchaseButtonDisabled: disabled,
+    available,
+    purchaseAction: available ? "Add to cart / Add to bag" : "",
+    purchaseButtonDisabled: hasBuy && unavailable,
   };
 }
 
@@ -286,59 +287,30 @@ async function fetchAntMarkdown(targetUrl, market) {
   throw new Error(`${market.code}: ScrapingAnt category failed in all local proxy modes: ${failures.join(" | ")}`);
 }
 
-async function fetchAntWarmCookies(market, proxyType, sessionId) {
-  const params = new URLSearchParams({
-    url: market.categoryUrl,
-    browser: "false",
-    proxy_type: proxyType,
-    proxy_country: market.country,
-    timeout: "60",
-    session: sessionId,
-  });
-
-  const response = await fetch(`https://api.scrapingant.com/v2/extended?${params}`, {
-    headers: { ...ANT_TARGET_HEADERS, accept: "application/json" },
-  });
-  const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
-
-  if (!response.ok) {
-    console.log(`[${market.code}] warm-up ${proxyType} failed HTTP ${response.status}; credits=${credits ?? "unknown"}`);
-    return "";
-  }
-
-  const data = await response.json();
-  const cookies = typeof data?.cookies === "string" ? data.cookies : "";
-  console.log(`[${market.code}] warm-up ${proxyType} succeeded; cookies=${cookies ? "yes" : "no"}; credits=${credits ?? "unknown"}`);
-  return cookies;
-}
-
-async function fetchAntHtml(targetUrl, market) {
+async function fetchAntProductMarkdown(targetUrl, market) {
+  const modes = [
+    { browser: false, proxyType: "datacenter", label: "product-markdown-local-datacenter" },
+    { browser: false, proxyType: "residential", label: "product-markdown-local-residential" },
+    { browser: true, proxyType: "datacenter", label: "product-markdown-browser-datacenter" },
+  ];
   const failures = [];
-  const warmups = new Map();
 
-  for (const mode of PRODUCT_FETCH_MODES) {
-    const sessionId = `hwatch-${market.code.toLowerCase()}-${mode.proxyType}-${Math.floor(Date.now() / (10 * 60 * 1000))}`;
-    if (!warmups.has(mode.proxyType)) {
-      warmups.set(mode.proxyType, await fetchAntWarmCookies(market, mode.proxyType, sessionId));
-    }
-    const cookies = warmups.get(mode.proxyType) || "";
-
+  for (const mode of modes) {
     const params = new URLSearchParams({
       url: targetUrl,
       browser: mode.browser ? "true" : "false",
       proxy_type: mode.proxyType,
       proxy_country: market.country,
       timeout: "60",
-      session: sessionId,
     });
-    if (cookies) params.set("cookies", cookies);
-    if (mode.rawSource) params.set("return_page_source", "true");
-    if (mode.browser) { params.append("block_resource", "image"); params.append("block_resource", "media"); params.append("block_resource", "font"); }
+    if (mode.browser) {
+      params.append("block_resource", "image");
+      params.append("block_resource", "media");
+      params.append("block_resource", "font");
+    }
 
-    const response = await fetch(`https://api.scrapingant.com/v2/general?${params}`, {
-      headers: mode.browser
-        ? { "x-api-key": apiKey, accept: "text/html,*/*" }
-        : { ...ANT_TARGET_HEADERS, accept: "text/html,*/*" },
+    const response = await fetch(`https://api.scrapingant.com/v2/markdown?${params}`, {
+      headers: { "x-api-key": apiKey, accept: "application/json" },
     });
     const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
 
@@ -347,129 +319,28 @@ async function fetchAntHtml(targetUrl, market) {
       continue;
     }
 
-    const html = await response.text();
-    if (html.length < 5000 || BLOCK_RE.test(html)) {
-      failures.push(`${mode.label}: unusable HTML`);
+    const data = await response.json();
+    const markdown = typeof data?.markdown === "string" ? data.markdown : "";
+    if (markdown.length < 1000 || BLOCK_RE.test(markdown)) {
+      failures.push(`${mode.label}: unusable markdown`);
       continue;
     }
 
     try {
-      const verified = parseProductHtml(html, {
+      parseProductMarkdown(markdown, {
         market: market.code,
         sku: targetUrl.match(/-([A-Z0-9]{6,})\/?(?:\?|$)/i)?.[1]?.toUpperCase() || "",
       });
-      console.log(`[${market.code}] product fetched via ${mode.label}; credits=${credits ?? "unknown"}`);
-      return html;
     } catch (error) {
       failures.push(`${mode.label}: ${error.message}`);
+      continue;
     }
+
+    console.log(`[${market.code}] product fetched via ${mode.label}; credits=${credits ?? "unknown"}`);
+    return { markdown, url: data.url || targetUrl, credits, mode: mode.label };
   }
 
-  try {
-    return await fetchProductThroughCategoryBrowser(targetUrl, market);
-  } catch (error) {
-    failures.push(`category-browser-bridge: ${error.message}`);
-  }
-
-  throw new Error(`${market.code}: ScrapingAnt product verification failed in all modes: ${failures.join(" | ")}`);
-}
-
-async function fetchProductThroughCategoryBrowser(targetUrl, market) {
-  const sku = targetUrl.match(/-([A-Z0-9]{6,})\/?(?:\?|$)/i)?.[1]?.toUpperCase() || "";
-  const js = `
-    const target = ${JSON.stringify(targetUrl)};
-    const wanted = new URL(target).pathname;
-    const anchor = Array.from(document.querySelectorAll("a")).find((a) => {
-      try { return new URL(a.href, location.href).pathname === wanted; } catch { return false; }
-    });
-    if (!anchor) {
-      document.title = "HWATCH:" + btoa(JSON.stringify({ status: 0, sku: "", hasButton: false, label: "", disabled: false, unavailable: false, error: "link-not-found" }));
-    } else {
-      anchor.click();
-      await new Promise((resolve) => setTimeout(resolve, 7000));
-      const meta = document.querySelector('meta[property="product:retailer_item_id"], meta[name="product:retailer_item_id"]');
-      const buttons = Array.from(document.querySelectorAll("button"));
-      const button = buttons.find((b) => /Add to (cart|bag)/i.test((b.innerText || b.textContent || "").trim()) || /add-to-cart/i.test(b.getAttribute("name") || ""));
-      const label = button ? (button.innerText || button.textContent || "").replace(/\\s+/g, " ").trim() : "";
-      const disabled = !!button && (button.disabled || button.hasAttribute("disabled") || button.getAttribute("aria-disabled") === "true");
-      const text = (document.body?.innerText || document.body?.textContent || "").replace(/\\s+/g, " ");
-      const unavailable = /\\bDiscover\\b|\\bAvailable soon\\b|\\bUnavailable\\b|\\bSold out\\b|no longer available|currently unavailable|back in stock|notify you when this product is back in stock/i.test(text);
-      const result = {
-        status: location.pathname === wanted ? 200 : 0,
-        sku: (meta?.getAttribute("content") || "").trim(),
-        hasButton: !!button,
-        label,
-        disabled,
-        unavailable,
-        path: location.pathname,
-      };
-      document.title = "HWATCH:" + btoa(JSON.stringify(result));
-    }
-  `;
-  const snippet = Buffer.from(js, "utf8").toString("base64");
-  const attempts = [
-    { proxyType: "datacenter", label: "category-browser-datacenter" },
-  ];
-  const failures = [];
-
-  for (const attempt of attempts) {
-    const params = new URLSearchParams({
-      url: market.categoryUrl,
-      browser: "true",
-      proxy_type: attempt.proxyType,
-      proxy_country: market.country,
-      timeout: "60",
-      js_snippet: snippet,
-    });
-    params.append("block_resource", "image");
-    params.append("block_resource", "media");
-    params.append("block_resource", "font");
-
-    const response = await fetch(`https://api.scrapingant.com/v2/general?${params}`, {
-      headers: { "x-api-key": apiKey, accept: "text/html,*/*" },
-    });
-    const credits = Number(response.headers.get("ant-credits-cost") || 0) || null;
-
-    if (!response.ok) {
-      failures.push(`${attempt.label} HTTP ${response.status}: ${(await response.text()).slice(0, 180)}`);
-      continue;
-    }
-
-    const outerHtml = await response.text();
-    const payload = outerHtml.match(/<title>HWATCH:([^<]+)<\/title>/i)?.[1];
-    if (!payload) {
-      failures.push(`${attempt.label}: result marker missing`);
-      continue;
-    }
-
-    let result;
-    try {
-      result = JSON.parse(Buffer.from(payload, "base64").toString("utf8"));
-    } catch {
-      failures.push(`${attempt.label}: result marker invalid`);
-      continue;
-    }
-
-    const pageSku = String(result.sku || "").toUpperCase();
-    if (result.status !== 200 || !pageSku || pageSku !== sku) {
-      failures.push(`${attempt.label}: product fetch status/SKU mismatch (status=${result.status}, sku=${pageSku || "missing"}, path=${result.path || "unknown"}, error=${result.error || "none"})`);
-      continue;
-    }
-    if (!result.hasButton && !result.unavailable) {
-      failures.push(`${attempt.label}: purchase state unknown`);
-      continue;
-    }
-
-    console.log(`[${market.code}] product verified via ${attempt.label}; credits=${credits ?? "unknown"}; button=${result.label || "none"}; disabled=${result.disabled}`);
-
-    const unavailableText = result.unavailable ? "<p>Unavailable</p>" : "";
-    const buttonHtml = result.hasButton
-      ? `<button name="add-to-cart"${result.disabled ? ' disabled aria-disabled="true"' : ""}>${result.label || "Add to cart"}</button>`
-      : "";
-    return `<html data-hwatch-probe="true"><head><meta property="product:retailer_item_id" content="${pageSku}"></head><body>${unavailableText}${buttonHtml}</body></html>`;
-  }
-
-  throw new Error(failures.join(" | "));
+  throw new Error(`${market.code}: ScrapingAnt product markdown verification failed: ${failures.join(" | ")}`);
 }
 
 function pickStateFields(product) {

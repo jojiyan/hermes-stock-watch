@@ -422,7 +422,7 @@ test("Firecrawl product verification ignores unavailable text inside translation
 
 
 test("ordinary anti-bot scripts are not rendered challenge pages", () => {
-  const normal = '<html><script src="https://js.datadome.co/tags.js"></script><script>const text="captcha cf-chl turnstile access denied";</script><body>Hermès bags</body></html>';
+  const normal = '<html><script src="https://js.datadome.co/tags.js"></script><script>const text="captcha cf-chl turnstile access denied";</script><body>Hermès bags. Protected by reCAPTCHA.</body></html>';
   assert.equal(isAccessBlockedHtml(normal), false);
   assert.equal(isAccessBlockedHtml(normal.replace('Hermès bags', 'Verify you are human')), true);
   assert.equal(isAccessBlockedHtml(normal.replace('Hermès bags', '<iframe src="https://geo.captcha-delivery.com/captcha/"></iframe>')), true);

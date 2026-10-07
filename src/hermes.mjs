@@ -48,10 +48,11 @@ export function isTargetProduct(name) {
 // Anti-bot script names occur on ordinary product pages too. Reject rendered
 // challenge text and challenge frames, not dormant JavaScript string literals.
 export function isAccessBlockedHtml(html) {
-  const markup = String(html).replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+  const markup = String(html).replace(/<(script|style|template|noscript)\b[^>]*>[\s\S]*?<\/\1>/gi, " ")
     .replace(/<!--([\s\S]*?)-->/g, " ");
-  return /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|enable javascript and cookies|robot challenge/i.test(htmlToText(markup))
+  const title = markup.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '';
+  return /sorry, you have been blocked|access denied|verify you are human|checking your browser|just a moment|enable javascript and cookies|robot challenge|please (?:complete|solve) (?:the )?captcha/i.test(htmlToText(markup))
+    || /captcha|cf-chl|turnstile/i.test(title)
     || /<iframe\b[^>]*src=["'][^"']*(?:captcha-delivery\.com|challenges\.cloudflare\.com)/i.test(markup);
 }
 

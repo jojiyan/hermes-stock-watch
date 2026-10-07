@@ -22,6 +22,8 @@ def main():
                 # Library/browser diagnostics must never enter the JSON protocol.
                 with contextlib.redirect_stdout(sys.stderr):
                     if country not in sessions:
+                        stack.close()
+                        sessions.clear()
                         session = stack.enter_context(StealthySession(
                             headless=True, real_chrome=True, block_webrtc=True,
                             hide_canvas=True, allow_webgl=True,

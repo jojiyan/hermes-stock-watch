@@ -37,8 +37,6 @@ const MARKETS = [
 const TARGET_PATTERNS = [
   /\bneo garden 23\b/i,
   /\bgarden party 30\b/i,
-  /\bbolide mini\b/i,
-  /\bmini bolide\b/i,
   /\blindy(?: ii)? mini\b/i,
   /\bmini lindy\b/i,
   /\bpicotin\b/i,

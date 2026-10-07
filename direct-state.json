@@ -47,7 +47,7 @@
   },
   "markets": {
     "US": {
-      "lastCheckedAt": "2026-10-07T10:37:34.050Z",
+      "lastCheckedAt": "2026-10-07T10:55:52.877Z",
       "lastSuccessAt": "2026-10-06T16:35:15.129Z",
       "status": "unknown",
       "market": "US",
@@ -55,7 +55,7 @@
       "committed": false
     },
     "CA": {
-      "lastCheckedAt": "2026-10-07T10:37:34.050Z",
+      "lastCheckedAt": "2026-10-07T10:55:52.877Z",
       "lastSuccessAt": "2026-10-06T16:35:15.129Z",
       "status": "unknown",
       "market": "CA",
@@ -63,7 +63,7 @@
       "committed": false
     }
   },
-  "lastCheckedAt": "2026-10-07T10:37:34.050Z",
+  "lastCheckedAt": "2026-10-07T10:55:52.877Z",
   "meta": {
     "initializedMarkets": [
       "US",
@@ -71,7 +71,7 @@
     ],
     "markets": {
       "US": {
-        "lastCheckedAt": "2026-10-07T10:37:34.050Z",
+        "lastCheckedAt": "2026-10-07T10:55:52.877Z",
         "lastSuccessAt": "2026-10-06T16:35:15.129Z",
         "status": "unknown",
         "market": "US",
@@ -79,7 +79,7 @@
         "committed": false
       },
       "CA": {
-        "lastCheckedAt": "2026-10-07T10:37:34.050Z",
+        "lastCheckedAt": "2026-10-07T10:55:52.877Z",
         "lastSuccessAt": "2026-10-06T16:35:15.129Z",
         "status": "unknown",
         "market": "CA",
@@ -89,6 +89,6 @@
     },
     "keepAliveAt": "2026-10-07T10:17:29.383Z",
     "lastSuccessfulMarkets": [],
-    "lastCheckedAt": "2026-10-07T10:37:34.050Z"
+    "lastCheckedAt": "2026-10-07T10:55:52.877Z"
   }
 }

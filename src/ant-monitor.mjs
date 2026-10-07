@@ -171,13 +171,13 @@ function parseCategoryMarkdown(markdown, market) {
   }
   if (BLOCK_RE.test(markdown)) throw new Error(`${market.code}: category returned an access-block page`);
 
-  const links = [...markdown.matchAll(/\[([^\]\n]+)\]\((https?:\/\/www\.hermes\.com\/(?:us|ca)\/en\/product\/[^)\s]+)(?:\s+"[^"]*")?\)/gi)];
+  const links = [...markdown.matchAll(/\[([^\]\n]+)\]\(((?:https?:\/\/www\.hermes\.com)?\/(?:us|ca)\/en\/product\/[^)\s]+)(?:\s+"[^"]*")?\)/gi)];
   const products = [];
 
   for (let i = 0; i < links.length; i += 1) {
     const match = links[i];
     const name = normalize(match[1]);
-    const url = match[2];
+    const url = new URL(match[2], "https://www.hermes.com").href;
     if (!url.includes(`/${market.code.toLowerCase()}/en/product/`)) continue;
     const sku = url.match(/-([A-Z0-9]{6,})\/?(?:\?|$)/i)?.[1]?.toUpperCase() || "";
     if (!name || !sku) continue;
@@ -277,11 +277,7 @@ async function fetchAntMarkdown(targetUrl, market) {
       continue;
     }
 
-    const firstProductIndex = data.markdown.search(/\/(?:us|ca)\/en\/product\//i);
-    const sampleStart = Math.max(0, firstProductIndex - 500);
-    const sampleEnd = Math.min(data.markdown.length, firstProductIndex + 1200);
     console.log(`[${market.code}] category fetched via ${mode.label}; productLinks=${productLinkCount}; credits=${credits ?? "unknown"}`);
-    console.log(`[${market.code}] MARKDOWN_SAMPLE_START\n${data.markdown.slice(sampleStart, sampleEnd)}\n[${market.code}] MARKDOWN_SAMPLE_END`);
     return { markdown: data.markdown, url: data.url || targetUrl, credits, mode: mode.label };
   }
 

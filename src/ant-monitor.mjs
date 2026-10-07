@@ -55,8 +55,6 @@ const ANT_TARGET_HEADERS = {
 const CHEAP_FETCH_MODES = [
   { browser: false, rawSource: false, proxyType: "datacenter", label: "direct-local-datacenter" },
   { browser: true, rawSource: false, proxyType: "datacenter", label: "browser-local-datacenter" },
-  { browser: false, rawSource: false, proxyType: "residential", label: "direct-local-residential" },
-  { browser: true, rawSource: false, proxyType: "residential", label: "browser-local-residential" },
 ];
 
 const PRODUCT_FETCH_MODES = [...CHEAP_FETCH_MODES];
@@ -150,30 +148,6 @@ for (const market of MARKETS) {
     };
     summaries.push({ market: market.code, error: error.message, committed: false });
   }
-}
-
-if (process.env.GITHUB_EVENT_NAME === "push") {
-  const probeCandidate = {
-    key: "CA:H087968CC55",
-    market: "CA",
-    marketName: "Hermès Canada",
-    sku: "H087968CC55",
-    name: "Le Petit Sac bag",
-    color: "",
-    price: "",
-    url: "https://www.hermes.com/ca/en/product/le-petit-sac-bag-H087968CC55/",
-    target: false,
-  };
-  const probeHtml = await fetchAntHtml(probeCandidate.url, MARKETS.find((item) => item.code === "CA"));
-  const probeResult = parseProductHtml(probeHtml, probeCandidate);
-  console.log(JSON.stringify({
-    validationProbe: true,
-    market: probeResult.market,
-    sku: probeResult.sku,
-    purchaseAction: probeResult.purchaseAction,
-    purchaseButtonDisabled: probeResult.purchaseButtonDisabled,
-    available: probeResult.available,
-  }));
 }
 
 const report = { checkedAt: nowIso, healthy: healthyMarkets === MARKETS.length, summaries, alerts };
@@ -435,7 +409,6 @@ async function fetchProductThroughCategoryBrowser(targetUrl, market) {
   const snippet = Buffer.from(js, "utf8").toString("base64");
   const attempts = [
     { proxyType: "datacenter", label: "category-browser-datacenter" },
-    ...(process.env.GITHUB_EVENT_NAME === "push" ? [] : [{ proxyType: "residential", label: "category-browser-residential" }]),
   ];
   const failures = [];
 

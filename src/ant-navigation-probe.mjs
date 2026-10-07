@@ -1,6 +1,6 @@
 const apiKey = process.env.SCRAPINGANT_API_KEY || "";
 if (!apiKey) throw new Error("SCRAPINGANT_API_KEY missing");
-const target = "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CCY1/";
+const target = "https://www.hermes.com/us/en/product/hermes-videpoches-bag-H088914CK37/";
 const params = new URLSearchParams({
   url: target,
   browser: "false",
@@ -18,13 +18,14 @@ const md=String(data.markdown||"");
 function around(re){
   const m=md.match(re);
   if(!m || m.index==null) return "";
-  return md.slice(Math.max(0,m.index-350),Math.min(md.length,m.index+700)).replace(/\s+/g," ");
+  return md.slice(Math.max(0,m.index-320),Math.min(md.length,m.index+650)).replace(/\s+/g," ");
 }
 console.log(JSON.stringify({
   status:res.status,
   cost:Number(cost||0)||null,
   length:md.length,
   productReference:md.match(/Product reference\s*:?\s*([A-Z0-9]+)/i)?.[1]||"",
-  buyContext:around(/Add to (?:cart|bag)/i),
-  unavailableContext:around(/Available soon|Unavailable|Sold out|no longer available|currently unavailable|back in stock/i)
+  hasBuy:/\bAdd to (?:cart|bag)\b/i.test(md),
+  unavailable:/Available soon|Unavailable|Sold out|no longer available|currently unavailable|back in stock|We will notify you when this product is back in stock/i.test(md),
+  buyContext:around(/Add to (?:cart|bag)/i)
 },null,2));

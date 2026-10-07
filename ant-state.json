@@ -4,14 +4,14 @@
     "US": {
       "available": {},
       "status": "unknown",
-      "lastCheckedAt": "2026-10-07T10:38:17.810Z",
-      "error": "US: ScrapingAnt category request failed (423): {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scrapingant.com/ and support email: support@scrapingant.com\"}"
+      "lastCheckedAt": "2026-10-07T10:40:35.503Z",
+      "error": "Cannot access 'CHEAP_FETCH_MODES' before initialization"
     },
     "CA": {
       "available": {},
       "status": "unknown",
-      "lastCheckedAt": "2026-10-07T10:38:17.810Z",
-      "error": "CA: ScrapingAnt category request failed (423): {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scrapingant.com/ and support email: support@scrapingant.com\"}"
+      "lastCheckedAt": "2026-10-07T10:40:35.503Z",
+      "error": "Cannot access 'CHEAP_FETCH_MODES' before initialization"
     }
   }
 }

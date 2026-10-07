@@ -8,6 +8,7 @@ const TARGET_PATTERNS = [
   /\bgarden party 30\b/i,
   /\blindy(?: ii)? mini\b/i,
   /\bmini lindy\b/i,
+  /\bpicotin\b/i,
   /\bbirkin\b/i,
   /\bkelly\b/i,
   /\bconstance\b/i,

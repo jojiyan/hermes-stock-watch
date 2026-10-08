@@ -2,7 +2,7 @@ name: Hermes Stock Watch (ScrapingAnt)
 
 on:
   schedule:
-    - cron: "3,13,23,33,43,53 * * * *"
+    - cron: "3-58/5 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -39,18 +39,37 @@ jobs:
             echo "SCRAPINGANT_API_KEY is not configured; skipping without failing."
           fi
 
-      - name: Use Node.js 22
+      - name: Avoid unnecessary paid checks
+        id: freshness
         if: steps.configured.outputs.ready == 'true'
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const state = JSON.parse(fs.readFileSync('ant-state.json','utf8'));
+          const times = Object.values(state.markets || {})
+            .map(m => Date.parse(m.lastCheckedAt || ''))
+            .filter(Number.isFinite);
+          const last = times.length ? Math.max(...times) : 0;
+          const due = process.env.EVENT_NAME !== 'schedule' || !last || (Date.now() - last >= 8*60*1000);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'ready=' + due + '\n');
+          console.log(due ? 'Stock check due' : 'Recent check already ran; skip paid requests');
+          NODE
+
+      - name: Use Node.js 22
+        if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
       - name: Syntax check
-        if: steps.configured.outputs.ready == 'true'
+        if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true'
         run: node --check src/ant-monitor.mjs
 
       - name: Check Hermes US and Canada through ScrapingAnt
-        if: steps.configured.outputs.ready == 'true'
+        if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true'
         id: monitor
         continue-on-error: true
         run: node src/ant-monitor.mjs
@@ -61,7 +80,7 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
       - name: Save ScrapingAnt stock state
-        if: steps.configured.outputs.ready == 'true'
+        if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true'
         shell: bash
         run: |
           if git diff --quiet -- ant-state.json; then
@@ -77,7 +96,7 @@ jobs:
           fi
 
       - name: Retain verification evidence
-        if: steps.configured.outputs.ready == 'true' && always()
+        if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true' && always()
         uses: actions/upload-artifact@v4
         with:
           name: scrapingant-market-verification-${{ github.run_id }}
@@ -85,7 +104,7 @@ jobs:
           retention-days: 7
 
       - name: Require both markets to be verified
-        if: steps.configured.outputs.ready == 'true' && always()
+        if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true' && always()
         env:
           MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
         run: test "$MONITOR_OUTCOME" = success

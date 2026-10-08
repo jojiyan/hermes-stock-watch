@@ -2,24 +2,26 @@
   "version": 1,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-08T11:54:07.026Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-08T12:15:11.367Z",
       "lastSuccessAt": "2026-10-08T11:54:07.026Z",
       "products": 28,
       "targets": 3,
       "categoryAvailable": 0,
       "available": {},
-      "verificationErrors": []
+      "verificationErrors": [],
+      "error": "US: ScrapingAnt category failed in all local proxy modes: direct-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-08T11:54:07.026Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-08T12:15:11.367Z",
       "lastSuccessAt": "2026-10-08T11:54:07.026Z",
       "products": 32,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
-      "verificationErrors": []
+      "verificationErrors": [],
+      "error": "CA: ScrapingAnt category failed in all local proxy modes: direct-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
     }
   }
 }

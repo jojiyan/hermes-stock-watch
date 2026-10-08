@@ -78,14 +78,11 @@ for (const market of MARKETS) {
   const previousAvailable = previousMarket.available || {};
 
   try {
+    // The unfiltered category reliably resolves through ScrapingAnt; filtered
+    // facet URLs are blocked by the retailer (423), so never make a market
+    // depend on an inaccessible facet endpoint.
     const categoryDoc = await fetchAntMarkdown(market.categoryUrl, market, 5);
-    // The base listing is a partial storefront page, not the entire bag catalog.
-    // Always check the dedicated Mini/Neo Garden 23 line as well.
-    const gardenDoc = await fetchAntMarkdown(market.gardenUrl, market, 1);
-    const products = [...new Map([
-      ...parseCategoryMarkdown(categoryDoc.markdown, market, 5),
-      ...parseCategoryMarkdown(gardenDoc.markdown, market, 0),
-    ].map((p) => [p.key, p])).values()];
+    const products = parseCategoryMarkdown(categoryDoc.markdown, market, 5);
     const targets = products.filter((product) => product.target);
     // Product details, not "Discover" or missing category buy buttons, determine stock.
     const previousTargets = Object.values(previousAvailable).filter(
@@ -97,7 +94,19 @@ for (const market of MARKETS) {
       target: true,
       categoryAvailable: true,
     }));
-    const categoryAvailable = [...new Map([...targets, ...previousTargets]
+    const pinnedProducts = market.code === "US" ? [{
+      key: "US:H086422CK89",
+      market: "US",
+      marketName: market.name,
+      sku: "H086422CK89",
+      name: "Neo Garden 23 bag",
+      color: "Noir",
+      price: "",
+      url: "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK89/",
+      target: true,
+      categoryAvailable: true,
+    }] : [];
+    const categoryAvailable = [...new Map([...targets, ...previousTargets, ...pinnedProducts]
       .map((product) => [product.key || `${market.code}:${product.sku}`, product])).values()];
     const nextAvailable = {};
     const verificationErrors = [];
@@ -156,7 +165,6 @@ for (const market of MARKETS) {
       verificationErrors,
       evidence,
       categoryCredits: categoryDoc.credits,
-      gardenCredits: gardenDoc.credits,
       committed: verificationErrors.length === 0,
     });
   } catch (error) {

@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { applyVerifiedStock } from "./ant-stock-state.mjs";
+import { afterProductFailure, planProductChecks, seedBackoffFromPreviousErrors } from "./ant-retry.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const statePath = resolve(here, "../ant-state.json");
@@ -83,28 +84,21 @@ for (const market of MARKETS) {
     const categoryDoc = await fetchAntMarkdown(market.categoryUrl, market, 5);
     const products = parseCategoryMarkdown(categoryDoc.markdown, market, 5);
     const targets = products.filter((product) => product.target);
-    // Product details, not "Discover" or missing category buy buttons, determine stock.
-    const previousTargets = Object.values(previousAvailable).filter(
-      (item) => item && item.sku && item.url && item.market === market.code
-    ).map((item) => ({
-      ...item,
-      marketName: market.name,
-      key: `${market.code}:${item.sku}`,
-      target: true,
-      categoryAvailable: true,
-    }));
-    const categoryAvailable = [...new Map([...targets, ...previousTargets]
-      .map((product) => [product.key || `${market.code}:${product.sku}`, product])).values()];
+    // Newly discovered category SKUs are evaluated first; previously known
+    // stock is retried later, without monopolizing attempts or blocking alerts.
+    const retryState = seedBackoffFromPreviousErrors(previousMarket);
+    const scanPlan = planProductChecks(targets, previousAvailable, retryState, nowIso, market.code);
     // Preserve previously confirmed stock until its own product page proves a sell-out.
     const nextAvailable = { ...previousAvailable };
     const verificationErrors = [];
     const evidence = [];
     const marketAlerts = [];
 
-    for (const product of categoryAvailable) {
+    for (const product of scanPlan.ready) {
       try {
         const productDoc = await fetchAntProductMarkdown(product.url, market);
         const verified = parseProductMarkdown(productDoc.markdown, product);
+        delete retryState[product.sku];
         evidence.push({
           sku: product.sku,
           url: product.url,
@@ -123,35 +117,43 @@ for (const market of MARKETS) {
         });
         if (newStock) marketAlerts.push(newStock);
       } catch (error) {
+        const retry = afterProductFailure(retryState[product.sku], error, nowIso);
+        if (retry) retryState[product.sku] = retry;
+        else delete retryState[product.sku];
         verificationErrors.push({ sku: product.sku, url: product.url, error: error.message });
       }
     }
 
     state.markets[market.code] = {
-      status: verificationErrors.length === 0 ? "ok" : "partial",
+      status: verificationErrors.length === 0 && scanPlan.deferred.length === 0 ? "ok" : "partial",
       lastCheckedAt: nowIso,
-      lastSuccessAt: verificationErrors.length === 0 ? nowIso : previousMarket.lastSuccessAt || null,
+      lastSuccessAt: verificationErrors.length === 0 && scanPlan.deferred.length === 0 ? nowIso : previousMarket.lastSuccessAt || null,
       products: products.length,
       targets: targets.length,
-      categoryAvailable: categoryAvailable.length,
+      categoryAvailable: scanPlan.total,
       available: nextAvailable,
+      retryState,
+      deferredProducts: scanPlan.deferred,
       verificationErrors,
     };
 
     // An unrelated SKU's 423 cannot suppress a newly VERIFIED stock alert.
     alerts.push(...marketAlerts);
-    if (verificationErrors.length === 0) healthyMarkets += 1;
+    if (verificationErrors.length === 0 && scanPlan.deferred.length === 0) healthyMarkets += 1;
 
     summaries.push({
       market: market.code,
       products: products.length,
       targets: targets.length,
-      categoryAvailable: categoryAvailable.length,
+      categoryAvailable: scanPlan.total,
+      attemptedProducts: scanPlan.ready.length,
+      deferredProducts: scanPlan.deferred,
       confirmedNewAvailability: marketAlerts.length,
       verificationErrors,
       evidence,
       categoryCredits: categoryDoc.credits,
-      committed: verificationErrors.length === 0,
+      committed: true,
+      fullyVerified: verificationErrors.length === 0 && scanPlan.deferred.length === 0,
     });
   } catch (error) {
     state.markets[market.code] = {

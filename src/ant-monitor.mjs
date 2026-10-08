@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import { applyVerifiedStock } from "./ant-stock-state.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const statePath = resolve(here, "../ant-state.json");
@@ -94,7 +95,8 @@ for (const market of MARKETS) {
     }));
     const categoryAvailable = [...new Map([...targets, ...previousTargets]
       .map((product) => [product.key || `${market.code}:${product.sku}`, product])).values()];
-    const nextAvailable = {};
+    // Preserve previously confirmed stock until its own product page proves a sell-out.
+    const nextAvailable = { ...previousAvailable };
     const verificationErrors = [];
     const evidence = [];
     const marketAlerts = [];
@@ -113,14 +115,13 @@ for (const market of MARKETS) {
           productMode: productDoc.mode,
         });
 
-        if (!verified.available) continue;
-
-        nextAvailable[product.sku] = {
-          ...pickStateFields(verified),
-          firstSeenAt: previousAvailable[product.sku]?.firstSeenAt || nowIso,
-          lastSeenAt: nowIso,
-        };
-        if (!previousAvailable[product.sku]) marketAlerts.push(verified);
+        const newStock = applyVerifiedStock({
+          previousAvailable,
+          nextAvailable,
+          verified,
+          checkedAt: nowIso,
+        });
+        if (newStock) marketAlerts.push(newStock);
       } catch (error) {
         verificationErrors.push({ sku: product.sku, url: product.url, error: error.message });
       }
@@ -133,21 +134,20 @@ for (const market of MARKETS) {
       products: products.length,
       targets: targets.length,
       categoryAvailable: categoryAvailable.length,
-      available: verificationErrors.length === 0 ? nextAvailable : previousAvailable,
+      available: nextAvailable,
       verificationErrors,
     };
 
-    if (verificationErrors.length === 0) {
-      healthyMarkets += 1;
-      alerts.push(...marketAlerts);
-    }
+    // An unrelated SKU's 423 cannot suppress a newly VERIFIED stock alert.
+    alerts.push(...marketAlerts);
+    if (verificationErrors.length === 0) healthyMarkets += 1;
 
     summaries.push({
       market: market.code,
       products: products.length,
       targets: targets.length,
       categoryAvailable: categoryAvailable.length,
-      confirmedNewAvailability: verificationErrors.length === 0 ? marketAlerts.length : 0,
+      confirmedNewAvailability: marketAlerts.length,
       verificationErrors,
       evidence,
       categoryCredits: categoryDoc.credits,

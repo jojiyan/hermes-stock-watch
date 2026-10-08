@@ -32,7 +32,7 @@ const MARKETS = [
     name: "Hermès USA",
     country: "us",
     categoryUrl: "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
-    gardenUrl: "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?facet_line=neo_garden_23",
+    gardenUrl: "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?facet_line=neo_garden_23&facet_material=cuir",
   },
   {
     code: "CA",
@@ -88,10 +88,21 @@ for (const market of MARKETS) {
     ].map((p) => [p.key, p])).values()];
     const targets = products.filter((product) => product.target);
     // Product details, not "Discover" or missing category buy buttons, determine stock.
-    const categoryAvailable = targets;
+    const previousTargets = Object.values(previousAvailable).filter(
+      (item) => item && item.sku && item.url && item.market === market.code
+    ).map((item) => ({
+      ...item,
+      marketName: market.name,
+      key: `${market.code}:${item.sku}`,
+      target: true,
+      categoryAvailable: true,
+    }));
+    const categoryAvailable = [...new Map([...targets, ...previousTargets]
+      .map((product) => [product.key || `${market.code}:${product.sku}`, product])).values()];
     const nextAvailable = {};
     const verificationErrors = [];
     const evidence = [];
+    const marketAlerts = [];
 
     for (const product of categoryAvailable) {
       try {
@@ -114,7 +125,7 @@ for (const market of MARKETS) {
           firstSeenAt: previousAvailable[product.sku]?.firstSeenAt || nowIso,
           lastSeenAt: nowIso,
         };
-        if (!previousAvailable[product.sku]) alerts.push(verified);
+        if (!previousAvailable[product.sku]) marketAlerts.push(verified);
       } catch (error) {
         verificationErrors.push({ sku: product.sku, url: product.url, error: error.message });
       }
@@ -131,14 +142,17 @@ for (const market of MARKETS) {
       verificationErrors,
     };
 
-    if (verificationErrors.length === 0) healthyMarkets += 1;
+    if (verificationErrors.length === 0) {
+      healthyMarkets += 1;
+      alerts.push(...marketAlerts);
+    }
 
     summaries.push({
       market: market.code,
       products: products.length,
       targets: targets.length,
       categoryAvailable: categoryAvailable.length,
-      confirmedNewAvailability: alerts.filter((item) => item.market === market.code).length,
+      confirmedNewAvailability: verificationErrors.length === 0 ? marketAlerts.length : 0,
       verificationErrors,
       evidence,
       categoryCredits: categoryDoc.credits,

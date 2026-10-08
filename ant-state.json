@@ -2,8 +2,8 @@
   "version": 1,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-08T14:00:32.208Z",
+      "status": "partial",
+      "lastCheckedAt": "2026-10-08T14:26:49.272Z",
       "lastSuccessAt": "2026-10-08T14:00:32.208Z",
       "products": 31,
       "targets": 5,
@@ -30,12 +30,23 @@
           "lastSeenAt": "2026-10-08T14:00:32.208Z"
         }
       },
-      "verificationErrors": []
+      "verificationErrors": [
+        {
+          "sku": "H086422CK37",
+          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
+          "error": "US: ScrapingAnt product markdown verification failed: product-markdown-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-local-residential HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-browser-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
+        },
+        {
+          "sku": "H056289CC3Y",
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CC3Y/",
+          "error": "US: ScrapingAnt product markdown verification failed: product-markdown-local-datacenter: US: product reference is missing | product-markdown-local-residential: US: product reference is missing | product-markdown-browser-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
+        }
+      ]
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-08T14:00:32.208Z",
-      "lastSuccessAt": "2026-10-08T14:00:32.208Z",
+      "lastCheckedAt": "2026-10-08T14:26:49.272Z",
+      "lastSuccessAt": "2026-10-08T14:26:49.272Z",
       "products": 32,
       "targets": 0,
       "categoryAvailable": 0,

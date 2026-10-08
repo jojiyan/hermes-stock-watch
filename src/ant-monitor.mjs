@@ -32,14 +32,12 @@ const MARKETS = [
     name: "Hermès USA",
     country: "us",
     categoryUrl: "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
-    gardenUrl: "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?facet_line=neo_garden_23&facet_material=cuir",
   },
   {
     code: "CA",
     name: "Hermès Canada",
     country: "ca",
     categoryUrl: "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
-    gardenUrl: "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?facet_line=neo_garden_23&facet_material=cuir",
   },
 ];
 
@@ -94,19 +92,7 @@ for (const market of MARKETS) {
       target: true,
       categoryAvailable: true,
     }));
-    const pinnedProducts = market.code === "US" ? [{
-      key: "US:H086422CK89",
-      market: "US",
-      marketName: market.name,
-      sku: "H086422CK89",
-      name: "Neo Garden 23 bag",
-      color: "Noir",
-      price: "",
-      url: "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK89/",
-      target: true,
-      categoryAvailable: true,
-    }] : [];
-    const categoryAvailable = [...new Map([...targets, ...previousTargets, ...pinnedProducts]
+    const categoryAvailable = [...new Map([...targets, ...previousTargets]
       .map((product) => [product.key || `${market.code}:${product.sku}`, product])).values()];
     const nextAvailable = {};
     const verificationErrors = [];

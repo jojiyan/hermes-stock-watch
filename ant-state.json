@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-08T13:40:17.239Z",
-      "lastSuccessAt": "2026-10-08T13:40:17.239Z",
+      "lastCheckedAt": "2026-10-08T14:00:32.208Z",
+      "lastSuccessAt": "2026-10-08T14:00:32.208Z",
       "products": 31,
       "targets": 5,
       "categoryAvailable": 5,
@@ -17,7 +17,7 @@
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
           "firstSeenAt": "2026-10-08T13:40:17.239Z",
-          "lastSeenAt": "2026-10-08T13:40:17.239Z"
+          "lastSeenAt": "2026-10-08T14:00:32.208Z"
         },
         "H056289CC3Y": {
           "market": "US",
@@ -27,16 +27,16 @@
           "price": "$3,975",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CC3Y/",
           "firstSeenAt": "2026-10-08T13:40:17.239Z",
-          "lastSeenAt": "2026-10-08T13:40:17.239Z"
+          "lastSeenAt": "2026-10-08T14:00:32.208Z"
         }
       },
       "verificationErrors": []
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-08T13:40:17.239Z",
-      "lastSuccessAt": "2026-10-08T13:40:17.239Z",
-      "products": 33,
+      "lastCheckedAt": "2026-10-08T14:00:32.208Z",
+      "lastSuccessAt": "2026-10-08T14:00:32.208Z",
+      "products": 32,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},

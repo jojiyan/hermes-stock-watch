@@ -7,6 +7,8 @@ on:
       - ".github/workflows/ant-stock-state-tests.yml"
       - "src/ant-monitor.mjs"
       - "src/ant-stock-state.mjs"
+      - "src/ant-retry.mjs"
+      - "test/ant-retry.test.mjs"
       - "test/ant-stock-state.test.mjs"
   workflow_dispatch:
 

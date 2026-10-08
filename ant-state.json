@@ -3,18 +3,39 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-08T13:14:44.628Z",
-      "lastSuccessAt": "2026-10-08T13:14:44.628Z",
-      "products": 28,
-      "targets": 3,
-      "categoryAvailable": 3,
-      "available": {},
+      "lastCheckedAt": "2026-10-08T13:40:17.239Z",
+      "lastSuccessAt": "2026-10-08T13:40:17.239Z",
+      "products": 31,
+      "targets": 5,
+      "categoryAvailable": 5,
+      "available": {
+        "H086422CK37": {
+          "market": "US",
+          "sku": "H086422CK37",
+          "name": "Neo Garden 23 bag",
+          "color": "Beige/Natural",
+          "price": "$4,475",
+          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
+          "firstSeenAt": "2026-10-08T13:40:17.239Z",
+          "lastSeenAt": "2026-10-08T13:40:17.239Z"
+        },
+        "H056289CC3Y": {
+          "market": "US",
+          "sku": "H056289CC3Y",
+          "name": "Picotin Lock 18 bag",
+          "color": "Blue",
+          "price": "$3,975",
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CC3Y/",
+          "firstSeenAt": "2026-10-08T13:40:17.239Z",
+          "lastSeenAt": "2026-10-08T13:40:17.239Z"
+        }
+      },
       "verificationErrors": []
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-08T13:14:44.628Z",
-      "lastSuccessAt": "2026-10-08T13:14:44.628Z",
+      "lastCheckedAt": "2026-10-08T13:40:17.239Z",
+      "lastSuccessAt": "2026-10-08T13:40:17.239Z",
       "products": 33,
       "targets": 0,
       "categoryAvailable": 0,

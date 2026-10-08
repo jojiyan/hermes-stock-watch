@@ -15,6 +15,8 @@ if (!repository || !token || !repositoryOwner) throw new Error("GitHub repositor
 
 const TARGET_PATTERNS = [
   /\bneo garden 23\b/i,
+  /\bneo garden (?:bredies|pockets) 23\b/i,
+  /\b(?:mini garden(?: party)?|garden party (?:mini|23))\b/i,
   /\bgarden party 30\b/i,
   /\blindy(?: ii)? mini\b/i,
   /\bmini lindy\b/i,
@@ -30,17 +32,20 @@ const MARKETS = [
     name: "Hermès USA",
     country: "us",
     categoryUrl: "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
+    gardenUrl: "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?facet_line=neo_garden_23",
   },
   {
     code: "CA",
     name: "Hermès Canada",
     country: "ca",
     categoryUrl: "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
+    gardenUrl: "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?facet_line=neo_garden_23",
   },
 ];
 
 const BLOCK_RE = /sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|robot challenge/i;
-const NEGATIVE_RE = /\bDiscover\b|\bAvailable soon\b|\bUnavailable\b|\bSold out\b|no longer available|currently unavailable/i;
+// "Discover" is normal navigation/editorial text, not an out-of-stock signal.
+const PRODUCT_UNAVAILABLE_RE = /unfortunately this product is no longer available|we will notify you when this product is back in stock|\bavailable soon\b|\bcurrently unavailable\b|\bsold out\b|\bout of stock\b|\bno longer available\b/i;
 const BUY_RE = /\bAdd to (?:cart|bag)\b/i;
 
 const ANT_TARGET_HEADERS = {
@@ -73,24 +78,22 @@ for (const market of MARKETS) {
   const previousAvailable = previousMarket.available || {};
 
   try {
-    const categoryDoc = await fetchAntMarkdown(market.categoryUrl, market);
-    const products = parseCategoryMarkdown(categoryDoc.markdown, market);
+    const categoryDoc = await fetchAntMarkdown(market.categoryUrl, market, 5);
+    // The base listing is a partial storefront page, not the entire bag catalog.
+    // Always check the dedicated Mini/Neo Garden 23 line as well.
+    const gardenDoc = await fetchAntMarkdown(market.gardenUrl, market, 1);
+    const products = [...new Map([
+      ...parseCategoryMarkdown(categoryDoc.markdown, market, 5),
+      ...parseCategoryMarkdown(gardenDoc.markdown, market, 0),
+    ].map((p) => [p.key, p])).values()];
     const targets = products.filter((product) => product.target);
-    const categoryAvailable = targets.filter((product) => product.categoryAvailable);
+    // Product details, not "Discover" or missing category buy buttons, determine stock.
+    const categoryAvailable = targets;
     const nextAvailable = {};
     const verificationErrors = [];
     const evidence = [];
 
     for (const product of categoryAvailable) {
-      if (previousAvailable[product.sku]) {
-        nextAvailable[product.sku] = {
-          ...previousAvailable[product.sku],
-          ...pickStateFields(product),
-          lastSeenAt: nowIso,
-        };
-        continue;
-      }
-
       try {
         const productDoc = await fetchAntProductMarkdown(product.url, market);
         const verified = parseProductMarkdown(productDoc.markdown, product);
@@ -108,10 +111,10 @@ for (const market of MARKETS) {
 
         nextAvailable[product.sku] = {
           ...pickStateFields(verified),
-          firstSeenAt: nowIso,
+          firstSeenAt: previousAvailable[product.sku]?.firstSeenAt || nowIso,
           lastSeenAt: nowIso,
         };
-        alerts.push(verified);
+        if (!previousAvailable[product.sku]) alerts.push(verified);
       } catch (error) {
         verificationErrors.push({ sku: product.sku, url: product.url, error: error.message });
       }
@@ -139,6 +142,7 @@ for (const market of MARKETS) {
       verificationErrors,
       evidence,
       categoryCredits: categoryDoc.credits,
+      gardenCredits: gardenDoc.credits,
       committed: verificationErrors.length === 0,
     });
   } catch (error) {
@@ -168,7 +172,7 @@ function isTargetProduct(name) {
   return TARGET_PATTERNS.some((pattern) => pattern.test(normalized));
 }
 
-function parseCategoryMarkdown(markdown, market) {
+function parseCategoryMarkdown(markdown, market, minProducts = 5) {
   if (typeof markdown !== "string" || markdown.length < 1000) {
     throw new Error(`${market.code}: category markdown is unexpectedly short`);
   }
@@ -189,11 +193,6 @@ function parseCategoryMarkdown(markdown, market) {
     const segment = markdown.slice(match.index, end);
     const color = normalize(segment.match(/\bColor\s*:\s*([^\n,]+(?:\s*\/\s*[^\n,]+)?)/i)?.[1]);
     const price = normalize(segment.match(/\bPrice\s+((?:CA|US)?\s*\$\s*[\d,]+(?:\.\d{2})?)/i)?.[1]);
-    // Category tiles are discovery hints, not proof of availability. Some
-    // buyable items do not show an Add to cart button on the listing card.
-    // Confirm any potential availability using the product page itself.
-    const negative = NEGATIVE_RE.test(segment);
-
     products.push({
       key: `${market.code}:${sku}`,
       market: market.code,
@@ -203,13 +202,13 @@ function parseCategoryMarkdown(markdown, market) {
       color,
       price,
       url,
-      categoryAvailable: !negative,
+      categoryAvailable: true,
       target: isTargetProduct(name),
     });
   }
 
   const unique = [...new Map(products.map((p) => [p.key, p])).values()];
-  if (unique.length < 5) throw new Error(`${market.code}: parsed only ${unique.length} products from category`);
+  if (unique.length < minProducts) throw new Error(`${market.code}: parsed only ${unique.length} products from category (expected ${minProducts})`);
   return unique;
 }
 
@@ -227,10 +226,14 @@ function parseProductMarkdown(markdown, candidate) {
     throw new Error(`${candidate.market}: product SKU ${pageSku} did not match ${candidate.sku}`);
   }
 
-  const hasBuy = BUY_RE.test(markdown);
-  const unavailable =
-    NEGATIVE_RE.test(markdown) ||
-    /we will notify you when this product is back in stock|back in stock/i.test(markdown);
+  const start = markdown.indexOf("Product information and customization");
+  const end = markdown.indexOf("Product description", start);
+  if (start < 0 || end < start) {
+    throw new Error(`${candidate.market}: missing complete product purchase section`);
+  }
+  const purchaseSection = markdown.slice(start, end);
+  const hasBuy = BUY_RE.test(purchaseSection);
+  const unavailable = PRODUCT_UNAVAILABLE_RE.test(purchaseSection);
   const available = hasBuy && !unavailable;
 
   if (!hasBuy && !unavailable) {
@@ -245,7 +248,7 @@ function parseProductMarkdown(markdown, candidate) {
   };
 }
 
-async function fetchAntMarkdown(targetUrl, market) {
+async function fetchAntMarkdown(targetUrl, market, minLinks = 5) {
   const failures = [];
 
   for (const mode of CHEAP_FETCH_MODES) {
@@ -276,8 +279,8 @@ async function fetchAntMarkdown(targetUrl, market) {
     }
 
     const productLinkCount = (data.markdown.match(/\/(?:us|ca)\/en\/product\//gi) || []).length;
-    if (productLinkCount < 5) {
-      failures.push(`${mode.label}: only ${productLinkCount} product links`);
+    if (productLinkCount < minLinks) {
+      failures.push(`${mode.label}: only ${productLinkCount} product links (expected ${minLinks})`);
       console.log(`[${market.code}] ${mode.label} returned only ${productLinkCount} product links; trying next mode; credits=${credits ?? "unknown"}`);
       continue;
     }
@@ -383,7 +386,7 @@ async function createStockIssue(product) {
     product.price ? `- 价格：${product.price}` : "",
     `- SKU：${product.sku}`,
     `- 购买链接：${product.url}`,
-    "- 验证：类别页出现 Add to cart/Add to bag，并再次打开官方商品页确认购买按钮可用",
+    "- 验证：官方商品页 SKU 一致，购买区显示 Add to cart/Add to bag 且无缺货提示",
     `- 检测时间：${nowIso}`,
     "",
     "同一持续在售状态只提醒一次；离开可售状态后再次补货会重新提醒。",

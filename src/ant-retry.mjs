@@ -4,7 +4,7 @@ const MAX_DELAY_MINUTES = 60;
 const BASE_DELAY_MINUTES = 10;
 
 export function isAntibotError(error) {
-  return /\\bHTTP 423\\b|browser was detected by target site|antibot|anti-bot/i.test(String(error?.message || error || ""));
+  return /\bHTTP 423\b|browser was detected by target site|antibot|anti-bot/i.test(String(error?.message || error || ""));
 }
 
 export function afterProductFailure(previousRetry, error, nowIso) {

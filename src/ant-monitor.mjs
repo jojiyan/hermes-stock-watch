@@ -39,7 +39,7 @@ const MARKETS = [
     name: "Hermès Canada",
     country: "ca",
     categoryUrl: "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
-    gardenUrl: "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?facet_line=neo_garden_23",
+    gardenUrl: "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?facet_line=neo_garden_23&facet_material=cuir",
   },
 ];
 

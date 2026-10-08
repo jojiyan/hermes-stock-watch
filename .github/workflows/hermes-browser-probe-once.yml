@@ -1,0 +1,27 @@
+name: One-time Hermès Browser Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/hermes-browser-probe-once.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install available browser fetcher
+        run: |
+          test -x /usr/bin/google-chrome-stable
+          python3 -m venv .venv
+          .venv/bin/python -m pip install --quiet 'scrapling[fetchers]==0.4.15'
+      - name: Probe blocked Neo Garden 23 page
+        run: |
+          .venv/bin/python -m py_compile src/scrapling_oneoff_probe.py
+          .venv/bin/python src/scrapling_oneoff_probe.py

@@ -303,10 +303,11 @@ async function fetchAntMarkdown(targetUrl, market, minLinks = 5) {
 }
 
 async function fetchAntProductMarkdown(targetUrl, market) {
+  // Attempt lower-cost modes first. Residential is a last resort.
   const modes = [
     { browser: false, proxyType: "datacenter", label: "product-markdown-local-datacenter" },
-    { browser: false, proxyType: "residential", label: "product-markdown-local-residential" },
     { browser: true, proxyType: "datacenter", label: "product-markdown-browser-datacenter" },
+    { browser: false, proxyType: "residential", label: "product-markdown-local-residential" },
   ];
   const failures = [];
 

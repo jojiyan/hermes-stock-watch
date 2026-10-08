@@ -189,7 +189,9 @@ function parseCategoryMarkdown(markdown, market) {
     const segment = markdown.slice(match.index, end);
     const color = normalize(segment.match(/\bColor\s*:\s*([^\n,]+(?:\s*\/\s*[^\n,]+)?)/i)?.[1]);
     const price = normalize(segment.match(/\bPrice\s+((?:CA|US)?\s*\$\s*[\d,]+(?:\.\d{2})?)/i)?.[1]);
-    const hasBuy = BUY_RE.test(segment);
+    // Category tiles are discovery hints, not proof of availability. Some
+    // buyable items do not show an Add to cart button on the listing card.
+    // Confirm any potential availability using the product page itself.
     const negative = NEGATIVE_RE.test(segment);
 
     products.push({
@@ -201,7 +203,7 @@ function parseCategoryMarkdown(markdown, market) {
       color,
       price,
       url,
-      categoryAvailable: hasBuy && !negative,
+      categoryAvailable: !negative,
       target: isTargetProduct(name),
     });
   }

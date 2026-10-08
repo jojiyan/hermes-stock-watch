@@ -3,9 +3,9 @@
   "markets": {
     "US": {
       "status": "partial",
-      "lastCheckedAt": "2026-10-08T15:10:38.788Z",
+      "lastCheckedAt": "2026-10-08T15:36:07.424Z",
       "lastSuccessAt": "2026-10-08T14:00:32.208Z",
-      "products": 34,
+      "products": 33,
       "targets": 3,
       "categoryAvailable": 5,
       "available": {
@@ -39,14 +39,14 @@
         {
           "sku": "H056289CC3Y",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CC3Y/",
-          "error": "US: ScrapingAnt product markdown verification failed: product-markdown-local-datacenter: US: product reference is missing | product-markdown-local-residential: US: product reference is missing | product-markdown-browser-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
+          "error": "US: ScrapingAnt product markdown verification failed: product-markdown-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-local-residential HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-browser-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
         }
       ]
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-08T15:10:38.788Z",
-      "lastSuccessAt": "2026-10-08T15:10:38.788Z",
+      "lastCheckedAt": "2026-10-08T15:36:07.424Z",
+      "lastSuccessAt": "2026-10-08T15:36:07.424Z",
       "products": 33,
       "targets": 0,
       "categoryAvailable": 0,

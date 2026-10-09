@@ -102,6 +102,14 @@ jobs:
           path: ant-run-report.json
           retention-days: 7
 
+      - name: Deliver confirmed new stock to QQ Mail (if configured)
+        if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true' && always()
+        env:
+          QQ_SMTP_EMAIL: ${{ secrets.QQ_SMTP_EMAIL }}
+          QQ_SMTP_AUTH_CODE: ${{ secrets.QQ_SMTP_AUTH_CODE }}
+          QQ_NOTIFY_TO: ${{ secrets.QQ_NOTIFY_TO }}
+        run: python3 src/qq-mail-notify.py
+
       - name: Require both markets to be verified
         if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true' && always()
         env:

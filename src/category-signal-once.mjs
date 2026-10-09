@@ -1,14 +1,35 @@
-import { Buffer } from "node:buffer";
 const key=process.env.SCRAPINGANT_API_KEY;
-if(!key)throw new Error("Missing SCRAPINGANT_API_KEY");
-const target="https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/";
-const params=new URLSearchParams({url:target,browser:"false",proxy_country:"us",proxy_type:"datacenter",timeout:"50"});
-const res=await fetch("https://api.scrapingant.com/v2/general?"+params,{headers:{"x-api-key":key,"accept":"text/html,*/*"}});
-const html=await res.text();
-const signals=["H086422CK37","H056289CC3Y","H051551CKCM","availability","inventory","outOfStock","inStock","stockStatus","addToCart","Add to cart","product-card","product-item","data-product"];
-const rows=signals.map(term=>{
- const i=html.toLowerCase().indexOf(term.toLowerCase());
- return {term,count:html.toLowerCase().split(term.toLowerCase()).length-1,firstSnippet:i<0?null:html.slice(Math.max(0,i-220),i+420).replace(/\s+/g," ").slice(0,650)};
+if(!key)throw new Error("Missing key");
+const url="https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/";
+const params=new URLSearchParams({url,browser:"false",proxy_country:"us",proxy_type:"datacenter",timeout:"50"});
+const response=await fetch("https://api.scrapingant.com/v2/general?"+params,{headers:{"x-api-key":key}});
+const html=await response.text();
+const skuList=[...new Set([...html.matchAll(/id="grid-product-([A-Z0-9]+)"/g)].map(m=>m[1]))];
+const samples=["H051551CKCM",...skuList.slice(0,4),...skuList.slice(15,18)];
+const tiles=samples.map(sku=>{
+ const i=html.indexOf('id="grid-product-'+sku+'"');
+ const j=html.indexOf('id="grid-product-',i+10);
+ const str=i<0?"":html.slice(i,Math.min(j>=0?j:i+15000,i+15000));
+ const tag=str.match(/<h-out-of-stock-label[^>]*>[\s\S]{0,600}?<\/h-out-of-stock-label>/i)?.[0]||"";
+ return {sku,tileSize:str.length,containsOutLabel:str.includes("h-out-of-stock-label"),outLabel:tag.slice(0,650),excerpt:str.slice(0,1200),text:str.replace(/<[^>]+>/g," ").replace(/\s+/g," ").slice(0,200)};
 });
-const scripts=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].map(m=>({attrs:m[1].slice(0,150),len:m[2].length,containsSku:/H086422CK37|H051551CKCM/i.test(m[2])})).filter(x=>x.containsSku||/application\/ld\+json|__NEXT_DATA__|application\/json/i.test(x.attrs)).slice(0,20);
-console.log(JSON.stringify({status:res.status,credits:res.headers.get("ant-credits-cost"),length:html.length,title:html.match(/<title[^>]*>([^<]*)/i)?.[1]||"",signals:rows,scripts},null,2));
+let stateInfo={};
+const stateStr=html.match(/<script[^>]*id="hermes-state"[^>]*>([\s\S]*?)<\/script>/i)?.[1];
+if(stateStr){
+ try{
+   const data=JSON.parse(stateStr);
+   const found=[];
+   function walk(v,path,depth=0){
+     if(found.length>30||depth>14||v==null||typeof v!=="object")return;
+     if(Array.isArray(v)){for(let i=0;i<Math.min(v.length,300);i++)walk(v[i],path+"["+i+"]",depth+1);return;}
+     const vjson=JSON.stringify(v).slice(0,2500);
+     if(/H051551CKCM|H086422CK37/i.test(vjson) && vjson.length<2500){
+       found.push({path,keys:Object.keys(v).slice(0,28),snippet:vjson.slice(0,900)});
+     }
+     for(const [k,x] of Object.entries(v))walk(x,path+"."+k,depth+1);
+   }
+   walk(data,"state");
+   stateInfo={keys:Object.keys(data).slice(0,35),found,bytes:stateStr.length};
+ }catch(e){stateInfo={error:e.message,bytes:stateStr.length,sample:stateStr.slice(0,150)};}
+}
+console.log(JSON.stringify({status:response.status,credits:response.headers.get("ant-credits-cost"),htmlLength:html.length,gridProductCount:skuList.length,tiles,stateInfo},null,2));

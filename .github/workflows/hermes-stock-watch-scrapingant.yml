@@ -34,18 +34,6 @@ jobs:
             echo "SCRAPINGANT_API_KEY is not configured; skipping without failing."
           fi
 
-      - name: Check optional QQ SMTP setup
-        shell: bash
-        env:
-          QQ_SMTP_EMAIL: ${{ secrets.QQ_SMTP_EMAIL }}
-          QQ_SMTP_AUTH_CODE: ${{ secrets.QQ_SMTP_AUTH_CODE }}
-        run: |
-          if [[ -n "$QQ_SMTP_EMAIL" && -n "$QQ_SMTP_AUTH_CODE" ]]; then
-            echo "QQ SMTP: configured (end-to-end delivery still requires a real test)"
-          else
-            echo "QQ SMTP: NOT configured; GitHub Issue notifications are the only active delivery method"
-          fi
-
       - name: Avoid unnecessary paid checks
         id: freshness
         if: steps.configured.outputs.ready == 'true'
@@ -109,14 +97,6 @@ jobs:
           name: scrapingant-market-verification-${{ github.run_id }}
           path: ant-run-report.json
           retention-days: 7
-
-      - name: Deliver confirmed new stock to QQ Mail (if configured)
-        if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true' && always()
-        env:
-          QQ_SMTP_EMAIL: ${{ secrets.QQ_SMTP_EMAIL }}
-          QQ_SMTP_AUTH_CODE: ${{ secrets.QQ_SMTP_AUTH_CODE }}
-          QQ_NOTIFY_TO: ${{ secrets.QQ_NOTIFY_TO }}
-        run: python3 src/qq-mail-notify.py
 
       - name: Require both markets to be verified
         if: steps.configured.outputs.ready == 'true' && steps.freshness.outputs.ready == 'true' && always()

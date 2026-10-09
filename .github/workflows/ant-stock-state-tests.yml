@@ -13,6 +13,8 @@ on:
       - "src/ant-catalog-monitor.mjs"
       - "src/ant-catalog-fetch.mjs"
       - "test/ant-catalog-fetch.test.mjs"
+      - "src/qq-mail-notify.py"
+      - "test/test_qq_mail_notify.py"
       - "test/ant-catalog.test.mjs"
       - "test/ant-stock-state.test.mjs"
   workflow_dispatch:
@@ -29,5 +31,6 @@ jobs:
         with:
           node-version: "22"
       - run: npm test
+      - run: python3 -m unittest discover -s test -p 'test_qq_mail_notify.py'
       - run: node --check src/ant-monitor.mjs
       - run: node --check src/ant-catalog-monitor.mjs

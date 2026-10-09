@@ -71,8 +71,12 @@ export function parseHermesCatalog(html, marketCode) {
 export function reconcileCatalog(previousMarket, parsed, nowIso) {
   const prev=previousMarket||{};
   const previousStatus={...(prev.catalogStocks||{})};
-  const alerted=prev.alertedSkus||{};
-  const notified={...alerted};
+  // Migrate old GitHub alerts from the former product-page monitor. Some of
+  // those SKUs have disappeared from the visible catalog, but reappearing
+  // must not send a duplicate notification unless observed explicitly sold out.
+  const legacyAlerted=Object.fromEntries(Object.values(prev.available||{})
+    .filter(x=>x?.sku).map(x=>[x.sku,x.firstSeenAt||nowIso]));
+  const notified={...legacyAlerted,...(prev.alertedSkus||{})};
   const available={};
   const newAlerts=[];
   const stocks={...previousStatus};

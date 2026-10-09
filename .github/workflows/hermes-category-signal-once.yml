@@ -2,7 +2,7 @@ name: Hermès Category Signal One-Shot
 on:
   push:
     branches: [main]
-    paths: [".github/workflows/hermes-category-signal-once.yml"]
+    paths: [".github/workflows/hermes-category-signal-once.yml", "src/category-signal-once.mjs"]
   workflow_dispatch:
 permissions:
   contents: read

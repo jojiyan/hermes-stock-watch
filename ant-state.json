@@ -1,73 +1,48 @@
 {
-  "version": 1,
+  "version": 2,
   "markets": {
     "US": {
-      "status": "partial",
-      "lastCheckedAt": "2026-10-09T04:36:35.374Z",
-      "lastSuccessAt": "2026-10-08T14:00:32.208Z",
-      "products": 29,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-09T04:54:33.401Z",
+      "lastSuccessAt": "2026-10-09T04:54:33.401Z",
+      "products": 33,
       "targets": 3,
-      "categoryAvailable": 5,
-      "available": {
-        "H086422CK37": {
-          "market": "US",
-          "sku": "H086422CK37",
-          "name": "Neo Garden 23 bag",
-          "color": "Beige/Natural",
-          "price": "$4,475",
-          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
-          "firstSeenAt": "2026-10-08T13:40:17.239Z",
-          "lastSeenAt": "2026-10-08T14:00:32.208Z"
+      "categoryAvailable": 0,
+      "available": {},
+      "catalogStocks": {
+        "H085956CCY1": {
+          "ecom": false,
+          "seenAt": "2026-10-09T04:54:33.401Z"
         },
-        "H056289CC3Y": {
-          "market": "US",
-          "sku": "H056289CC3Y",
-          "name": "Picotin Lock 18 bag",
-          "color": "Blue",
-          "price": "$3,975",
-          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CC3Y/",
-          "firstSeenAt": "2026-10-08T13:40:17.239Z",
-          "lastSeenAt": "2026-10-08T14:00:32.208Z"
+        "H056289CKY1": {
+          "ecom": false,
+          "seenAt": "2026-10-09T04:54:33.401Z"
+        },
+        "H051551CKCM": {
+          "ecom": false,
+          "seenAt": "2026-10-09T04:54:33.401Z"
         }
       },
-      "retryState": {
-        "H086422CK37": {
-          "attempts": 7,
-          "lastFailureAt": "2026-10-09T04:12:19.825Z",
-          "retryAfter": "2026-10-09T05:12:19.825Z",
-          "reason": "HTTP 423 (Hermès anti-bot)"
-        },
-        "H056289CC3Y": {
-          "attempts": 7,
-          "lastFailureAt": "2026-10-09T04:12:19.825Z",
-          "retryAfter": "2026-10-09T05:12:19.825Z",
-          "reason": "HTTP 423 (Hermès anti-bot)"
-        }
-      },
-      "deferredProducts": [
-        {
-          "sku": "H086422CK37",
-          "retryAfter": "2026-10-09T05:12:19.825Z",
-          "reason": "Previous HTTP 423; stock unverified"
-        },
-        {
-          "sku": "H056289CC3Y",
-          "retryAfter": "2026-10-09T05:12:19.825Z",
-          "reason": "Previous HTTP 423; stock unverified"
-        }
+      "alertedSkus": {},
+      "coverage": "visible category page only; additional paginated SKUs not checked",
+      "unlistedPreviouslyAlerted": [
+        "H086422CK37",
+        "H056289CC3Y"
       ],
       "verificationErrors": []
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-09T04:36:35.374Z",
-      "lastSuccessAt": "2026-10-09T04:36:35.374Z",
-      "products": 31,
+      "lastCheckedAt": "2026-10-09T04:54:33.401Z",
+      "lastSuccessAt": "2026-10-09T04:54:33.401Z",
+      "products": 46,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
-      "retryState": {},
-      "deferredProducts": [],
+      "catalogStocks": {},
+      "alertedSkus": {},
+      "coverage": "visible category page only; additional paginated SKUs not checked",
+      "unlistedPreviouslyAlerted": [],
       "verificationErrors": []
     }
   }

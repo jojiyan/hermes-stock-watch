@@ -4,10 +4,6 @@ on:
   schedule:
     - cron: "3-58/5 * * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/hermes-stock-watch-scrapingant.yml"
 
 permissions:
   contents: write

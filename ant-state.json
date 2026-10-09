@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "partial",
-      "lastCheckedAt": "2026-10-09T02:50:12.562Z",
+      "lastCheckedAt": "2026-10-09T03:06:56.973Z",
       "lastSuccessAt": "2026-10-08T14:00:32.208Z",
       "products": 29,
       "targets": 3,
@@ -32,36 +32,36 @@
       },
       "retryState": {
         "H086422CK37": {
-          "attempts": 5,
-          "lastFailureAt": "2026-10-09T01:51:09.123Z",
-          "retryAfter": "2026-10-09T02:51:09.123Z",
+          "attempts": 6,
+          "lastFailureAt": "2026-10-09T03:06:56.973Z",
+          "retryAfter": "2026-10-09T04:06:56.973Z",
           "reason": "HTTP 423 (Hermès anti-bot)"
         },
         "H056289CC3Y": {
-          "attempts": 5,
-          "lastFailureAt": "2026-10-09T01:51:09.123Z",
-          "retryAfter": "2026-10-09T02:51:09.123Z",
+          "attempts": 6,
+          "lastFailureAt": "2026-10-09T03:06:56.973Z",
+          "retryAfter": "2026-10-09T04:06:56.973Z",
           "reason": "HTTP 423 (Hermès anti-bot)"
         }
       },
-      "deferredProducts": [
+      "deferredProducts": [],
+      "verificationErrors": [
         {
           "sku": "H086422CK37",
-          "retryAfter": "2026-10-09T02:51:09.123Z",
-          "reason": "Previous HTTP 423; stock unverified"
+          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
+          "error": "US: ScrapingAnt product markdown verification failed: product-markdown-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-browser-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-local-residential HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
         },
         {
           "sku": "H056289CC3Y",
-          "retryAfter": "2026-10-09T02:51:09.123Z",
-          "reason": "Previous HTTP 423; stock unverified"
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CC3Y/",
+          "error": "US: ScrapingAnt product markdown verification failed: product-markdown-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-browser-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-local-residential HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
         }
-      ],
-      "verificationErrors": []
+      ]
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-09T02:50:12.562Z",
-      "lastSuccessAt": "2026-10-09T02:50:12.562Z",
+      "lastCheckedAt": "2026-10-09T03:06:56.973Z",
+      "lastSuccessAt": "2026-10-09T03:06:56.973Z",
       "products": 31,
       "targets": 0,
       "categoryAvailable": 0,

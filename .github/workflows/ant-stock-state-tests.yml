@@ -11,6 +11,8 @@ on:
       - "test/ant-retry.test.mjs"
       - "src/ant-catalog.mjs"
       - "src/ant-catalog-monitor.mjs"
+      - "src/ant-catalog-fetch.mjs"
+      - "test/ant-catalog-fetch.test.mjs"
       - "test/ant-catalog.test.mjs"
       - "test/ant-stock-state.test.mjs"
   workflow_dispatch:

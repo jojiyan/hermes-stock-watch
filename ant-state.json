@@ -23,7 +23,10 @@
           "seenAt": "2026-10-09T04:54:33.401Z"
         }
       },
-      "alertedSkus": {},
+      "alertedSkus": {
+        "H086422CK37": "2026-10-08T13:40:17.239Z",
+        "H056289CC3Y": "2026-10-08T13:40:17.239Z"
+      },
       "coverage": "visible category page only; additional paginated SKUs not checked",
       "unlistedPreviouslyAlerted": [
         "H086422CK37",

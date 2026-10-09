@@ -17,7 +17,7 @@ function makeHtml(p=products){
  }));
  const entries=items.map(x=>`<div id="grid-product-${x.sku}"><a href="/us/en${x.url}">${x.title}</a>
   ${x.stock.ecom?"":'<h-out-of-stock-label class="tag-unavailable">Discover</h-out-of-stock-label>'}</div>`).join("");
- const state=JSON.stringify({"700976760":{b:{products:{items,maxSize:33},total:200}}});
+ const state=JSON.stringify({"700976760":{b:{products:{items,maxSize:33},total:items.length}}});
  return `<html><head><title>Hermès official catalog</title></head><body>${entries}<script id="hermes-state" type="application/json">${state}</script>${" ".repeat(11000)}</body></html>`;
 }
 test("parses official stock true and false, explicitly excludes Garden Party 36",()=>{
@@ -60,4 +60,10 @@ test("accepts only requested families",()=>{
  assert.equal(isRequestedBag("Mini Garden Party bag"),true);
  assert.equal(isRequestedBag("Garden Party 36 bag"),false);
  assert.equal(isRequestedBag("Neo Garden Voyage 41 bag"),false);
+});
+
+test("rejects a category that exposes only the first page of a larger catalog",()=>{
+ const html=makeHtml();
+ const short=html.replace('"total":12', '"total":120');
+ assert.throws(()=>parseHermesCatalog(short,"US"),/Incomplete Hermès catalog: received 12 of 120/);
 });

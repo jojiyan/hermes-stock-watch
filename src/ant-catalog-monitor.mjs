@@ -1,7 +1,8 @@
 import {readFile,writeFile} from "node:fs/promises";
 import {resolve,dirname} from "node:path";
 import {fileURLToPath} from "node:url";
-import {parseHermesCatalog,reconcileCatalog} from "./ant-catalog.mjs";
+import {reconcileCatalog} from "./ant-catalog.mjs";
+import {fetchOfficialCatalog} from "./ant-catalog-fetch.mjs";
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const stateFile=resolve(root,"ant-state.json"),reportFile=resolve(root,"ant-run-report.json");
 const key=process.env.SCRAPINGANT_API_KEY;
@@ -15,14 +16,7 @@ let marketsRead=0;
 for (const market of ["US","CA"]) {
   const previous=state.markets[market]||{};
   try{
-    const url=`https://www.hermes.com/${market.toLowerCase()}/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/`;
-    const params=new URLSearchParams({url,browser:"false",proxy_type:"datacenter",proxy_country:market.toLowerCase(),timeout:"50"});
-    const response=await fetch(`https://api.scrapingant.com/v2/general?${params}`,{
-      headers:{"x-api-key":key,"accept":"text/html,*/*"}
-    });
-    const credits=Number(response.headers.get("ant-credits-cost")||0);
-    if(!response.ok)throw new Error(`ScrapingAnt category HTTP ${response.status}: ${(await response.text()).slice(0,180)}`);
-    const parsed=parseHermesCatalog(await response.text(),market);
+    const {parsed, credits, mode} = await fetchOfficialCatalog(market,key);
     const reconciled=reconcileCatalog(previous,parsed,checkedAt);
     const listingCodes=new Set(parsed.products.map(p=>p.sku));
     state.markets[market]={
@@ -32,13 +26,16 @@ for (const market of ["US","CA"]) {
       available:reconciled.available,
       catalogStocks:reconciled.catalogStocks,
       alertedSkus:reconciled.alertedSkus,
-      coverage:"visible category page only; additional paginated SKUs not checked",
+      coverage:parsed.coverage,
+      officialTotal:parsed.reportedTotal,
+      fetchMode:mode,
       unlistedPreviouslyAlerted:Object.keys(previous.available||{}).filter(sku=>!listingCodes.has(sku)),
       verificationErrors:[],
     };
     summaries.push({market,status:"ok",categoryProducts:parsed.pageItems,targetProducts:parsed.products.length,
       ecommerceAvailable:parsed.products.filter(x=>x.ecom).length,
-      newAlerts:reconciled.alerts.length,credits,coverage:parsed.coverage});
+      newAlerts:reconciled.alerts.length,credits,fetchMode:mode,
+      officialTotal:parsed.reportedTotal,coverage:parsed.coverage});
     marketsRead++;
     // Use the previous catalog state for stable notification deduplication.
     for(const p of reconciled.alerts)alerts.push({...p,
@@ -48,7 +45,7 @@ for (const market of ["US","CA"]) {
     summaries.push({market,status:"unknown",error:err.message});
   }
 }
-const report={checkedAt,healthy:marketsRead===2,coverage:"first visible category page per market, not full catalog",
+const report={checkedAt,healthy:marketsRead===2,coverage:"complete published category when official product total matches; products absent from this category cannot be inferred",
   summaries,alerts:alerts.map(({marker,...a})=>a)};
 await writeFile(reportFile,JSON.stringify(report,null,2)+"\n");
 console.log(JSON.stringify(report,null,2));

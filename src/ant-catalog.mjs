@@ -31,6 +31,14 @@ export function parseHermesCatalog(html, marketCode) {
   if(!holder || !Number.isInteger(holder.products.maxSize)) throw new Error("Unknown Hermès catalog schema");
   const items=holder.products.items;
   if(items.length < 10 || items.length > 500) throw new Error("Incomplete category product list");
+  // The "total" field is the official number of products in this catalog
+  // (not the number of cards we happened to scrape). Fail CLOSED if a later
+  // site redesign introduces pagination, lazy loading or partial hydration.
+  const reportedTotal=Number(holder.total);
+  if(!Number.isSafeInteger(reportedTotal) || reportedTotal < 0)
+    throw new Error("Hermès catalog total count is missing or invalid");
+  if(reportedTotal !== items.length)
+    throw new Error(`Incomplete Hermès catalog: received ${items.length} of ${reportedTotal} total products`);
   const result=[];
   const seen=new Set();
   let recognized=0;
@@ -64,8 +72,9 @@ export function parseHermesCatalog(html, marketCode) {
     });
   }
   if(recognized < 10)throw new Error("Too few verified stock records");
-  return { products:result, pageItems:recognized, reportedTotal:holder.total??null,
-           maxSize:holder.products.maxSize, coverage:"visible category page only" };
+  if(recognized !== reportedTotal)throw new Error("Official product totals did not reconcile with verified SKU records");
+  return { products:result, pageItems:recognized, reportedTotal,
+           maxSize:holder.products.maxSize, coverage:"all items of the currently published category (verified total)" };
 }
 
 export function reconcileCatalog(previousMarket, parsed, nowIso) {

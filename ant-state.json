@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-09T08:52:00.015Z",
-      "lastSuccessAt": "2026-10-09T08:52:00.015Z",
+      "lastCheckedAt": "2026-10-09T09:11:48.909Z",
+      "lastSuccessAt": "2026-10-09T09:11:48.909Z",
       "products": 33,
       "targets": 3,
       "categoryAvailable": 0,
@@ -12,15 +12,15 @@
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-09T08:52:00.015Z"
+          "seenAt": "2026-10-09T09:11:48.909Z"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-09T08:52:00.015Z"
+          "seenAt": "2026-10-09T09:11:48.909Z"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-09T08:52:00.015Z"
+          "seenAt": "2026-10-09T09:11:48.909Z"
         }
       },
       "alertedSkus": {
@@ -32,9 +32,9 @@
       "verificationErrors": []
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-09T08:52:00.015Z",
-      "lastSuccessAt": "2026-10-09T08:28:07.315Z",
+      "status": "ok",
+      "lastCheckedAt": "2026-10-09T09:11:48.909Z",
+      "lastSuccessAt": "2026-10-09T09:11:48.909Z",
       "products": 46,
       "targets": 0,
       "categoryAvailable": 0,
@@ -43,8 +43,7 @@
       "alertedSkus": {},
       "coverage": "visible category page only; additional paginated SKUs not checked",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": "ScrapingAnt category HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
+      "verificationErrors": []
     }
   }
 }

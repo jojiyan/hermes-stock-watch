@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-09T09:11:48.909Z",
-      "lastSuccessAt": "2026-10-09T09:11:48.909Z",
+      "lastCheckedAt": "2026-10-09T09:26:30.815Z",
+      "lastSuccessAt": "2026-10-09T09:26:30.815Z",
       "products": 33,
       "targets": 3,
       "categoryAvailable": 0,
@@ -12,36 +12,40 @@
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-09T09:11:48.909Z"
+          "seenAt": "2026-10-09T09:26:30.815Z"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-09T09:11:48.909Z"
+          "seenAt": "2026-10-09T09:26:30.815Z"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-09T09:11:48.909Z"
+          "seenAt": "2026-10-09T09:26:30.815Z"
         }
       },
       "alertedSkus": {
         "H086422CK37": "2026-10-08T13:40:17.239Z",
         "H056289CC3Y": "2026-10-08T13:40:17.239Z"
       },
-      "coverage": "visible category page only; additional paginated SKUs not checked",
+      "coverage": "all items of the currently published category (verified total)",
+      "officialTotal": 33,
+      "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": []
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-09T09:11:48.909Z",
-      "lastSuccessAt": "2026-10-09T09:11:48.909Z",
+      "lastCheckedAt": "2026-10-09T09:26:30.815Z",
+      "lastSuccessAt": "2026-10-09T09:26:30.815Z",
       "products": 46,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
-      "coverage": "visible category page only; additional paginated SKUs not checked",
+      "coverage": "all items of the currently published category (verified total)",
+      "officialTotal": 46,
+      "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": []
     }

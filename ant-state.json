@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "partial",
-      "lastCheckedAt": "2026-10-09T00:37:20.493Z",
+      "lastCheckedAt": "2026-10-09T01:05:10.833Z",
       "lastSuccessAt": "2026-10-08T14:00:32.208Z",
       "products": 29,
       "targets": 3,
@@ -44,24 +44,24 @@
           "reason": "HTTP 423 (Hermès anti-bot)"
         }
       },
-      "deferredProducts": [],
-      "verificationErrors": [
+      "deferredProducts": [
         {
           "sku": "H086422CK37",
-          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
-          "error": "US: ScrapingAnt product markdown verification failed: product-markdown-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-browser-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-local-residential HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
+          "retryAfter": "2026-10-09T01:37:20.493Z",
+          "reason": "Previous HTTP 423; stock unverified"
         },
         {
           "sku": "H056289CC3Y",
-          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CC3Y/",
-          "error": "US: ScrapingAnt product markdown verification failed: product-markdown-local-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-browser-datacenter HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | product-markdown-local-residential HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
+          "retryAfter": "2026-10-09T01:37:20.493Z",
+          "reason": "Previous HTTP 423; stock unverified"
         }
-      ]
+      ],
+      "verificationErrors": []
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-09T00:37:20.493Z",
-      "lastSuccessAt": "2026-10-09T00:37:20.493Z",
+      "lastCheckedAt": "2026-10-09T01:05:10.833Z",
+      "lastSuccessAt": "2026-10-09T01:05:10.833Z",
       "products": 31,
       "targets": 0,
       "categoryAvailable": 0,

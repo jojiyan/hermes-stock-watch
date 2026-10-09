@@ -12,23 +12,17 @@
 - US and CA preserve their state independently. A market's failure does not erase prior observations or suppress stock notifications from the other region.
 - Each new qualifying SKU / restock sends a GitHub Issue mentioning and assigning the repository owner; duplicate notifications are suppressed until an explicit `stock.ecom=false` observation.
 
-## QQ email alerts (optional)
+## Stock notifications through GitHub
 
-Direct QQ email delivery is implemented in `src/qq-mail-notify.py` and called by the production workflow **only after new official stock is detected**. To enable, add these **Actions repository secrets**:
+When first-party Hermès category data confirms a new eligible SKU is available, the workflow creates a GitHub Issue and assigns and @mentions the repository owner (`jojiyan`). This uses the existing GitHub notification system, with **no SMTP authorization code or additional email secrets**.
 
-- `QQ_SMTP_EMAIL`: full QQ sender mailbox address (e.g., `your-account@qq.com`)
-- `QQ_SMTP_AUTH_CODE`: QQ Mail's dedicated SMTP authorization code, **not** your QQ login password
-- `QQ_NOTIFY_TO`: optional destination email; defaults to the sender QQ email
-
-Use `https://github.com/jojiyan/hermes-stock-watch/settings/secrets/actions`. Enable SMTP in QQ Mail settings and generate a dedicated authorization code. **Never put the code in issues, GitHub source files, or chat messages.**
-
-SMTP server: `smtp.qq.com:465` SSL. `QQ SMTP accepted` in a GitHub log means the server accepted the message, **not** that the recipient inbox or iPhone push notification delivered it. Until the two required secrets are set, **only GitHub Issue notifications are active**; their delivery depends on GitHub notification preferences.
+The connected GitHub account displays `954736371@qq.com` as its profile email. The actual email address used for GitHub notification delivery, plus whether emails/push notifications are enabled, is controlled separately under [GitHub Notifications Settings](https://github.com/settings/notifications). Merely having an email registered does not prove delivery. We cannot verify inbox arrival using repository access alone.
 
 ## Checks and evidence
 
-- Run `npm test` and `python3 -m unittest discover -s test -p 'test_qq_mail_notify.py'`.
+- Run `npm test` and review the GitHub Actions run and issue evidence.
 - Inspect `ant-state.json` for each market's `status`, `lastCheckedAt`, `officialTotal`, `products`, and `coverage`.
 - Each production run publishes `ant-run-report.json` as an artifact, showing fetched status, mode, credit consumption and newly detected stock.
 - The Scrapling workflow remains **manual-only backup**, and old Firecrawl workflows are not the production schedule.
 
-**A green Actions run validates the published category data, not the availability of an unlisted product or end-to-end QQ inbox delivery.**
+**A green Actions run validates the published category data, not the availability of an unlisted product or actual GitHub email/inbox delivery.**

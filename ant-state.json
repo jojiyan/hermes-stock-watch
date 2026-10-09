@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-09T16:47:29.109Z",
-      "lastSuccessAt": "2026-10-09T16:47:29.109Z",
+      "lastCheckedAt": "2026-10-09T17:03:54.747Z",
+      "lastSuccessAt": "2026-10-09T17:03:54.747Z",
       "products": 38,
       "targets": 3,
       "categoryAvailable": 0,
@@ -12,15 +12,15 @@
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-09T16:47:29.109Z"
+          "seenAt": "2026-10-09T17:03:54.747Z"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-09T16:47:29.109Z"
+          "seenAt": "2026-10-09T17:03:54.747Z"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-09T16:47:29.109Z"
+          "seenAt": "2026-10-09T17:03:54.747Z"
         }
       },
       "alertedSkus": {
@@ -34,21 +34,20 @@
       "verificationErrors": []
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-09T16:47:29.109Z",
-      "lastSuccessAt": "2026-10-09T15:39:33.994Z",
-      "products": 47,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-09T17:03:54.747Z",
+      "lastSuccessAt": "2026-10-09T17:03:54.747Z",
+      "products": 46,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
       "coverage": "all items of the currently published category (verified total)",
-      "officialTotal": 47,
+      "officialTotal": 46,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": "CA: official catalog could not be verified: low-credit-1: Incomplete Hermès catalog: received 46 of 47 total products | low-credit-retry: Incomplete Hermès catalog: received 46 of 47 total products | browser-fallback: Incomplete Hermès catalog: received 46 of 47 total products"
+      "verificationErrors": []
     }
   }
 }

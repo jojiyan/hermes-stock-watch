@@ -18,7 +18,7 @@ function makeHtml(p=products){
  const entries=items.map(x=>`<div id="grid-product-${x.sku}"><a href="/us/en${x.url}">${x.title}</a>
   ${x.stock.ecom?"":'<h-out-of-stock-label class="tag-unavailable">Discover</h-out-of-stock-label>'}</div>`).join("");
  const state=JSON.stringify({"700976760":{b:{products:{items,maxSize:33},total:200}}});
- return `<html><head><title>Hermès official catalog</title></head><body>${entries}<script id="hermes-state" type="application/json">${state}</script></body></html>`;
+ return `<html><head><title>Hermès official catalog</title></head><body>${entries}<script id="hermes-state" type="application/json">${state}</script>${" ".repeat(11000)}</body></html>`;
 }
 test("parses official stock true and false, explicitly excludes Garden Party 36",()=>{
  const p=parseHermesCatalog(makeHtml(),market);

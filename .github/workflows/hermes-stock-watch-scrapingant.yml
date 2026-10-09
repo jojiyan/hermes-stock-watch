@@ -38,6 +38,18 @@ jobs:
             echo "SCRAPINGANT_API_KEY is not configured; skipping without failing."
           fi
 
+      - name: Check optional QQ SMTP setup
+        shell: bash
+        env:
+          QQ_SMTP_EMAIL: ${{ secrets.QQ_SMTP_EMAIL }}
+          QQ_SMTP_AUTH_CODE: ${{ secrets.QQ_SMTP_AUTH_CODE }}
+        run: |
+          if [[ -n "$QQ_SMTP_EMAIL" && -n "$QQ_SMTP_AUTH_CODE" ]]; then
+            echo "QQ SMTP: configured (end-to-end delivery still requires a real test)"
+          else
+            echo "QQ SMTP: NOT configured; GitHub Issue notifications are the only active delivery method"
+          fi
+
       - name: Avoid unnecessary paid checks
         id: freshness
         if: steps.configured.outputs.ready == 'true'

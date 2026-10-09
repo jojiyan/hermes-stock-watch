@@ -9,6 +9,9 @@ on:
       - "src/ant-stock-state.mjs"
       - "src/ant-retry.mjs"
       - "test/ant-retry.test.mjs"
+      - "src/ant-catalog.mjs"
+      - "src/ant-catalog-monitor.mjs"
+      - "test/ant-catalog.test.mjs"
       - "test/ant-stock-state.test.mjs"
   workflow_dispatch:
 
@@ -25,3 +28,4 @@ jobs:
           node-version: "22"
       - run: npm test
       - run: node --check src/ant-monitor.mjs
+      - run: node --check src/ant-catalog-monitor.mjs

@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-12T05:59:54.934Z",
-      "lastSuccessAt": "2026-10-12T05:59:54.934Z",
+      "lastCheckedAt": "2026-10-12T06:32:47.436Z",
+      "lastSuccessAt": "2026-10-12T06:32:47.436Z",
       "products": 32,
       "targets": 3,
       "categoryAvailable": 0,
@@ -12,15 +12,15 @@
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-12T05:59:54.934Z"
+          "seenAt": "2026-10-12T06:32:47.436Z"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-12T05:59:54.934Z"
+          "seenAt": "2026-10-12T06:32:47.436Z"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-12T05:59:54.934Z"
+          "seenAt": "2026-10-12T06:32:47.436Z"
         }
       },
       "alertedSkus": {
@@ -35,8 +35,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-12T05:59:54.934Z",
-      "lastSuccessAt": "2026-10-12T05:59:54.934Z",
+      "lastCheckedAt": "2026-10-12T06:32:47.436Z",
+      "lastSuccessAt": "2026-10-12T06:32:47.436Z",
       "products": 46,
       "targets": 0,
       "categoryAvailable": 0,

@@ -3,24 +3,24 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-12T15:49:26.798Z",
-      "lastSuccessAt": "2026-10-12T15:49:26.798Z",
-      "products": 33,
+      "lastCheckedAt": "2026-10-12T16:07:41.163Z",
+      "lastSuccessAt": "2026-10-12T16:07:41.163Z",
+      "products": 32,
       "targets": 3,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-12T15:49:26.798Z"
+          "seenAt": "2026-10-12T16:07:41.163Z"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-12T15:49:26.798Z"
+          "seenAt": "2026-10-12T16:07:41.163Z"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-12T15:49:26.798Z"
+          "seenAt": "2026-10-12T16:07:41.163Z"
         }
       },
       "alertedSkus": {
@@ -28,23 +28,23 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z"
       },
       "coverage": "all items of the currently published category (verified total)",
-      "officialTotal": 33,
+      "officialTotal": 32,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": []
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-12T15:49:26.798Z",
-      "lastSuccessAt": "2026-10-12T15:49:26.798Z",
-      "products": 46,
+      "lastCheckedAt": "2026-10-12T16:07:41.163Z",
+      "lastSuccessAt": "2026-10-12T16:07:41.163Z",
+      "products": 47,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
       "coverage": "all items of the currently published category (verified total)",
-      "officialTotal": 46,
+      "officialTotal": 47,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": []

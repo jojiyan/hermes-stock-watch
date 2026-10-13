@@ -2,9 +2,9 @@
   "version": 2,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-13T14:34:26.161Z",
-      "lastSuccessAt": "2026-10-13T13:39:28.959Z",
+      "status": "ok",
+      "lastCheckedAt": "2026-10-13T14:59:51.565Z",
+      "lastSuccessAt": "2026-10-13T14:59:51.565Z",
       "products": 32,
       "targets": 3,
       "categoryAvailable": 0,
@@ -12,15 +12,15 @@
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-13T13:39:28.959Z"
+          "seenAt": "2026-10-13T14:59:51.565Z"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-13T13:39:28.959Z"
+          "seenAt": "2026-10-13T14:59:51.565Z"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-13T13:39:28.959Z"
+          "seenAt": "2026-10-13T14:59:51.565Z"
         }
       },
       "alertedSkus": {
@@ -31,21 +31,20 @@
       "officialTotal": 32,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": "US: official catalog could not be verified: low-credit-1: Incomplete Hermès catalog: received 33 of 34 total products | low-credit-retry: Incomplete Hermès catalog: received 33 of 34 total products | browser-fallback: Incomplete Hermès catalog: received 33 of 34 total products"
+      "verificationErrors": []
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-13T14:34:26.161Z",
-      "lastSuccessAt": "2026-10-13T14:34:26.161Z",
-      "products": 46,
+      "lastCheckedAt": "2026-10-13T14:59:51.565Z",
+      "lastSuccessAt": "2026-10-13T14:59:51.565Z",
+      "products": 47,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
       "coverage": "all items of the currently published category (verified total)",
-      "officialTotal": 46,
+      "officialTotal": 47,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": []

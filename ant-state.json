@@ -2,8 +2,8 @@
   "version": 2,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-14T02:56:19.826Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-14T03:28:50.291Z",
       "lastSuccessAt": "2026-10-14T02:56:19.826Z",
       "products": 30,
       "targets": 3,
@@ -31,12 +31,13 @@
       "officialTotal": 30,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": []
+      "verificationErrors": [],
+      "error": "US: official catalog could not be verified: low-credit-1: HTTP 500 | low-credit-retry: HTTP 500 | browser-fallback: HTTP 500"
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-14T02:56:19.826Z",
-      "lastSuccessAt": "2026-10-14T02:56:19.826Z",
+      "lastCheckedAt": "2026-10-14T03:28:50.291Z",
+      "lastSuccessAt": "2026-10-14T03:28:50.291Z",
       "products": 45,
       "targets": 0,
       "categoryAvailable": 0,
@@ -45,7 +46,7 @@
       "alertedSkus": {},
       "coverage": "all items of the currently published category (verified total)",
       "officialTotal": 45,
-      "fetchMode": "low-credit-1",
+      "fetchMode": "low-credit-retry",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": []
     }

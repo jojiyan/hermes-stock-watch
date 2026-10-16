@@ -2,8 +2,8 @@
   "version": 2,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-16T12:25:26.635Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-16T13:14:02.755Z",
       "lastSuccessAt": "2026-10-16T12:25:26.635Z",
       "products": 31,
       "targets": 3,
@@ -31,12 +31,13 @@
       "officialTotal": 31,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": []
+      "verificationErrors": [],
+      "error": "US: official catalog could not be verified: low-credit-1: Incomplete Hermès catalog: received 35 of 36 total products | low-credit-retry: Incomplete Hermès catalog: received 35 of 36 total products | browser-fallback: Incomplete Hermès catalog: received 35 of 36 total products"
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-16T12:25:26.635Z",
-      "lastSuccessAt": "2026-10-16T12:25:26.635Z",
+      "lastCheckedAt": "2026-10-16T13:14:02.755Z",
+      "lastSuccessAt": "2026-10-16T13:14:02.755Z",
       "products": 43,
       "targets": 0,
       "categoryAvailable": 0,

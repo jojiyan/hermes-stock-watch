@@ -3,24 +3,24 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-19T21:43:26.324Z",
-      "lastSuccessAt": "2026-10-19T21:43:26.324Z",
-      "products": 37,
+      "lastCheckedAt": "2026-10-19T22:13:16.279Z",
+      "lastSuccessAt": "2026-10-19T22:13:16.279Z",
+      "products": 36,
       "targets": 3,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-19T21:43:26.324Z"
+          "seenAt": "2026-10-19T22:13:16.279Z"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-19T21:43:26.324Z"
+          "seenAt": "2026-10-19T22:13:16.279Z"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-19T21:43:26.324Z"
+          "seenAt": "2026-10-19T22:13:16.279Z"
         }
       },
       "alertedSkus": {
@@ -28,14 +28,14 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z"
       },
       "coverage": "all items of the currently published category (verified total)",
-      "officialTotal": 37,
-      "fetchMode": "low-credit-1",
+      "officialTotal": 36,
+      "fetchMode": "browser-fallback",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": []
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-19T21:43:26.324Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-19T22:13:16.279Z",
       "lastSuccessAt": "2026-10-19T21:43:26.324Z",
       "products": 44,
       "targets": 0,
@@ -47,7 +47,8 @@
       "officialTotal": 44,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": []
+      "verificationErrors": [],
+      "error": "CA: official catalog could not be verified: low-credit-1: HTTP 500 | low-credit-retry: HTTP 500 | browser-fallback: HTTP 500"
     }
   }
 }

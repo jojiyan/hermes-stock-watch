@@ -2,8 +2,8 @@
   "version": 2,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-19T18:48:48.671Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-19T19:23:30.065Z",
       "lastSuccessAt": "2026-10-19T18:48:48.671Z",
       "products": 38,
       "targets": 3,
@@ -31,12 +31,13 @@
       "officialTotal": 38,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": []
+      "verificationErrors": [],
+      "error": "US: official catalog could not be verified: low-credit-1: HTTP 500 | low-credit-retry: HTTP 502 | browser-fallback: HTTP 502"
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-19T18:48:48.671Z",
-      "lastSuccessAt": "2026-10-19T18:48:48.671Z",
+      "lastCheckedAt": "2026-10-19T19:23:30.065Z",
+      "lastSuccessAt": "2026-10-19T19:23:30.065Z",
       "products": 44,
       "targets": 0,
       "categoryAvailable": 0,

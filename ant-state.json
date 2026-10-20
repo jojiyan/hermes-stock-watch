@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-20T15:19:25.637Z",
+      "lastCheckedAt": "2026-10-20T15:58:35.509Z",
       "lastSuccessAt": "2026-10-20T13:23:14.822Z",
       "products": 40,
       "targets": 4,
@@ -52,8 +52,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-20T15:19:25.637Z",
-      "lastSuccessAt": "2026-10-20T15:19:25.637Z",
+      "lastCheckedAt": "2026-10-20T15:58:35.509Z",
+      "lastSuccessAt": "2026-10-20T15:58:35.509Z",
       "products": 44,
       "targets": 0,
       "categoryAvailable": 0,

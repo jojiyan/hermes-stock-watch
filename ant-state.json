@@ -3,40 +3,56 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-20T12:37:36.309Z",
-      "lastSuccessAt": "2026-10-20T12:37:36.309Z",
-      "products": 35,
-      "targets": 3,
-      "categoryAvailable": 0,
-      "available": {},
+      "lastCheckedAt": "2026-10-20T13:23:14.822Z",
+      "lastSuccessAt": "2026-10-20T13:23:14.822Z",
+      "products": 40,
+      "targets": 4,
+      "categoryAvailable": 1,
+      "available": {
+        "H060991CKV8": {
+          "market": "US",
+          "sku": "H060991CKV8",
+          "name": "Picotin Lock 22 bag",
+          "color": "Green",
+          "price": "$4,275",
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-22-bag-H060991CKV8/",
+          "lastSeenAt": "2026-10-20T13:23:14.822Z",
+          "source": "official-catalog"
+        }
+      },
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-20T12:37:36.309Z"
+          "seenAt": "2026-10-20T13:23:14.822Z"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-20T12:37:36.309Z"
+          "seenAt": "2026-10-20T13:23:14.822Z"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-20T12:37:36.309Z"
+          "seenAt": "2026-10-20T13:23:14.822Z"
+        },
+        "H060991CKV8": {
+          "ecom": true,
+          "seenAt": "2026-10-20T13:23:14.822Z"
         }
       },
       "alertedSkus": {
         "H086422CK37": "2026-10-08T13:40:17.239Z",
-        "H056289CC3Y": "2026-10-08T13:40:17.239Z"
+        "H056289CC3Y": "2026-10-08T13:40:17.239Z",
+        "H060991CKV8": "2026-10-20T13:23:14.822Z"
       },
       "coverage": "all items of the currently published category (verified total)",
-      "officialTotal": 35,
+      "officialTotal": 40,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": []
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-20T12:37:36.309Z",
-      "lastSuccessAt": "2026-10-20T12:37:36.309Z",
+      "lastCheckedAt": "2026-10-20T13:23:14.822Z",
+      "lastSuccessAt": "2026-10-20T13:23:14.822Z",
       "products": 44,
       "targets": 0,
       "categoryAvailable": 0,

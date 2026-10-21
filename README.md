@@ -2,19 +2,19 @@
 
 **Active production workflow:** [Hermes Stock Watch (ScrapingAnt)](.github/workflows/hermes-stock-watch-scrapingant.yml).
 
-- Runs on GitHub Actions. The cron **requests** a run every 5 minutes; GitHub's queue can delay executions by 15–30+ minutes. A freshness guard skips paid checks when a recent check already occurred within 8 minutes.
+- Runs on GitHub Actions. The cron **requests** a run every 5 minutes; GitHub's queue can delay executions by 15–30+ minutes. Every scheduled execution checks both markets; the former 8-minute freshness guard was removed because it could skip a requested 5-minute check and let one healthy market suppress retries for the other. Scheduling remains best effort, not a 5-minute SLA.
 - Uses `SCRAPINGANT_API_KEY`; no Firecrawl runtime dependency.
-- Reads each market's official Hermès women's bags category HTML (normally **1 credit per country**) and the official hydrated product listing field **`stock.ecom`**. A false value or a rendered unavailable label cannot trigger stock alerts.
-- Requires the official `holder.total` to exactly match the parsed complete category items; incomplete/blocked pages remain **unknown**, not sold out. Transient 423s trigger a bounded datacenter retry, then one rendered-browser fallback; residential requests are not used.
+- Reads every official category page, following the same-market `rel="next"` links. Canada's 43-item catalog is 40 items on page 1 plus 3 on page 2 (normally two category credits). `stock.ecom` is discovery metadata only.
+- Requires stable official totals across pages and exactly that many unique validated SKUs/tiles. Missing pages, duplicate SKUs, changed totals and blocked responses remain **unknown** and fail Actions. Requests have bounded datacenter retries, then one browser fallback; residential requests are not used. After transport blocking, one direct request to the same official category URL may recover the page under identical validation; all preceding failures remain in the evidence.
 - Tracks Neo Garden 23 / Mini Garden 23 including full-leather when included in the *published category*, Garden Party 30, Picotin, Mini Lindy, Birkin, Kelly (including Pochette), Constance; excludes Garden Party 36, Neo Garden Voyage 41, and Bolide.
 - **Coverage limitation:** this checks every item currently published in the women's bags category for each market (the official total is verified). A product that is not included in that category, or a separately accessible product detail page not listed there, cannot be inferred to be for sale. This is **not** a guarantee of complete product-site or historical-SKU coverage.
-- **Confirmation level:** `stock.ecom=true` is official first-party e-commerce stock metadata, NOT a verified live enabled `Add to cart` button. Alerts say this explicitly; availability can change before clicking.
+- **Confirmation level:** target product pages must match canonical URL, market and visible SKU. Only an enabled official **Add to cart / Add to bag** button without unavailable evidence can trigger an alert. Unknown product pages preserve previous observations and alert deduplication. A complete category with explicit `stock.ecom=false` is negative evidence and needs no detail request; only potential positives need button verification.
 - US and CA preserve their state independently. A market's failure does not erase prior observations or suppress stock notifications from the other region.
-- Each new qualifying SKU / restock sends a GitHub Issue mentioning and assigning the repository owner; duplicate notifications are suppressed until an explicit `stock.ecom=false` observation.
+- Each new qualifying SKU / restock sends a GitHub Issue mentioning and assigning the repository owner; duplicate notifications are suppressed until an explicit negative observation from a complete official category or verified product page.
 
 ## Stock notifications through GitHub
 
-When first-party Hermès category data confirms a new eligible SKU is available, the workflow creates a GitHub Issue and assigns and @mentions the repository owner (`jojiyan`). This uses the existing GitHub notification system, with **no SMTP authorization code or additional email secrets**.
+When an official Hermès product page confirms an enabled purchase button for a new eligible SKU, the workflow creates a GitHub Issue and assigns and @mentions the repository owner (`jojiyan`). This uses the existing GitHub notification system, with **no SMTP authorization code or additional email secrets**.
 
 The connected GitHub account displays `954736371@qq.com` as its profile email. The actual email address used for GitHub notification delivery, plus whether emails/push notifications are enabled, is controlled separately under [GitHub Notifications Settings](https://github.com/settings/notifications). Merely having an email registered does not prove delivery. We cannot verify inbox arrival using repository access alone.
 
@@ -22,7 +22,13 @@ The connected GitHub account displays `954736371@qq.com` as its profile email. T
 
 - Run `npm test` and review the GitHub Actions run and issue evidence.
 - Inspect `ant-state.json` for each market's `status`, `lastCheckedAt`, `officialTotal`, `products`, and `coverage`.
-- Each production run publishes `ant-run-report.json` as an artifact, showing fetched status, mode, credit consumption and newly detected stock.
+- Each production run publishes `ant-run-report.json` as an artifact, showing each page, HTTP status, retries, credits, SHA-256, product purchase evidence and errors. Raw HTML is retained alongside it for 7 days.
 - The Scrapling workflow remains **manual-only backup**, and old Firecrawl workflows are not the production schedule.
 
 **A green Actions run validates the published category data, not the availability of an unlisted product or actual GitHub email/inbox delivery.**
+
+## Repair validation
+
+The `fix/ca-catalog-pagination` branch push runs the real ScrapingAnt workflow in `VERIFY_ONLY` mode: it uses the repository secret but sends no notifications and writes no production state. Production schedule/manual runs on `main` still persist state and notify. Regression tests also run on pull requests. Verification and production use separate concurrency groups, so branch checks do not cancel pending production checks.
+
+CA regression fixtures are reduced extracts of official HTML retrieved on 2026-10-21: 40 + 3 products, `total=43`, and official next/canonical links. Only required catalog fields and rendered tile identifiers were retained.

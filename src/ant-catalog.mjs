@@ -15,7 +15,7 @@ export function isRequestedBag(title) {
   return REQUESTED_BAGS.some(r => r.test(String(title || "")));
 }
 
-export function parseHermesCatalog(html, marketCode) {
+export function parseHermesCatalog(html, marketCode, { partial = false } = {}) {
   if(!["US","CA"].includes(marketCode)) throw new Error("Unsupported Hermès market");
   if(typeof html !== "string" || html.length < 10_000) throw new Error("Missing complete category HTML");
   if(/sorry, you have been blocked|access denied|verify you are human|captcha|checking your browser|just a moment|cf-chl|turnstile|robot challenge/i.test(html.slice(0,15000))) {
@@ -30,22 +30,24 @@ export function parseHermesCatalog(html, marketCode) {
   const holder=matches.sort((a,b)=>b.b.products.items.length-a.b.products.items.length)[0]?.b;
   if(!holder || !Number.isInteger(holder.products.maxSize)) throw new Error("Unknown Hermès catalog schema");
   const items=holder.products.items;
-  if(items.length < 10 || items.length > 500) throw new Error("Incomplete category product list");
+  if(items.length < (partial ? 1 : 10) || items.length > 500) throw new Error("Incomplete category product list");
   // The "total" field is the official number of products in this catalog
   // (not the number of cards we happened to scrape). Fail CLOSED if a later
   // site redesign introduces pagination, lazy loading or partial hydration.
   const reportedTotal=Number(holder.total);
   if(!Number.isSafeInteger(reportedTotal) || reportedTotal < 0)
     throw new Error("Hermès catalog total count is missing or invalid");
-  if(reportedTotal !== items.length)
+  if(reportedTotal > 500 || reportedTotal < items.length) throw new Error("Invalid Hermès catalog total");
+  if(!partial && reportedTotal !== items.length)
     throw new Error(`Incomplete Hermès catalog: received ${items.length} of ${reportedTotal} total products`);
   const result=[];
   const seen=new Set();
   let recognized=0;
   for(const p of items) {
-    if(!p?.sku || seen.has(p.sku))continue;
+    if(!p?.sku) throw new Error("Missing official SKU");
     const sku=String(p.sku).toUpperCase();
-    if(!/^H[A-Z0-9]{7,16}$/.test(sku))continue;
+    if(seen.has(sku)) throw new Error("Duplicate official SKU "+sku);
+    if(!/^H[A-Z0-9]{7,16}$/.test(sku)) throw new Error("Invalid official SKU");
     if(typeof p.stock?.ecom!=="boolean")throw new Error("Missing e-commerce stock value for SKU "+sku);
     const slug=String(p.slug||"");
     const rawPath=String(p.url||"");
@@ -71,9 +73,13 @@ export function parseHermesCatalog(html, marketCode) {
       evidence:"Hermès official category: stock.ecom=true and no unavailable badge",
     });
   }
-  if(recognized < 10)throw new Error("Too few verified stock records");
-  if(recognized !== reportedTotal)throw new Error("Official product totals did not reconcile with verified SKU records");
+  if(!partial && recognized < 10)throw new Error("Too few verified stock records");
+  if(recognized !== items.length)throw new Error("Official product totals did not reconcile with verified SKU records");
+  const nextLinks=[...html.matchAll(/<link\b[^>]*>/gi)].filter(x=>/\brel=["']next["']/i.test(x[0]));
+  if(nextLinks.length>1) throw new Error("Ambiguous next catalog page");
+  const next=nextLinks[0]?.[0].match(/\bhref=["']([^"']+)["']/i)?.[1]?.replace(/&amp;/g,"&") || null;
   return { products:result, pageItems:recognized, reportedTotal,
+           skus:[...seen], next,
            maxSize:holder.products.maxSize, coverage:"all items of the currently published category (verified total)" };
 }
 
@@ -86,13 +92,16 @@ export function reconcileCatalog(previousMarket, parsed, nowIso) {
   const legacyAlerted=Object.fromEntries(Object.values(prev.available||{})
     .filter(x=>x?.sku).map(x=>[x.sku,x.firstSeenAt||nowIso]));
   const notified={...legacyAlerted,...(prev.alertedSkus||{})};
-  const available={};
+  const available={...(prev.available||{})};
   const newAlerts=[];
   const stocks={...previousStatus};
   for(const p of parsed.products) {
+    // Metadata is discovery evidence only. Unknown product pages never rearm alerts.
+    if(p.purchaseVerified!==true && !(p.categoryNegativeVerified===true && p.ecom===false)) continue;
     const previously=stocks[p.sku]?.ecom;
-    stocks[p.sku]={ecom:p.ecom,seenAt:nowIso};
-    if(!p.ecom)continue;
+    stocks[p.sku]={ecom:p.ecom,seenAt:nowIso,
+      source:p.purchaseVerified?'official-product-purchase':'complete-official-category-negative'};
+    if(!p.ecom){delete available[p.sku];continue;}
     available[p.sku]={market:p.market,sku:p.sku,name:p.name,
       color:p.color,price:p.price,url:p.url,lastSeenAt:nowIso,source:"official-catalog"};
     const legacyAlert=!!prev.available?.[p.sku];
@@ -103,6 +112,6 @@ export function reconcileCatalog(previousMarket, parsed, nowIso) {
   }
   // A negative observation explicitly rearms the SKU, but a missing catalog
   // entry does not: pagination and disappearing listings are not sell-out proof.
-  for(const p of parsed.products) if(!p.ecom)delete notified[p.sku];
+  for(const p of parsed.products) if((p.purchaseVerified===true||p.categoryNegativeVerified===true) && !p.ecom)delete notified[p.sku];
   return {available,catalogStocks:stocks,alertedSkus:notified,alerts:newAlerts};
 }

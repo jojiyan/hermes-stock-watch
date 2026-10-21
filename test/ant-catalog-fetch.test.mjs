@@ -44,7 +44,7 @@ test("persistent 423 uses at most one browser fallback and never residential",as
       },
       parser,wait:async()=>{},
     }),
-    /official catalog could not be verified/
+    /official page could not be verified/
   );
   assert.equal(modes.length,3);
   assert.deepEqual(modes.map(x=>x.get("browser")),["false","false","true"]);

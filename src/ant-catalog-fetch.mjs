@@ -49,15 +49,21 @@ export async function fetchAntHtml(url, market, key, options = {}) {
     {browser:false, mode:'low-credit-retry'},
     {browser:true, mode:'browser-fallback'},
   ];
+  if(new URL(url).searchParams.has('page')) {
+    // Observed official equivalent: ?page=2& serves the same canonical page.
+    // A distinct transport URL can recover an edge/proxy block without changing scope.
+    modes.splice(2,0,{browser:false,mode:'low-credit-page-delimiter',targetUrl:url+'&'});
+  }
   const errors = [];
   for (let i = 0; i < modes.length; i++) {
     const mode = modes[i];
     if (i) await wait(attempts.at(-1)?.status===409?10_000:1200 * i);
     if(attempts.at(-1)?.status===409)mode.browser=false;
-    const params = new URLSearchParams({url, browser:String(mode.browser),
+    const targetUrl=mode.targetUrl||url;
+    const params = new URLSearchParams({url:targetUrl, browser:String(mode.browser),
       proxy_type:'datacenter', proxy_country:market.toLowerCase(), timeout:'50'});
     if (mode.browser) for (const type of ['image','media','font']) params.append('block_resource',type);
-    const evidence = {market,url,mode:mode.mode,credits:0};
+    const evidence = {market,url:targetUrl,mode:mode.mode,credits:0};
     attempts.push(evidence);
     try {
       const response = await paidFetch(fetcher,`https://api.scrapingant.com/v2/general?${params}`, {

@@ -71,8 +71,17 @@ test('blocked ScrapingAnt pagination may recover only through the same verified 
   directFetcher:async url=>{assert.equal(url,categoryUrl('CA')+'?page=2');return new Response(second)},
  });
  assert.equal(x.parsed.pageItems,43);assert.equal(x.attempts.at(-1).mode,'direct-official');
- assert.equal(x.attempts.filter(a=>a.status===423).length,3);
+ assert.equal(x.attempts.filter(a=>a.status===423).length,4);
  await assert.rejects(fetchOfficialCatalog('CA','key',{
   wait:async()=>{},fetcher:async()=>new Response('blocked',{status:423}),directFetcher:async()=>new Response('blocked',{status:403}),
  }),/Direct official HTTP 403/);
+});
+test('equivalent official page delimiter still reconciles the original canonical page',async()=>{
+ const x=await fetchOfficialCatalog('CA','key',{wait:async()=>{},fetcher:async url=>{
+  const target=new URL(url).searchParams.get('url');
+  if(!target.includes('?'))return new Response(first);
+  return target.endsWith('&')?new Response(second):new Response('blocked',{status:423});
+ }});
+ assert.equal(x.parsed.pageItems,43);assert.equal(x.parsed.pages[1].mode,'low-credit-page-delimiter');
+ assert.equal(x.attempts.at(-1).url,categoryUrl('CA')+'?page=2&');
 });

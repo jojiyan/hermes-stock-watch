@@ -1,10 +1,10 @@
 {
-  "version": 2,
+  "version": 3,
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-21T09:04:40.923Z",
-      "lastSuccessAt": "2026-10-21T09:04:40.923Z",
+      "lastCheckedAt": "2026-10-21T10:16:29.794Z",
+      "lastSuccessAt": "2026-10-21T10:16:29.794Z",
       "products": 36,
       "targets": 3,
       "categoryAvailable": 0,
@@ -12,15 +12,18 @@
       "catalogStocks": {
         "H085956CCY1": {
           "ecom": false,
-          "seenAt": "2026-10-21T09:04:40.923Z"
+          "seenAt": "2026-10-21T10:16:29.794Z",
+          "source": "complete-official-category-negative"
         },
         "H056289CKY1": {
           "ecom": false,
-          "seenAt": "2026-10-21T09:04:40.923Z"
+          "seenAt": "2026-10-21T10:16:29.794Z",
+          "source": "complete-official-category-negative"
         },
         "H051551CKCM": {
           "ecom": false,
-          "seenAt": "2026-10-21T09:04:40.923Z"
+          "seenAt": "2026-10-21T10:16:29.794Z",
+          "source": "complete-official-category-negative"
         },
         "H060991CKV8": {
           "ecom": true,
@@ -32,28 +35,29 @@
         "H086422CK37": "2026-10-08T13:40:17.239Z",
         "H056289CC3Y": "2026-10-08T13:40:17.239Z"
       },
-      "coverage": "all items of the currently published category (verified total)",
+      "coverage": "all pages of the currently published category (verified total and unique SKUs)",
       "officialTotal": 36,
       "fetchMode": "low-credit-1",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": []
+      "verificationErrors": [],
+      "error": null
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-21T09:04:40.923Z",
-      "lastSuccessAt": "2026-10-21T06:10:44.019Z",
+      "status": "ok",
+      "lastCheckedAt": "2026-10-21T10:16:29.794Z",
+      "lastSuccessAt": "2026-10-21T10:16:29.794Z",
       "products": 43,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
-      "coverage": "all items of the currently published category (verified total)",
+      "coverage": "all pages of the currently published category (verified total and unique SKUs)",
       "officialTotal": 43,
-      "fetchMode": "low-credit-1",
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": "CA: official catalog could not be verified: low-credit-1: Incomplete Hermès catalog: received 40 of 43 total products | low-credit-retry: Incomplete Hermès catalog: received 40 of 43 total products | browser-fallback: Incomplete Hermès catalog: received 40 of 43 total products"
+      "error": null
     }
   }
 }

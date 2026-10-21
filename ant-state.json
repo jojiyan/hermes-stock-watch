@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-21T16:53:28.539Z",
-      "lastSuccessAt": "2026-10-21T16:53:28.539Z",
+      "lastCheckedAt": "2026-10-21T17:25:05.188Z",
+      "lastSuccessAt": "2026-10-21T17:25:05.188Z",
       "products": 44,
       "targets": 3,
       "categoryAvailable": 0,
@@ -31,17 +31,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-21T16:53:28.539Z",
+          "seenAt": "2026-10-21T17:25:05.188Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-21T16:53:28.539Z",
+          "seenAt": "2026-10-21T17:25:05.188Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-21T16:53:28.539Z",
+          "seenAt": "2026-10-21T17:25:05.188Z",
           "source": "complete-official-category-negative"
         }
       },
@@ -58,9 +58,9 @@
       "error": null
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-21T16:53:28.539Z",
-      "lastSuccessAt": "2026-10-21T15:33:11.290Z",
+      "status": "ok",
+      "lastCheckedAt": "2026-10-21T17:25:05.188Z",
+      "lastSuccessAt": "2026-10-21T17:25:05.188Z",
       "products": 44,
       "targets": 0,
       "categoryAvailable": 0,
@@ -72,7 +72,7 @@
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": "Duplicate SKU across catalog pages: H087987CKQ0"
+      "error": null
     }
   }
 }

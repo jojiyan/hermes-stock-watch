@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-21T17:25:05.188Z",
-      "lastSuccessAt": "2026-10-21T17:25:05.188Z",
+      "lastCheckedAt": "2026-10-21T17:59:57.170Z",
+      "lastSuccessAt": "2026-10-21T17:59:57.170Z",
       "products": 44,
       "targets": 3,
       "categoryAvailable": 0,
@@ -31,17 +31,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-21T17:25:05.188Z",
+          "seenAt": "2026-10-21T17:59:57.170Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-21T17:25:05.188Z",
+          "seenAt": "2026-10-21T17:59:57.170Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-21T17:25:05.188Z",
+          "seenAt": "2026-10-21T17:59:57.170Z",
           "source": "complete-official-category-negative"
         }
       },
@@ -58,8 +58,8 @@
       "error": null
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-21T17:25:05.188Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-21T17:59:57.170Z",
       "lastSuccessAt": "2026-10-21T17:25:05.188Z",
       "products": 44,
       "targets": 0,
@@ -72,7 +72,7 @@
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": null
+      "error": "Incomplete Hermès catalog: received 43 of 44 total products; missing next page"
     }
   }
 }

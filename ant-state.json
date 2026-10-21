@@ -3,9 +3,9 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-21T22:11:08.603Z",
-      "lastSuccessAt": "2026-10-21T22:11:08.603Z",
-      "products": 48,
+      "lastCheckedAt": "2026-10-21T22:48:14.260Z",
+      "lastSuccessAt": "2026-10-21T22:48:14.260Z",
+      "products": 47,
       "targets": 3,
       "categoryAvailable": 0,
       "available": {},
@@ -31,17 +31,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-21T22:11:08.603Z",
+          "seenAt": "2026-10-21T22:48:14.260Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-21T22:11:08.603Z",
+          "seenAt": "2026-10-21T22:48:14.260Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-21T22:11:08.603Z",
+          "seenAt": "2026-10-21T22:48:14.260Z",
           "source": "complete-official-category-negative"
         }
       },
@@ -51,28 +51,28 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z"
       },
       "coverage": "all pages of the currently published category (verified total and unique SKUs)",
-      "officialTotal": 48,
+      "officialTotal": 47,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
       "error": null
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-21T22:11:08.603Z",
-      "lastSuccessAt": "2026-10-21T21:37:47.801Z",
-      "products": 43,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-21T22:48:14.260Z",
+      "lastSuccessAt": "2026-10-21T22:48:14.260Z",
+      "products": 58,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
       "coverage": "all pages of the currently published category (verified total and unique SKUs)",
-      "officialTotal": 43,
+      "officialTotal": 58,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": "Official total changed during pagination"
+      "error": null
     }
   }
 }

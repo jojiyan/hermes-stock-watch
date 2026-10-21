@@ -19,3 +19,9 @@ test('missing/hidden/script/recommendation purchase text and wrong region/SKU re
  assert.throws(()=>parseOfficialPurchase(html('<button>Add to bag</button>').replace('/ca/en/','/us/en/'),p));
  assert.throws(()=>parseOfficialPurchase(html('<button>Add to bag</button>').replace('reference: H12345678','reference: H87654321'),p));
 });
+import {verifyOfficialProducts} from '../src/ant-purchase.mjs';
+test('complete category false is negative evidence and never spends product credits or alerts',async()=>{
+ const x=await verifyOfficialProducts({products:[{...p,ecom:false}]},'CA','key',{fetcher:async()=>{throw new Error('must not fetch')}});
+ assert.equal(x.products[0].ecom,false);assert.equal(x.products[0].categoryNegativeVerified,true);
+ assert.equal(x.purchaseAttempts.length,0);assert.equal(x.verificationErrors.length,0);
+});

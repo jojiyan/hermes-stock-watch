@@ -5,12 +5,12 @@
 - Runs on GitHub Actions. The cron **requests** a run every 5 minutes; GitHub's queue can delay executions by 15–30+ minutes. Every scheduled execution checks both markets; the former 8-minute freshness guard was removed because it could skip a requested 5-minute check and let one healthy market suppress retries for the other. Scheduling remains best effort, not a 5-minute SLA.
 - Uses `SCRAPINGANT_API_KEY`; no Firecrawl runtime dependency.
 - Reads every official category page, following the same-market `rel="next"` links. Canada's 43-item catalog is 40 items on page 1 plus 3 on page 2 (normally two category credits). `stock.ecom` is discovery metadata only.
-- Requires stable official totals across pages and exactly that many unique validated SKUs/tiles. Missing pages, duplicate SKUs, changed totals and blocked responses remain **unknown** and fail Actions. Requests have bounded datacenter retries, then one browser fallback; residential requests are not used.
+- Requires stable official totals across pages and exactly that many unique validated SKUs/tiles. Missing pages, duplicate SKUs, changed totals and blocked responses remain **unknown** and fail Actions. Requests have bounded datacenter retries, then one browser fallback; residential requests are not used. After transport blocking, one direct request to the same official category URL may recover the page under identical validation; all preceding failures remain in the evidence.
 - Tracks Neo Garden 23 / Mini Garden 23 including full-leather when included in the *published category*, Garden Party 30, Picotin, Mini Lindy, Birkin, Kelly (including Pochette), Constance; excludes Garden Party 36, Neo Garden Voyage 41, and Bolide.
 - **Coverage limitation:** this checks every item currently published in the women's bags category for each market (the official total is verified). A product that is not included in that category, or a separately accessible product detail page not listed there, cannot be inferred to be for sale. This is **not** a guarantee of complete product-site or historical-SKU coverage.
-- **Confirmation level:** target product pages must match canonical URL, market and visible SKU. Only an enabled official **Add to cart / Add to bag** button without unavailable evidence can trigger an alert. Unknown product pages preserve previous observations and alert deduplication; category metadata alone never rearms a notification.
+- **Confirmation level:** target product pages must match canonical URL, market and visible SKU. Only an enabled official **Add to cart / Add to bag** button without unavailable evidence can trigger an alert. Unknown product pages preserve previous observations and alert deduplication. A complete category with explicit `stock.ecom=false` is negative evidence and needs no detail request; only potential positives need button verification.
 - US and CA preserve their state independently. A market's failure does not erase prior observations or suppress stock notifications from the other region.
-- Each new qualifying SKU / restock sends a GitHub Issue mentioning and assigning the repository owner; duplicate notifications are suppressed until a verified product page explicitly shows an unavailable/disabled purchase state.
+- Each new qualifying SKU / restock sends a GitHub Issue mentioning and assigning the repository owner; duplicate notifications are suppressed until an explicit negative observation from a complete official category or verified product page.
 
 ## Stock notifications through GitHub
 
@@ -29,6 +29,6 @@ The connected GitHub account displays `954736371@qq.com` as its profile email. T
 
 ## Repair validation
 
-The `fix/ca-catalog-pagination` branch push runs the real ScrapingAnt workflow in `VERIFY_ONLY` mode: it uses the repository secret but sends no notifications and writes no production state. Production schedule/manual runs on `main` still persist state and notify. Regression tests also run on pull requests.
+The `fix/ca-catalog-pagination` branch push runs the real ScrapingAnt workflow in `VERIFY_ONLY` mode: it uses the repository secret but sends no notifications and writes no production state. Production schedule/manual runs on `main` still persist state and notify. Regression tests also run on pull requests. Verification and production use separate concurrency groups, so branch checks do not cancel pending production checks.
 
 CA regression fixtures are reduced extracts of official HTML retrieved on 2026-10-21: 40 + 3 products, `total=43`, and official next/canonical links. Only required catalog fields and rendered tile identifiers were retained.

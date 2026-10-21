@@ -12,7 +12,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: hermes-stock-watch-scrapingant
+  group: hermes-stock-watch-scrapingant-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -33,7 +33,8 @@ jobs:
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "SCRAPINGANT_API_KEY is not configured; skipping without failing."
+            echo "::error::SCRAPINGANT_API_KEY is not configured."
+            exit 1
           fi
 
       - name: Use Node.js 22

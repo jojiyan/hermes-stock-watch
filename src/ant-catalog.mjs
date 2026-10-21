@@ -97,9 +97,10 @@ export function reconcileCatalog(previousMarket, parsed, nowIso) {
   const stocks={...previousStatus};
   for(const p of parsed.products) {
     // Metadata is discovery evidence only. Unknown product pages never rearm alerts.
-    if(p.purchaseVerified!==true) continue;
+    if(p.purchaseVerified!==true && !(p.categoryNegativeVerified===true && p.ecom===false)) continue;
     const previously=stocks[p.sku]?.ecom;
-    stocks[p.sku]={ecom:p.ecom,seenAt:nowIso};
+    stocks[p.sku]={ecom:p.ecom,seenAt:nowIso,
+      source:p.purchaseVerified?'official-product-purchase':'complete-official-category-negative'};
     if(!p.ecom){delete available[p.sku];continue;}
     available[p.sku]={market:p.market,sku:p.sku,name:p.name,
       color:p.color,price:p.price,url:p.url,lastSeenAt:nowIso,source:"official-catalog"};
@@ -111,6 +112,6 @@ export function reconcileCatalog(previousMarket, parsed, nowIso) {
   }
   // A negative observation explicitly rearms the SKU, but a missing catalog
   // entry does not: pagination and disappearing listings are not sell-out proof.
-  for(const p of parsed.products) if(p.purchaseVerified===true && !p.ecom)delete notified[p.sku];
+  for(const p of parsed.products) if((p.purchaseVerified===true||p.categoryNegativeVerified===true) && !p.ecom)delete notified[p.sku];
   return {available,catalogStocks:stocks,alertedSkus:notified,alerts:newAlerts};
 }

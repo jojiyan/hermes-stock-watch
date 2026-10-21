@@ -88,11 +88,39 @@ export async function fetchOfficialCatalog(market, key, options = {}) {
   let url = categoryUrl(market), total;
   try {
     for (let page = 1; page <= 13; page++) {
-      const {parsed,mode} = await fetchAntHtml(url,market,key,{...options,attempts,
-        parse:html=>{
+      const parse=html=>{
           if(!options.parser)validateCatalogLocation(html,url,market);
           return parser(html,market,{partial:true});
-        }});
+      };
+      let fetched;
+      try {
+        fetched=await fetchAntHtml(url,market,key,{...options,attempts,parse});
+      } catch(error) {
+        // Public official HTML is an independent fallback, never a relaxed parser.
+        // Do not hide authentication/balance failures or retry untrusted pagination.
+        const last=attempts.at(-1);
+        if(![423,500,502,503,504].includes(last?.status) || (options.fetcher&&!options.directFetcher))throw error;
+        const evidence={market,url,mode:'direct-official',credits:0};
+        attempts.push(evidence);
+        try {
+          const response=await (options.directFetcher||fetch)(url,{signal:AbortSignal.timeout(30_000),
+            headers:{accept:'text/html','user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36'}});
+          evidence.status=response.status;
+          if(!response.ok)throw new Error(`Direct official HTTP ${response.status}`);
+          const html=await response.text();
+          evidence.bytes=Buffer.byteLength(html);
+          evidence.sha256=createHash('sha256').update(html).digest('hex');
+          evidence.fetchedAt=new Date().toISOString();
+          if(options.onHtml)await options.onHtml(html,evidence);
+          const parsed=parse(html);
+          evidence.pageItems=parsed.pageItems;evidence.officialTotal=parsed.reportedTotal;
+          fetched={parsed,mode:evidence.mode};
+        } catch(directError) {
+          evidence.error=directError.message;
+          throw new Error(`${error.message} | ${directError.message}`);
+        }
+      }
+      const {parsed,mode}=fetched;
       if (total === undefined) total = parsed.reportedTotal;
       if (parsed.reportedTotal !== total) throw new Error('Official total changed during pagination');
       for (const sku of parsed.skus || []) {

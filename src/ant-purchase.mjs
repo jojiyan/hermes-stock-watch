@@ -58,6 +58,13 @@ export function parseOfficialPurchase(html, candidate) {
 export async function verifyOfficialProducts(parsed, market, key, options = {}) {
   const attempts = [], products = [], verificationErrors = [];
   for (const candidate of parsed.products) {
+    // A complete official catalog explicitly says this SKU cannot be bought.
+    // It needs no expensive/blocked detail request, and can never be positive.
+    if(candidate.ecom===false) {
+      products.push({...candidate,categoryNegativeVerified:true,
+        evidence:'Complete official catalog: stock.ecom=false (not purchasable)',purchaseAction:''});
+      continue;
+    }
     try {
       const result = await fetchAntHtml(candidate.url,market,key,{...options,attempts,
         parse:html=>parseOfficialPurchase(html,candidate)});

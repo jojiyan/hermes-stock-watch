@@ -65,3 +65,14 @@ test('a cross-market redirect or wrong-page canonical is rejected even with vali
  for(const bad of [first.replace('/ca/en/','/us/en/'),first.replace('rel="canonical" href="https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/"','rel="canonical" href="https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/"')])
   await assert.rejects(fetchOfficialCatalog('CA','key',opts({'1':bad,'2':second})),/canonical URL\/market\/page mismatch/);
 });
+test('blocked ScrapingAnt pagination may recover only through the same verified official HTML',async()=>{
+ const x=await fetchOfficialCatalog('CA','key',{
+  wait:async()=>{},fetcher:async url=>new Response(new URL(new URL(url).searchParams.get('url')).search?'blocked':first,{status:new URL(new URL(url).searchParams.get('url')).search?423:200}),
+  directFetcher:async url=>{assert.equal(url,categoryUrl('CA')+'?page=2');return new Response(second)},
+ });
+ assert.equal(x.parsed.pageItems,43);assert.equal(x.attempts.at(-1).mode,'direct-official');
+ assert.equal(x.attempts.filter(a=>a.status===423).length,3);
+ await assert.rejects(fetchOfficialCatalog('CA','key',{
+  wait:async()=>{},fetcher:async()=>new Response('blocked',{status:423}),directFetcher:async()=>new Response('blocked',{status:403}),
+ }),/Direct official HTTP 403/);
+});

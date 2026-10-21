@@ -2,10 +2,10 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-21T21:37:47.801Z",
-      "lastSuccessAt": "2026-10-21T20:26:28.574Z",
-      "products": 44,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-21T22:11:08.603Z",
+      "lastSuccessAt": "2026-10-21T22:11:08.603Z",
+      "products": 48,
       "targets": 3,
       "categoryAvailable": 0,
       "available": {},
@@ -31,17 +31,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-21T20:26:28.574Z",
+          "seenAt": "2026-10-21T22:11:08.603Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-21T20:26:28.574Z",
+          "seenAt": "2026-10-21T22:11:08.603Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-21T20:26:28.574Z",
+          "seenAt": "2026-10-21T22:11:08.603Z",
           "source": "complete-official-category-negative"
         }
       },
@@ -51,15 +51,15 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z"
       },
       "coverage": "all pages of the currently published category (verified total and unique SKUs)",
-      "officialTotal": 44,
+      "officialTotal": 48,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": "Official total changed during pagination"
+      "error": null
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-21T21:37:47.801Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-21T22:11:08.603Z",
       "lastSuccessAt": "2026-10-21T21:37:47.801Z",
       "products": 43,
       "targets": 0,
@@ -72,7 +72,7 @@
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": null
+      "error": "Official total changed during pagination"
     }
   }
 }

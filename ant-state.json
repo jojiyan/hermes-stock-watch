@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-21T18:38:17.755Z",
-      "lastSuccessAt": "2026-10-21T18:38:17.755Z",
+      "lastCheckedAt": "2026-10-21T19:18:53.249Z",
+      "lastSuccessAt": "2026-10-21T19:18:53.249Z",
       "products": 44,
       "targets": 3,
       "categoryAvailable": 0,
@@ -31,17 +31,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-21T18:38:17.755Z",
+          "seenAt": "2026-10-21T19:18:53.249Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-21T18:38:17.755Z",
+          "seenAt": "2026-10-21T19:18:53.249Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-21T18:38:17.755Z",
+          "seenAt": "2026-10-21T19:18:53.249Z",
           "source": "complete-official-category-negative"
         }
       },
@@ -58,21 +58,21 @@
       "error": null
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-21T18:38:17.755Z",
-      "lastSuccessAt": "2026-10-21T17:25:05.188Z",
-      "products": 44,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-21T19:18:53.249Z",
+      "lastSuccessAt": "2026-10-21T19:18:53.249Z",
+      "products": 43,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
       "coverage": "all pages of the currently published category (verified total and unique SKUs)",
-      "officialTotal": 44,
+      "officialTotal": 43,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": "Official total changed during pagination"
+      "error": null
     }
   }
 }

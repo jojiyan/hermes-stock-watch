@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-21T15:33:11.290Z",
-      "lastSuccessAt": "2026-10-21T15:33:11.290Z",
+      "lastCheckedAt": "2026-10-21T16:12:39.043Z",
+      "lastSuccessAt": "2026-10-21T16:12:39.043Z",
       "products": 44,
       "targets": 3,
       "categoryAvailable": 0,
@@ -31,17 +31,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-21T15:33:11.290Z",
+          "seenAt": "2026-10-21T16:12:39.043Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-21T15:33:11.290Z",
+          "seenAt": "2026-10-21T16:12:39.043Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-21T15:33:11.290Z",
+          "seenAt": "2026-10-21T16:12:39.043Z",
           "source": "complete-official-category-negative"
         }
       },
@@ -58,8 +58,8 @@
       "error": null
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-21T15:33:11.290Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-21T16:12:39.043Z",
       "lastSuccessAt": "2026-10-21T15:33:11.290Z",
       "products": 44,
       "targets": 0,
@@ -72,7 +72,7 @@
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": null
+      "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
     }
   }
 }

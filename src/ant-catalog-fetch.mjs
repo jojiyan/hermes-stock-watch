@@ -5,6 +5,15 @@ export function categoryUrl(market) {
   return `https://www.hermes.com/${market.toLowerCase()}/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/`;
 }
 
+function validateCatalogLocation(html,url,market) {
+  const base=html.match(/<base\b[^>]*href=["']([^"']+)["']/i)?.[1];
+  const canonical=[...html.matchAll(/<link\b[^>]*>/gi)]
+    .find(x=>/\brel=["']canonical["']/i.test(x[0]))?.[0]
+    .match(/\bhref=["']([^"']+)["']/i)?.[1]?.replace(/&amp;/g,'&');
+  if(base!==`/${market.toLowerCase()}/en/`||canonical!==url)
+    throw new Error('Official catalog canonical URL/market/page mismatch');
+}
+
 // Reuse only within the same market/path. Never follow a scraped external URL.
 export function nextCatalogUrl(next, current, market) {
   const url = new URL(next, current);
@@ -52,6 +61,7 @@ export async function fetchAntHtml(url, market, key, options = {}) {
       }
       const html = await response.text();
       evidence.bytes = Buffer.byteLength(html);
+      evidence.fetchedAt = new Date().toISOString();
       evidence.sha256 = createHash('sha256').update(html).digest('hex');
       // Optional evidence sink is used by Actions; never includes request headers/key.
       if (options.onHtml) await options.onHtml(html,evidence);
@@ -79,7 +89,10 @@ export async function fetchOfficialCatalog(market, key, options = {}) {
   try {
     for (let page = 1; page <= 13; page++) {
       const {parsed,mode} = await fetchAntHtml(url,market,key,{...options,attempts,
-        parse:html=>parser(html,market,{partial:true})});
+        parse:html=>{
+          if(!options.parser)validateCatalogLocation(html,url,market);
+          return parser(html,market,{partial:true});
+        }});
       if (total === undefined) total = parsed.reportedTotal;
       if (parsed.reportedTotal !== total) throw new Error('Official total changed during pagination');
       for (const sku of parsed.skus || []) {

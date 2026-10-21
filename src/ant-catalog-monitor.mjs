@@ -20,6 +20,7 @@ const {state:nextState,report,alerts}=await checkCatalogMarkets(state,key,checke
     const name=evidence.market+'-'+(++sequence)+'-'+evidence.mode+'.html';
     evidence.file='ant-evidence/'+name;
     await writeFile(resolve(evidenceDir,name),html);
+    console.log(JSON.stringify({event:'official-page-received',...evidence}));
   },
 });
 await writeFile(reportFile,JSON.stringify(report,null,2)+'\n');

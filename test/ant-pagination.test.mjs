@@ -61,3 +61,7 @@ test('unknown product preserves prior stock and cannot rearm alerts',async()=>{
  assert.equal(result.report.healthy,false);assert.deepEqual(result.state.markets.US.available,prev.markets.US.available);
  assert.deepEqual(result.state.markets.US.catalogStocks,prev.markets.US.catalogStocks);assert.equal(result.alerts.length,0);
 });
+test('a cross-market redirect or wrong-page canonical is rejected even with valid stock fields',async()=>{
+ for(const bad of [first.replace('/ca/en/','/us/en/'),first.replace('rel="canonical" href="https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/"','rel="canonical" href="https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/"')])
+  await assert.rejects(fetchOfficialCatalog('CA','key',opts({'1':bad,'2':second})),/canonical URL\/market\/page mismatch/);
+});

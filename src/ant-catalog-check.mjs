@@ -7,7 +7,7 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
   state.markets ||= {};
   state.version=3;
   const summaries=[],alerts=[];
-  for (const market of ['US','CA']) {
+  await Promise.all(['US','CA'].map(async market => {
     const previous=state.markets[market]||{};
     try {
       const fetched=await (options.fetchCatalog||fetchOfficialCatalog)(market,key,options);
@@ -39,7 +39,8 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
       state.markets[market]={...previous,status:'unknown',lastCheckedAt:checkedAt,error:error.message};
       summaries.push({market,status:'unknown',error:error.message,attempts:error.attempts||[],pages:error.pages||[]});
     }
-  }
+  }));
+  summaries.sort((a,b)=>['US','CA'].indexOf(a.market)-['US','CA'].indexOf(b.market));
   return {state,report:{checkedAt,healthy:summaries.every(s=>s.status==='ok'),
     coverage:'Complete published category, official pagination and unique totals; positive stock requires an enabled official product purchase button. Unlisted products remain unknown.',
     summaries,alerts:alerts.map(({marker,...p})=>p)},alerts};

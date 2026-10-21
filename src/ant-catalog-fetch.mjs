@@ -1,6 +1,17 @@
 import { parseHermesCatalog } from './ant-catalog.mjs';
 import { createHash } from 'node:crypto';
 
+// A plan may allow just one concurrent paid request. Market state stays independent.
+let requestQueue=Promise.resolve();
+async function paidFetch(fetcher,url,init) {
+  const previous=requestQueue;
+  let release;
+  requestQueue=new Promise(resolve=>{release=resolve;});
+  await previous;
+  try {return await fetcher(url,{...init,signal:AbortSignal.timeout(60_000)});}
+  finally {release();}
+}
+
 export function categoryUrl(market) {
   return `https://www.hermes.com/${market.toLowerCase()}/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/`;
 }
@@ -41,21 +52,24 @@ export async function fetchAntHtml(url, market, key, options = {}) {
   const errors = [];
   for (let i = 0; i < modes.length; i++) {
     const mode = modes[i];
-    if (i) await wait(1200 * i);
+    if (i) await wait(attempts.at(-1)?.status===409?10_000:1200 * i);
+    if(attempts.at(-1)?.status===409)mode.browser=false;
     const params = new URLSearchParams({url, browser:String(mode.browser),
       proxy_type:'datacenter', proxy_country:market.toLowerCase(), timeout:'50'});
     if (mode.browser) for (const type of ['image','media','font']) params.append('block_resource',type);
     const evidence = {market,url,mode:mode.mode,credits:0};
     attempts.push(evidence);
     try {
-      const response = await fetcher(`https://api.scrapingant.com/v2/general?${params}`, {
+      const response = await paidFetch(fetcher,`https://api.scrapingant.com/v2/general?${params}`, {
         headers:{'x-api-key':key,accept:'text/html,*/*'}, signal:AbortSignal.timeout(60_000),
       });
       evidence.status = response.status;
       const used = Number(response.headers.get('ant-credits-cost') || 0);
       evidence.credits = Number.isFinite(used) && used >= 0 ? used : 0;
       if (!response.ok) {
-        const error = new Error(`HTTP ${response.status}`);
+        const body=(await response.text()).split(key).join('[redacted]').slice(0,800);
+        evidence.responseBody=body;
+        const error = new Error(`HTTP ${response.status}: ${body.slice(0,180)}`);
         error.fatal = [400,401,402,403].includes(response.status);
         throw error;
       }

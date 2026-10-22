@@ -2,8 +2,8 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-22T10:02:13.811Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-22T15:11:04.957Z",
       "lastSuccessAt": "2026-10-22T10:02:13.811Z",
       "products": 45,
       "targets": 3,
@@ -55,20 +55,20 @@
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": null
+      "error": "Official total changed during pagination"
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-22T10:02:13.811Z",
-      "lastSuccessAt": "2026-10-22T10:02:13.811Z",
-      "products": 58,
+      "lastCheckedAt": "2026-10-22T15:11:04.957Z",
+      "lastSuccessAt": "2026-10-22T15:11:04.957Z",
+      "products": 89,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
       "coverage": "all pages of the currently published category (verified total and unique SKUs)",
-      "officialTotal": 58,
+      "officialTotal": 89,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],

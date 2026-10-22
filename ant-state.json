@@ -2,8 +2,8 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-22T05:12:10.759Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-22T05:49:23.144Z",
       "lastSuccessAt": "2026-10-22T05:12:10.759Z",
       "products": 46,
       "targets": 3,
@@ -55,12 +55,12 @@
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": null
+      "error": "Official total changed during pagination"
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-22T05:12:10.759Z",
-      "lastSuccessAt": "2026-10-22T05:12:10.759Z",
+      "lastCheckedAt": "2026-10-22T05:49:23.144Z",
+      "lastSuccessAt": "2026-10-22T05:49:23.144Z",
       "products": 58,
       "targets": 0,
       "categoryAvailable": 0,

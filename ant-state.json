@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-22T01:35:05.632Z",
-      "lastSuccessAt": "2026-10-22T01:35:05.632Z",
+      "lastCheckedAt": "2026-10-22T02:10:47.508Z",
+      "lastSuccessAt": "2026-10-22T02:10:47.508Z",
       "products": 48,
       "targets": 3,
       "categoryAvailable": 0,
@@ -31,17 +31,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-22T01:35:05.632Z",
+          "seenAt": "2026-10-22T02:10:47.508Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-22T01:35:05.632Z",
+          "seenAt": "2026-10-22T02:10:47.508Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-22T01:35:05.632Z",
+          "seenAt": "2026-10-22T02:10:47.508Z",
           "source": "complete-official-category-negative"
         }
       },
@@ -58,9 +58,9 @@
       "error": null
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-22T01:35:05.632Z",
-      "lastSuccessAt": "2026-10-22T00:57:02.682Z",
+      "status": "ok",
+      "lastCheckedAt": "2026-10-22T02:10:47.508Z",
+      "lastSuccessAt": "2026-10-22T02:10:47.508Z",
       "products": 58,
       "targets": 0,
       "categoryAvailable": 0,
@@ -72,7 +72,7 @@
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
-      "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
+      "error": null
     }
   }
 }

@@ -15,7 +15,7 @@ test('captured CA official 40 + 3 pagination reconciles 43 distinct SKUs',async(
  const x=await fetchOfficialCatalog('CA','key',opts({'1':first,'2':second}));
  assert.equal(x.parsed.pageItems,43);assert.equal(x.parsed.skus.length,43);
  assert.deepEqual(x.parsed.pages.map(p=>p.pageItems),[40,3]);
- assert.equal(x.credits,2);assert.equal(x.mode,'paginated');
+ assert.equal(x.credits,3);assert.equal(x.mode,'paginated');
  assert.equal(x.parsed.products.length,0);
 });
 test('short final page is valid only as part of the complete catalog',()=>{
@@ -70,7 +70,7 @@ test('blocked ScrapingAnt pagination may recover only through the same verified 
   wait:async()=>{},fetcher:async url=>new Response(new URL(new URL(url).searchParams.get('url')).search?'blocked':first,{status:new URL(new URL(url).searchParams.get('url')).search?423:200}),
   directFetcher:async url=>{assert.equal(url,categoryUrl('CA')+'?page=2');return new Response(second)},
  });
- assert.equal(x.parsed.pageItems,43);assert.equal(x.attempts.at(-1).mode,'direct-official');
+ assert.equal(x.parsed.pageItems,43);assert.equal(x.attempts.at(-2).mode,'direct-official');
  assert.equal(x.attempts.filter(a=>a.status===423).length,4);
  await assert.rejects(fetchOfficialCatalog('CA','key',{
   wait:async()=>{},fetcher:async()=>new Response('blocked',{status:423}),directFetcher:async()=>new Response('blocked',{status:403}),
@@ -83,5 +83,57 @@ test('equivalent official page delimiter still reconciles the original canonical
   return target.endsWith('&')?new Response(second):new Response('blocked',{status:423});
  }});
  assert.equal(x.parsed.pageItems,43);assert.equal(x.parsed.pages[1].mode,'low-credit-page-delimiter');
- assert.equal(x.attempts.at(-1).url,categoryUrl('CA')+'?page=2&');
+ assert.equal(x.attempts.at(-2).url,categoryUrl('CA')+'?page=2&');
+});
+
+
+test('US incomplete 43/44 restarts at page one and accepts only a fresh complete scan',async()=>{
+ let scan=0; const urls=[];
+ const result=await fetchOfficialCatalog('US','key',{
+  wait:async()=>{},parser:JSON.parse,fetcher:async url=>{
+   const target=new URL(new URL(url).searchParams.get('url'));
+   const page=Number(target.searchParams.get('page')||1);urls.push(page);
+   if(page===1)scan++;
+   const partial=scan===1;
+   const start=page===1?0:40, end=page===1?(partial?39:40):44;
+   return new Response(JSON.stringify({products:[],pageItems:end-start,reportedTotal:44,
+    skus:Array.from({length:end-start},(_,i)=>`sku${start+i}`),next:page===1?'?page=2':null}));
+  },
+ });
+ assert.deepEqual(urls,[1,2,1,2,1]);
+ assert.equal(result.parsed.pageItems,44);assert.equal(result.parsed.skus.length,44);
+ assert.deepEqual(result.scans.map(s=>s.status),['unknown','verified']);
+});
+test('persistent incomplete scans stop after three and retain all attempt evidence',async()=>{
+ let calls=0;
+ await assert.rejects(fetchOfficialCatalog('US','key',{wait:async()=>{},parser:JSON.parse,
+  fetcher:async()=>{calls++;return new Response(JSON.stringify({products:[],pageItems:43,reportedTotal:44,next:null}));},
+ }),e=>{assert.equal(e.scans.length,3);assert.equal(e.attempts.length,3);return /43 of 44/.test(e.message);});
+ assert.equal(calls,3);
+});
+test('closing first-page total drift forces a whole fresh scan',async()=>{
+ let calls=0;const totals=[2,2,3,2,2,2];
+ const result=await fetchOfficialCatalog('US','key',{wait:async()=>{},parser:JSON.parse,
+  fetcher:async url=>{
+   const secondPage=new URL(new URL(url).searchParams.get('url')).searchParams.has('page');
+   return new Response(JSON.stringify({products:[],pageItems:1,reportedTotal:totals[calls++],
+    skus:[secondPage?'second':'first'],next:secondPage?null:'?page=2'}));
+  },
+ });
+ assert.equal(calls,6);assert.equal(result.scans.length,2);assert.equal(result.parsed.reportedTotal,2);
+});
+test('US partial purchase failure suppresses all US alerts, preserves history and leaves CA independent',async()=>{
+ const prior={version:2,markets:{US:{lastSuccessAt:'before',catalogStocks:{old:{ecom:false,seenAt:'before'}},alertedSkus:{old:'before'},available:{}}}};
+ const out=await checkCatalogMarkets(prior,'key','now',{
+  fetchCatalog:async market=>({parsed:{products:[{market,sku:'new',ecom:true,purchaseVerified:true}],pageItems:1,reportedTotal:1}}),
+  verifyProducts:async p=>({...p,verificationErrors:p.products[0].market==='US'?[{error:'blocked'}]:[]}),
+ });
+ assert.equal(out.state.version,3);assert.equal(out.state.markets.US.status,'unknown');
+ assert.deepEqual(out.state.markets.US.catalogStocks,prior.markets.US.catalogStocks);
+ assert.deepEqual(out.state.markets.US.alertedSkus,prior.markets.US.alertedSkus);
+ assert.deepEqual(out.state.markets.US.currentStocks,{});
+ assert.equal(out.state.markets.US.lastSuccessAt,'before');
+ assert.deepEqual(out.alerts.map(p=>p.market),['CA']);
+ assert.equal(out.report.executionStatus,'completed');assert.equal(out.report.verificationStatus,'unverified');
+ assert.equal(prior.version,2);
 });

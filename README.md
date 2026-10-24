@@ -32,3 +32,32 @@ The connected GitHub account displays `954736371@qq.com` as its profile email. T
 The `fix/ca-catalog-pagination` branch push runs the real ScrapingAnt workflow in `VERIFY_ONLY` mode: it uses the repository secret but sends no notifications and writes no production state. Production schedule/manual runs on `main` still persist state and notify. Regression tests also run on pull requests. Verification and production use separate concurrency groups, so branch checks do not cancel pending production checks.
 
 CA regression fixtures are reduced extracts of official HTML retrieved on 2026-10-21: 40 + 3 products, `total=43`, and official next/canonical links. Only required catalog fields and rendered tile identifiers were retained.
+
+
+### Catalog consistency and historical state
+
+Catalog pagination consistency failures restart the entire market scan from page one,
+up to three scans with bounded backoff. Totals, pages, products and SKU sets are never
+combined across scans. All pages must agree on the total and reconcile exactly with
+unique SKUs. After a multi-page scan, a fresh first-page request must match its opening
+total, SKU order, next link and target stock metadata. This detects observed changes;
+it cannot guarantee an atomic snapshot of a live retailer. Persistent inconsistency
+remains `unknown`. No guessed next-page URL or relaxed count tolerance is used.
+Transport retries remain bounded separately; authentication, unsafe pagination and
+invalid HTML do not trigger consistency retries. Reports retain each scan's errors,
+pages and paid-request evidence, including credits from failed scans.
+
+`catalogStocks`, `available` and `alertedSkus` retain historical observations and
+notification deduplication; they are not a current inventory listing. On any market
+verification failure, these collections and `lastSuccessAt` are preserved, while
+`status`, `lastCheckedAt` and errors reflect the failed check and `currentStocks` is
+empty. On success, `currentStocks` contains only observations verified in that scan;
+unlisted historical SKUs are not assumed sold out. Partial purchase verification
+cannot alert or rearm any SKU in that market. US and CA remain independent.
+
+State schema is version 3. A completed scan can persist `unknown` for one market and
+verified observations for the other. The execution step succeeds when processing and
+persistence finish; the separate verification gate fails if either market is unknown.
+Unexpected execution/notification/write errors fail the execution step directly.
+The gate uses explicit execution and verification outputs, not a `continue-on-error`
+conclusion. `VERIFY_ONLY=true` writes evidence/report but never state or notifications.

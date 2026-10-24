@@ -51,10 +51,9 @@ jobs:
         if: steps.configured.outputs.ready == 'true'
         run: node --check src/ant-catalog-monitor.mjs
 
-      - name: Check Hermes US and Canada official e-commerce stock
+      - name: Execute scan and persist independent market observations
         if: steps.configured.outputs.ready == 'true'
         id: monitor
-        continue-on-error: true
         run: node src/ant-catalog-monitor.mjs
         env:
           VERIFY_ONLY: ${{ github.event_name == 'push' || github.ref != 'refs/heads/main' }}
@@ -64,7 +63,7 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
       - name: Save ScrapingAnt stock state
-        if: always() && steps.configured.outputs.ready == 'true' && steps.monitor.outcome != 'skipped' && github.event_name != 'push' && github.ref == 'refs/heads/main'
+        if: always() && steps.configured.outputs.ready == 'true' && steps.monitor.outputs.state_written == 'true' && github.event_name != 'push' && github.ref == 'refs/heads/main'
         shell: bash
         run: |
           if git diff --quiet -- ant-state.json; then
@@ -89,12 +88,22 @@ jobs:
             ant-evidence/
           retention-days: 7
 
-      - name: Require both markets to be verified
+      - name: Require current US and CA verification
         if: steps.configured.outputs.ready == 'true' && always()
         env:
           MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
-        run: test "$MONITOR_OUTCOME" = success
+          VERIFICATION_STATUS: ${{ steps.monitor.outputs.verification_status }}
+        run: |
+          if [[ "$MONITOR_OUTCOME" != success ]]; then
+            echo "::error::Monitor execution failed or was skipped; see execution step."
+            exit 1
+          fi
+          if [[ "$VERIFICATION_STATUS" != verified ]]; then
+            echo "::error::Scan completed but market verification failed; historical stock is not current availability. See ant-run-report.json."
+            exit 1
+          fi
 
       - name: ScrapingAnt key not configured
         if: steps.configured.outputs.ready != 'true'
         run: echo "SCRAPINGANT_API_KEY missing; scheduled run skipped."
+

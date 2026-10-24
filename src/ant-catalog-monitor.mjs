@@ -1,4 +1,4 @@
-import {readFile,writeFile,mkdir} from "node:fs/promises";
+import {readFile,writeFile,mkdir,appendFile} from "node:fs/promises";
 import {resolve,dirname} from "node:path";
 import {fileURLToPath} from "node:url";
 import {checkCatalogMarkets} from "./ant-catalog-check.mjs";
@@ -8,9 +8,9 @@ const key=process.env.SCRAPINGANT_API_KEY;
 const repo=process.env.GITHUB_REPOSITORY,owner=process.env.GITHUB_REPOSITORY_OWNER,token=process.env.GITHUB_TOKEN;
 const verifyOnly=process.env.VERIFY_ONLY === "true";
 if(!key||(!verifyOnly&&(!repo||!owner||!token)))throw new Error("Monitor authentication is not configured");
-const state=JSON.parse(await readFile(stateFile,"utf8").catch(()=>"{\"version\":2,\"markets\":{}}"));
+const state=JSON.parse(await readFile(stateFile,"utf8").catch(()=>"{\"version\":3,\"markets\":{}}"));
 state.markets ||= {};
-state.version=2;
+state.version=3;
 const checkedAt=new Date().toISOString();
 const evidenceDir=resolve(root,'ant-evidence');
 await mkdir(evidenceDir,{recursive:true});
@@ -29,7 +29,9 @@ if(!verifyOnly){
   for(const p of alerts)await notify(p);
   await writeFile(stateFile,JSON.stringify(nextState,null,2)+'\n');
 }
-if(!report.healthy)throw new Error('At least one market has unverified catalog or product purchase stock.');
+if(process.env.GITHUB_OUTPUT)await appendFile(process.env.GITHUB_OUTPUT,
+  `execution_status=completed\nverification_status=${report.verificationStatus}\nstate_written=${!verifyOnly}\n`);
+if(!report.healthy)console.warn('Market verification incomplete; historical stock retained, unverified markets cannot alert.');
 async function notify(p){
   const headers={authorization:`Bearer ${token}`,accept:"application/vnd.github+json",
     "content-type":"application/json","user-agent":"hermes-stock-watch","x-github-api-version":"2022-11-28"};
@@ -48,3 +50,4 @@ async function notify(p){
   });
   if(!r.ok)throw new Error(`Issue stock notification failed (${r.status}): ${(await r.text()).slice(0,250)}`);
 }
+

@@ -100,12 +100,12 @@ export async function fetchAntHtml(url, market, key, options = {}) {
   throw error;
 }
 
-export async function fetchOfficialCatalog(market, key, options = {}) {
+async function fetchCatalogScan(market, key, options = {}) {
   if (!['US','CA'].includes(market) || !key) throw new Error('Invalid market or missing key');
   const parser = options.parser || parseHermesCatalog;
   const attempts = [];
   const pages = [], products = [], skus = new Set();
-  let url = categoryUrl(market), total;
+  let url = categoryUrl(market), total, firstPage;
   try {
     for (let page = 1; page <= 13; page++) {
       const parse=html=>{
@@ -141,24 +141,34 @@ export async function fetchOfficialCatalog(market, key, options = {}) {
         }
       }
       const {parsed,mode}=fetched;
-      if (total === undefined) total = parsed.reportedTotal;
-      if (parsed.reportedTotal !== total) throw new Error('Official total changed during pagination');
+      if (total === undefined) { total = parsed.reportedTotal; firstPage = parsed; }
+      if (parsed.reportedTotal !== total) throw unstableCatalog('Official total changed during pagination');
       for (const sku of parsed.skus || []) {
-        if (skus.has(sku)) throw new Error(`Duplicate SKU across catalog pages: ${sku}`);
+        if (skus.has(sku)) throw unstableCatalog(`Duplicate SKU across catalog pages: ${sku}`);
         skus.add(sku);
       }
       pages.push({url,pageItems:parsed.pageItems,reportedTotal:parsed.reportedTotal,mode});
       products.push(...parsed.products);
       const count = pages.reduce((sum,p)=>sum+p.pageItems,0);
-      if (count > total) throw new Error('Catalog page counts exceed official total');
+      if (count > total) throw unstableCatalog('Catalog page counts exceed official total');
       if (!parsed.next) {
         if (count !== total || (parsed.skus && skus.size !== total))
-          throw new Error(`Incomplete Hermès catalog: received ${count} of ${total} total products; missing next page`);
+          throw unstableCatalog(`Incomplete Hermès catalog: received ${count} of ${total} total products; missing next page`);
+        // Re-fetch the first page after pagination: reject a moving boundary/total.
+        if (pages.length > 1) {
+          const firstUrl = categoryUrl(market);
+          const closing = await fetchAntHtml(firstUrl,market,key,{...options,attempts,parse:html=>{
+            if(!options.parser)validateCatalogLocation(html,firstUrl,market);
+            return parser(html,market,{partial:true});
+          }});
+          if (catalogFingerprint(closing.parsed) !== catalogFingerprint(firstPage))
+            throw unstableCatalog('Official catalog changed during closing first-page verification');
+        }
         return {parsed:{products,pageItems:count,reportedTotal:total,skus:[...skus],pages,
           coverage:'all pages of the currently published category (verified total and unique SKUs)'},
           credits:attempts.reduce((sum,a)=>sum+a.credits,0),mode:pages.length>1?'paginated':mode,attempts};
       }
-      if (count === total) throw new Error('Unexpected next page after complete catalog');
+      if (count === total) throw unstableCatalog('Unexpected next page after complete catalog');
       url = nextCatalogUrl(parsed.next,url,market);
     }
     throw new Error('Official catalog exceeded pagination limit');
@@ -166,5 +176,38 @@ export async function fetchOfficialCatalog(market, key, options = {}) {
     error.attempts = attempts;
     error.pages = pages;
     throw error;
+  }
+}
+
+
+function unstableCatalog(message) {
+  return Object.assign(new Error(message),{retryCatalog:true});
+}
+function catalogFingerprint(parsed) {
+  return JSON.stringify([parsed.reportedTotal,parsed.pageItems,parsed.skus,parsed.next,parsed.products]);
+}
+
+export async function fetchOfficialCatalog(market,key,options={}) {
+  const attempts=[], scans=[];
+  const wait=options.wait || (ms=>new Promise(resolve=>setTimeout(resolve,ms)));
+  for(let scan=1;scan<=3;scan++) {
+    try {
+      // Each attempt owns fresh totals, pages, products and SKU sets. Never merge scans.
+      const result=await fetchCatalogScan(market,key,{...options,onHtml:async(html,evidence)=>{
+        evidence.scan=scan;
+        if(options.onHtml)await options.onHtml(html,evidence);
+      }});
+      attempts.push(...result.attempts.map(a=>({...a,scan})));
+      scans.push({scan,status:'verified',pages:result.parsed.pages});
+      return {...result,attempts,scans,credits:attempts.reduce((n,a)=>n+a.credits,0)};
+    } catch(error) {
+      attempts.push(...(error.attempts||[]).map(a=>({...a,scan})));
+      scans.push({scan,status:'unknown',error:error.message,pages:error.pages||[]});
+      if(!error.retryCatalog || scan===3) {
+        error.attempts=attempts; error.scans=scans;
+        throw error;
+      }
+      await wait(1500*scan);
+    }
   }
 }

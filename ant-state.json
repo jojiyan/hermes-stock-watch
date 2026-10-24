@@ -3,11 +3,11 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-24T09:51:39.305Z",
+      "lastCheckedAt": "2026-10-24T13:48:50.253Z",
       "lastSuccessAt": "2026-10-23T00:53:11.390Z",
-      "products": 46,
-      "targets": 3,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {},
       "catalogStocks": {
         "H085956CCY1": {
@@ -50,24 +50,31 @@
         "H086422CK37": "2026-10-08T13:40:17.239Z",
         "H056289CC3Y": "2026-10-08T13:40:17.239Z"
       },
-      "coverage": "all pages of the currently published category (verified total and unique SKUs)",
-      "officialTotal": 46,
-      "fetchMode": "paginated",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Incomplete Hermès catalog: received 41 of 42 total products; missing next page"
+          "error": "Official total changed during pagination"
         }
       ],
-      "error": "Incomplete Hermès catalog: received 41 of 42 total products; missing next page",
+      "error": "Official total changed during pagination",
       "currentStocks": {},
-      "catalogStocksUsage": "historical observations; consult currentStocks for this scan"
+      "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
+      "lastVerifiedCatalog": {
+        "checkedAt": "2026-10-23T00:53:11.390Z",
+        "products": 46,
+        "targets": 3,
+        "officialTotal": 46,
+        "coverage": "all pages of the currently published category (verified total and unique SKUs)"
+      }
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-24T09:51:39.305Z",
-      "lastSuccessAt": "2026-10-24T09:51:39.305Z",
+      "lastCheckedAt": "2026-10-24T13:48:50.253Z",
+      "lastSuccessAt": "2026-10-24T13:48:50.253Z",
       "products": 97,
       "targets": 0,
       "categoryAvailable": 0,
@@ -81,7 +88,14 @@
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {}
+      "currentStocks": {},
+      "lastVerifiedCatalog": {
+        "checkedAt": "2026-10-24T13:48:50.253Z",
+        "products": 97,
+        "targets": 0,
+        "officialTotal": 97,
+        "coverage": "all pages of the currently published category (verified total and unique SKUs)"
+      }
     }
   }
 }

@@ -140,7 +140,7 @@ test('US partial purchase failure suppresses all US alerts, preserves history an
 
 test('repeated HTTP 200 incomplete catalogs escalate to an entirely browser-rendered scan',async()=>{
  const calls=[];
- const x=await fetchOfficialCatalog('US','key',{wait:async()=>{},parser:JSON.parse,
+ const x=await fetchOfficialCatalog('US','key',{browserRecovery:true,wait:async()=>{},parser:JSON.parse,
   fetcher:async url=>{
    const params=new URL(url).searchParams;
    const browser=params.get('browser')==='true';
@@ -158,11 +158,23 @@ test('repeated HTTP 200 incomplete catalogs escalate to an entirely browser-rend
 });
 test('browser recovery never accepts the same incomplete response or silently downgrades after 409',async()=>{
  const modes=[];
- await assert.rejects(fetchOfficialCatalog('US','key',{wait:async()=>{},parser:JSON.parse,
+ await assert.rejects(fetchOfficialCatalog('US','key',{browserRecovery:true,wait:async()=>{},parser:JSON.parse,
   fetcher:async url=>{
    const browser=new URL(url).searchParams.get('browser');modes.push(browser);
    return browser==='true'?new Response('busy',{status:409}):new Response(JSON.stringify({products:[],pageItems:41,reportedTotal:42}));
   },
  }),/HTTP 409/);
  assert.deepEqual(modes,['false','false','true']);
+});
+test('failed scan clears misleading current counts but preserves last verified summary across repeated failures',async()=>{
+ const prev={markets:{US:{status:'ok',lastSuccessAt:'before',products:46,targets:3,officialTotal:46,coverage:'verified'}}};
+ const options={fetchCatalog:async()=>{throw new Error('41 of 42');}};
+ const first=await checkCatalogMarkets(prev,'key','now',options);
+ const second=await checkCatalogMarkets(first.state,'key','later',options);
+ assert.equal(second.state.markets.US.products,null);
+ assert.equal(second.state.markets.US.officialTotal,null);
+ assert.equal(second.state.markets.US.coverage,'unverified');
+ assert.equal(second.state.markets.US.lastVerifiedCatalog.products,46);
+ assert.equal(second.state.markets.US.lastVerifiedCatalog.checkedAt,'before');
+ assert.deepEqual(second.alerts,[]);
 });

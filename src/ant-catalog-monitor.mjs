@@ -16,6 +16,7 @@ const evidenceDir=resolve(root,'ant-evidence');
 await mkdir(evidenceDir,{recursive:true});
 let sequence=0;
 const {state:nextState,report,alerts}=await checkCatalogMarkets(state,key,checkedAt,{
+  browserRecovery:process.env.CATALOG_BROWSER_RECOVERY === "true",
   onHtml:async(html,evidence)=>{
     const name=evidence.market+'-'+(++sequence)+'-'+evidence.mode+'.html';
     evidence.file='ant-evidence/'+name;

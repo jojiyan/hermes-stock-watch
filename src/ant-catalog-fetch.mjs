@@ -195,16 +195,16 @@ export async function fetchOfficialCatalog(market,key,options={}) {
   for(let scan=1;scan<=3;scan++) {
     try {
       // Each attempt owns fresh totals, pages, products and SKU sets. Never merge scans.
-      const result=await fetchCatalogScan(market,key,{...options,browserOnly:scan===3,onHtml:async(html,evidence)=>{
+      const result=await fetchCatalogScan(market,key,{...options,browserOnly:scan===3 && options.browserRecovery===true,onHtml:async(html,evidence)=>{
         evidence.scan=scan;
         if(options.onHtml)await options.onHtml(html,evidence);
       }});
       attempts.push(...result.attempts.map(a=>({...a,scan})));
-      scans.push({scan,transport:scan===3?'browser':'http',status:'verified',pages:result.parsed.pages});
+      scans.push({scan,transport:scan===3 && options.browserRecovery===true?'browser':'http',status:'verified',pages:result.parsed.pages});
       return {...result,attempts,scans,credits:attempts.reduce((n,a)=>n+a.credits,0)};
     } catch(error) {
       attempts.push(...(error.attempts||[]).map(a=>({...a,scan})));
-      scans.push({scan,transport:scan===3?'browser':'http',status:'unknown',error:error.message,pages:error.pages||[]});
+      scans.push({scan,transport:scan===3 && options.browserRecovery===true?'browser':'http',status:'unknown',error:error.message,pages:error.pages||[]});
       if(!error.retryCatalog || scan===3) {
         error.attempts=attempts; error.scans=scans;
         throw error;

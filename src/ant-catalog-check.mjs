@@ -23,6 +23,8 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
       state.markets[market]={...previous,
         catalogStocksUsage:'historical observations; consult currentStocks for this scan',
         currentStocks:healthy?Object.fromEntries(Object.entries(reconciled.catalogStocks).filter(([,v])=>v.seenAt===checkedAt)):{},
+        lastVerifiedCatalog:healthy?{checkedAt,products:parsed.pageItems,targets:fetched.parsed.products.length,
+          officialTotal:parsed.reportedTotal,coverage:parsed.coverage}:previous.lastVerifiedCatalog||null,
         status:healthy?'ok':'unknown',lastCheckedAt:checkedAt,
         lastSuccessAt:healthy?checkedAt:previous.lastSuccessAt||null,
         products:parsed.pageItems,targets:fetched.parsed.products.length,
@@ -44,6 +46,10 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
     } catch(error) {
       // Failure preserves previous observations and notification deduplication.
       state.markets[market]={...previous,status:'unknown',lastCheckedAt:checkedAt,
+        lastVerifiedCatalog:previous.lastVerifiedCatalog || (previous.lastSuccessAt?{
+          checkedAt:previous.lastSuccessAt,products:previous.products,targets:previous.targets,
+          officialTotal:previous.officialTotal,coverage:previous.coverage}:null),
+        products:null,targets:null,officialTotal:null,categoryAvailable:null,coverage:'unverified',fetchMode:null,
         currentStocks:{},catalogStocksUsage:'historical observations; consult currentStocks for this scan',
         verificationErrors:[{stage:'catalog',error:error.message}],error:error.message};
       summaries.push({market,status:'unknown',error:error.message,attempts:error.attempts||[],pages:error.pages||[],scans:error.scans||[],newAlerts:0});

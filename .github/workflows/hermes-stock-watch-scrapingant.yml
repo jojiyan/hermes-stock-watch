@@ -10,6 +10,11 @@ on:
       - 'test/ant-*.test.mjs'
       - '.github/workflows/hermes-stock-watch-scrapingant.yml'
   workflow_dispatch:
+    inputs:
+      browser_recovery:
+        description: 'Opt-in browser diagnostic after two inconsistent scans (extra credits)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -60,6 +65,7 @@ jobs:
         id: monitor
         run: node src/ant-catalog-monitor.mjs
         env:
+          CATALOG_BROWSER_RECOVERY: ${{ inputs.browser_recovery == true }}
           VERIFY_ONLY: ${{ github.event_name == 'push' || github.ref != 'refs/heads/main' }}
           SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

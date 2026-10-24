@@ -137,3 +137,32 @@ test('US partial purchase failure suppresses all US alerts, preserves history an
  assert.equal(out.report.executionStatus,'completed');assert.equal(out.report.verificationStatus,'unverified');
  assert.equal(prior.version,2);
 });
+
+test('repeated HTTP 200 incomplete catalogs escalate to an entirely browser-rendered scan',async()=>{
+ const calls=[];
+ const x=await fetchOfficialCatalog('US','key',{wait:async()=>{},parser:JSON.parse,
+  fetcher:async url=>{
+   const params=new URL(url).searchParams;
+   const browser=params.get('browser')==='true';
+   const page=new URL(params.get('url')).searchParams.has('page')?2:1;
+   calls.push({browser,page});
+   return new Response(JSON.stringify({products:[],pageItems:page===1?(browser?40:39):2,reportedTotal:42,
+    skus:Array.from({length:page===1?(browser?40:39):2},(_,i)=>'H'+(page===1?i:40+i)),next:page===1?'?page=2':null}),
+    {headers:{'ant-credits-cost':browser?'10':'1'}});
+  },
+ });
+ assert.deepEqual(calls,[{browser:false,page:1},{browser:false,page:2},{browser:false,page:1},{browser:false,page:2},
+  {browser:true,page:1},{browser:true,page:2},{browser:true,page:1}]);
+ assert.equal(x.parsed.pageItems,42);assert.equal(x.parsed.skus.length,42);
+ assert.equal(x.credits,34);assert.equal(x.scans[2].transport,'browser');
+});
+test('browser recovery never accepts the same incomplete response or silently downgrades after 409',async()=>{
+ const modes=[];
+ await assert.rejects(fetchOfficialCatalog('US','key',{wait:async()=>{},parser:JSON.parse,
+  fetcher:async url=>{
+   const browser=new URL(url).searchParams.get('browser');modes.push(browser);
+   return browser==='true'?new Response('busy',{status:409}):new Response(JSON.stringify({products:[],pageItems:41,reportedTotal:42}));
+  },
+ }),/HTTP 409/);
+ assert.deepEqual(modes,['false','false','true']);
+});

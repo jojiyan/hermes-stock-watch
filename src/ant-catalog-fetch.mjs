@@ -44,12 +44,14 @@ export async function fetchAntHtml(url, market, key, options = {}) {
   const fetcher = options.fetcher || fetch;
   const wait = options.wait || (ms => new Promise(resolve => setTimeout(resolve, ms)));
   const attempts = options.attempts || [];
-  const modes = [
+  const modes = options.browserOnly ? [
+    {browser:true, mode:'browser-consistency-recovery'},
+  ] : [
     {browser:false, mode:'low-credit-1'},
     {browser:false, mode:'low-credit-retry'},
     {browser:true, mode:'browser-fallback'},
   ];
-  if(new URL(url).searchParams.has('page')) {
+  if(!options.browserOnly && new URL(url).searchParams.has('page')) {
     // Observed official equivalent: ?page=2& serves the same canonical page.
     // A distinct transport URL can recover an edge/proxy block without changing scope.
     modes.splice(2,0,{browser:false,mode:'low-credit-page-delimiter',targetUrl:url+'&'});
@@ -58,7 +60,7 @@ export async function fetchAntHtml(url, market, key, options = {}) {
   for (let i = 0; i < modes.length; i++) {
     const mode = modes[i];
     if (i) await wait(attempts.at(-1)?.status===409?10_000:1200 * i);
-    if(attempts.at(-1)?.status===409)mode.browser=false;
+    if(!options.browserOnly && attempts.at(-1)?.status===409)mode.browser=false;
     const targetUrl=mode.targetUrl||url;
     const params = new URLSearchParams({url:targetUrl, browser:String(mode.browser),
       proxy_type:'datacenter', proxy_country:market.toLowerCase(), timeout:'50'});
@@ -193,16 +195,16 @@ export async function fetchOfficialCatalog(market,key,options={}) {
   for(let scan=1;scan<=3;scan++) {
     try {
       // Each attempt owns fresh totals, pages, products and SKU sets. Never merge scans.
-      const result=await fetchCatalogScan(market,key,{...options,onHtml:async(html,evidence)=>{
+      const result=await fetchCatalogScan(market,key,{...options,browserOnly:scan===3,onHtml:async(html,evidence)=>{
         evidence.scan=scan;
         if(options.onHtml)await options.onHtml(html,evidence);
       }});
       attempts.push(...result.attempts.map(a=>({...a,scan})));
-      scans.push({scan,status:'verified',pages:result.parsed.pages});
+      scans.push({scan,transport:scan===3?'browser':'http',status:'verified',pages:result.parsed.pages});
       return {...result,attempts,scans,credits:attempts.reduce((n,a)=>n+a.credits,0)};
     } catch(error) {
       attempts.push(...(error.attempts||[]).map(a=>({...a,scan})));
-      scans.push({scan,status:'unknown',error:error.message,pages:error.pages||[]});
+      scans.push({scan,transport:scan===3?'browser':'http',status:'unknown',error:error.message,pages:error.pages||[]});
       if(!error.retryCatalog || scan===3) {
         error.attempts=attempts; error.scans=scans;
         throw error;

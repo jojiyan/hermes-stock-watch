@@ -4,7 +4,11 @@ on:
   schedule:
     - cron: "3-58/5 * * * *"
   push:
-    branches: [fix/ca-catalog-pagination]
+    branches: [main, fix/ca-catalog-pagination]
+    paths:
+      - 'src/ant-*.mjs'
+      - 'test/ant-*.test.mjs'
+      - '.github/workflows/hermes-stock-watch-scrapingant.yml'
   workflow_dispatch:
 
 permissions:

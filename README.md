@@ -61,3 +61,10 @@ persistence finish; the separate verification gate fails if either market is unk
 Unexpected execution/notification/write errors fail the execution step directly.
 The gate uses explicit execution and verification outputs, not a `continue-on-error`
 conclusion. `VERIFY_ONLY=true` writes evidence/report but never state or notifications.
+
+If two full HTTP scans still return inconsistent catalogs (including HTTP 200 with
+missing items), the third scan explicitly uses browser rendering for every page and
+the closing first-page check. It cannot fall back to the same incomplete HTTP mode.
+This bounded recovery costs more credits, and still requires exact totals and unique
+SKUs; it does not treat a repeated short catalog as verified. Code changes on main
+also trigger a live `VERIFY_ONLY` scan, without writing state or sending alerts.

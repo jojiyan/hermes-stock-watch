@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-24T23:53:02.395Z",
+      "lastCheckedAt": "2026-10-25T03:27:40.462Z",
       "lastSuccessAt": "2026-10-23T00:53:11.390Z",
       "products": null,
       "targets": null,
@@ -73,8 +73,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-24T23:53:02.395Z",
-      "lastSuccessAt": "2026-10-24T23:53:02.395Z",
+      "lastCheckedAt": "2026-10-25T03:27:40.462Z",
+      "lastSuccessAt": "2026-10-25T03:27:40.462Z",
       "products": 96,
       "targets": 0,
       "categoryAvailable": 0,
@@ -90,7 +90,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-24T23:53:02.395Z",
+        "checkedAt": "2026-10-25T03:27:40.462Z",
         "products": 96,
         "targets": 0,
         "officialTotal": 96,

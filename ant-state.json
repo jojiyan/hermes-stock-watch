@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-26T05:03:19.513Z",
+      "lastCheckedAt": "2026-10-26T11:01:25.654Z",
       "lastSuccessAt": "2026-10-23T00:53:11.390Z",
       "products": null,
       "targets": null,
@@ -57,10 +57,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Incomplete Hermès catalog: received 42 of 43 total products; missing next page"
+          "error": "Incomplete Hermès catalog: received 41 of 42 total products; missing next page"
         }
       ],
-      "error": "Incomplete Hermès catalog: received 42 of 43 total products; missing next page",
+      "error": "Incomplete Hermès catalog: received 41 of 42 total products; missing next page",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -73,8 +73,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-26T05:03:19.513Z",
-      "lastSuccessAt": "2026-10-26T05:03:19.513Z",
+      "lastCheckedAt": "2026-10-26T11:01:25.654Z",
+      "lastSuccessAt": "2026-10-26T11:01:25.654Z",
       "products": 95,
       "targets": 0,
       "categoryAvailable": 0,
@@ -90,7 +90,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-26T05:03:19.513Z",
+        "checkedAt": "2026-10-26T11:01:25.654Z",
         "products": 95,
         "targets": 0,
         "officialTotal": 95,

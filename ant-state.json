@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-26T00:18:40.824Z",
+      "lastCheckedAt": "2026-10-26T05:03:19.513Z",
       "lastSuccessAt": "2026-10-23T00:53:11.390Z",
       "products": null,
       "targets": null,
@@ -57,10 +57,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Incomplete Hermès catalog: received 41 of 42 total products; missing next page"
+          "error": "Incomplete Hermès catalog: received 42 of 43 total products; missing next page"
         }
       ],
-      "error": "Incomplete Hermès catalog: received 41 of 42 total products; missing next page",
+      "error": "Incomplete Hermès catalog: received 42 of 43 total products; missing next page",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -72,33 +72,28 @@
       }
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-26T00:18:40.824Z",
-      "lastSuccessAt": "2026-10-25T13:23:14.649Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-26T05:03:19.513Z",
+      "lastSuccessAt": "2026-10-26T05:03:19.513Z",
+      "products": 95,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all pages of the currently published category (verified total and unique SKUs)",
+      "officialTotal": 95,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
-        }
-      ],
-      "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-25T13:23:14.649Z",
-        "products": 96,
+        "checkedAt": "2026-10-26T05:03:19.513Z",
+        "products": 95,
         "targets": 0,
-        "officialTotal": 96,
+        "officialTotal": 95,
         "coverage": "all pages of the currently published category (verified total and unique SKUs)"
       }
     }

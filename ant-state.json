@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-26T11:01:25.654Z",
+      "lastCheckedAt": "2026-10-26T17:18:21.781Z",
       "lastSuccessAt": "2026-10-23T00:53:11.390Z",
       "products": null,
       "targets": null,
@@ -57,10 +57,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Incomplete Hermès catalog: received 41 of 42 total products; missing next page"
+          "error": "Official total changed during pagination"
         }
       ],
-      "error": "Incomplete Hermès catalog: received 41 of 42 total products; missing next page",
+      "error": "Official total changed during pagination",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -73,16 +73,16 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-26T11:01:25.654Z",
-      "lastSuccessAt": "2026-10-26T11:01:25.654Z",
-      "products": 95,
+      "lastCheckedAt": "2026-10-26T17:18:21.781Z",
+      "lastSuccessAt": "2026-10-26T17:18:21.781Z",
+      "products": 94,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
       "coverage": "all pages of the currently published category (verified total and unique SKUs)",
-      "officialTotal": 95,
+      "officialTotal": 94,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
@@ -90,10 +90,10 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-26T11:01:25.654Z",
-        "products": 95,
+        "checkedAt": "2026-10-26T17:18:21.781Z",
+        "products": 94,
         "targets": 0,
-        "officialTotal": 95,
+        "officialTotal": 94,
         "coverage": "all pages of the currently published category (verified total and unique SKUs)"
       }
     }

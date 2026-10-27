@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-26T21:42:52.567Z",
+      "lastCheckedAt": "2026-10-27T00:53:23.726Z",
       "lastSuccessAt": "2026-10-23T00:53:11.390Z",
       "products": null,
       "targets": null,
@@ -57,10 +57,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination"
+          "error": "Incomplete Hermès catalog: received 45 of 46 total products; missing next page"
         }
       ],
-      "error": "Official total changed during pagination",
+      "error": "Incomplete Hermès catalog: received 45 of 46 total products; missing next page",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -72,30 +72,25 @@
       }
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-26T21:42:52.567Z",
-      "lastSuccessAt": "2026-10-26T17:18:21.781Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-27T00:53:23.726Z",
+      "lastSuccessAt": "2026-10-27T00:53:23.726Z",
+      "products": 94,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all pages of the currently published category (verified total and unique SKUs)",
+      "officialTotal": 94,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
-        }
-      ],
-      "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-26T17:18:21.781Z",
+        "checkedAt": "2026-10-27T00:53:23.726Z",
         "products": 94,
         "targets": 0,
         "officialTotal": 94,

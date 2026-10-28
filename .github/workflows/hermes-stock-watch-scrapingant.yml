@@ -2,21 +2,26 @@ name: Hermes Stock Watch (ScrapingAnt)
 
 on:
   schedule:
-    - cron: "3-58/5 * * * *"
+    - cron: "7-57/10 * * * *"
   push:
-    branches: [main, fix/ca-catalog-pagination, fix/catalog-facet-recovery]
+    branches: [main, 'fix/**']
     paths:
       - 'src/ant-*.mjs'
       - 'test/ant-*.test.mjs'
       - '.github/workflows/hermes-stock-watch-scrapingant.yml'
   workflow_dispatch:
     inputs:
+      not_before:
+        description: 'Internal continuation: next scan slot (ISO timestamp)'
+        type: string
+        default: ''
       browser_recovery:
         description: 'Opt-in browser diagnostic after two inconsistent scans (extra credits)'
         type: boolean
         default: false
 
 permissions:
+  actions: write
   contents: write
   issues: write
 
@@ -27,7 +32,7 @@ concurrency:
 jobs:
   check-stock:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Check out monitor
         uses: actions/checkout@v4
@@ -60,6 +65,19 @@ jobs:
         if: steps.configured.outputs.ready == 'true'
         run: node --check src/ant-catalog-monitor.mjs
 
+      - name: Load current production stock state
+        if: steps.configured.outputs.ready == 'true' && github.ref == 'refs/heads/main'
+        run: node src/ant-state-store.mjs load
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Wait for the next ten-minute scan slot
+        if: steps.configured.outputs.ready == 'true' && github.ref == 'refs/heads/main'
+        run: node src/ant-schedule.mjs wait
+        env:
+          NOT_BEFORE: ${{ inputs.not_before }}
+
       - name: Execute scan and persist independent market observations
         if: steps.configured.outputs.ready == 'true'
         id: monitor
@@ -72,21 +90,13 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
-      - name: Save ScrapingAnt stock state
+      - name: Save current stock state without git rebase
+        id: persist
         if: always() && steps.configured.outputs.ready == 'true' && steps.monitor.outputs.state_written == 'true' && github.ref == 'refs/heads/main'
-        shell: bash
-        run: |
-          if git diff --quiet -- ant-state.json; then
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ant-state.json
-          git commit -m "chore: update ScrapingAnt stock state [skip ci]"
-          if ! git push; then
-            git pull --rebase origin main
-            git push
-          fi
+        run: node src/ant-state-store.mjs save
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Retain verification evidence
         if: steps.configured.outputs.ready == 'true' && always()
@@ -101,11 +111,17 @@ jobs:
       - name: Require current US and CA verification
         if: steps.configured.outputs.ready == 'true' && always()
         env:
+          PERSIST_OUTCOME: ${{ steps.persist.outcome }}
+          PRODUCTION: ${{ github.ref == 'refs/heads/main' }}
           MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
           VERIFICATION_STATUS: ${{ steps.monitor.outputs.verification_status }}
         run: |
           if [[ "$MONITOR_OUTCOME" != success ]]; then
             echo "::error::Monitor execution failed or was skipped; see execution step."
+            exit 1
+          fi
+          if [[ "$PRODUCTION" == true && "$PERSIST_OUTCOME" != success ]]; then
+            echo "::error::Scan state was not persisted; the run is not complete."
             exit 1
           fi
           if [[ "$VERIFICATION_STATUS" != verified ]]; then
@@ -117,3 +133,10 @@ jobs:
         if: steps.configured.outputs.ready != 'true'
         run: echo "SCRAPINGANT_API_KEY missing; scheduled run skipped."
 
+
+      - name: Queue the next ten-minute stock scan
+        if: always() && !cancelled() && steps.configured.outputs.ready == 'true' && steps.monitor.outcome != 'skipped' && github.ref == 'refs/heads/main'
+        run: node src/ant-schedule.mjs next
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}

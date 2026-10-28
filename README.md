@@ -29,7 +29,7 @@ The connected GitHub account displays `954736371@qq.com` as its profile email. T
 
 ## Repair validation
 
-The `fix/ca-catalog-pagination` branch push runs the real ScrapingAnt workflow in `VERIFY_ONLY` mode: it uses the repository secret but sends no notifications and writes no production state. Production schedule/manual runs on `main` still persist state and notify. Regression tests also run on pull requests. Verification and production use separate concurrency groups, so branch checks do not cancel pending production checks.
+The `fix/ca-catalog-pagination` and `fix/catalog-facet-recovery` branch pushes runs the real ScrapingAnt workflow in `VERIFY_ONLY` mode: it uses the repository secret but sends no notifications and writes no production state. Production schedule/manual runs and monitored-code pushes on `main` persist state and notify only after the safety regressions pass. Regression tests also run on pull requests. Verification and production use separate concurrency groups, so branch checks do not cancel pending production checks.
 
 CA regression fixtures are reduced extracts of official HTML retrieved on 2026-10-21: 40 + 3 products, `total=43`, and official next/canonical links. Only required catalog fields and rendered tile identifiers were retained.
 
@@ -67,9 +67,36 @@ HTTP scans still return inconsistent catalogs, the third scan uses browser rende
 the closing first-page check. It cannot fall back to the same incomplete HTTP mode.
 This bounded recovery costs more credits, and still requires exact totals and unique
 SKUs; it does not treat a repeated short catalog as verified. Code changes on main
-also trigger a live `VERIFY_ONLY` scan, without writing state or sending alerts.
+activate the production scan after tests, persist state and notify only verified stock.
+Repair branch pushes remain `VERIFY_ONLY` and never write state or notify.
 
 Browser diagnostics are disabled by default: live run #833 confirmed rendered US
 HTML also contained only 41 of the claimed 42 products. Repeating paid browser
 requests cannot resolve that upstream discrepancy. The strict unknown status is
 intentional until complete official evidence is available.
+
+### Official facet recovery for the US 48/49 gap
+
+On 2026-10-28, ordinary US pagination returned 39 + 9 SKUs while the official
+unfiltered total remained 49. The published So Medor line link returned two
+validated SKUs, including the omitted H085054CK37. This is an upstream page gap,
+not permission to accept a short catalog.
+
+For gaps of at most five SKUs, the monitor can fetch up to three same-market,
+same-category line links explicitly published in that page. Facet names are only
+a cost-saving ranking hint. Every selected facet must reconcile its own exact
+official count, each overlapping SKU must have identical metadata, and the union
+must reach the exact unfiltered official total. The opening category page and
+all used recovery facets are fetched again and must remain identical. No data
+is combined across scan retries. Any mismatch remains unknown and cannot alert.
+
+Reports now retain all validated catalog records, including non-target names,
+URLs and stock metadata, plus the recovery page and unique SKU contribution.
+Missing product titles are errors; target matching normalizes Unicode spacing,
+accents and punctuation. Positive notifications still require product-page
+purchase verification. Reduced US fixtures preserve the observed 39 + 9 + 2
+records and the official links/counts; the facet contributes one new unique SKU.
+
+GitHub scheduling and email routing are separate from catalog verification.
+The cron remains best effort. An Issue notification is not proof that Gmail
+received an email; account notification routing must be checked while signed in.

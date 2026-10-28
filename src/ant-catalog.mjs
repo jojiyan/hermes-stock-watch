@@ -11,8 +11,13 @@ export const REQUESTED_BAGS = [
   /\bconstance\b/i,
 ];
 
+export function normalizeCatalogTitle(title) {
+  return String(title || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
+}
+
 export function isRequestedBag(title) {
-  return REQUESTED_BAGS.some(r => r.test(String(title || "")));
+  return REQUESTED_BAGS.some(r => r.test(normalizeCatalogTitle(title)));
 }
 
 export function parseHermesCatalog(html, marketCode, { partial = false } = {}) {
@@ -40,7 +45,7 @@ export function parseHermesCatalog(html, marketCode, { partial = false } = {}) {
   if(reportedTotal > 500 || reportedTotal < items.length) throw new Error("Invalid Hermès catalog total");
   if(!partial && reportedTotal !== items.length)
     throw new Error(`Incomplete Hermès catalog: received ${items.length} of ${reportedTotal} total products`);
-  const result=[];
+  const result=[], records=[];
   const seen=new Set();
   let recognized=0;
   for(const p of items) {
@@ -49,7 +54,7 @@ export function parseHermesCatalog(html, marketCode, { partial = false } = {}) {
     if(seen.has(sku)) throw new Error("Duplicate official SKU "+sku);
     if(!/^H[A-Z0-9]{7,16}$/.test(sku)) throw new Error("Invalid official SKU");
     if(typeof p.stock?.ecom!=="boolean")throw new Error("Missing e-commerce stock value for SKU "+sku);
-    const slug=String(p.slug||"");
+    if(typeof p.title!=="string" || !normalizeCatalogTitle(p.title)) throw new Error("Missing official product title for SKU "+sku);
     const rawPath=String(p.url||"");
     if(!/^\/product\/[a-z0-9-]+\/$/i.test(rawPath) || !rawPath.endsWith("-"+sku+"/"))throw new Error("Unexpected official product URL for SKU "+sku);
     const productUrl=`https://www.hermes.com/${marketCode.toLowerCase()}/en${rawPath}`;
@@ -63,22 +68,37 @@ export function parseHermesCatalog(html, marketCode, { partial = false } = {}) {
     const ecom=p.stock.ecom && !unavailableTag;
     seen.add(sku);
     recognized+=1;
-    if(!isRequestedBag(p.title))continue;
-    result.push({
+    const record={
       market:marketCode,
       marketName:marketCode==="US"?"Hermès USA":"Hermès Canada",
       sku, name:String(p.title), color:String(p.avgColor||""),
       price:typeof p.price==="number" ? `$${p.price.toLocaleString("en-US")}` : "",
       url:productUrl, ecom,
-      evidence:"Hermès official category: stock.ecom=true and no unavailable badge",
-    });
+      evidence:"Hermès official category: stock.ecom and rendered product tile",
+    };
+    records.push(record);
+    if(isRequestedBag(p.title))result.push(record);
   }
   if(!partial && recognized < 10)throw new Error("Too few verified stock records");
   if(recognized !== items.length)throw new Error("Official product totals did not reconcile with verified SKU records");
   const nextLinks=[...html.matchAll(/<link\b[^>]*>/gi)].filter(x=>/\brel=["']next["']/i.test(x[0]));
   if(nextLinks.length>1) throw new Error("Ambiguous next catalog page");
   const next=nextLinks[0]?.[0].match(/\bhref=["']([^"']+)["']/i)?.[1]?.replace(/&amp;/g,"&") || null;
-  return { products:result, pageItems:recognized, reportedTotal,
+  // Recovery links must be explicitly published in this official page.
+  const baseUrl="https://www.hermes.com/"+marketCode.toLowerCase()+"/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/";
+  const links=[...html.matchAll(/<a\b[^>]*href=["']([^"']+)["']/gi)].map(x=>x[1].replace(/&amp;/g,'&'));
+  const facets=(holder.filtersGroup||[]).find(f=>f.attribute==='display_name')?.filters||[];
+  const recoveryFacets=facets.filter(f=>f.facetIsCrawlable===true && Number.isSafeInteger(f.total) && f.total>0 && f.total<=40)
+    .flatMap(f=>{
+      const url=links.find(link=>{
+        try {const u=new URL(link,baseUrl),base=new URL(baseUrl);
+          return u.origin===base.origin && u.pathname===base.pathname && !u.username && !u.password && !u.hash &&
+            [...u.searchParams.keys()].length===1 && u.searchParams.get('facet_line')===f.value;
+        }catch{return false;}
+      });
+      return url?[{name:f.name,value:f.value,total:f.total,url:new URL(url,baseUrl).href}]:[];
+    });
+  return { products:result, records, recoveryFacets, pageItems:recognized, reportedTotal,
            skus:[...seen], next,
            maxSize:holder.products.maxSize, coverage:"all items of the currently published category (verified total)" };
 }

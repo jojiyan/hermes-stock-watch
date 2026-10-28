@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "3-58/5 * * * *"
   push:
-    branches: [main, fix/ca-catalog-pagination]
+    branches: [main, fix/ca-catalog-pagination, fix/catalog-facet-recovery]
     paths:
       - 'src/ant-*.mjs'
       - 'test/ant-*.test.mjs'
@@ -66,14 +66,14 @@ jobs:
         run: node src/ant-catalog-monitor.mjs
         env:
           CATALOG_BROWSER_RECOVERY: ${{ inputs.browser_recovery == true }}
-          VERIFY_ONLY: ${{ github.event_name == 'push' || github.ref != 'refs/heads/main' }}
+          VERIFY_ONLY: ${{ github.ref != 'refs/heads/main' }}
           SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
       - name: Save ScrapingAnt stock state
-        if: always() && steps.configured.outputs.ready == 'true' && steps.monitor.outputs.state_written == 'true' && github.event_name != 'push' && github.ref == 'refs/heads/main'
+        if: always() && steps.configured.outputs.ready == 'true' && steps.monitor.outputs.state_written == 'true' && github.ref == 'refs/heads/main'
         shell: bash
         run: |
           if git diff --quiet -- ant-state.json; then

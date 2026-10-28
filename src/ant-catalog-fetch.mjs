@@ -1,4 +1,4 @@
-import { parseHermesCatalog } from './ant-catalog.mjs';
+import { parseHermesCatalog, normalizeCatalogTitle } from './ant-catalog.mjs';
 import { createHash } from 'node:crypto';
 
 // A plan may allow just one concurrent paid request. Market state stays independent.
@@ -106,7 +106,7 @@ async function fetchCatalogScan(market, key, options = {}) {
   if (!['US','CA'].includes(market) || !key) throw new Error('Invalid market or missing key');
   const parser = options.parser || parseHermesCatalog;
   const attempts = [];
-  const pages = [], products = [], skus = new Set();
+  const pages = [], products = [], records = [], skus = new Set(), recoveredFacets=[];
   let url = categoryUrl(market), total, firstPage;
   try {
     for (let page = 1; page <= 13; page++) {
@@ -151,9 +151,55 @@ async function fetchCatalogScan(market, key, options = {}) {
       }
       pages.push({url,pageItems:parsed.pageItems,reportedTotal:parsed.reportedTotal,mode});
       products.push(...parsed.products);
-      const count = pages.reduce((sum,p)=>sum+p.pageItems,0);
+      records.push(...(parsed.records||[]));
+      let count = pages.reduce((sum,p)=>sum+p.pageItems,0);
       if (count > total) throw unstableCatalog('Catalog page counts exceed official total');
       if (!parsed.next) {
+        if(count<total && total-count<=5 && records.length===count && options.facetRecovery!==false) {
+          // Ranking only limits cost; acceptance still needs exact official totals,
+          // rendered SKU records, matching overlaps and closing consistency checks.
+          const normalize=s=>' '+normalizeCatalogTitle(s).toLowerCase()+' ';
+          const candidates=(firstPage.recoveryFacets||[]).map(f=>{
+            const terms=[f.name,...String(f.value).split(';')].map(normalize);
+            const observed=records.filter(p=>terms.some(t=>normalize(p.name).includes(t))).length;
+            return {...f,deficit:f.total-observed};
+          }).filter(f=>f.deficit>0).sort((a,b)=>b.deficit-a.deficit||a.total-b.total).slice(0,3);
+          for(const facet of candidates) {
+            const facetUrl=new URL(facet.url),base=new URL(categoryUrl(market));
+            if(facetUrl.origin!==base.origin || facetUrl.pathname!==base.pathname ||
+              facetUrl.username || facetUrl.password || facetUrl.hash ||
+              [...facetUrl.searchParams.keys()].length!==1 ||
+              facetUrl.searchParams.get('facet_line')!==facet.value)
+              throw new Error('Unsafe official recovery facet URL');
+            const result=await fetchAntHtml(facet.url,market,key,{...options,attempts,parse:html=>{
+              if(!options.parser)validateCatalogLocation(html,facet.url,market);
+              return parser(html,market,{partial:true});
+            }});
+            const recovered=result.parsed;
+            if(recovered.reportedTotal!==facet.total || recovered.pageItems!==facet.total ||
+              recovered.next || recovered.records?.length!==facet.total ||
+              recovered.skus?.length!==facet.total)
+              throw unstableCatalog('Official recovery facet is incomplete or changed');
+            let added=0;
+            for(const record of recovered.records) {
+              const existing=records.find(p=>p.sku===record.sku);
+              if(existing) {
+                if(JSON.stringify(existing)!==JSON.stringify(record))
+                  throw unstableCatalog('Conflicting SKU metadata in official recovery facet: '+record.sku);
+              } else {
+                records.push(record);skus.add(record.sku);added++;
+                const target=recovered.products.find(p=>p.sku===record.sku);
+                if(target)products.push(target);
+              }
+            }
+            count=skus.size;
+            pages.push({url:facet.url,kind:'facet-recovery',pageItems:recovered.pageItems,
+              reportedTotal:recovered.reportedTotal,addedSkus:added,mode:result.mode});
+            recoveredFacets.push({facet,parsed:recovered});
+            if(count>total)throw unstableCatalog('Recovered unique SKU count exceeds official total');
+            if(count===total)break;
+          }
+        }
         if (count !== total || (parsed.skus && skus.size !== total))
           throw unstableCatalog(`Incomplete Hermès catalog: received ${count} of ${total} total products; missing next page`);
         // Re-fetch the first page after pagination: reject a moving boundary/total.
@@ -166,9 +212,20 @@ async function fetchCatalogScan(market, key, options = {}) {
           if (catalogFingerprint(closing.parsed) !== catalogFingerprint(firstPage))
             throw unstableCatalog('Official catalog changed during closing first-page verification');
         }
-        return {parsed:{products,pageItems:count,reportedTotal:total,skus:[...skus],pages,
-          coverage:'all pages of the currently published category (verified total and unique SKUs)'},
-          credits:attempts.reduce((sum,a)=>sum+a.credits,0),mode:pages.length>1?'paginated':mode,attempts};
+        for(const recovery of recoveredFacets) {
+          const {facet}=recovery;
+          const closing=await fetchAntHtml(facet.url,market,key,{...options,attempts,parse:html=>{
+            if(!options.parser)validateCatalogLocation(html,facet.url,market);
+            return parser(html,market,{partial:true});
+          }});
+          if(catalogFingerprint(closing.parsed)!==catalogFingerprint(recovery.parsed))
+            throw unstableCatalog('Official recovery facet changed during closing verification');
+        }
+        return {parsed:{products,records,pageItems:count,reportedTotal:total,skus:[...skus],pages,
+          recovery:recoveredFacets.length?'official linked line facets (exact unique total)':'none',
+          coverage:'all published category SKUs; exact official total with closing page and recovery-facet verification'},
+          credits:attempts.reduce((sum,a)=>sum+a.credits,0),
+          mode:recoveredFacets.length?'facet-recovered':pages.length>1?'paginated':mode,attempts};
       }
       if (count === total) throw unstableCatalog('Unexpected next page after complete catalog');
       url = nextCatalogUrl(parsed.next,url,market);
@@ -186,7 +243,7 @@ function unstableCatalog(message) {
   return Object.assign(new Error(message),{retryCatalog:true});
 }
 function catalogFingerprint(parsed) {
-  return JSON.stringify([parsed.reportedTotal,parsed.pageItems,parsed.skus,parsed.next,parsed.products]);
+  return JSON.stringify([parsed.reportedTotal,parsed.pageItems,parsed.skus,parsed.next,parsed.records||parsed.products,parsed.recoveryFacets]);
 }
 
 export async function fetchOfficialCatalog(market,key,options={}) {

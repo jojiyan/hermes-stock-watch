@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-28T16:44:31.756Z",
-      "lastSuccessAt": "2026-10-28T16:44:31.756Z",
+      "lastCheckedAt": "2026-10-28T16:54:31.813Z",
+      "lastSuccessAt": "2026-10-28T16:54:31.813Z",
       "products": 60,
       "targets": 4,
       "categoryAvailable": 1,
@@ -16,7 +16,7 @@
           "color": "Orange",
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H069573CKDM/",
-          "lastSeenAt": "2026-10-28T16:44:31.756Z",
+          "lastSeenAt": "2026-10-28T16:54:31.813Z",
           "source": "official-catalog"
         }
       },
@@ -42,22 +42,22 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-28T16:44:31.756Z",
+          "seenAt": "2026-10-28T16:54:31.813Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-28T16:44:31.756Z",
+          "seenAt": "2026-10-28T16:54:31.813Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-28T16:44:31.756Z",
+          "seenAt": "2026-10-28T16:54:31.813Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
           "ecom": true,
-          "seenAt": "2026-10-28T16:44:31.756Z",
+          "seenAt": "2026-10-28T16:54:31.813Z",
           "source": "official-product-purchase"
         }
       },
@@ -76,28 +76,28 @@
       "currentStocks": {
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-28T16:44:31.756Z",
+          "seenAt": "2026-10-28T16:54:31.813Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-28T16:44:31.756Z",
+          "seenAt": "2026-10-28T16:54:31.813Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-28T16:44:31.756Z",
+          "seenAt": "2026-10-28T16:54:31.813Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
           "ecom": true,
-          "seenAt": "2026-10-28T16:44:31.756Z",
+          "seenAt": "2026-10-28T16:54:31.813Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-28T16:44:31.756Z",
+        "checkedAt": "2026-10-28T16:54:31.813Z",
         "products": 60,
         "targets": 4,
         "officialTotal": 60,
@@ -106,7 +106,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-28T16:44:31.756Z",
+      "lastCheckedAt": "2026-10-28T16:54:31.813Z",
       "lastSuccessAt": "2026-10-28T16:14:31.593Z",
       "products": null,
       "targets": null,

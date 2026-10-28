@@ -1,125 +1,60 @@
-# Hermès US + CA official stock monitor
+# Hermès US + Canada stock monitor
 
-**Active production workflow:** [Hermes Stock Watch (ScrapingAnt)](.github/workflows/hermes-stock-watch-scrapingant.yml).
+Production: [Hermes Stock Watch (ScrapingAnt)](.github/workflows/hermes-stock-watch-scrapingant.yml).
 
-- Runs on GitHub Actions. The cron **requests** a run every 5 minutes; GitHub's queue can delay executions by 15–30+ minutes. Every scheduled execution checks both markets; the former 8-minute freshness guard was removed because it could skip a requested 5-minute check and let one healthy market suppress retries for the other. Scheduling remains best effort, not a 5-minute SLA.
-- Uses `SCRAPINGANT_API_KEY`; no Firecrawl runtime dependency.
-- Reads every official category page, following the same-market `rel="next"` links. Canada's 43-item catalog is 40 items on page 1 plus 3 on page 2 (normally two category credits). `stock.ecom` is discovery metadata only.
-- Requires stable official totals across pages and exactly that many unique validated SKUs/tiles. Missing pages, duplicate SKUs, changed totals and blocked responses remain **unknown** and fail Actions. Requests have bounded datacenter retries, then one browser fallback; residential requests are not used. After transport blocking, one direct request to the same official category URL may recover the page under identical validation; all preceding failures remain in the evidence.
-- Tracks Neo Garden 23 / Mini Garden 23 including full-leather when included in the *published category*, Garden Party 30, Picotin, Mini Lindy, Birkin, Kelly (including Pochette), Constance; excludes Garden Party 36, Neo Garden Voyage 41, and Bolide.
-- **Coverage limitation:** this checks every item currently published in the women's bags category for each market (the official total is verified). A product that is not included in that category, or a separately accessible product detail page not listed there, cannot be inferred to be for sale. This is **not** a guarantee of complete product-site or historical-SKU coverage.
-- **Confirmation level:** target product pages must match canonical URL, market and visible SKU. Only an enabled official **Add to cart / Add to bag** button without unavailable evidence can trigger an alert. Unknown product pages preserve previous observations and alert deduplication. A complete category with explicit `stock.ecom=false` is negative evidence and needs no detail request; only potential positives need button verification.
-- US and CA preserve their state independently. A market's failure does not erase prior observations or suppress stock notifications from the other region.
-- Each new qualifying SKU / restock sends a GitHub Issue mentioning and assigning the repository owner; duplicate notifications are suppressed until an explicit negative observation from a complete official category or verified product page.
+## Operation
 
-## Stock notifications through GitHub
+- Each production run scans both markets, saves the observations, and queues the next workflow_dispatch for a ten-minute interval. The next run waits for its due time and the most recent persisted observation. GitHub's native ten-minute cron is a recovery trigger.
+- This runs in GitHub Actions and does not depend on a user's computer remaining open. The job's temporary GITHUB_TOKEN queues its successor with Actions write permission. No permanent personal token is required.
+- GitHub queue delays or service outages can shift a scan. Completion of one scan is not evidence of recurring timing; verify successive state timestamps and the dispatched successor.
+- Disable the production workflow in Actions to stop the continuation. Repair branches run VERIFY_ONLY and never save production state, notify, wait for a slot, or queue successors.
 
-When an official Hermès product page confirms an enabled purchase button for a new eligible SKU, the workflow creates a GitHub Issue and assigns and @mentions the repository owner (`jojiyan`). This uses the existing GitHub notification system, with **no SMTP authorization code or additional email secrets**.
+## Stock confirmation
 
-The connected GitHub account displays `954736371@qq.com` as its profile email. The actual email address used for GitHub notification delivery, plus whether emails/push notifications are enabled, is controlled separately under [GitHub Notifications Settings](https://github.com/settings/notifications). Merely having an email registered does not prove delivery. We cannot verify inbox arrival using repository access alone.
+Targets are Neo Garden 23 / Mini Garden, Garden Party 30, Picotin, Mini Lindy / Lindy II mini, and Birkin, Kelly and Constance. Garden Party 36, Neo Garden Voyage 41 and Bolide are excluded.
 
-## Checks and evidence
+Every published category page must reconcile with the official total and unique rendered SKU records. An eligible positive requires its official product page to match the canonical URL, market and visible SKU, with an enabled Add to cart / Add to bag button. Category stock.ecom is discovery metadata. An explicitly negative complete category can establish unavailability without an additional product request.
 
-- Run `npm test` and review the GitHub Actions run and issue evidence.
-- Inspect `ant-state.json` for each market's `status`, `lastCheckedAt`, `officialTotal`, `products`, and `coverage`.
-- Each production run publishes `ant-run-report.json` as an artifact, showing each page, HTTP status, retries, credits, SHA-256, product purchase evidence and errors. Raw HTML is retained alongside it for 7 days.
-- The Scrapling workflow remains **manual-only backup**, and old Firecrawl workflows are not the production schedule.
+Coverage is the currently published women's bags category. Unlisted historical SKUs and product pages outside that category remain unknown. No result guarantees inventory across the entire retail site.
 
-**A green Actions run validates the published category data, not the availability of an unlisted product or actual GitHub email/inbox delivery.**
+US and CA state is independent. Failed or incomplete evidence remains unknown, cannot alert or rearm a SKU, and retains historical observations and deduplication. Only explicit negative observations rearm an alerted SKU.
 
-## Repair validation
+## Exact-count recovery
 
-The `fix/ca-catalog-pagination` and `fix/catalog-facet-recovery` branch pushes runs the real ScrapingAnt workflow in `VERIFY_ONLY` mode: it uses the repository secret but sends no notifications and writes no production state. Production schedule/manual runs and monitored-code pushes on `main` persist state and notify only after the safety regressions pass. Regression tests also run on pull requests. Verification and production use separate concurrency groups, so branch checks do not cancel pending production checks.
+The captured US fault returned 39 + 9 ordinary-page SKUs against an official total of 49. The official So Medor line page included the omitted H085054CK37.
 
-CA regression fixtures are reduced extracts of official HTML retrieved on 2026-10-21: 40 + 3 products, `total=43`, and official next/canonical links. Only required catalog fields and rendered tile identifiers were retained.
+For gaps of at most five SKUs, up to three same-market/category line links explicitly published in the official page can recover omitted records. Facet names only rank requests to limit cost. Each selected facet must reconcile its exact total; overlapping SKU metadata must agree; the union must reach the unfiltered official unique total. The opening category and used recovery facets are fetched again and must remain identical. Data is never combined across scan retries. Any discrepancy remains unknown.
 
+Requests use bounded datacenter retries and one browser fallback; residential proxies are not used. Whole-catalog inconsistencies can retry up to three fresh scans. Optional browser diagnostics preserve the same strict validation.
 
-### Catalog consistency and historical state
+## State persistence and reruns
 
-Catalog pagination consistency failures restart the entire market scan from page one,
-up to three scans with bounded backoff. Totals, pages, products and SKU sets are never
-combined across scans. All pages must agree on the total and reconcile exactly with
-unique SKUs. After a multi-page scan, a fresh first-page request must match its opening
-total, SKU order, next link and target stock metadata. This detects observed changes;
-it cannot guarantee an atomic snapshot of a live retailer. Persistent inconsistency
-remains `unknown`. No guessed next-page URL or relaxed count tolerance is used.
-Transport retries remain bounded separately; authentication, unsafe pagination and
-invalid HTML do not trigger consistency retries. Reports retain each scan's errors,
-pages and paid-request evidence, including credits from failed scans.
+Production loads the current main-branch state before scanning. It writes only ant-state.json through the GitHub Contents API with the current blob SHA. A conflicting write triggers a bounded fresh read/merge/retry; newer market observations and per-SKU histories are preserved. No git rebase or force push is used for state.
 
-`catalogStocks`, `available` and `alertedSkus` retain historical observations and
-notification deduplication; they are not a current inventory listing. On any market
-verification failure, these collections and `lastSuccessAt` are preserved, while
-`status`, `lastCheckedAt` and errors reflect the failed check and `currentStocks` is
-empty. On success, `currentStocks` contains only observations verified in that scan;
-unlisted historical SKUs are not assumed sold out. Partial purchase verification
-cannot alert or rearm any SKU in that market. US and CA remain independent.
+This fixes a production rerun that successfully scanned both markets but failed while rebasing an old state commit over a newer one. The final verification gate requires execution, state persistence and both-market verification to succeed.
 
-State schema is version 3. A completed scan can persist `unknown` for one market and
-verified observations for the other. The execution step succeeds when processing and
-persistence finish; the separate verification gate fails if either market is unknown.
-Unexpected execution/notification/write errors fail the execution step directly.
-The gate uses explicit execution and verification outputs, not a `continue-on-error`
-conclusion. `VERIFY_ONLY=true` writes evidence/report but never state or notifications.
+State schema is version 3:
 
-When `CATALOG_BROWSER_RECOVERY=true` (manual workflow diagnostic input), if two full
-HTTP scans still return inconsistent catalogs, the third scan uses browser rendering for every page and
-the closing first-page check. It cannot fall back to the same incomplete HTTP mode.
-This bounded recovery costs more credits, and still requires exact totals and unique
-SKUs; it does not treat a repeated short catalog as verified. Code changes on main
-activate the production scan after tests, persist state and notify only verified stock.
-Repair branch pushes remain `VERIFY_ONLY` and never write state or notify.
+- currentStocks contains only observations verified in the current successful scan.
+- catalogStocks, available and alertedSkus contain historical observations and deduplication.
+- lastVerifiedCatalog and lastSuccessAt retain the most recent verified evidence through failures.
+- Unknown scans expose no current stock.
 
-Browser diagnostics are disabled by default: live run #833 confirmed rendered US
-HTML also contained only 41 of the claimed 42 products. Repeating paid browser
-requests cannot resolve that upstream discrepancy. The strict unknown status is
-intentional until complete official evidence is available.
+## Notifications
 
-### Official facet recovery for the US 48/49 gap
+A newly verified purchasable target creates a GitHub Issue mentioning and assigning the repository owner. Deduplication checks existing Issues across pages before creating the alert. Tests cover positive eligibility, duplicate suppression and failed delivery. No fake stock alert is sent for testing.
 
-On 2026-10-28, ordinary US pagination returned 39 + 9 SKUs while the official
-unfiltered total remained 49. The published So Medor line link returned two
-validated SKUs, including the omitted H085054CK37. This is an upstream page gap,
-not permission to accept a short catalog.
+GitHub Issue creation is the configured notification channel. Gmail inbox arrival is **not verified** and requires an authorized email connection or a signed-in check of [GitHub notification routing](https://github.com/settings/notifications). A profile email or successfully created Issue is not proof of inbox delivery.
 
-For gaps of at most five SKUs, the monitor can fetch up to three same-market,
-same-category line links explicitly published in that page. Facet names are only
-a cost-saving ranking hint. Every selected facet must reconcile its own exact
-official count, each overlapping SKU must have identical metadata, and the union
-must reach the exact unfiltered official total. The opening category page and
-all used recovery facets are fetched again and must remain identical. No data
-is combined across scan retries. Any mismatch remains unknown and cannot alert.
+## Configuration and evidence
 
-Reports now retain all validated catalog records, including non-target names,
-URLs and stock metadata, plus the recovery page and unique SKU contribution.
-Missing product titles are errors; target matching normalizes Unicode spacing,
-accents and punctuation. Positive notifications still require product-page
-purchase verification. Reduced US fixtures preserve the observed 39 + 9 + 2
-records and the official links/counts; the facet contributes one new unique SKU.
+- Required secret: SCRAPINGANT_API_KEY.
+- Production job permissions: contents: write, issues: write, actions: write.
+- workflow_dispatch accepts optional browser_recovery and internal not_before inputs.
+- npm test runs the regression suite.
+- ant-run-report.json records each market, page, request status, retry, credit cost, SHA-256, all validated catalog records, product purchase evidence and notification results.
+- Raw HTML and the report are retained as Actions artifacts for seven days.
+- Reduced CA 40 + 3 and US 39 + 9 + 2 fixtures preserve actual official fields, links and counts.
+- Scrapling and legacy workflows remain manual backups.
 
-GitHub scheduling and email routing are separate from catalog verification.
-The cron remains best effort. An Issue notification is not proof that Gmail
-received an email; account notification routing must be checked while signed in.
-
-### Reliable reruns and ten-minute continuation
-
-A real rerun of production #859 reproduced a state-save failure: the original
-checkout's state commit conflicted with newer ant-state.json during git rebase.
-Production now loads the current main-branch state before scanning and writes
-only ant-state.json through the Contents API with its current blob SHA. A 409
-causes a bounded fresh read/merge/retry. Newer per-market observations and
-per-SKU notification history are preserved. The verification gate also requires
-a successful state save. No state is force-pushed and source files are untouched.
-
-Each production run queues its next workflow_dispatch for the next ten-minute
-scan slot using the job's ephemeral GITHUB_TOKEN and Actions write permission.
-The next run respects both not_before and the latest persisted observation time.
-The native ten-minute cron remains a recovery trigger. Repair branches do not
-wait, write production state or queue continuations. Disable the production
-workflow to stop the chain. No new personal token or external scheduler is used.
-GitHub queue delays and service outages can still shift an individual run; the
-continuation removes the observed dependency on the delayed schedule event.
-
-Gmail delivery still requires an authorized email connection or signed-in
-GitHub notification-routing settings. Only verified stock can create an Issue;
-no fake stock alert is sent as an email test.
+The catalog/persistence/scheduler/notification suite has 89 tests. Validate real production state saves and the next ten-minute scan after changing scheduling or storage.

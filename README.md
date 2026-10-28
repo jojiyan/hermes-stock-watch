@@ -100,3 +100,26 @@ records and the official links/counts; the facet contributes one new unique SKU.
 GitHub scheduling and email routing are separate from catalog verification.
 The cron remains best effort. An Issue notification is not proof that Gmail
 received an email; account notification routing must be checked while signed in.
+
+### Reliable reruns and ten-minute continuation
+
+A real rerun of production #859 reproduced a state-save failure: the original
+checkout's state commit conflicted with newer ant-state.json during git rebase.
+Production now loads the current main-branch state before scanning and writes
+only ant-state.json through the Contents API with its current blob SHA. A 409
+causes a bounded fresh read/merge/retry. Newer per-market observations and
+per-SKU notification history are preserved. The verification gate also requires
+a successful state save. No state is force-pushed and source files are untouched.
+
+Each production run queues its next workflow_dispatch for the next ten-minute
+scan slot using the job's ephemeral GITHUB_TOKEN and Actions write permission.
+The next run respects both not_before and the latest persisted observation time.
+The native ten-minute cron remains a recovery trigger. Repair branches do not
+wait, write production state or queue continuations. Disable the production
+workflow to stop the chain. No new personal token or external scheduler is used.
+GitHub queue delays and service outages can still shift an individual run; the
+continuation removes the observed dependency on the delayed schedule event.
+
+Gmail delivery still requires an authorized email connection or signed-in
+GitHub notification-routing settings. Only verified stock can create an Issue;
+no fake stock alert is sent as an email test.

@@ -9,7 +9,8 @@ for(const verifyOnly of [true,false])test(`catalog CLI separates completed execu
  const dir=await mkdtemp(join(tmpdir(),'ant-cli-'));
  try{
   await mkdir(join(dir,'src'));
-  await copyFile(new URL('../src/ant-catalog-monitor.mjs',import.meta.url),join(dir,'src/ant-catalog-monitor.mjs'));
+  for(const file of ['ant-catalog-monitor.mjs','ant-notify.mjs','ant-state-store.mjs'])
+   await copyFile(new URL('../src/'+file,import.meta.url),join(dir,'src',file));
   await writeFile(join(dir,'src/ant-catalog-check.mjs'),`export async function checkCatalogMarkets(state,key,checkedAt){
    if(state.version!==3)throw new Error('version downgraded');
    return {state:{...state,markets:{US:{status:'unknown'},CA:{status:'ok'}}},

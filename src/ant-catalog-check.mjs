@@ -38,7 +38,7 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
       summaries.push({market,status:healthy?'ok':'unknown',categoryProducts:parsed.pageItems,
         officialTotal:parsed.reportedTotal,targetProducts:fetched.parsed.products.length,
         verifiedTargets:parsed.products.length,ecommerceAvailable:parsed.products.filter(p=>p.ecom).length,
-        pages:parsed.pages,scans:fetched.scans||[],attempts,credits:attempts.reduce((n,a)=>n+a.credits,0),
+        pages:parsed.pages,catalogEvidence:fetched.parsed.records||[],recovery:fetched.parsed.recovery||'none',scans:fetched.scans||[],attempts,credits:attempts.reduce((n,a)=>n+a.credits,0),
         fetchMode:fetched.mode,verificationErrors:errors,
         purchaseEvidence:parsed.products,newAlerts:reconciled.alerts.length});
       for(const p of reconciled.alerts) alerts.push({...p,
@@ -52,7 +52,7 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
         products:null,targets:null,officialTotal:null,categoryAvailable:null,coverage:'unverified',fetchMode:null,
         currentStocks:{},catalogStocksUsage:'historical observations; consult currentStocks for this scan',
         verificationErrors:[{stage:'catalog',error:error.message}],error:error.message};
-      summaries.push({market,status:'unknown',error:error.message,attempts:error.attempts||[],pages:error.pages||[],scans:error.scans||[],newAlerts:0});
+      summaries.push({market,status:'unknown',error:error.message,attempts:error.attempts||[],credits:(error.attempts||[]).reduce((n,a)=>n+(a.credits||0),0),pages:error.pages||[],scans:error.scans||[],newAlerts:0});
     }
   }));
   summaries.sort((a,b)=>['US','CA'].indexOf(a.market)-['US','CA'].indexOf(b.market));

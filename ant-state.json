@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-28T14:24:30.937Z",
+      "lastCheckedAt": "2026-10-28T14:34:30.988Z",
       "lastSuccessAt": "2026-10-28T13:24:30.569Z",
       "products": null,
       "targets": null,
@@ -57,10 +57,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "US: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
+          "error": "US: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
         }
       ],
-      "error": "US: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr",
+      "error": "US: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -73,7 +73,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-28T14:24:30.937Z",
+      "lastCheckedAt": "2026-10-28T14:34:30.988Z",
       "lastSuccessAt": "2026-10-28T13:44:30.684Z",
       "products": null,
       "targets": null,
@@ -88,10 +88,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination"
+          "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
         }
       ],
-      "error": "Official total changed during pagination",
+      "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

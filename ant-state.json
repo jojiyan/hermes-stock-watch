@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-28T01:18:21.318Z",
+      "lastCheckedAt": "2026-10-28T06:57:10.469Z",
       "lastSuccessAt": "2026-10-23T00:53:11.390Z",
       "products": null,
       "targets": null,
@@ -57,10 +57,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Incomplete Hermès catalog: received 50 of 51 total products; missing next page"
+          "error": "Incomplete Hermès catalog: received 48 of 49 total products; missing next page"
         }
       ],
-      "error": "Incomplete Hermès catalog: received 50 of 51 total products; missing next page",
+      "error": "Incomplete Hermès catalog: received 48 of 49 total products; missing next page",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -73,16 +73,16 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-28T01:18:21.318Z",
-      "lastSuccessAt": "2026-10-28T01:18:21.318Z",
-      "products": 119,
+      "lastCheckedAt": "2026-10-28T06:57:10.469Z",
+      "lastSuccessAt": "2026-10-28T06:57:10.469Z",
+      "products": 118,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
       "coverage": "all pages of the currently published category (verified total and unique SKUs)",
-      "officialTotal": 119,
+      "officialTotal": 118,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
@@ -90,10 +90,10 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-28T01:18:21.318Z",
-        "products": 119,
+        "checkedAt": "2026-10-28T06:57:10.469Z",
+        "products": 118,
         "targets": 0,
-        "officialTotal": 119,
+        "officialTotal": 118,
         "coverage": "all pages of the currently published category (verified total and unique SKUs)"
       }
     }

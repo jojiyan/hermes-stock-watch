@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-29T13:54:39.070Z",
+      "lastCheckedAt": "2026-10-29T14:04:39.128Z",
       "lastSuccessAt": "2026-10-29T13:44:39.015Z",
       "products": null,
       "targets": null,
@@ -89,30 +89,25 @@
       }
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-29T13:54:39.070Z",
-      "lastSuccessAt": "2026-10-29T13:34:38.958Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-29T14:04:39.128Z",
+      "lastSuccessAt": "2026-10-29T14:04:39.128Z",
+      "products": 117,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 117,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
-        }
-      ],
-      "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-29T13:34:38.958Z",
+        "checkedAt": "2026-10-29T14:04:39.128Z",
         "products": 117,
         "targets": 0,
         "officialTotal": 117,

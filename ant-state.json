@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-29T14:54:39.394Z",
+      "lastCheckedAt": "2026-10-29T15:04:39.441Z",
       "lastSuccessAt": "2026-10-29T14:24:39.220Z",
       "products": null,
       "targets": null,
@@ -89,33 +89,28 @@
       }
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-29T14:54:39.394Z",
-      "lastSuccessAt": "2026-10-29T14:14:39.174Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-29T15:04:39.441Z",
+      "lastSuccessAt": "2026-10-29T15:04:39.441Z",
+      "products": 116,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 116,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination"
-        }
-      ],
-      "error": "Official total changed during pagination",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-29T14:14:39.174Z",
-        "products": 117,
+        "checkedAt": "2026-10-29T15:04:39.441Z",
+        "products": 116,
         "targets": 0,
-        "officialTotal": 117,
+        "officialTotal": 116,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       }
     }

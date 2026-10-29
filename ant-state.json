@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-29T14:14:39.174Z",
-      "lastSuccessAt": "2026-10-29T13:44:39.015Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-29T14:24:39.220Z",
+      "lastSuccessAt": "2026-10-29T14:24:39.220Z",
+      "products": 48,
+      "targets": 3,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-29T13:44:39.015Z",
+          "seenAt": "2026-10-29T14:24:39.220Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-29T13:44:39.015Z",
+          "seenAt": "2026-10-29T14:24:39.220Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-29T13:44:39.015Z",
+          "seenAt": "2026-10-29T14:24:39.220Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
@@ -67,6 +67,48 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 48,
+      "fetchMode": "facet-recovered",
+      "unlistedPreviouslyAlerted": [],
+      "verificationErrors": [],
+      "error": null,
+      "currentStocks": {
+        "H085956CC18": {
+          "ecom": false,
+          "seenAt": "2026-10-29T14:24:39.220Z",
+          "source": "complete-official-category-negative"
+        },
+        "H083189CKAX": {
+          "ecom": false,
+          "seenAt": "2026-10-29T14:24:39.220Z",
+          "source": "complete-official-category-negative"
+        },
+        "H056289CK7G": {
+          "ecom": false,
+          "seenAt": "2026-10-29T14:24:39.220Z",
+          "source": "complete-official-category-negative"
+        }
+      },
+      "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
+      "lastVerifiedCatalog": {
+        "checkedAt": "2026-10-29T14:24:39.220Z",
+        "products": 48,
+        "targets": 3,
+        "officialTotal": 48,
+        "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
+      }
+    },
+    "CA": {
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-29T14:24:39.220Z",
+      "lastSuccessAt": "2026-10-29T14:14:39.174Z",
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
+      "available": {},
+      "catalogStocks": {},
+      "alertedSkus": {},
       "coverage": "unverified",
       "officialTotal": null,
       "fetchMode": null,
@@ -78,32 +120,6 @@
         }
       ],
       "error": "Official total changed during pagination",
-      "currentStocks": {},
-      "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-29T13:44:39.015Z",
-        "products": 49,
-        "targets": 3,
-        "officialTotal": 49,
-        "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
-      }
-    },
-    "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-29T14:14:39.174Z",
-      "lastSuccessAt": "2026-10-29T14:14:39.174Z",
-      "products": 117,
-      "targets": 0,
-      "categoryAvailable": 0,
-      "available": {},
-      "catalogStocks": {},
-      "alertedSkus": {},
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 117,
-      "fetchMode": "paginated",
-      "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

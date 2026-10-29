@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-29T19:14:40.947Z",
-      "lastSuccessAt": "2026-10-29T18:14:40.560Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-29T19:24:41.008Z",
+      "lastSuccessAt": "2026-10-29T19:24:41.008Z",
+      "products": 49,
+      "targets": 3,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-29T18:14:40.560Z",
+          "seenAt": "2026-10-29T19:24:41.008Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-29T18:14:40.560Z",
+          "seenAt": "2026-10-29T19:24:41.008Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-29T18:14:40.560Z",
+          "seenAt": "2026-10-29T19:24:41.008Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
@@ -67,21 +67,32 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 49,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination"
+      "verificationErrors": [],
+      "error": null,
+      "currentStocks": {
+        "H085956CC18": {
+          "ecom": false,
+          "seenAt": "2026-10-29T19:24:41.008Z",
+          "source": "complete-official-category-negative"
+        },
+        "H083189CKAX": {
+          "ecom": false,
+          "seenAt": "2026-10-29T19:24:41.008Z",
+          "source": "complete-official-category-negative"
+        },
+        "H056289CK7G": {
+          "ecom": false,
+          "seenAt": "2026-10-29T19:24:41.008Z",
+          "source": "complete-official-category-negative"
         }
-      ],
-      "error": "Official total changed during pagination",
-      "currentStocks": {},
+      },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-29T18:14:40.560Z",
+        "checkedAt": "2026-10-29T19:24:41.008Z",
         "products": 49,
         "targets": 3,
         "officialTotal": 49,
@@ -89,33 +100,28 @@
       }
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-10-29T19:14:40.947Z",
-      "lastSuccessAt": "2026-10-29T19:04:40.854Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-10-29T19:24:41.008Z",
+      "lastSuccessAt": "2026-10-29T19:24:41.008Z",
+      "products": 116,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 116,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination"
-        }
-      ],
-      "error": "Official total changed during pagination",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-29T19:04:40.854Z",
-        "products": 117,
+        "checkedAt": "2026-10-29T19:24:41.008Z",
+        "products": 116,
         "targets": 0,
-        "officialTotal": 117,
+        "officialTotal": 116,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       }
     }

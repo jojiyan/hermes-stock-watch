@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-10-29T09:04:37.392Z",
-      "lastSuccessAt": "2026-10-29T09:04:37.392Z",
+      "lastCheckedAt": "2026-10-29T09:14:37.453Z",
+      "lastSuccessAt": "2026-10-29T09:14:37.453Z",
       "products": 49,
       "targets": 3,
       "categoryAvailable": 0,
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-29T09:04:37.392Z",
+          "seenAt": "2026-10-29T09:14:37.453Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-29T09:04:37.392Z",
+          "seenAt": "2026-10-29T09:14:37.453Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-29T09:04:37.392Z",
+          "seenAt": "2026-10-29T09:14:37.453Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
@@ -76,23 +76,23 @@
       "currentStocks": {
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-10-29T09:04:37.392Z",
+          "seenAt": "2026-10-29T09:14:37.453Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-10-29T09:04:37.392Z",
+          "seenAt": "2026-10-29T09:14:37.453Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-10-29T09:04:37.392Z",
+          "seenAt": "2026-10-29T09:14:37.453Z",
           "source": "complete-official-category-negative"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-10-29T09:04:37.392Z",
+        "checkedAt": "2026-10-29T09:14:37.453Z",
         "products": 49,
         "targets": 3,
         "officialTotal": 49,
@@ -100,21 +100,26 @@
       }
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-29T09:04:37.392Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-29T09:14:37.453Z",
       "lastSuccessAt": "2026-10-29T09:04:37.392Z",
-      "products": 117,
-      "targets": 0,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {},
       "catalogStocks": {},
       "alertedSkus": {},
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 117,
-      "fetchMode": "paginated",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
+        }
+      ],
+      "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

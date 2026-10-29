@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-10-29T13:44:39.015Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-10-29T13:54:39.070Z",
       "lastSuccessAt": "2026-10-29T13:44:39.015Z",
-      "products": 49,
-      "targets": 3,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -67,29 +67,18 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 49,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
-      "currentStocks": {
-        "H085956CC18": {
-          "ecom": false,
-          "seenAt": "2026-10-29T13:44:39.015Z",
-          "source": "complete-official-category-negative"
-        },
-        "H083189CKAX": {
-          "ecom": false,
-          "seenAt": "2026-10-29T13:44:39.015Z",
-          "source": "complete-official-category-negative"
-        },
-        "H056289CK7G": {
-          "ecom": false,
-          "seenAt": "2026-10-29T13:44:39.015Z",
-          "source": "complete-official-category-negative"
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination"
         }
-      },
+      ],
+      "error": "Official total changed during pagination",
+      "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
         "checkedAt": "2026-10-29T13:44:39.015Z",
@@ -101,7 +90,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-10-29T13:44:39.015Z",
+      "lastCheckedAt": "2026-10-29T13:54:39.070Z",
       "lastSuccessAt": "2026-10-29T13:34:38.958Z",
       "products": null,
       "targets": null,

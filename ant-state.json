@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-02T23:15:15.928Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-02T23:25:15.988Z",
       "lastSuccessAt": "2026-11-02T23:15:15.928Z",
-      "products": 48,
-      "targets": 3,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -67,29 +67,18 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 48,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
-      "currentStocks": {
-        "H085956CC18": {
-          "ecom": false,
-          "seenAt": "2026-11-02T23:15:15.928Z",
-          "source": "complete-official-category-negative"
-        },
-        "H083189CKAX": {
-          "ecom": false,
-          "seenAt": "2026-11-02T23:15:15.928Z",
-          "source": "complete-official-category-negative"
-        },
-        "H056289CK7G": {
-          "ecom": false,
-          "seenAt": "2026-11-02T23:15:15.928Z",
-          "source": "complete-official-category-negative"
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "US: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
         }
-      },
+      ],
+      "error": "US: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr",
+      "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
         "checkedAt": "2026-11-02T23:15:15.928Z",
@@ -100,33 +89,53 @@
       }
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-02T23:15:15.928Z",
-      "lastSuccessAt": "2026-11-02T21:55:15.446Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
-      "available": {},
-      "catalogStocks": {},
-      "alertedSkus": {},
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
-      "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403"
+      "status": "ok",
+      "lastCheckedAt": "2026-11-02T23:25:15.988Z",
+      "lastSuccessAt": "2026-11-02T23:25:15.988Z",
+      "products": 125,
+      "targets": 1,
+      "categoryAvailable": 1,
+      "available": {
+        "H051551CKCS": {
+          "market": "CA",
+          "sku": "H051551CKCS",
+          "name": "Garden Party 30 bag",
+          "color": "Green",
+          "price": "$4,000",
+          "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H051551CKCS/",
+          "lastSeenAt": "2026-11-02T23:25:15.988Z",
+          "source": "official-catalog"
         }
-      ],
-      "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-page-delimiter: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | Direct official HTTP 403",
+      },
+      "catalogStocks": {
+        "H051551CKCS": {
+          "ecom": true,
+          "seenAt": "2026-11-02T23:25:15.988Z",
+          "source": "official-product-purchase"
+        }
+      },
+      "alertedSkus": {
+        "H051551CKCS": "2026-11-02T23:25:15.988Z"
+      },
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 125,
+      "fetchMode": "paginated",
+      "unlistedPreviouslyAlerted": [],
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {},
+      "currentStocks": {
+        "H051551CKCS": {
+          "ecom": true,
+          "seenAt": "2026-11-02T23:25:15.988Z",
+          "source": "official-product-purchase"
+        }
+      },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-02T21:55:15.446Z",
-        "products": 117,
-        "targets": 0,
-        "officialTotal": 117,
+        "checkedAt": "2026-11-02T23:25:15.988Z",
+        "products": 125,
+        "targets": 1,
+        "officialTotal": 125,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       }
     }

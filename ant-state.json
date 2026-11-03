@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-03T01:45:16.756Z",
+      "lastCheckedAt": "2026-11-03T01:55:16.803Z",
       "lastSuccessAt": "2026-11-03T00:15:16.280Z",
       "products": null,
       "targets": null,
@@ -89,12 +89,12 @@
       }
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-03T01:45:16.756Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-03T01:55:16.803Z",
       "lastSuccessAt": "2026-11-03T01:45:16.756Z",
       "products": 123,
       "targets": 1,
-      "categoryAvailable": 1,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -121,16 +121,16 @@
       "officialTotal": 123,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
-      "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {
-        "H051551CKCS": {
-          "ecom": true,
-          "seenAt": "2026-11-03T01:45:16.756Z",
-          "source": "official-product-purchase"
+      "verificationErrors": [
+        {
+          "sku": "H051551CKCS",
+          "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H051551CKCS/",
+          "error": "CA: official page could not be verified: low-credit-1: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | low-credit-retry: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr | browser-fallback: HTTP 423: {\"detail\":\"Our browser was detected by target site. Retry the request or try adjusting proxy country, proxy type and browser rendering settings. Our documentation: https://docs.scr"
         }
-      },
+      ],
+      "error": "Some official product purchase states are unknown",
+      "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
+      "currentStocks": {},
       "lastVerifiedCatalog": {
         "checkedAt": "2026-11-03T01:45:16.756Z",
         "products": 123,

@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-04T21:03:22.321Z",
+      "lastCheckedAt": "2026-11-04T21:13:22.395Z",
       "lastSuccessAt": "2026-11-03T13:35:20.753Z",
       "products": null,
       "targets": null,
@@ -90,7 +90,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-04T21:03:22.321Z",
+      "lastCheckedAt": "2026-11-04T21:13:22.395Z",
       "lastSuccessAt": "2026-11-03T13:05:20.588Z",
       "products": null,
       "targets": null,
@@ -124,10 +124,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination"
+          "error": "Official HTTP 403"
         }
       ],
-      "error": "Official total changed during pagination",
+      "error": "Official HTTP 403",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

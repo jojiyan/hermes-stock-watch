@@ -1,142 +1,16 @@
-name: Hermes Stock Watch (ScrapingAnt)
+name: Hermes Stock Watch (retired credit provider)
 
 on:
-  schedule:
-    - cron: "7-57/10 * * * *"
-  push:
-    branches: [main, 'fix/**']
-    paths:
-      - 'src/ant-*.mjs'
-      - 'test/ant-*.test.mjs'
-      - '.github/workflows/hermes-stock-watch-scrapingant.yml'
   workflow_dispatch:
-    inputs:
-      not_before:
-        description: 'Internal continuation: next scan slot (ISO timestamp)'
-        type: string
-        default: ''
-      browser_recovery:
-        description: 'Opt-in browser diagnostic after two inconsistent scans (extra credits)'
-        type: boolean
-        default: false
 
 permissions:
-  actions: write
-  contents: write
-  issues: write
-
-concurrency:
-  group: hermes-stock-watch-scrapingant-${{ github.ref }}
-  cancel-in-progress: false
+  contents: read
 
 jobs:
-  check-stock:
+  retired:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     steps:
-      - name: Check out monitor
-        uses: actions/checkout@v4
-
-      - name: Check ScrapingAnt configuration
-        id: configured
-        shell: bash
-        env:
-          SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
+      - name: Credit-based provider disabled
         run: |
-          if [[ -n "$SCRAPINGANT_API_KEY" ]]; then
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::error::SCRAPINGANT_API_KEY is not configured."
-            exit 1
-          fi
-
-      - name: Use Node.js 22
-        if: steps.configured.outputs.ready == 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
-      - name: Run stock safety regressions
-        if: steps.configured.outputs.ready == 'true'
-        run: npm test
-
-      - name: Syntax check
-        if: steps.configured.outputs.ready == 'true'
-        run: node --check src/ant-catalog-monitor.mjs
-
-      - name: Load current production stock state
-        if: steps.configured.outputs.ready == 'true' && github.ref == 'refs/heads/main'
-        run: node src/ant-state-store.mjs load
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Wait for the next ten-minute scan slot
-        if: steps.configured.outputs.ready == 'true' && github.ref == 'refs/heads/main'
-        run: node src/ant-schedule.mjs wait
-        env:
-          NOT_BEFORE: ${{ inputs.not_before }}
-
-      - name: Execute scan and persist independent market observations
-        if: steps.configured.outputs.ready == 'true'
-        id: monitor
-        run: node src/ant-catalog-monitor.mjs
-        env:
-          CATALOG_BROWSER_RECOVERY: ${{ inputs.browser_recovery == true }}
-          VERIFY_ONLY: ${{ github.ref != 'refs/heads/main' }}
-          SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-
-      - name: Save current stock state without git rebase
-        id: persist
-        if: always() && steps.configured.outputs.ready == 'true' && steps.monitor.outputs.state_written == 'true' && github.ref == 'refs/heads/main'
-        run: node src/ant-state-store.mjs save
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Retain verification evidence
-        if: steps.configured.outputs.ready == 'true' && always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: scrapingant-market-verification-${{ github.run_id }}
-          path: |
-            ant-run-report.json
-            ant-evidence/
-          retention-days: 7
-
-      - name: Require current US and CA verification
-        if: steps.configured.outputs.ready == 'true' && always()
-        env:
-          PERSIST_OUTCOME: ${{ steps.persist.outcome }}
-          PRODUCTION: ${{ github.ref == 'refs/heads/main' }}
-          MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
-          VERIFICATION_STATUS: ${{ steps.monitor.outputs.verification_status }}
-        run: |
-          if [[ "$MONITOR_OUTCOME" != success ]]; then
-            echo "::error::Monitor execution failed or was skipped; see execution step."
-            exit 1
-          fi
-          if [[ "$PRODUCTION" == true && "$PERSIST_OUTCOME" != success ]]; then
-            echo "::error::Scan state was not persisted; the run is not complete."
-            exit 1
-          fi
-          if [[ "$VERIFICATION_STATUS" != verified ]]; then
-            echo "::error::Scan completed but market verification failed; historical stock is not current availability. See ant-run-report.json."
-            exit 1
-          fi
-
-      - name: ScrapingAnt key not configured
-        if: steps.configured.outputs.ready != 'true'
-        run: echo "SCRAPINGANT_API_KEY missing; scheduled run skipped."
-
-
-      - name: Queue the next ten-minute stock scan
-        if: always() && !cancelled() && steps.configured.outputs.ready == 'true' && steps.monitor.outcome != 'skipped' && github.ref == 'refs/heads/main'
-        run: node src/ant-schedule.mjs next
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+          echo "::warning::This workflow is retired. Use Hermes Stock Watch (Scrapling)."
+          exit 1

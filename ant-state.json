@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-04T20:45:31.562Z",
+      "lastCheckedAt": "2026-11-04T20:53:22.250Z",
       "lastSuccessAt": "2026-11-03T13:35:20.753Z",
       "products": null,
       "targets": null,
@@ -74,10 +74,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "US: official page could not be verified: low-credit-1: HTTP 403: {\"detail\":\"Requests quota limit reached. Please visit https://app.scrapingant.com/subscriptions to upgrade your plan and get more requests\"}"
+          "error": "Official total changed during pagination"
         }
       ],
-      "error": "US: official page could not be verified: low-credit-1: HTTP 403: {\"detail\":\"Requests quota limit reached. Please visit https://app.scrapingant.com/subscriptions to upgrade your plan and get more requests\"}",
+      "error": "Official total changed during pagination",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -90,7 +90,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-04T20:45:31.562Z",
+      "lastCheckedAt": "2026-11-04T20:53:22.250Z",
       "lastSuccessAt": "2026-11-03T13:05:20.588Z",
       "products": null,
       "targets": null,
@@ -124,10 +124,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "CA: official page could not be verified: low-credit-1: HTTP 403: {\"detail\":\"Requests quota limit reached. Please visit https://app.scrapingant.com/subscriptions to upgrade your plan and get more requests\"}"
+          "error": "Official total changed during pagination"
         }
       ],
-      "error": "CA: official page could not be verified: low-credit-1: HTTP 403: {\"detail\":\"Requests quota limit reached. Please visit https://app.scrapingant.com/subscriptions to upgrade your plan and get more requests\"}",
+      "error": "Official total changed during pagination",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

@@ -1,20 +1,36 @@
-name: Hermes Stock Watch (Scrapling - manual backup)
+name: Hermes Stock Watch (Scrapling)
 
 on:
+  schedule:
+    - cron: "7-57/10 * * * *"
+  push:
+    branches: [main, 'fix/**']
+    paths:
+      - 'src/ant-*.mjs'
+      - 'src/scrapling-*.mjs'
+      - 'src/scrapling_fetch.py'
+      - 'test/*.test.mjs'
+      - '.github/workflows/hermes-stock-watch-ant.yml'
   workflow_dispatch:
+    inputs:
+      not_before:
+        description: 'Internal continuation: next scan slot (ISO timestamp)'
+        type: string
+        default: ''
 
 permissions:
+  actions: write
   contents: write
   issues: write
 
 concurrency:
-  group: hermes-stock-watch-scrapling
+  group: hermes-stock-watch-scrapling-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   check-stock:
     runs-on: ubuntu-latest
-    timeout-minutes: 9
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,36 +45,60 @@ jobs:
         run: |
           npm test
           .venv/bin/python -m py_compile src/scrapling_fetch.py
-      - name: Verify US and Canada with Scrapling
-        id: monitor
-        continue-on-error: true
-        run: node src/direct-monitor.mjs
+          node --check src/scrapling-monitor.mjs
+      - name: Load current production stock state
+        if: github.ref == 'refs/heads/main'
+        run: node src/ant-state-store.mjs load
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+      - name: Wait for the next ten-minute scan slot
+        if: github.ref == 'refs/heads/main'
+        run: node src/ant-schedule.mjs wait
+        env:
+          NOT_BEFORE: ${{ inputs.not_before }}
+      - name: Verify US and Canada using first-party browsers
+        id: monitor
+        run: node src/scrapling-monitor.mjs
+        env:
+          VERIFY_ONLY: ${{ github.ref != 'refs/heads/main' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-      - name: Save verified stock and market health
-        if: always() && steps.monitor.outcome != 'skipped'
-        shell: bash
-        run: |
-          if git diff --quiet -- direct-state.json; then exit 0; fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add direct-state.json
-          git commit -m 'chore: update Scrapling stock state [skip ci]'
-          if ! git push; then
-            git pull --rebase origin main
-            git push
-          fi
-      - name: Retain verification evidence
+      - name: Save current stock state
+        id: persist
+        if: always() && steps.monitor.outputs.state_written == 'true' && github.ref == 'refs/heads/main'
+        run: node src/ant-state-store.mjs save
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+      - name: Retain first-party verification evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: scrapling-verification-${{ github.run_id }}
-          path: direct-run-report.json
-          retention-days: 3
-      - name: Require a completed monitor process
+          path: |
+            scrapling-run-report.json
+            scrapling-evidence/
+          retention-days: 7
+      - name: Require current US and CA verification
         if: always()
         env:
           MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
-        run: test "$MONITOR_OUTCOME" = success
+          PERSIST_OUTCOME: ${{ steps.persist.outcome }}
+          VERIFICATION_STATUS: ${{ steps.monitor.outputs.verification_status }}
+          PRODUCTION: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          test "$MONITOR_OUTCOME" = success
+          if [[ "$PRODUCTION" == true ]]; then test "$PERSIST_OUTCOME" = success; fi
+          if [[ "$VERIFICATION_STATUS" != verified ]]; then
+            echo "::error::Live market verification incomplete; unavailable markets remain unknown. See scrapling-run-report.json."
+            exit 1
+          fi
+      - name: Queue the next ten-minute stock scan
+        if: always() && !cancelled() && steps.monitor.outcome != 'skipped' && github.ref == 'refs/heads/main'
+        run: node src/ant-schedule.mjs next
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+

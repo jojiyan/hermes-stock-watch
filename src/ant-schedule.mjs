@@ -23,11 +23,11 @@ export async function dispatchNextScan({repo,token,due,fetcher=fetch,now=Date.no
   if(!Number.isFinite(due))throw new Error('Missing next scan time');
   // Queue shortly before the next slot; the new run waits for not_before.
   await waitUntil(due-45_000,{now,wait});
-  const url='https://api.github.com/repos/'+repo+'/actions/workflows/hermes-stock-watch-scrapingant.yml/dispatches';
+  const url='https://api.github.com/repos/'+repo+'/actions/workflows/hermes-stock-watch-ant.yml/dispatches';
   for(let attempt=1;attempt<=3;attempt++) {
     const response=await fetcher(url,{method:'POST',headers:githubHeaders(token),
       signal:AbortSignal.timeout(30_000),
-      body:JSON.stringify({ref:'main',inputs:{not_before:new Date(due).toISOString(),browser_recovery:false}})});
+      body:JSON.stringify({ref:'main',inputs:{not_before:new Date(due).toISOString()}})});
     if(response.ok) {
       let data={};try {data=await response.json();}catch{}
       return {status:'queued',notBefore:new Date(due).toISOString(),runId:data.workflow_run_id||data.id||null};
@@ -45,10 +45,11 @@ if(process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url))
     console.log(JSON.stringify({event:'stock-scan-slot',notBefore:new Date(due).toISOString()}));
     await waitUntil(due);
   } else if(process.argv[2]==='next') {
-    const report=JSON.parse(await readFile(resolve(root,'ant-run-report.json'),'utf8').catch(()=>'{}'));
+    const report=JSON.parse(await readFile(resolve(root,'scrapling-run-report.json'),'utf8').catch(()=>'{}'));
     const checked=Date.parse(report.checkedAt)||Date.now();
     const result=await dispatchNextScan({repo:process.env.GITHUB_REPOSITORY,token:process.env.GITHUB_TOKEN,
       due:checked+INTERVAL_MS});
     console.log(JSON.stringify({event:'next-stock-scan',...result}));
   } else throw new Error('Use ant-schedule.mjs wait or next');
 }
+

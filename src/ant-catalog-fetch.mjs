@@ -41,6 +41,33 @@ export function nextCatalogUrl(next, current, market) {
 }
 
 export async function fetchAntHtml(url, market, key, options = {}) {
+  // Production injects a first-party, no-credit transport for every page,
+  // including pagination, recovery facets and product purchase verification.
+  if (options.officialFetcher) {
+    const evidence={market,url,mode:'scrapling-direct',credits:0};
+    (options.attempts ||= []).push(evidence);
+    try {
+      const response=await options.officialFetcher(url,market);
+      evidence.status=response.status;
+      const expected=new URL(url),actual=new URL(response.url);
+      if(actual.origin!=='https://www.hermes.com' || actual.href!==expected.href)
+        throw new Error('Official request redirected away from the requested market/page');
+      if(response.status!==200)throw new Error('Official HTTP '+response.status);
+      const html=response.html;
+      if(typeof html!=='string')throw new Error('Missing official HTML');
+      evidence.bytes=Buffer.byteLength(html);
+      evidence.fetchedAt=new Date().toISOString();
+      evidence.sha256=createHash('sha256').update(html).digest('hex');
+      if(options.onHtml)await options.onHtml(html,evidence);
+      const parsed=options.parse(html);
+      evidence.pageItems=parsed.pageItems;evidence.officialTotal=parsed.reportedTotal;
+      return {parsed,mode:evidence.mode};
+    } catch(error) {
+      evidence.error=error.message;
+      error.attempts=options.attempts;
+      throw error; // Never fall through to a paid provider.
+    }
+  }
   const fetcher = options.fetcher || fetch;
   const wait = options.wait || (ms => new Promise(resolve => setTimeout(resolve, ms)));
   const attempts = options.attempts || [];
@@ -103,7 +130,7 @@ export async function fetchAntHtml(url, market, key, options = {}) {
 }
 
 async function fetchCatalogScan(market, key, options = {}) {
-  if (!['US','CA'].includes(market) || !key) throw new Error('Invalid market or missing key');
+  if (!['US','CA'].includes(market) || (!key&&!options.officialFetcher)) throw new Error('Invalid market or missing transport');
   const parser = options.parser || parseHermesCatalog;
   const attempts = [];
   const pages = [], products = [], records = [], skus = new Set(), recoveredFacets=[];
@@ -121,7 +148,7 @@ async function fetchCatalogScan(market, key, options = {}) {
         // Public official HTML is an independent fallback, never a relaxed parser.
         // Do not hide authentication/balance failures or retry untrusted pagination.
         const last=attempts.at(-1);
-        if(![423,500,502,503,504].includes(last?.status) || (options.fetcher&&!options.directFetcher))throw error;
+        if(options.officialFetcher || ![423,500,502,503,504].includes(last?.status) || (options.fetcher&&!options.directFetcher))throw error;
         const evidence={market,url,mode:'direct-official',credits:0};
         attempts.push(evidence);
         try {
@@ -201,7 +228,7 @@ async function fetchCatalogScan(market, key, options = {}) {
           }
         }
         if (count !== total || (parsed.skus && skus.size !== total))
-          throw unstableCatalog(`Incomplete Hermès catalog: received ${count} of ${total} total products; missing next page`);
+          throw unstableCatalog(`Incomplete Herm�s catalog: received ${count} of ${total} total products; missing next page`);
         // Re-fetch the first page after pagination: reject a moving boundary/total.
         if (pages.length > 1) {
           const firstUrl = categoryUrl(market);
@@ -270,3 +297,4 @@ export async function fetchOfficialCatalog(market,key,options={}) {
     }
   }
 }
+

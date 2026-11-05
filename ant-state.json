@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T16:20:07.711Z",
+      "lastCheckedAt": "2026-11-05T16:30:07.792Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
       "products": null,
       "targets": null,
@@ -106,7 +106,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T16:20:07.711Z",
+      "lastCheckedAt": "2026-11-05T16:30:07.792Z",
       "lastSuccessAt": "2026-11-05T16:00:07.593Z",
       "products": null,
       "targets": null,
@@ -145,10 +145,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 126, received 127 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official HTTP 403"
         }
       ],
-      "error": "Official total changed during pagination: expected 126, received 127 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official HTTP 403",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

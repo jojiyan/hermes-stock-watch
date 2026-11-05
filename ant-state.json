@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T10:52:17.575Z",
+      "lastCheckedAt": "2026-11-05T11:02:17.641Z",
       "lastSuccessAt": "2026-11-05T09:53:42.861Z",
       "products": null,
       "targets": null,
@@ -90,12 +90,12 @@
       "productVerification": "independent"
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-05T10:52:17.575Z",
-      "lastSuccessAt": "2026-11-03T13:05:20.588Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-05T11:02:17.641Z",
+      "lastSuccessAt": "2026-11-05T11:02:17.641Z",
+      "products": 124,
+      "targets": 1,
+      "categoryAvailable": 1,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -106,6 +106,16 @@
           "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H051551CKCS/",
           "lastSeenAt": "2026-11-03T13:05:20.588Z",
           "source": "official-catalog"
+        },
+        "H069573CKDJ": {
+          "market": "CA",
+          "sku": "H069573CKDJ",
+          "name": "Garden Party 30 bag",
+          "color": "Brown",
+          "price": "$4,000",
+          "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
+          "lastSeenAt": "2026-11-05T11:02:17.641Z",
+          "source": "official-catalog"
         }
       },
       "catalogStocks": {
@@ -113,29 +123,36 @@
           "ecom": true,
           "seenAt": "2026-11-03T13:05:20.588Z",
           "source": "official-product-purchase"
+        },
+        "H069573CKDJ": {
+          "ecom": true,
+          "seenAt": "2026-11-05T11:02:17.641Z",
+          "source": "official-product-purchase"
         }
       },
       "alertedSkus": {
-        "H051551CKCS": "2026-11-02T23:25:15.988Z"
+        "H051551CKCS": "2026-11-02T23:25:15.988Z",
+        "H069573CKDJ": "2026-11-05T11:02:17.641Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 124,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
-        }
-      ],
-      "error": "Official HTTP 403",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {},
+      "currentStocks": {
+        "H069573CKDJ": {
+          "ecom": true,
+          "seenAt": "2026-11-05T11:02:17.641Z",
+          "source": "official-product-purchase"
+        }
+      },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-03T13:05:20.588Z",
-        "products": 122,
+        "checkedAt": "2026-11-05T11:02:17.641Z",
+        "products": 124,
         "targets": 1,
-        "officialTotal": 122,
+        "officialTotal": 124,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent"

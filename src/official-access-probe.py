@@ -7,6 +7,37 @@ from urllib.parse import urlsplit, urljoin
 from curl_cffi import requests
 from scrapling.fetchers import StealthySession
 
+if '--headful' in sys.argv:
+    for market in ('us','ca'):
+        result={}
+        def inspect(page):
+            page.wait_for_load_state('load',timeout=20000)
+            page.wait_for_timeout(5000)
+            result.update(page.evaluate('''async market => {
+              const origin='https://bck.hermes.com';
+              const query='fh_location=--%2Fcategories%3C%7Bwomenbagsandclutches%7D&country='+market+'&fh_view_size=144&locale='+market+'_en';
+              const out={cookieNames:document.cookie.split(';').map(x=>x.split('=')[0].trim()).filter(Boolean)};
+              try {
+                const sync=await fetch(origin+'/sync-form?locale='+market+'_en',{credentials:'include'});
+                out.syncStatus=sync.status;
+                const token=document.cookie.split(';').map(x=>x.trim()).find(x=>x.startsWith('x-xsrf-token='))?.slice(13);
+                const headers=token?{'x-xsrf-token':decodeURIComponent(token)}:{};
+                const res=await fetch(origin+'/products?'+query,{credentials:'include',headers});
+                out.status=res.status;
+                if(res.ok){const data=await res.json();out.total=data.total;out.items=data.products?.items?.length;}
+              } catch(error){out.error=String(error);}
+              return out;
+            }''',market))
+        try:
+            with contextlib.redirect_stdout(sys.stderr):
+                with StealthySession(headless=False,real_chrome=True,timeout=45000) as browser:
+                    page=browser.fetch(f'https://www.hermes.com/{market}/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/',
+                        google_search=False,network_idle=False,page_action=inspect)
+            print(json.dumps({'mode':'headful-browser-protocol','market':market,'pageStatus':page.status,**result}),flush=True)
+        except Exception as exc:
+            print(json.dumps({'mode':'headful-browser-protocol','market':market,'error':str(exc)}),flush=True)
+    sys.exit(0)
+
 
 if '--frontend' in sys.argv:
     base = 'https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/'
@@ -21,7 +52,7 @@ if '--frontend' in sys.argv:
             headers={'accept':'application/json, text/plain, */*','origin':origin,
                      'referer':f'{origin}/{market}/en/','sec-fetch-mode':'cors','sec-fetch-site':'same-origin',
                      'sec-fetch-dest':'empty','accept-language':'en-US,en;q=0.9'}
-            sync=session.get(origin+'/api/sync-form',headers=headers,timeout=25)
+            sync=session.get(origin+f'/api/sync-form?locale={market}_en',headers=headers,timeout=25)
             token=session.cookies.get('x-xsrf-token')
             if token: headers['x-xsrf-token']=token
             query=f'fh_location=--%2Fcategories%3C%7Bwomenbagsandclutches%7D&country={market}&fh_view_size=144&locale={market}_en'
@@ -140,5 +171,4 @@ for market in ('us', 'ca'):
                 browser.__exit__(None,None,None)
     except Exception as exc:
         print(json.dumps({'market':market,'mode':'browser','error':str(exc)}),flush=True)
-
 

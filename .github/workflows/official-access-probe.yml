@@ -22,5 +22,5 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install --quiet "scrapling[fetchers]==0.4.15"
-      - run: python src/official-access-probe.py --frontend
+      - run: xvfb-run -a python src/official-access-probe.py --headful
 

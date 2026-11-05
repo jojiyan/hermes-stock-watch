@@ -44,10 +44,10 @@ export async function fetchAntHtml(url, market, key, options = {}) {
   // Production injects a first-party, no-credit transport for every page,
   // including pagination, recovery facets and product purchase verification.
   if (options.officialFetcher) {
-    const evidence={market,url,mode:'scrapling-direct',credits:0};
+    const evidence={market,url,mode:options.browserOnly?'scrapling-browser':'scrapling-direct',credits:0};
     (options.attempts ||= []).push(evidence);
     try {
-      const response=await options.officialFetcher(url,market);
+      const response=await options.officialFetcher(url,market,{browserOnly:options.browserOnly===true});
       evidence.status=response.status;
       evidence.transportAttempts=response.transportAttempts||[];
       const expected=new URL(url),actual=new URL(response.url);
@@ -60,11 +60,20 @@ export async function fetchAntHtml(url, market, key, options = {}) {
       evidence.fetchedAt=new Date().toISOString();
       evidence.sha256=createHash('sha256').update(html).digest('hex');
       if(options.onHtml)await options.onHtml(html,evidence);
-      const parsed=options.parse(html);
+      let parsed;
+      try {parsed=options.parse(html);}
+      catch(error) {
+        evidence.error=error.message;
+        // HTTP 200 can be an unhydrated product shell. Give the strict parser
+        // one fully rendered attempt; it must satisfy the same SKU/URL checks.
+        if(!options.browserOnly&&!evidence.transportAttempts.some(a=>a.mode==='browser'))
+          return await fetchAntHtml(url,market,key,{...options,browserOnly:true});
+        throw error;
+      }
       evidence.pageItems=parsed.pageItems;evidence.officialTotal=parsed.reportedTotal;
       return {parsed,mode:evidence.mode};
     } catch(error) {
-      evidence.error=error.message;
+      evidence.error ||= error.message;
       error.attempts=options.attempts;
       throw error; // Never fall through to a paid provider.
     }
@@ -135,7 +144,7 @@ async function fetchCatalogScan(market, key, options = {}) {
   const parser = options.parser || parseHermesCatalog;
   const attempts = [];
   const pages = [], products = [], records = [], skus = new Set(), recoveredFacets=[];
-  let url = categoryUrl(market), total, firstPage;
+  let url = categoryUrl(market), total, firstPage, instability='';
   try {
     for (let page = 1; page <= 13; page++) {
       const parse=html=>{
@@ -173,17 +182,31 @@ async function fetchCatalogScan(market, key, options = {}) {
       const {parsed,mode}=fetched;
       if(options.onCatalogPage)await options.onCatalogPage(parsed,market,url);
       if (total === undefined) { total = parsed.reportedTotal; firstPage = parsed; }
-      if (parsed.reportedTotal !== total) throw unstableCatalog(`Official total changed during pagination: expected ${total}, received ${parsed.reportedTotal} (${url})`);
+      if (parsed.reportedTotal !== total) {
+        const reason=`Official total changed during pagination: expected ${total}, received ${parsed.reportedTotal} (${url})`;
+        if(!options.discoverThroughDrift)throw unstableCatalog(reason);
+        instability ||= reason;
+      }
       for (const sku of parsed.skus || []) {
-        if (skus.has(sku)) throw unstableCatalog(`Duplicate SKU across catalog pages: ${sku}`);
+        if (skus.has(sku)) {
+          const reason=`Duplicate SKU across catalog pages: ${sku}`;
+          if(!options.discoverThroughDrift)throw unstableCatalog(reason);
+          instability ||= reason;
+        }
         skus.add(sku);
       }
       pages.push({url,pageItems:parsed.pageItems,reportedTotal:parsed.reportedTotal,mode});
       products.push(...parsed.products);
       records.push(...(parsed.records||[]));
       let count = pages.reduce((sum,p)=>sum+p.pageItems,0);
-      if (count > total) throw unstableCatalog('Catalog page counts exceed official total');
+      if (count > total) {
+        if(!options.discoverThroughDrift)throw unstableCatalog('Catalog page counts exceed official total');
+        instability ||= 'Catalog page counts exceed official total';
+      }
       if (!parsed.next) {
+        // Keep discovering later published URLs during drift, but never accept
+        // mixed page totals as a complete catalog or use them as sell-out proof.
+        if(instability)throw unstableCatalog(instability);
         if(count<total && total-count<=5 && records.length===count && options.facetRecovery!==false) {
           // Ranking only limits cost; acceptance still needs exact official totals,
           // rendered SKU records, matching overlaps and closing consistency checks.
@@ -256,7 +279,10 @@ async function fetchCatalogScan(market, key, options = {}) {
           credits:attempts.reduce((sum,a)=>sum+a.credits,0),
           mode:recoveredFacets.length?'facet-recovered':pages.length>1?'paginated':mode,attempts};
       }
-      if (count === total) throw unstableCatalog('Unexpected next page after complete catalog');
+      if (count === total) {
+        if(!options.discoverThroughDrift)throw unstableCatalog('Unexpected next page after complete catalog');
+        instability ||= 'Unexpected next page after complete catalog';
+      }
       url = nextCatalogUrl(parsed.next,url,market);
     }
     throw new Error('Official catalog exceeded pagination limit');

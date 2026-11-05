@@ -20,7 +20,8 @@ try {
     // Category HTML may be cached for an hour. Its negative stock field must
     // not suppress checking the target's own current purchase page.
     verifyAllTargets:true,
-    officialFetcher:(url,market)=>client.fetch(url,market),
+    discoverThroughDrift:true,
+    officialFetcher:(url,market,options)=>client.fetch(url,market,options),
     onHtml:async(html,evidence)=>{
       evidence.file='scrapling-evidence/'+evidence.market+'-'+(++sequence)+'.html';
       await writeFile(resolve(root,evidence.file),html);

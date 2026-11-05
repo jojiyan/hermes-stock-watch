@@ -41,3 +41,22 @@ test('a blocked target page cannot inherit a cached-category negative in product
  assert.equal(x.products.length,0);assert.equal(x.verificationErrors.length,1);
 });
 
+test('an HTTP-200 product shell retries one fully rendered page without credits',async()=>{
+ const calls=[];
+ const x=await verifyOfficialProducts({products:[{...p,ecom:false}]},'CA',null,{
+  verifyAllTargets:true,officialFetcher:async(url,_market,options)=>{
+   calls.push(options.browserOnly);
+   return {url,status:200,html:options.browserOnly?html('<button>Add to bag</button>'):html('Loading purchase options')};
+  },
+ });
+ assert.deepEqual(calls,[false,true]);assert.equal(x.products[0].ecom,true);
+ assert.equal(x.purchaseAttempts.length,2);assert.equal(x.verificationErrors.length,0);
+});
+test('a rendered page with no verifiable purchase state remains unknown after one retry',async()=>{
+ let calls=0;
+ const x=await verifyOfficialProducts({products:[{...p,ecom:true}]},'CA',null,{
+  officialFetcher:async url=>{calls++;return {url,status:200,html:html('Loading purchase options')};},
+ });
+ assert.equal(calls,2);assert.equal(x.products.length,0);assert.equal(x.verificationErrors.length,1);
+});
+

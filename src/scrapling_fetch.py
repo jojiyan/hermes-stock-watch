@@ -36,15 +36,18 @@ def main():
                            'cache-control': 'no-cache', 'pragma': 'no-cache'}
                 attempts = []
                 with contextlib.redirect_stdout(sys.stderr):
-                    try:
-                        response = http.get(target, headers=headers, timeout=35)
-                        html, status, final = response.text, response.status_code, str(response.url)
-                        attempts.append({'mode': 'http', 'status': status,
-                            'cacheAgeSeconds': response.headers.get('age'),
-                            'cacheStatus': response.headers.get('cf-cache-status')})
-                    except Exception as exc:
+                    if request.get('browserOnly') is True:
                         html, status, final = '', 0, target
-                        attempts.append({'mode': 'http', 'error': str(exc)[:200]})
+                    else:
+                        try:
+                            response = http.get(target, headers=headers, timeout=35)
+                            html, status, final = response.text, response.status_code, str(response.url)
+                            attempts.append({'mode': 'http', 'status': status,
+                                'cacheAgeSeconds': response.headers.get('age'),
+                                'cacheStatus': response.headers.get('cf-cache-status')})
+                        except Exception as exc:
+                            html, status, final = '', 0, target
+                            attempts.append({'mode': 'http', 'error': str(exc)[:200]})
                     if blocked(status, html):
                         if country not in browsers:
                             browsers[country] = stack.enter_context(StealthySession(
@@ -55,7 +58,8 @@ def main():
                                 timeout=45000,
                             ))
                         page = browsers[country].fetch(target, google_search=False,
-                            network_idle=False, wait=2000, disable_resources=False, extra_headers=headers)
+                            network_idle=False, wait=7000 if '/product/' in parsed.path else 2500,
+                            disable_resources=False, extra_headers=headers)
                         html, status, final = page.html_content, page.status, str(page.url)
                         if isinstance(html, bytes):
                             html = html.decode('utf-8', errors='replace')

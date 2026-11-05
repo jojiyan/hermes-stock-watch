@@ -28,7 +28,7 @@ export function createScraplingClient(root,{spawnWorker=spawn,timeoutMs=90000}={
     workers.set(market,worker);return worker;
   }
   return {
-    async fetch(url,market) {
+    async fetch(url,market,options={}) {
       const parsed=new URL(url);
       if(!['US','CA'].includes(market)||parsed.origin!=='https://www.hermes.com'||
         !parsed.pathname.startsWith('/'+market.toLowerCase()+'/en/')||parsed.username||parsed.password)
@@ -42,7 +42,7 @@ export function createScraplingClient(root,{spawnWorker=spawn,timeoutMs=90000}={
             worker.error=error;worker.pending=null;reject(error);worker.child.kill();
           },timeoutMs);
           worker.pending={resolve,reject,timer};
-          worker.child.stdin.write(JSON.stringify({url})+'\n');
+          worker.child.stdin.write(JSON.stringify({url,browserOnly:options.browserOnly===true})+'\n');
         });
       });
       worker.queue=request.catch(()=>{});return request;

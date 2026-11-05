@@ -18,6 +18,8 @@ Every published category page must reconcile with the official total and unique 
 
 Production checks every discovered target's purchase page, including category entries marked unavailable. A cached negative cannot suppress its check or rearm an alert when its product page is blocked. The legacy credit-provider parser's negative-category shortcut is not used in production.
 
+When a published page total changes, production continues through safely linked later pages to discover target URLs, but still rejects the mixed catalog as complete coverage. Each discovered SKU requires its own purchase-page validation. An HTTP-200 page without a verifiable purchase state receives one browser-rendered retry under the same strict parser; unavailable or still unknown pages cannot alert.
+
 US, CA and individual SKUs are independent. A failed catalog page keeps full-market coverage unknown. A separately verified matching product page may still alert. A failed SKU never changes its own stock or suppresses another SKU. Incomplete-category negatives cannot rearm stock. Missing listings alone do not prove a sell-out.
 
 Coverage is the currently published women's bags category. Unlisted products remain unknown.

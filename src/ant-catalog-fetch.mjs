@@ -49,6 +49,7 @@ export async function fetchAntHtml(url, market, key, options = {}) {
     try {
       const response=await options.officialFetcher(url,market);
       evidence.status=response.status;
+      evidence.transportAttempts=response.transportAttempts||[];
       const expected=new URL(url),actual=new URL(response.url);
       if(actual.origin!=='https://www.hermes.com' || actual.href!==expected.href)
         throw new Error('Official request redirected away from the requested market/page');
@@ -171,7 +172,7 @@ async function fetchCatalogScan(market, key, options = {}) {
       }
       const {parsed,mode}=fetched;
       if (total === undefined) { total = parsed.reportedTotal; firstPage = parsed; }
-      if (parsed.reportedTotal !== total) throw unstableCatalog('Official total changed during pagination');
+      if (parsed.reportedTotal !== total) throw unstableCatalog(`Official total changed during pagination: expected ${total}, received ${parsed.reportedTotal} (${url})`);
       for (const sku of parsed.skus || []) {
         if (skus.has(sku)) throw unstableCatalog(`Duplicate SKU across catalog pages: ${sku}`);
         skus.add(sku);

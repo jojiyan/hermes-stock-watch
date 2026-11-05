@@ -10,16 +10,16 @@ test('scheduled and continuation runs respect the latest ten-minute observation 
   assert.throws(()=>scanDueAt({now,notBefore:'not a date'}),/Invalid/);
   assert.throws(()=>scanDueAt({now,notBefore:new Date(now+INTERVAL_MS*3).toISOString()}),/Invalid/);
 });
-test('waiting is bounded into short intervals and dispatch happens before the next due time',async()=>{
+test('dispatch queues immediately while preserving the future scan slot',async()=>{
   let clock=now;const sleeps=[],requests=[];
   const due=now+INTERVAL_MS;
   const result=await dispatchNextScan({repo:'x/y',token:'secret',due,now:()=>clock,
     wait:async ms=>{assert.ok(ms<=30000);sleeps.push(ms);clock+=ms;},
     fetcher:async(url,init)=>{requests.push({url,init,clock});return new Response('{}',{status:200});}});
-  assert.equal(requests.length,1);assert.equal(requests[0].clock,due-45000);
+  assert.equal(requests.length,1);assert.equal(requests[0].clock,now);
   const payload=JSON.parse(requests[0].init.body);
   assert.equal(payload.ref,'main');assert.equal(payload.inputs.not_before,new Date(due).toISOString());
-  assert.equal(result.status,'queued');assert.ok(sleeps.length>1);
+  assert.equal(result.status,'queued');assert.equal(sleeps.length,0);
 });
 test('dispatch handles 204 responses and never uses a permanent personal token',async()=>{
   const out=await dispatchNextScan({repo:'x/y',token:'ephemeral',due:now,now:()=>now,
@@ -41,3 +41,4 @@ test('the pre-scan wait reaches the exact slot without fixed long sleeps',async(
   await waitUntil(now+65000,{now:()=>clock,wait:async ms=>{assert.ok(ms<=30000);clock+=ms;}});
   assert.equal(clock,now+65000);
 });
+

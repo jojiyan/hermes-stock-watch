@@ -21,8 +21,8 @@ export async function waitUntil(due,{now=Date.now,wait=sleep}={}) {
 }
 export async function dispatchNextScan({repo,token,due,fetcher=fetch,now=Date.now,wait=sleep}) {
   if(!Number.isFinite(due))throw new Error('Missing next scan time');
-  // Queue shortly before the next slot; the new run waits for not_before.
-  await waitUntil(due-45_000,{now,wait});
+  // Queue promptly so this run's logs become available. The successor waits
+  // for not_before and the latest persisted observation before scanning.
   const url='https://api.github.com/repos/'+repo+'/actions/workflows/hermes-stock-watch-ant.yml/dispatches';
   for(let attempt=1;attempt<=3;attempt++) {
     const response=await fetcher(url,{method:'POST',headers:githubHeaders(token),

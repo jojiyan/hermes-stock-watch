@@ -37,6 +37,10 @@ def inspect_browser_paging(page):
         responses.append(item)
     page.on('response', capture)
     try:
+        # The button is already present in SSR HTML before Angular binds it.
+        # Wait for scripts to load before the real user navigation action.
+        page.wait_for_load_state('load', timeout=15000)
+        page.wait_for_timeout(3000)
         page.get_by_role('button', name='See more products', exact=True).click(force=True, timeout=8000)
         page.wait_for_timeout(4000)
     except Exception as exc:

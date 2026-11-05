@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T10:03:42.934Z",
+      "lastCheckedAt": "2026-11-05T10:13:43.003Z",
       "lastSuccessAt": "2026-11-05T09:53:42.861Z",
       "products": null,
       "targets": null,
@@ -90,11 +90,11 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T10:03:42.934Z",
+      "lastCheckedAt": "2026-11-05T10:13:43.003Z",
       "lastSuccessAt": "2026-11-03T13:05:20.588Z",
-      "products": 124,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -117,18 +117,17 @@
       "alertedSkus": {
         "H051551CKCS": "2026-11-02T23:25:15.988Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 124,
-      "fetchMode": "paginated",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [
         {
-          "sku": "H069573CKDJ",
-          "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
-          "error": "CA: Hermès returned an access-block page"
+          "stage": "catalog",
+          "error": "Official HTTP 403"
         }
       ],
-      "error": "Some official product purchase states are unknown",
+      "error": "Official HTTP 403",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

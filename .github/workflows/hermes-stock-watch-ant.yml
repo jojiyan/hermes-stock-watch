@@ -24,7 +24,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: hermes-stock-watch-scrapling-v2-${{ github.ref }}
+  group: hermes-stock-watch-live-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:

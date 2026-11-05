@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T15:22:19.266Z",
+      "lastCheckedAt": "2026-11-05T15:32:19.348Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
       "products": null,
       "targets": null,
@@ -90,12 +90,12 @@
       "productVerification": "independent"
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-05T15:22:19.266Z",
-      "lastSuccessAt": "2026-11-05T15:12:19.203Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-05T15:32:19.348Z",
+      "lastSuccessAt": "2026-11-05T15:32:19.348Z",
+      "products": 127,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -123,24 +123,19 @@
       "alertedSkus": {
         "H051551CKCS": "2026-11-02T23:25:15.988Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 127,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
-        }
-      ],
-      "error": "Official HTTP 403",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T15:12:19.203Z",
-        "products": 134,
+        "checkedAt": "2026-11-05T15:32:19.348Z",
+        "products": 127,
         "targets": 0,
-        "officialTotal": 134,
+        "officialTotal": 127,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent"

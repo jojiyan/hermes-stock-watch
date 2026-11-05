@@ -6,6 +6,15 @@ const html=(action)=>`<html><head><base href="/ca/en/"><link rel="canonical" hre
 test('positive stock requires matching official SKU, market and enabled real purchase button',()=>{
  for(const label of ['Add to cart','Add to bag'])assert.equal(parseOfficialPurchase(html(`<button name="add-to-cart"><span>${label}</span></button>`),p).ecom,true);
 });
+test('exact product-page colour and price replace broad catalog metadata',()=>{
+ const candidate={...p,name:'Neo Garden 23 bag',color:'Blue',price:'$1'};
+ const source=html('<p>Price CA$3,650</p><p>Color , Bleu Paradis / Bleu Paradis selected</p><button>Add to bag</button>')
+   .replace('<h1>Picotin 18 bag</h1>','<h1>Neo Garden 23 bag</h1>');
+ const out=parseOfficialPurchase(source,candidate);
+ assert.equal(out.color,'Bleu Paradis / Bleu Paradis');assert.equal(out.price,'CA$3,650');
+ assert.equal(out.name,'Neo Garden 23 bag');assert.equal(out.ecom,true);
+ assert.throws(()=>parseOfficialPurchase(html('<button>Add to bag</button>'),{...candidate,watchOnly:true}),/model mismatch/);
+});
 test('disabled actions and explicit sold-out override stock metadata',()=>{
  for(const attr of ['disabled','disabled="false"','aria-disabled="true"']){
   const x=parseOfficialPurchase(html(`<button ${attr}>Add to bag</button>`),p);assert.equal(x.ecom,false);assert.equal(x.purchaseVerified,true);

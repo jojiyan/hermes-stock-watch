@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {notifyVerifiedStock} from '../src/ant-notify.mjs';
-const p={market:'US',marketName:'Hermès USA',sku:'H12345678',name:'Mini Lindy',color:'Black',
+const p={market:'US',marketName:'Herm�s USA',sku:'H12345678',name:'Mini Lindy',color:'Black',
   price:'$1',url:'https://www.hermes.com/us/en/product/mini-lindy-H12345678/',
   purchaseVerified:true,ecom:true,marker:'<!-- stock:US:H12345678:initial -->'};
 const auth={repo:'test/repo',owner:'owner',token:'token',checkedAt:'2026-10-28T10:00:00Z'};
@@ -33,3 +33,15 @@ test('failed delivery is not recorded as success',async()=>{
   await assert.rejects(notifyVerifiedStock(p,{...auth,fetcher:async(_url,init)=>
     init.method==='POST'?new Response('',{status:500}):new Response('[]')}),/notification failed.*500/);
 });
+test('confirmed favourite Garden colours receive a visible priority title without changing deduplication',async()=>{
+  for(const [color,label] of [['Bleu Paradis','???'],['Bleu Z�phyr','???']]) {
+    await notifyVerifiedStock({...p,name:'Neo Garden 23 bag',color},{...auth,fetcher:async(_url,init)=>{
+      if(init.method!=='POST')return new Response('[]');
+      const issue=JSON.parse(init.body);
+      assert.ok(issue.title.includes('????'));assert.ok(issue.title.includes(label));
+      assert.ok(issue.body.includes(p.marker));assert.ok(issue.body.includes('??:'+color));
+      return new Response(JSON.stringify({number:43,html_url:'https://github.com/test/repo/issues/43'}));
+    }});
+  }
+});
+

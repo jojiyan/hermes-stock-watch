@@ -21,6 +21,7 @@ try {
     // not suppress checking the target's own current purchase page.
     verifyAllTargets:true,
     discoverThroughDrift:true,
+    priorityWatch:true,
     officialFetcher:(url,market,options)=>client.fetch(url,market,options),
     onHtml:async(html,evidence)=>{
       evidence.file='scrapling-evidence/'+evidence.market+'-'+(++sequence)+'.html';

@@ -1,5 +1,6 @@
 import { parseProductPageHtml } from './hermes.mjs';
 import { fetchAntHtml } from './ant-catalog-fetch.mjs';
+import {isGarden23, prioritizeProducts} from './ant-priority.mjs';
 
 function visibleHtml(html) {
   const stack=[];
@@ -50,17 +51,19 @@ export function parseOfficialPurchase(html, candidate) {
   // Supply only the main purchase buttons; retain the full main product description/reference.
   const scoped = main.replace(/<button\b[^>]*>[\s\S]*?<\/button>/gi,'') + buttons.map(x=>x[0]).join('');
   const result = parseProductPageHtml(scoped + ' '.repeat(5000),candidate);
-  return {...candidate, ecom:result.available, purchaseVerified:true,
+  if (candidate.watchOnly && !isGarden23(result.name)) throw new Error('Priority watch product model mismatch');
+  return {...candidate, name:result.name, color:result.color, material:result.material,
+    price:result.price, ecom:result.available, purchaseVerified:true,
     purchaseAction:result.purchaseAction, purchaseButtonDisabled:result.purchaseButtonDisabled,
     evidence:result.available?'Official matching product page: enabled Add to cart/Add to bag':'Official matching product page: disabled purchase button or explicit unavailable message'};
 }
 
 export async function verifyOfficialProducts(parsed, market, key, options = {}) {
-  const attempts = [], products = [], verificationErrors = [];
-  for (const candidate of parsed.products) {
+  const attempts = [], products = [], verificationErrors = [], priorityWatchErrors = [];
+  for (const candidate of prioritizeProducts(parsed.products)) {
     // A complete official catalog explicitly says this SKU cannot be bought.
     // It needs no expensive/blocked detail request, and can never be positive.
-    if(candidate.ecom===false && options.verifyAllTargets!==true) {
+    if(candidate.ecom===false && !candidate.watchOnly && options.verifyAllTargets!==true) {
       products.push({...candidate,categoryNegativeVerified:true,
         evidence:'Complete official catalog: stock.ecom=false (not purchasable)',purchaseAction:''});
       continue;
@@ -70,9 +73,10 @@ export async function verifyOfficialProducts(parsed, market, key, options = {}) 
         parse:html=>parseOfficialPurchase(html,candidate)});
       products.push(result.parsed);
     } catch (error) {
-      verificationErrors.push({sku:candidate.sku,url:candidate.url,error:error.message});
+      (candidate.watchOnly ? priorityWatchErrors : verificationErrors)
+        .push({sku:candidate.sku,url:candidate.url,error:error.message});
     }
   }
-  return {...parsed, products, verificationErrors, purchaseAttempts:attempts};
+  return {...parsed, products, verificationErrors, priorityWatchErrors, purchaseAttempts:attempts};
 }
 

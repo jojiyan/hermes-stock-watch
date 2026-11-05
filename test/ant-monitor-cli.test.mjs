@@ -9,7 +9,7 @@ for(const verifyOnly of [true,false])test(`catalog CLI separates completed execu
  const dir=await mkdtemp(join(tmpdir(),'ant-cli-'));
  try{
   await mkdir(join(dir,'src'));
-  for(const file of ['ant-catalog-monitor.mjs','ant-notify.mjs','ant-state-store.mjs'])
+  for(const file of ['ant-catalog-monitor.mjs','ant-notify.mjs','ant-state-store.mjs','ant-priority.mjs'])
    await copyFile(new URL('../src/'+file,import.meta.url),join(dir,'src',file));
   await writeFile(join(dir,'src/ant-catalog-check.mjs'),`export async function checkCatalogMarkets(state,key,checkedAt){
    if(state.version!==3)throw new Error('version downgraded');
@@ -30,3 +30,4 @@ for(const verifyOnly of [true,false])test(`catalog CLI separates completed execu
   else {assert.equal(JSON.parse(saved).version,3);assert.equal(JSON.parse(saved).markets.US.status,'unknown');}
  }finally{await rm(dir,{recursive:true,force:true});}
 });
+

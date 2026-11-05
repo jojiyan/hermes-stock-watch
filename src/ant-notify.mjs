@@ -1,4 +1,5 @@
 import {githubHeaders} from './ant-state-store.mjs';
+import {stockPriority} from './ant-priority.mjs';
 export async function notifyVerifiedStock(p,{repo,owner,token,checkedAt,fetcher=fetch}) {
   if(p.purchaseVerified!==true||p.ecom!==true||!p.marker)
     throw new Error('Only confirmed purchasable stock can notify');
@@ -14,15 +15,18 @@ export async function notifyVerifiedStock(p,{repo,owner,token,checkedAt,fetcher=
     if(items.length<100){exhausted=true;break;}
   }
   if(!exhausted)throw new Error('Stock alert deduplication exceeded the safe page limit');
-  const body=['@'+owner,'','地区：'+p.marketName,'包款：'+p.name,'颜色：'+p.color,
-    '价格：'+p.price,'SKU：'+p.sku,'官方商品链接：'+p.url,'',
-    '来源：Hermès 官方商品页，地区与 SKU 匹配，Add to cart/Add to bag 按钮可用。',
-    '检测时间：'+checkedAt,p.marker].join('\n');
+  const priority=stockPriority(p);
+  const body=['@'+owner,'',...(priority.label?['????:'+priority.label,'???:'+priority.rank,'']:[]),
+    '??:'+p.marketName,'??:'+p.name,'??:'+p.color,
+    '??:'+p.price,'SKU:'+p.sku,'??????:'+p.url,'',
+    '??:Herm�s ?????,??? SKU ??,Add to cart/Add to bag ?????',
+    '????:'+checkedAt,p.marker].join('\n');
   const response=await fetcher('https://api.github.com/repos/'+repo+'/issues',{
     method:'POST',headers,signal:AbortSignal.timeout(30_000),
-    body:JSON.stringify({title:'🟠 Hermès 官方电商有货｜'+p.market+'｜'+p.name+'｜'+p.color,
+    body:JSON.stringify({title:(priority.label?'?? ????|'+priority.label+'|':'?? Herm�s ??????|')+p.market+'|'+p.name+'|'+p.color,
       body,assignees:[owner]})});
   if(!response.ok)throw new Error('Issue stock notification failed (HTTP '+response.status+')');
   const issue=await response.json();
   return {status:'created',channel:'github-issue',number:issue.number,url:issue.html_url};
 }
+

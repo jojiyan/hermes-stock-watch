@@ -16,9 +16,21 @@ if '--frontend' in sys.argv:
         url = urljoin(base, next(s for s in scripts if re.search(r'/main\.[a-z0-9]+\.js', s)))
         response = session.get(url, timeout=30)
         print(json.dumps({'mode':'frontend-source','url':url,'status':response.status_code,'bytes':len(response.content)}),flush=True)
-        for term in ('/products','/sync-form','xsrf','getProducts','withCredentials','bck.hermes','fh_location'):
+        for term in ('Yd=(()=>','Bp=(()=>','params:M','path:"category','hcomGateway','apiGateway'):
             for match in list(re.finditer(re.escape(term), response.text, re.I))[:5]:
-                print(json.dumps({'term':term,'snippet':response.text[max(0,match.start()-350):match.end()+650]}),flush=True)
+                print(json.dumps({'term':term,'snippet':response.text[max(0,match.start()-2200):match.end()+3500]}),flush=True)
+        runtime_url = urljoin(base, next(s for s in scripts if re.search(r'/runtime\.[a-z0-9]+\.js', s)))
+        runtime = session.get(runtime_url, timeout=30).text
+        print(json.dumps({'mode':'runtime-source','url':runtime_url,'source':runtime[:14000]}),flush=True)
+        for market in ('us','ca'):
+            headers={'accept':'application/json, text/plain, */*','origin':'https://www.hermes.com',
+                     'referer':f'https://www.hermes.com/{market}/en/','sec-fetch-mode':'cors','sec-fetch-site':'same-site',
+                     'sec-fetch-dest':'empty','accept-language':'en-US,en;q=0.9'}
+            sync=session.get('https://bck.hermes.com/sync-form',headers=headers,timeout=25)
+            token=session.cookies.get('x-xsrf-token')
+            if token: headers['x-xsrf-token']=token
+            api=session.get(f'https://bck.hermes.com/products?category=WOMEN_BAGS_AND_CLUTCHES&sort=relevance&pagesize=144&locale={market}_en',headers=headers,timeout=25)
+            print(json.dumps({'mode':'synced-api','market':market,'syncStatus':sync.status_code,'hasToken':bool(token),'status':api.status_code}),flush=True)
     sys.exit(0)
 
 
@@ -113,4 +125,5 @@ for market in ('us', 'ca'):
                 browser.__exit__(None,None,None)
     except Exception as exc:
         print(json.dumps({'market':market,'mode':'browser','error':str(exc)}),flush=True)
+
 

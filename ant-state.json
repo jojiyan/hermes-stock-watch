@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-05T06:13:41.276Z",
-      "lastSuccessAt": "2026-11-05T05:33:41.003Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-05T06:23:41.344Z",
+      "lastSuccessAt": "2026-11-05T06:23:41.344Z",
+      "products": 49,
+      "targets": 3,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-05T05:33:41.003Z",
+          "seenAt": "2026-11-05T06:23:41.344Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-05T05:33:41.003Z",
+          "seenAt": "2026-11-05T06:23:41.344Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-05T05:33:41.003Z",
+          "seenAt": "2026-11-05T06:23:41.344Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
@@ -67,21 +67,32 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 49,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
+      "verificationErrors": [],
+      "error": null,
+      "currentStocks": {
+        "H085956CC18": {
+          "ecom": false,
+          "seenAt": "2026-11-05T06:23:41.344Z",
+          "source": "complete-official-category-negative"
+        },
+        "H083189CKAX": {
+          "ecom": false,
+          "seenAt": "2026-11-05T06:23:41.344Z",
+          "source": "complete-official-category-negative"
+        },
+        "H056289CK7G": {
+          "ecom": false,
+          "seenAt": "2026-11-05T06:23:41.344Z",
+          "source": "complete-official-category-negative"
         }
-      ],
-      "error": "Official HTTP 403",
-      "currentStocks": {},
+      },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T05:33:41.003Z",
+        "checkedAt": "2026-11-05T06:23:41.344Z",
         "products": 49,
         "targets": 3,
         "officialTotal": 49,
@@ -90,11 +101,11 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T06:13:41.276Z",
+      "lastCheckedAt": "2026-11-05T06:23:41.344Z",
       "lastSuccessAt": "2026-11-03T13:05:20.588Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "products": 125,
+      "targets": 1,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -117,17 +128,18 @@
       "alertedSkus": {
         "H051551CKCS": "2026-11-02T23:25:15.988Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 125,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [
         {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
+          "sku": "H069573CKDJ",
+          "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
+          "error": "CA: Hermès returned an access-block page"
         }
       ],
-      "error": "Official HTTP 403",
+      "error": "Some official product purchase states are unknown",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

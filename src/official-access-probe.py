@@ -2,9 +2,24 @@
 import contextlib
 import json
 import re
-from urllib.parse import urlsplit
+import sys
+from urllib.parse import urlsplit, urljoin
 from curl_cffi import requests
 from scrapling.fetchers import StealthySession
+
+
+if '--frontend' in sys.argv:
+    base = 'https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/'
+    with requests.Session(impersonate='chrome') as session:
+        html = session.get(base, timeout=30).text
+        scripts = re.findall(r'<script[^>]*src=["\']([^"\']+)', html)
+        url = urljoin(base, next(s for s in scripts if re.search(r'/main\.[a-z0-9]+\.js', s)))
+        response = session.get(url, timeout=30)
+        print(json.dumps({'mode':'frontend-source','url':url,'status':response.status_code,'bytes':len(response.content)}),flush=True)
+        for term in ('/products','/sync-form','xsrf','getProducts','withCredentials','bck.hermes','fh_location'):
+            for match in list(re.finditer(re.escape(term), response.text, re.I))[:5]:
+                print(json.dumps({'term':term,'snippet':response.text[max(0,match.start()-350):match.end()+650]}),flush=True)
+    sys.exit(0)
 
 
 def summary(html):
@@ -98,5 +113,4 @@ for market in ('us', 'ca'):
                 browser.__exit__(None,None,None)
     except Exception as exc:
         print(json.dumps({'market':market,'mode':'browser','error':str(exc)}),flush=True)
-
 

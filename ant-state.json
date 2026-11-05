@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T22:50:10.482Z",
+      "lastCheckedAt": "2026-11-05T23:00:10.573Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
       "products": null,
       "targets": null,
@@ -74,7 +74,7 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 51, received 52 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official HTTP 403"
         },
         {
           "sku": "H085956CC18",
@@ -92,7 +92,7 @@
           "error": "US: Hermès returned an access-block page"
         }
       ],
-      "error": "Official total changed during pagination: expected 51, received 52 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official HTTP 403",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -105,12 +105,12 @@
       "productVerification": "independent"
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-05T22:50:10.482Z",
-      "lastSuccessAt": "2026-11-05T22:40:10.409Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-05T23:00:10.573Z",
+      "lastSuccessAt": "2026-11-05T23:00:10.573Z",
+      "products": 123,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -138,21 +138,16 @@
       "alertedSkus": {
         "H051551CKCS": "2026-11-02T23:25:15.988Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 123,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
-        }
-      ],
-      "error": "Official HTTP 403",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T22:40:10.409Z",
+        "checkedAt": "2026-11-05T23:00:10.573Z",
         "products": 123,
         "targets": 0,
         "officialTotal": 123,

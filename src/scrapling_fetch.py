@@ -46,7 +46,7 @@ def main():
                 country = parsed.path.split('/')[1]
                 if country not in ('us', 'ca') or not parsed.path.startswith(f'/{country}/en/'):
                     raise ValueError('Unexpected market URL')
-                target = fresh_url(url)
+                target = url
                 headers = {'accept': 'text/html,application/xhtml+xml',
                            'accept-language': 'en-CA,en;q=0.9' if country == 'ca' else 'en-US,en;q=0.9',
                            'cache-control': 'no-cache', 'pragma': 'no-cache'}
@@ -55,7 +55,9 @@ def main():
                     try:
                         response = http.get(target, headers=headers, timeout=35)
                         html, status, final = response.text, response.status_code, str(response.url)
-                        attempts.append({'mode': 'http', 'status': status})
+                        attempts.append({'mode': 'http', 'status': status,
+                            'cacheAgeSeconds': response.headers.get('age'),
+                            'cacheStatus': response.headers.get('cf-cache-status')})
                     except Exception as exc:
                         html, status, final = '', 0, target
                         attempts.append({'mode': 'http', 'error': str(exc)[:200]})

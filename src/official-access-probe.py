@@ -33,6 +33,22 @@ for market in ('us', 'ca'):
                     **summary(page.text)}), flush=True)
             except Exception as exc:
                 print(json.dumps({'market':market,'mode':'http','url':url,'error':str(exc)}), flush=True)
+    with requests.Session(impersonate='chrome') as api:
+        api.get(base, timeout=25)
+        for query in (f'fh_location=--%2Fcategories%3C%7Bwomenbagsandclutches%7D&country={market}&fh_view_size=144',
+                      f'category=WOMEN_BAGS_AND_CLUTCHES&sort=relevance&pagesize=144&locale={market}_en'):
+            api_url = 'https://bck.hermes.com/products?' + query
+            try:
+                response = api.get(api_url, timeout=25, headers={
+                    'accept':'application/json, text/plain, */*', 'origin':'https://www.hermes.com',
+                    'referer':base,'sec-fetch-mode':'cors','sec-fetch-site':'same-site','sec-fetch-dest':'empty',
+                    'accept-language':'en-US,en;q=0.9', 'cache-control':'no-cache'})
+                data = response.json() if response.status_code == 200 else {}
+                items = data.get('products',{}).get('items',[]) if isinstance(data.get('products'),dict) else data.get('products',[])
+                print(json.dumps({'market':market,'mode':'official-json','url':api_url,'status':response.status_code,
+                    'total':data.get('total'),'items':len(items),'keys':list(data.keys())[:15]}),flush=True)
+            except Exception as exc:
+                print(json.dumps({'market':market,'mode':'official-json','url':api_url,'error':str(exc)}),flush=True)
     try:
         with contextlib.redirect_stdout(__import__('sys').stderr):
             browser = StealthySession(headless=True, real_chrome=True, timeout=35000,
@@ -54,3 +70,4 @@ for market in ('us', 'ca'):
                 browser.__exit__(None,None,None)
     except Exception as exc:
         print(json.dumps({'market':market,'mode':'browser','error':str(exc)}),flush=True)
+

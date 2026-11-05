@@ -8,7 +8,7 @@ Production runs in GitHub Actions, with a first-party Scrapling browser session 
 
 Each main-branch run saves its observations and dispatches the active Scrapling workflow for the next ten-minute slot. Native cron is a recovery trigger; GitHub queue delays can shift scan times. Repair branches use VERIFY_ONLY and cannot notify, save production state or chain successors.
 
-Deployments cancel an obsolete waiting run and scan immediately. Scheduled continuations keep their due time. This prevents a waiting successor from repeatedly replacing a queued repair deployment.
+Deployments replace obsolete waiting runs and scan immediately. Scheduled continuations respect the latest persisted observation and their due time without cancelling their predecessor. Contents-API state merging and Issue deduplication preserve history through deployment cancellation.
 
 ## Stock confirmation
 

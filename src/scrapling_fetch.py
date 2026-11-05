@@ -57,6 +57,16 @@ def main():
                                 timezone_id='America/Toronto' if country == 'ca' else 'America/New_York',
                                 timeout=45000,
                             ))
+                            # Establish the normal first-party market session
+                            # before entering a cold product/category deep link.
+                            try:
+                                warm = browsers[country].fetch(
+                                    f'https://www.hermes.com/{country}/en/',
+                                    google_search=False, network_idle=False, wait=2500,
+                                    timeout=15000, extra_headers=headers)
+                                attempts.append({'mode':'browser-warmup','status':warm.status})
+                            except Exception as exc:
+                                attempts.append({'mode':'browser-warmup','error':str(exc)[:150]})
                         page = browsers[country].fetch(target, google_search=False,
                             network_idle=False, wait=7000 if '/product/' in parsed.path else 2500,
                             disable_resources=False, extra_headers=headers)

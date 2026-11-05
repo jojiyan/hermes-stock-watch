@@ -3,7 +3,7 @@ import {createInterface} from 'node:readline';
 import {resolve} from 'node:path';
 
 // Two persistent workers isolate market cookies while allowing independent scans.
-export function createScraplingClient(root,{spawnWorker=spawn,timeoutMs=90000}={}) {
+export function createScraplingClient(root,{spawnWorker=spawn,timeoutMs=120000}={}) {
   const workers=new Map();
   function start(market) {
     const child=spawnWorker(process.env.SCRAPLING_PYTHON||resolve(root,'.venv/bin/python'),

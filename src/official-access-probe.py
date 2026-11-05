@@ -16,6 +16,21 @@ if '--frontend' in sys.argv:
         url = urljoin(base, next(s for s in scripts if re.search(r'/main\.[a-z0-9]+\.js', s)))
         response = session.get(url, timeout=30)
         print(json.dumps({'mode':'frontend-source','url':url,'status':response.status_code,'bytes':len(response.content)}),flush=True)
+        for market in ('us','ca'):
+            origin='https://www.hermes.com'
+            headers={'accept':'application/json, text/plain, */*','origin':origin,
+                     'referer':f'{origin}/{market}/en/','sec-fetch-mode':'cors','sec-fetch-site':'same-origin',
+                     'sec-fetch-dest':'empty','accept-language':'en-US,en;q=0.9'}
+            sync=session.get(origin+'/api/sync-form',headers=headers,timeout=25)
+            token=session.cookies.get('x-xsrf-token')
+            if token: headers['x-xsrf-token']=token
+            query=f'fh_location=--%2Fcategories%3C%7Bwomenbagsandclutches%7D&country={market}&fh_view_size=144&locale={market}_en'
+            api=session.get(origin+'/api/products?'+query,headers=headers,timeout=25)
+            data=api.json() if api.status_code==200 else {}
+            items=data.get('products',{}).get('items',[]) if isinstance(data.get('products'),dict) else []
+            print(json.dumps({'mode':'official-gateway','market':market,'syncStatus':sync.status_code,'hasToken':bool(token),
+                'status':api.status_code,'total':data.get('total'),'items':len(items),'keys':list(data.keys())[:15]}),flush=True)
+        sys.exit(0)
         for term in ('Yd=(()=>','Bp=(()=>','params:M','path:"category','hcomGateway','apiGateway'):
             for match in list(re.finditer(re.escape(term), response.text, re.I))[:5]:
                 print(json.dumps({'term':term,'snippet':response.text[max(0,match.start()-2200):match.end()+3500]}),flush=True)

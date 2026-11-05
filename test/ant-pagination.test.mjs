@@ -122,20 +122,52 @@ test('closing first-page total drift forces a whole fresh scan',async()=>{
  });
  assert.equal(calls,6);assert.equal(result.scans.length,2);assert.equal(result.parsed.reportedTotal,2);
 });
-test('US partial purchase failure suppresses all US alerts, preserves history and leaves CA independent',async()=>{
- const prior={version:2,markets:{US:{lastSuccessAt:'before',catalogStocks:{old:{ecom:false,seenAt:'before'}},alertedSkus:{old:'before'},available:{}}}};
- const out=await checkCatalogMarkets(prior,'key','now',{
-  fetchCatalog:async market=>({parsed:{products:[{market,sku:'new',ecom:true,purchaseVerified:true}],pageItems:1,reportedTotal:1}}),
-  verifyProducts:async p=>({...p,verificationErrors:p.products[0].market==='US'?[{error:'blocked'}]:[]}),
+test('a blocked SKU cannot suppress other independently verified purchase alerts',async()=>{
+ const checkedAt='2026-11-05T09:00:00.000Z';
+ const prior={version:3,markets:{US:{
+   lastSuccessAt:'2026-11-03T09:00:00.000Z',
+   catalogStocks:{HOLD:{ecom:true,seenAt:'2026-11-03T09:00:00.000Z'}},
+   alertedSkus:{HOLD:'2026-11-03T09:00:00.000Z'},
+   available:{HOLD:{sku:'HOLD',lastSeenAt:'2026-11-03T09:00:00.000Z'}},
+ }}};
+ const out=await checkCatalogMarkets(prior,'key',checkedAt,{
+  fetchCatalog:async market=>({parsed:{
+    products:[{sku:'HNEW'+market,ecom:true},{sku:'HOLD',ecom:true}],
+    pageItems:124,reportedTotal:124,coverage:'complete official catalog',
+  }}),
+  verifyProducts:async(p,market)=>({...p,
+    products:[{market,marketName:market==='US'?'Hermès USA':'Hermès Canada',
+      sku:'HNEW'+market,name:'Neo Garden 23 bag',color:'Blue',
+      url:'https://www.hermes.com/'+market.toLowerCase()+'/en/product/neo-garden-23-bag-HNEW'+market+'/',
+      ecom:true,purchaseVerified:true}],
+    verificationErrors:market==='US'?[{sku:'HOLD',error:'official page blocked'}]:[],
+  }),
  });
- assert.equal(out.state.version,3);assert.equal(out.state.markets.US.status,'unknown');
- assert.deepEqual(out.state.markets.US.catalogStocks,prior.markets.US.catalogStocks);
- assert.deepEqual(out.state.markets.US.alertedSkus,prior.markets.US.alertedSkus);
+ assert.equal(out.state.version,3);
+ assert.equal(out.state.markets.US.status,'unknown');
+ assert.equal(out.state.markets.CA.status,'ok');
+ assert.equal(out.state.markets.US.lastSuccessAt,'2026-11-03T09:00:00.000Z');
+ assert.equal(out.state.markets.US.catalogStocks.HOLD.ecom,true);
+ assert.equal(out.state.markets.US.available.HOLD.sku,'HOLD');
+ assert.equal(out.state.markets.US.catalogStocks.HNEWUS.ecom,true);
+ assert.equal(out.state.markets.US.alertedSkus.HNEWUS,checkedAt);
  assert.deepEqual(out.state.markets.US.currentStocks,{});
- assert.equal(out.state.markets.US.lastSuccessAt,'before');
- assert.deepEqual(out.alerts.map(p=>p.market),['CA']);
- assert.equal(out.report.executionStatus,'completed');assert.equal(out.report.verificationStatus,'unverified');
- assert.equal(prior.version,2);
+ assert.deepEqual(out.alerts.map(p=>p.sku).sort(),['HNEWCA','HNEWUS']);
+ assert.equal(out.report.healthy,false);
+ assert.equal(out.report.verificationStatus,'unverified');
+ assert.equal(out.report.summaries.find(x=>x.market==='US').newAlerts,1);
+ assert.equal(prior.version,3);
+});
+test('an entirely unverified purchase page cannot alert or alter historical stock',async()=>{
+ const prev={markets:{US:{available:{old:{sku:'old'}},catalogStocks:{old:{ecom:true}},alertedSkus:{old:'before'}}}};
+ const result=await checkCatalogMarkets(prev,'key','2026-11-05T09:10:00.000Z',{
+  fetchCatalog:async()=>({parsed:{products:[{sku:'old',ecom:true}],pageItems:40,reportedTotal:40}}),
+  verifyProducts:async p=>({...p,products:[],verificationErrors:[{sku:'old',error:'blocked'}]}),
+ });
+ assert.equal(result.report.healthy,false);
+ assert.deepEqual(result.state.markets.US.available,prev.markets.US.available);
+ assert.deepEqual(result.state.markets.US.catalogStocks,prev.markets.US.catalogStocks);
+ assert.equal(result.alerts.length,0);
 });
 
 test('repeated HTTP 200 incomplete catalogs escalate to an entirely browser-rendered scan',async()=>{

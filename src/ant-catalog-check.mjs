@@ -15,11 +15,11 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
 
       const errors=parsed.verificationErrors||[];
       const healthy=errors.length===0;
-      // A market is transactional: partial purchase verification cannot alert or rearm.
-      const reconciled=healthy?reconcileCatalog(previous,parsed,checkedAt):{
-        available:previous.available||{},catalogStocks:previous.catalogStocks||{},
-        alertedSkus:previous.alertedSkus||{},alerts:[],
-      };
+      // The catalog is complete, but an individual blocked product page is unknown.
+      // Reconcile only independently VERIFIED product purchases or explicit category
+      // negatives. A failure for SKU A must not suppress an independently verified
+      // purchase for SKU B. Unverified SKU history is never changed or rearmed.
+      const reconciled=reconcileCatalog(previous,parsed,checkedAt);
       state.markets[market]={...previous,
         catalogStocksUsage:'historical observations; consult currentStocks for this scan',
         currentStocks:healthy?Object.fromEntries(Object.entries(reconciled.catalogStocks).filter(([,v])=>v.seenAt===checkedAt)):{},

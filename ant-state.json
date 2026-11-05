@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-05T23:10:10.656Z",
-      "lastSuccessAt": "2026-11-05T13:42:18.671Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-05T23:16:57.785Z",
+      "lastSuccessAt": "2026-11-05T23:16:57.785Z",
+      "products": 51,
+      "targets": 3,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -42,18 +42,18 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-05T13:42:18.671Z",
-          "source": "complete-official-category-negative"
+          "seenAt": "2026-11-05T23:16:57.785Z",
+          "source": "official-product-purchase"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-05T13:42:18.671Z",
-          "source": "complete-official-category-negative"
+          "seenAt": "2026-11-05T23:16:57.785Z",
+          "source": "official-product-purchase"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-05T13:42:18.671Z",
-          "source": "complete-official-category-negative"
+          "seenAt": "2026-11-05T23:16:57.785Z",
+          "source": "official-product-purchase"
         },
         "H069573CKDM": {
           "ecom": true,
@@ -67,47 +67,43 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 51,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
+      "verificationErrors": [],
+      "error": null,
+      "currentStocks": {
+        "H085956CC18": {
+          "ecom": false,
+          "seenAt": "2026-11-05T23:16:57.785Z",
+          "source": "official-product-purchase"
         },
-        {
-          "sku": "H085956CC18",
-          "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CC18/",
-          "error": "US: Hermès returned an access-block page"
+        "H083189CKAX": {
+          "ecom": false,
+          "seenAt": "2026-11-05T23:16:57.785Z",
+          "source": "official-product-purchase"
         },
-        {
-          "sku": "H083189CKAX",
-          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-pocket-bag-H083189CKAX/",
-          "error": "US: Hermès returned an access-block page"
-        },
-        {
-          "sku": "H056289CK7G",
-          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CK7G/",
-          "error": "US: Hermès returned an access-block page"
+        "H056289CK7G": {
+          "ecom": false,
+          "seenAt": "2026-11-05T23:16:57.785Z",
+          "source": "official-product-purchase"
         }
-      ],
-      "error": "Official HTTP 403",
-      "currentStocks": {},
+      },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T13:42:18.671Z",
-        "products": 47,
+        "checkedAt": "2026-11-05T23:16:57.785Z",
+        "products": 51,
         "targets": 3,
-        "officialTotal": 47,
+        "officialTotal": 51,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent"
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T23:10:10.656Z",
-      "lastSuccessAt": "2026-11-05T23:10:10.656Z",
+      "lastCheckedAt": "2026-11-05T23:16:57.785Z",
+      "lastSuccessAt": "2026-11-05T23:16:57.785Z",
       "products": 123,
       "targets": 0,
       "categoryAvailable": 0,
@@ -147,7 +143,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T23:10:10.656Z",
+        "checkedAt": "2026-11-05T23:16:57.785Z",
         "products": 123,
         "targets": 0,
         "officialTotal": 123,

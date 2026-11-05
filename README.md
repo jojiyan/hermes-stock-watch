@@ -4,7 +4,9 @@ Production: [Hermes Stock Watch (Scrapling)](.github/workflows/hermes-stock-watc
 
 ## Operation
 
-Production runs in GitHub Actions, with a first-party Scrapling browser session per market. It does not require the user's computer or any paid scraping credits. No production step loads Firecrawl, ScrapingAnt or TinyFish credentials. The former credit-provider workflow is retired and cannot queue more scans.
+Production runs in GitHub Actions, with direct first-party HTTP and a persistent Camoufox browser session per market. The browser runs under Xvfb in the cloud and does not require the user's computer or any paid scraping credits. No production step loads Firecrawl, ScrapingAnt or TinyFish credentials. The former credit-provider workflow is retired and cannot queue more scans.
+
+Camoufox Python 0.5.9 and browser 158.0.1-beta.41 are pinned. Public browser/runtime data is cached between runs. Live alternate-engine verification opened the US category and a matching Lindy product page without a challenge frame. The current visible negative message, "This product is currently not available", is recognized under the same SKU/canonical/market checks as other sold-out evidence; recommendation text remains excluded.
 
 Each main-branch run saves its observations and dispatches the active Scrapling workflow for the next ten-minute slot. Native cron is a recovery trigger; GitHub queue delays can shift scan times. Repair branches use VERIFY_ONLY and cannot notify, save production state or chain successors.
 

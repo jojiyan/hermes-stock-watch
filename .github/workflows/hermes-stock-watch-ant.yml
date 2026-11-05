@@ -36,11 +36,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Restore pinned browser runtime
+        id: browser-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/camoufox
+            ~/.cache/fpgen
+          key: camoufox-${{ runner.os }}-${{ runner.arch }}-0.5.9-158.0.1-beta.41
       - name: Install pinned open-source fetcher
         run: |
-          test -x /usr/bin/google-chrome-stable
           python3 -m venv .venv
-          .venv/bin/python -m pip install --quiet 'scrapling[fetchers]==0.4.15'
+          .venv/bin/python -m pip install --quiet 'scrapling[fetchers]==0.4.15' 'camoufox==0.5.9'
+      - name: Install verified browser build
+        if: steps.browser-cache.outputs.cache-hit != 'true'
+        run: |
+          .venv/bin/python -m camoufox set official/stable/158.0.1-beta.41
+          .venv/bin/python -m camoufox fetch
       - name: Check stock safety rules
         run: |
           npm test
@@ -59,7 +71,7 @@ jobs:
           NOT_BEFORE: ${{ inputs.not_before }}
       - name: Verify US and Canada using first-party browsers
         id: monitor
-        run: node src/scrapling-monitor.mjs
+        run: xvfb-run -a node src/scrapling-monitor.mjs
         env:
           VERIFY_ONLY: ${{ github.ref != 'refs/heads/main' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

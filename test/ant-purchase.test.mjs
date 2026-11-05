@@ -12,6 +12,16 @@ test('disabled actions and explicit sold-out override stock metadata',()=>{
  }
  assert.equal(parseOfficialPurchase(html('<button>Add to bag</button><p>Unfortunately this product is no longer available</p>'),p).ecom,false);
 });
+
+test('the current official unavailable wording verifies a negative for the matching main SKU',()=>{
+ for(const message of ['This product is currently not available.','This item is currently not available.']) {
+  const out=parseOfficialPurchase(html('<div role="alert">'+message+'</div>'),{...p,ecom:true});
+  assert.equal(out.ecom,false);assert.equal(out.purchaseVerified,true);
+ }
+});
+test('unavailable wording in recommendations cannot establish the main SKU state',()=>{
+ assert.throws(()=>parseOfficialPurchase(html('You may also like <p>This product is currently not available.</p>'),p));
+});
 test('missing/hidden/script/recommendation purchase text and wrong region/SKU remain unknown',()=>{
  for(const action of ['stock.ecom=true','<script>Add to bag</script>','<div hidden><button>Add to bag</button></div>','<div style="display:none"><button>Add to bag</button></div>','<button hidden>Add to bag</button>','<template><button>Add to bag</button></template>'])
   assert.throws(()=>parseOfficialPurchase(html(action),p));

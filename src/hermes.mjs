@@ -17,14 +17,14 @@ const TARGET_PATTERNS = [
 export const MARKETS = [
   {
     code: "US",
-    name: "Hermès USA",
+    name: "Herm�s USA",
     origin: "https://www.hermes.com",
     categoryUrl:
       "https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
   },
   {
     code: "CA",
-    name: "Hermès Canada",
+    name: "Herm�s Canada",
     origin: "https://www.hermes.com",
     categoryUrl:
       "https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/",
@@ -39,7 +39,7 @@ const CHROME_USER_AGENT =
 export function isTargetProduct(name) {
   const normalized = decodeHtml(name)
     .normalize("NFKD")
-    .replace(/[’']/g, "'")
+    .replace(/['']/g, "'")
     .replace(/\s+/g, " ")
     .trim();
   return TARGET_PATTERNS.some((pattern) => pattern.test(normalized));
@@ -62,7 +62,7 @@ export function parseCategoryHtml(html, market) {
   }
 
   if (isAccessBlockedHtml(html)) {
-    throw new Error(`${market.code}: Hermès returned an access-block page`);
+    throw new Error(`${market.code}: Herm�s returned an access-block page`);
   }
 
   const products = [];
@@ -288,7 +288,7 @@ export function parseProductPageHtml(html, candidate) {
   }
 
   if (isAccessBlockedHtml(html)) {
-    throw new Error(`${candidate.market}: Hermès returned an access-block page`);
+    throw new Error(`${candidate.market}: Herm�s returned an access-block page`);
   }
 
   const text = htmlToText(html);
@@ -324,6 +324,7 @@ export function parseProductPageHtml(html, candidate) {
     /Unfortunately this product is no longer available/i.test(text) ||
     /This product is currently unavailable/i.test(text) ||
     /This item is currently unavailable/i.test(text) ||
+    /This (?:product|item) is currently not available\b/i.test(text) ||
     /\bSold out\b/i.test(text);
   const purchaseButton = [...html.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)]
     .find(match => /\bAdd to (?:cart|bag)\b/i.test(htmlToText(match[2])));
@@ -351,14 +352,14 @@ export async function fetchCategory(market, fetchImpl = fetch, now = Date.now())
   url.searchParams.set("_hwatch", String(tenMinuteBucket));
 
   if (process.env.FIRECRAWL_CLI === "1" && fetchImpl === fetch) {
-    return fetchWithFirecrawlCli(url, `${market.code}: Hermès`, market.code);
+    return fetchWithFirecrawlCli(url, `${market.code}: Herm�s`, market.code);
   }
 
   if (process.env.FIRECRAWL_API_KEY && fetchImpl === fetch) {
-    return fetchWithFirecrawl(url, `${market.code}: Hermès`, market.code, fetchImpl);
+    return fetchWithFirecrawl(url, `${market.code}: Herm�s`, market.code, fetchImpl);
   }
 
-  return fetchHtml(url, `${market.code}: Hermès`, fetchImpl);
+  return fetchHtml(url, `${market.code}: Herm�s`, fetchImpl);
 }
 
 export async function fetchProductPage(
@@ -579,8 +580,8 @@ function validateOfficialHermesHtml(html, label) {
     throw new Error(`${label} returned an access/challenge page`);
   }
 
-  if (!/<html\b/i.test(html) || !/herm[eè]s/i.test(html)) {
-    throw new Error(`${label} did not return a recognizable Hermès HTML page`);
+  if (!/<html\b/i.test(html) || !/herm[e�]s/i.test(html)) {
+    throw new Error(`${label} did not return a recognizable Herm�s HTML page`);
   }
 }
 
@@ -679,3 +680,4 @@ function decodeHtml(value) {
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">");
 }
+

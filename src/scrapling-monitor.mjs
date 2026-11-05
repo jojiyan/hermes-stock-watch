@@ -30,7 +30,7 @@ try {
   });
 } finally {client.close();}
 const {report,alerts,state:nextState}=result;
-report.provider='Scrapling (first-party browser, no credits)';
+report.provider='First-party HTTP + Camoufox (no credits)';
 report.notificationChannel='github-issue';report.emailDelivery='unverified';report.notifications=[];
 const reportPath=resolve(root,'scrapling-run-report.json');
 await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');

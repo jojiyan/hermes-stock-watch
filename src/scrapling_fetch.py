@@ -1,10 +1,10 @@
-"""First-party no-credit worker: canonical HTTP HTML, then a browser on access failure."""
+"""First-party no-credit worker: HTTP plus a persistent Camoufox market session."""
 import contextlib
 import json
 import sys
 from urllib.parse import urlparse
 from curl_cffi import requests
-from scrapling.fetchers import StealthySession
+from camoufox.sync_api import Camoufox
 
 
 def blocked(status, html):
@@ -17,7 +17,7 @@ def blocked(status, html):
 
 def main():
     with contextlib.ExitStack() as stack:
-        browsers = {}
+        pages = {}
         http = requests.Session(impersonate='chrome')
         stack.callback(http.close)
         for line in sys.stdin:
@@ -30,55 +30,46 @@ def main():
                 country = parsed.path.split('/')[1]
                 if country not in ('us', 'ca') or not parsed.path.startswith(f'/{country}/en/'):
                     raise ValueError('Unexpected market URL')
-                target = url
                 headers = {'accept': 'text/html,application/xhtml+xml',
                            'accept-language': 'en-CA,en;q=0.9' if country == 'ca' else 'en-US,en;q=0.9',
                            'cache-control': 'no-cache', 'pragma': 'no-cache'}
                 attempts = []
                 with contextlib.redirect_stdout(sys.stderr):
                     if request.get('browserOnly') is True:
-                        html, status, final = '', 0, target
+                        html, status, final = '', 0, url
                     else:
                         try:
-                            response = http.get(target, headers=headers, timeout=35)
+                            response = http.get(url, headers=headers, timeout=35)
                             html, status, final = response.text, response.status_code, str(response.url)
-                            attempts.append({'mode': 'http', 'status': status,
-                                'cacheAgeSeconds': response.headers.get('age'),
-                                'cacheStatus': response.headers.get('cf-cache-status')})
+                            attempts.append({'mode':'http','status':status,
+                                'cacheAgeSeconds':response.headers.get('age'),
+                                'cacheStatus':response.headers.get('cf-cache-status')})
                         except Exception as exc:
-                            html, status, final = '', 0, target
-                            attempts.append({'mode': 'http', 'error': str(exc)[:200]})
+                            html, status, final = '', 0, url
+                            attempts.append({'mode':'http','error':str(exc)[:200]})
                     if blocked(status, html):
-                        if country not in browsers:
-                            browsers[country] = stack.enter_context(StealthySession(
-                                headless=True, real_chrome=True, block_webrtc=True,
-                                hide_canvas=True, allow_webgl=True,
-                                locale='en-CA' if country == 'ca' else 'en-US',
-                                timezone_id='America/Toronto' if country == 'ca' else 'America/New_York',
-                                timeout=45000,
-                            ))
-                            # Establish the normal first-party market session
-                            # before entering a cold product/category deep link.
+                        if country not in pages:
+                            browser = stack.enter_context(Camoufox(headless=False, os='linux'))
+                            page = browser.new_page(locale='en-CA' if country == 'ca' else 'en-US')
+                            page.set_default_navigation_timeout(35000)
+                            pages[country] = page
                             try:
-                                warm = browsers[country].fetch(
-                                    f'https://www.hermes.com/{country}/en/',
-                                    google_search=False, network_idle=False, wait=2500,
-                                    timeout=15000, extra_headers=headers)
-                                attempts.append({'mode':'browser-warmup','status':warm.status})
+                                warm=page.goto(f'https://www.hermes.com/{country}/en/',
+                                               wait_until='domcontentloaded',timeout=15000)
+                                page.wait_for_timeout(3500)
+                                attempts.append({'mode':'browser-warmup','engine':'camoufox',
+                                                 'status':warm.status if warm else None})
                             except Exception as exc:
-                                attempts.append({'mode':'browser-warmup','error':str(exc)[:150]})
-                        page = browsers[country].fetch(target, google_search=False,
-                            network_idle=False, wait=7000 if '/product/' in parsed.path else 2500,
-                            disable_resources=False, extra_headers=headers)
-                        html, status, final = page.html_content, page.status, str(page.url)
-                        if isinstance(html, bytes):
-                            html = html.decode('utf-8', errors='replace')
-                        attempts.append({'mode': 'browser', 'status': status})
-                result = {'html': str(html), 'status': status,
-                          'url': final, 'transportAttempts': attempts}
+                                attempts.append({'mode':'browser-warmup','engine':'camoufox','error':str(exc)[:150]})
+                        page=pages[country]
+                        response=page.goto(url,wait_until='domcontentloaded')
+                        page.wait_for_timeout(7000 if '/product/' in parsed.path else 3500)
+                        html, status, final=page.content(),response.status if response else 0,page.url
+                        attempts.append({'mode':'browser','engine':'camoufox','status':status})
+                result={'html':str(html),'status':status,'url':final,'transportAttempts':attempts}
             except Exception as exc:
-                result = {'error': str(exc)}
-            print(json.dumps(result), flush=True)
+                result={'error':str(exc)}
+            print(json.dumps(result),flush=True)
 
 
 if __name__ == '__main__':

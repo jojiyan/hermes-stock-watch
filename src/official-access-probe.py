@@ -21,6 +21,29 @@ def summary(html):
         return {'title': re.search(r'<title[^>]*>(.*?)</title>', html, re.S)[1] if '<title' in html else ''}
 
 
+def inspect_browser_paging(page):
+    responses = []
+    def capture(response):
+        if 'bck.hermes.com/products' not in response.url:
+            return
+        item = {'url':response.url, 'status':response.status,
+                'method':response.request.method, 'body':(response.request.post_data or '')[:1500]}
+        try:
+            data = response.json()
+            products = data.get('products',{})
+            item.update({'total':data.get('total'), 'items':len(products.get('items',[])) if isinstance(products,dict) else len(products)})
+        except Exception:
+            pass
+        responses.append(item)
+    page.on('response', capture)
+    try:
+        page.get_by_role('button', name='See more products', exact=True).click(force=True, timeout=8000)
+        page.wait_for_timeout(4000)
+    except Exception as exc:
+        responses.append({'error':str(exc)[:300]})
+    print(json.dumps({'mode':'browser-xhr','responses':responses}),flush=True)
+
+
 for market in ('us', 'ca'):
     base = f'https://www.hermes.com/{market}/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/'
     with requests.Session(impersonate='chrome') as session:
@@ -59,7 +82,8 @@ for market in ('us', 'ca'):
                 url = base + suffix
                 try:
                     with contextlib.redirect_stdout(__import__('sys').stderr):
-                        page = browser.fetch(url, google_search=False, wait=1500, network_idle=False)
+                        page = browser.fetch(url, google_search=False, wait=1500, network_idle=False,
+                                             page_action=inspect_browser_paging)
                     html = page.html_content
                     if isinstance(html, bytes): html=html.decode('utf8',errors='replace')
                     print(json.dumps({'market':market,'mode':'browser','url':url,'status':page.status,**summary(str(html))}),flush=True)
@@ -70,4 +94,5 @@ for market in ('us', 'ca'):
                 browser.__exit__(None,None,None)
     except Exception as exc:
         print(json.dumps({'market':market,'mode':'browser','error':str(exc)}),flush=True)
+
 

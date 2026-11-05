@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-05T12:12:18.093Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-05T12:22:18.150Z",
       "lastSuccessAt": "2026-11-05T12:12:18.093Z",
-      "products": 47,
-      "targets": 3,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -67,29 +67,18 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 47,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
-      "currentStocks": {
-        "H085956CC18": {
-          "ecom": false,
-          "seenAt": "2026-11-05T12:12:18.093Z",
-          "source": "complete-official-category-negative"
-        },
-        "H083189CKAX": {
-          "ecom": false,
-          "seenAt": "2026-11-05T12:12:18.093Z",
-          "source": "complete-official-category-negative"
-        },
-        "H056289CK7G": {
-          "ecom": false,
-          "seenAt": "2026-11-05T12:12:18.093Z",
-          "source": "complete-official-category-negative"
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official HTTP 403"
         }
-      },
+      ],
+      "error": "Official HTTP 403",
+      "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
         "checkedAt": "2026-11-05T12:12:18.093Z",
@@ -102,8 +91,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T12:12:18.093Z",
-      "lastSuccessAt": "2026-11-05T12:12:18.093Z",
+      "lastCheckedAt": "2026-11-05T12:22:18.150Z",
+      "lastSuccessAt": "2026-11-05T12:22:18.150Z",
       "products": 124,
       "targets": 1,
       "categoryAvailable": 1,
@@ -125,7 +114,7 @@
           "color": "Brown",
           "price": "$4,000",
           "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
-          "lastSeenAt": "2026-11-05T12:12:18.093Z",
+          "lastSeenAt": "2026-11-05T12:22:18.150Z",
           "source": "official-catalog"
         }
       },
@@ -137,7 +126,7 @@
         },
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-05T12:12:18.093Z",
+          "seenAt": "2026-11-05T12:22:18.150Z",
           "source": "official-product-purchase"
         }
       },
@@ -155,12 +144,12 @@
       "currentStocks": {
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-05T12:12:18.093Z",
+          "seenAt": "2026-11-05T12:22:18.150Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T12:12:18.093Z",
+        "checkedAt": "2026-11-05T12:22:18.150Z",
         "products": 124,
         "targets": 1,
         "officialTotal": 124,

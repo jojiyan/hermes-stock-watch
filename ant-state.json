@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T11:02:17.641Z",
+      "lastCheckedAt": "2026-11-05T11:12:17.709Z",
       "lastSuccessAt": "2026-11-05T09:53:42.861Z",
       "products": null,
       "targets": null,
@@ -90,12 +90,12 @@
       "productVerification": "independent"
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-05T11:02:17.641Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-05T11:12:17.709Z",
       "lastSuccessAt": "2026-11-05T11:02:17.641Z",
-      "products": 124,
-      "targets": 1,
-      "categoryAvailable": 1,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -134,20 +134,19 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H069573CKDJ": "2026-11-05T11:02:17.641Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 124,
-      "fetchMode": "paginated",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
-      "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {
-        "H069573CKDJ": {
-          "ecom": true,
-          "seenAt": "2026-11-05T11:02:17.641Z",
-          "source": "official-product-purchase"
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official HTTP 403"
         }
-      },
+      ],
+      "error": "Official HTTP 403",
+      "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
+      "currentStocks": {},
       "lastVerifiedCatalog": {
         "checkedAt": "2026-11-05T11:02:17.641Z",
         "products": 124,

@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T12:32:18.219Z",
+      "lastCheckedAt": "2026-11-05T12:42:18.269Z",
       "lastSuccessAt": "2026-11-05T12:12:18.093Z",
       "products": null,
       "targets": null,
@@ -91,8 +91,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T12:32:18.219Z",
-      "lastSuccessAt": "2026-11-05T12:32:18.219Z",
+      "lastCheckedAt": "2026-11-05T12:42:18.269Z",
+      "lastSuccessAt": "2026-11-05T12:42:18.269Z",
       "products": 124,
       "targets": 1,
       "categoryAvailable": 1,
@@ -114,7 +114,7 @@
           "color": "Brown",
           "price": "$4,000",
           "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
-          "lastSeenAt": "2026-11-05T12:32:18.219Z",
+          "lastSeenAt": "2026-11-05T12:42:18.269Z",
           "source": "official-catalog"
         }
       },
@@ -126,7 +126,7 @@
         },
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-05T12:32:18.219Z",
+          "seenAt": "2026-11-05T12:42:18.269Z",
           "source": "official-product-purchase"
         }
       },
@@ -144,12 +144,12 @@
       "currentStocks": {
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-05T12:32:18.219Z",
+          "seenAt": "2026-11-05T12:42:18.269Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T12:32:18.219Z",
+        "checkedAt": "2026-11-05T12:42:18.269Z",
         "products": 124,
         "targets": 1,
         "officialTotal": 124,

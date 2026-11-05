@@ -16,6 +16,8 @@ Targets: Neo Garden 23 / Mini Garden / Garden Party Mini, Garden Party 30, Mini 
 
 Every published category page must reconcile with the official total and unique rendered SKU records. Pagination, small-gap recovery through published official line links, and closing consistency checks use the same no-credit transport. An eligible positive requires its matching official product page, visible SKU, market/canonical URL, and an enabled Add to cart / Add to bag button. Category stock metadata cannot establish positive availability.
 
+Production checks every discovered target's purchase page, including category entries marked unavailable. A cached negative cannot suppress its check or rearm an alert when its product page is blocked. The legacy credit-provider parser's negative-category shortcut is not used in production.
+
 US, CA and individual SKUs are independent. A failed catalog page keeps full-market coverage unknown. A separately verified matching product page may still alert. A failed SKU never changes its own stock or suppresses another SKU. Incomplete-category negatives cannot rearm stock. Missing listings alone do not prove a sell-out.
 
 Coverage is the currently published women's bags category. Unlisted products remain unknown.
@@ -44,5 +46,4 @@ scrapling-run-report.json records market health, exact catalog totals, all valid
 A green unit-test run does not prove official-site access or recurring execution. Verify fresh US/CA status, successful production state persistence and the automatically dispatched successor after deployment.
 
 Live diagnostics found official category HTML with public max-age=3600 caching and different page ages. Uncached URLs and the live JSON API can return HTTP 403 from free cloud runners. The report retains cache age where available. Ten-minute execution cannot guarantee ten-minute visibility of newly published products while the official site serves cached or blocked content. Full-market verification remains failed if totals or pagination cannot be reconciled.
-
 

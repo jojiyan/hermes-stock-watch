@@ -22,7 +22,7 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
     const previous=state.markets[market]||{};
     const discovered=new Map();
     const marketOptions={...options,onCatalogPage:async(parsed,code,url)=>{
-      for(const p of parsed.products)if(p.market===market&&p.ecom===true)discovered.set(p.sku,p);
+      for(const p of parsed.products)if(p.market===market&&(p.ecom===true||options.verifyAllTargets===true))discovered.set(p.sku,p);
       if(options.onCatalogPage)await options.onCatalogPage(parsed,code,url);
     }};
     try {

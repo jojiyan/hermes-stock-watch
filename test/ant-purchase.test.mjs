@@ -25,3 +25,19 @@ test('complete category false is negative evidence and never spends product cred
  assert.equal(x.products[0].ecom,false);assert.equal(x.products[0].categoryNegativeVerified,true);
  assert.equal(x.purchaseAttempts.length,0);assert.equal(x.verificationErrors.length,0);
 });
+
+test('production verifies the purchase page even when a cached category says unavailable',async()=>{
+ const x=await verifyOfficialProducts({products:[{...p,ecom:false}]},'CA',null,{
+  verifyAllTargets:true,officialFetcher:async url=>({url,status:200,html:html('<button>Add to bag</button>')}),
+  fetcher:()=>{throw new Error('must not use paid transport')},
+ });
+ assert.equal(x.products[0].ecom,true);assert.equal(x.products[0].purchaseVerified,true);
+ assert.equal(x.verificationErrors.length,0);assert.equal(x.purchaseAttempts[0].credits,0);
+});
+test('a blocked target page cannot inherit a cached-category negative in production',async()=>{
+ const x=await verifyOfficialProducts({products:[{...p,ecom:false}]},'CA',null,{
+  verifyAllTargets:true,officialFetcher:async url=>({url,status:403,html:'blocked'}),
+ });
+ assert.equal(x.products.length,0);assert.equal(x.verificationErrors.length,1);
+});
+

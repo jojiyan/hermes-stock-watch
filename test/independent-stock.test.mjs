@@ -48,3 +48,18 @@ test('state persistence retains a fresh verified SKU while full-market coverage 
   const later=mergeMonitorState(state,{version:3,markets:{US:{status:'unknown',lastCheckedAt:'2026-11-05T11:00:00.000Z'}}});
   assert.deepEqual(later.markets.US.currentStocks,{});
 });
+
+test('cached negative metadata cannot hide an independently purchasable target after pagination fails',async()=>{
+ let checked=0;
+ const out=await checkCatalogMarkets(prior,null,now,{
+  verifyAllTargets:true,
+  fetchCatalog:async(market,_key,options)=>{
+   if(market==='US')await options.onCatalogPage({products:[{...candidate,ecom:false}]},market,candidate.url);
+   throw new Error('Second category page blocked');
+  },
+  verifyProducts:async parsed=>{checked++;assert.equal(parsed.products[0].ecom,false);
+   return {products:[{...candidate,purchaseVerified:true}],verificationErrors:[]};},
+ });
+ assert.equal(checked,1);assert.equal(out.alerts.length,1);
+ assert.equal(out.state.markets.US.currentStocks[candidate.sku].ecom,true);
+});

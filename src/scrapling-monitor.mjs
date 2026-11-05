@@ -17,6 +17,9 @@ const client=createScraplingClient(root);
 let sequence=0,result;
 try {
   result=await checkCatalogMarkets(state,null,checkedAt,{
+    // Category HTML may be cached for an hour. Its negative stock field must
+    // not suppress checking the target's own current purchase page.
+    verifyAllTargets:true,
     officialFetcher:(url,market)=>client.fetch(url,market),
     onHtml:async(html,evidence)=>{
       evidence.file='scrapling-evidence/'+evidence.market+'-'+(++sequence)+'.html';

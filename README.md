@@ -8,6 +8,8 @@ Production runs in GitHub Actions, with a first-party Scrapling browser session 
 
 Each main-branch run saves its observations and dispatches the active Scrapling workflow for the next ten-minute slot. Native cron is a recovery trigger; GitHub queue delays can shift scan times. Repair branches use VERIFY_ONLY and cannot notify, save production state or chain successors.
 
+Deployments cancel an obsolete waiting run and scan immediately. Scheduled continuations keep their due time. This prevents a waiting successor from repeatedly replacing a queued repair deployment.
+
 ## Stock confirmation
 
 Targets: Neo Garden 23 / Mini Garden / Garden Party Mini, Garden Party 30, Mini Lindy / Lindy II mini, Picotin in all sizes, Birkin, Kelly (including Kelly Pochette), and Constance. Garden Party 36, Neo Garden Voyage 41 and Bolide are excluded.
@@ -42,4 +44,5 @@ scrapling-run-report.json records market health, exact catalog totals, all valid
 A green unit-test run does not prove official-site access or recurring execution. Verify fresh US/CA status, successful production state persistence and the automatically dispatched successor after deployment.
 
 Live diagnostics found official category HTML with public max-age=3600 caching and different page ages. Uncached URLs and the live JSON API can return HTTP 403 from free cloud runners. The report retains cache age where available. Ten-minute execution cannot guarantee ten-minute visibility of newly published products while the official site serves cached or blocked content. Full-market verification remains failed if totals or pagination cannot be reconciled.
+
 

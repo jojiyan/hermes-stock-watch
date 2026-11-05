@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T14:12:18.850Z",
+      "lastCheckedAt": "2026-11-05T14:22:18.912Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
       "products": null,
       "targets": null,
@@ -74,10 +74,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 55, received 47 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official HTTP 403"
         }
       ],
-      "error": "Official total changed during pagination: expected 55, received 47 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official HTTP 403",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -91,10 +91,10 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T14:12:18.850Z",
-      "lastSuccessAt": "2026-11-05T14:12:18.850Z",
-      "products": 124,
-      "targets": 1,
+      "lastCheckedAt": "2026-11-05T14:22:18.912Z",
+      "lastSuccessAt": "2026-11-05T14:22:18.912Z",
+      "products": 134,
+      "targets": 0,
       "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
@@ -124,24 +124,18 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 124,
+      "officialTotal": 134,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {
-        "H069573CKDJ": {
-          "ecom": false,
-          "seenAt": "2026-11-05T14:12:18.850Z",
-          "source": "complete-official-category-negative"
-        }
-      },
+      "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T14:12:18.850Z",
-        "products": 124,
-        "targets": 1,
-        "officialTotal": 124,
+        "checkedAt": "2026-11-05T14:22:18.912Z",
+        "products": 134,
+        "targets": 0,
+        "officialTotal": 134,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent"

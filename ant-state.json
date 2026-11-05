@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T17:20:08.161Z",
+      "lastCheckedAt": "2026-11-05T17:30:08.218Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
       "products": null,
       "targets": null,
@@ -79,7 +79,7 @@
         {
           "sku": "H085956CC18",
           "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CC18/",
-          "error": "Official HTTP 403"
+          "error": "US: Hermès returned an access-block page"
         },
         {
           "sku": "H083189CKAX",
@@ -106,7 +106,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T17:20:08.161Z",
+      "lastCheckedAt": "2026-11-05T17:30:08.218Z",
       "lastSuccessAt": "2026-11-05T17:10:08.074Z",
       "products": null,
       "targets": null,
@@ -145,10 +145,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 123, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official HTTP 403"
         }
       ],
-      "error": "Official total changed during pagination: expected 123, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official HTTP 403",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

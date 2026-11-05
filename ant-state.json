@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T06:33:41.428Z",
-      "lastSuccessAt": "2026-11-05T06:33:41.428Z",
+      "lastCheckedAt": "2026-11-05T06:43:41.501Z",
+      "lastSuccessAt": "2026-11-05T06:43:41.501Z",
       "products": 49,
       "targets": 3,
       "categoryAvailable": 0,
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-05T06:33:41.428Z",
+          "seenAt": "2026-11-05T06:43:41.501Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-05T06:33:41.428Z",
+          "seenAt": "2026-11-05T06:43:41.501Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-05T06:33:41.428Z",
+          "seenAt": "2026-11-05T06:43:41.501Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
@@ -76,23 +76,23 @@
       "currentStocks": {
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-05T06:33:41.428Z",
+          "seenAt": "2026-11-05T06:43:41.501Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-05T06:33:41.428Z",
+          "seenAt": "2026-11-05T06:43:41.501Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-05T06:33:41.428Z",
+          "seenAt": "2026-11-05T06:43:41.501Z",
           "source": "complete-official-category-negative"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T06:33:41.428Z",
+        "checkedAt": "2026-11-05T06:43:41.501Z",
         "products": 49,
         "targets": 3,
         "officialTotal": 49,
@@ -101,7 +101,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T06:33:41.428Z",
+      "lastCheckedAt": "2026-11-05T06:43:41.501Z",
       "lastSuccessAt": "2026-11-03T13:05:20.588Z",
       "products": 125,
       "targets": 1,

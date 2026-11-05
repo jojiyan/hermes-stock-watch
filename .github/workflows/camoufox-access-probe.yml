@@ -1,0 +1,31 @@
+name: Hermes alternate browser verification
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/camoufox-access-probe.py'
+      - '.github/workflows/camoufox-access-probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned open-source browser
+        run: |
+          python -m pip install --quiet 'camoufox==0.5.9'
+          python -m camoufox fetch
+      - name: Verify official storefronts without credits
+        run: xvfb-run -a python src/camoufox-access-probe.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: camoufox-verification-${{ github.run_id }}
+          path: camoufox-evidence/
+          retention-days: 3

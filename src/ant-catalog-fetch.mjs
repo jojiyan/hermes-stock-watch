@@ -171,6 +171,7 @@ async function fetchCatalogScan(market, key, options = {}) {
         }
       }
       const {parsed,mode}=fetched;
+      if(options.onCatalogPage)await options.onCatalogPage(parsed,market,url);
       if (total === undefined) { total = parsed.reportedTotal; firstPage = parsed; }
       if (parsed.reportedTotal !== total) throw unstableCatalog(`Official total changed during pagination: expected ${total}, received ${parsed.reportedTotal} (${url})`);
       for (const sku of parsed.skus || []) {

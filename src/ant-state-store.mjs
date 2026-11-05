@@ -31,7 +31,8 @@ export function mergeMonitorState(remote,incoming) {
     out.markets[market]={...winner,catalogStocks:stocks,alertedSkus:notified,available,
       lastSuccessAt:stamp(next.lastSuccessAt)>=stamp(before.lastSuccessAt)?next.lastSuccessAt:before.lastSuccessAt,
       lastVerifiedCatalog:summaries[0]||null,
-      currentStocks:winner.status==='ok'?Object.fromEntries(Object.entries(stocks).filter(([,v])=>v.seenAt===winner.lastCheckedAt)):{}};
+      currentStocks:Object.fromEntries(Object.entries(stocks).filter(([,v])=>v.seenAt===winner.lastCheckedAt &&
+        (winner.status==='ok'||v.source==='official-product-purchase')))};
   }
   return out;
 }
@@ -83,3 +84,4 @@ if(process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url))
     if(process.env.GITHUB_OUTPUT)await appendFile(process.env.GITHUB_OUTPUT,'persistence_status='+saved.status+'\n');
   } else throw new Error('Use ant-state-store.mjs load or save');
 }
+

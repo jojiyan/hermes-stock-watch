@@ -1,26 +1,10 @@
-"""First-party no-credit worker: fresh HTTP HTML, then a browser on access failure."""
+"""First-party no-credit worker: canonical HTTP HTML, then a browser on access failure."""
 import contextlib
 import json
 import sys
-import time
-from urllib.parse import urlparse, urlsplit, urlunsplit, parse_qsl, urlencode
+from urllib.parse import urlparse
 from curl_cffi import requests
 from scrapling.fetchers import StealthySession
-
-
-def fresh_url(url):
-    parts = urlsplit(url)
-    query = parse_qsl(parts.query, keep_blank_values=True)
-    if any(key == '_hwatch' for key, _ in query):
-        raise ValueError('Unexpected transport cache parameter')
-    suffix = ('&' if parts.query else '') + '_hwatch=' + str(time.time_ns())
-    return urlunsplit(parts._replace(query=parts.query + suffix))
-
-
-def canonical_transport_url(url):
-    parts = urlsplit(url)
-    query = '&'.join(part for part in parts.query.split('&') if part.split('=', 1)[0] != '_hwatch')
-    return urlunsplit(parts._replace(query=query))
 
 
 def blocked(status, html):
@@ -77,7 +61,7 @@ def main():
                             html = html.decode('utf-8', errors='replace')
                         attempts.append({'mode': 'browser', 'status': status})
                 result = {'html': str(html), 'status': status,
-                          'url': canonical_transport_url(final), 'transportAttempts': attempts}
+                          'url': final, 'transportAttempts': attempts}
             except Exception as exc:
                 result = {'error': str(exc)}
             print(json.dumps(result), flush=True)

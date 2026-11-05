@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T10:48:25.631Z",
+      "lastCheckedAt": "2026-11-05T10:51:52.146Z",
       "lastSuccessAt": "2026-11-05T09:53:42.861Z",
       "products": null,
       "targets": null,
@@ -86,11 +86,12 @@
         "targets": 3,
         "officialTotal": 48,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
-      }
+      },
+      "productVerification": "independent"
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T10:48:25.631Z",
+      "lastCheckedAt": "2026-11-05T10:51:52.146Z",
       "lastSuccessAt": "2026-11-03T13:05:20.588Z",
       "products": null,
       "targets": null,
@@ -136,7 +137,8 @@
         "targets": 1,
         "officialTotal": 122,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
-      }
+      },
+      "productVerification": "independent"
     }
   }
 }

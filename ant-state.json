@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T15:50:39.214Z",
+      "lastCheckedAt": "2026-11-05T15:56:25.448Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
       "products": null,
       "targets": null,
@@ -79,17 +79,17 @@
         {
           "sku": "H085956CC18",
           "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CC18/",
-          "error": "US: product purchase state is unknown"
+          "error": "US: Hermès returned an access-block page"
         },
         {
           "sku": "H083189CKAX",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-18-pocket-bag-H083189CKAX/",
-          "error": "US: product purchase state is unknown"
+          "error": "US: Hermès returned an access-block page"
         },
         {
           "sku": "H056289CK7G",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CK7G/",
-          "error": "US: product purchase state is unknown"
+          "error": "US: Hermès returned an access-block page"
         }
       ],
       "error": "Official total changed during pagination: expected 56, received 55 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
@@ -106,8 +106,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T15:50:39.214Z",
-      "lastSuccessAt": "2026-11-05T15:50:39.214Z",
+      "lastCheckedAt": "2026-11-05T15:56:25.448Z",
+      "lastSuccessAt": "2026-11-05T15:56:25.448Z",
       "products": 127,
       "targets": 0,
       "categoryAvailable": 0,
@@ -147,7 +147,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T15:50:39.214Z",
+        "checkedAt": "2026-11-05T15:56:25.448Z",
         "products": 127,
         "targets": 0,
         "officialTotal": 127,

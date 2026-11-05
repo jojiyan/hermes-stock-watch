@@ -9,10 +9,10 @@ export function isGarden23(name) {
 export function stockPriority(product) {
   if (!isGarden23(product.name)) return {rank: 4, label: ''};
   const colours = normalize(product.color).split(/\s*[/,;|]\s*/);
-  if (colours.some(c => /^(?:bleu paradis|blue paradise|paradise blue|???|???)$/.test(c)))
-    return {rank: 1, label: '??? Garden 23'};
-  if (colours.some(c => /^(?:bleu zephyr|blue zephyr|zephyr blue|???|???)$/.test(c)))
-    return {rank: 2, label: '??? Garden 23'};
+  if (colours.some(c => /^(?:bleu paradis|blue paradise|paradise blue|天堂蓝|天堂藍)$/.test(c)))
+    return {rank: 1, label: '天堂蓝 Garden 23'};
+  if (colours.some(c => /^(?:bleu zephyr|blue zephyr|zephyr blue|微风蓝|微風藍)$/.test(c)))
+    return {rank: 2, label: '微风蓝 Garden 23'};
   return {rank: 3, label: ''};
 }
 
@@ -27,7 +27,7 @@ export function priorityWatchCandidates(market) {
   // Its colour and stock are deliberately not copied. The exact local official
   // page must establish the SKU, actual colour and enabled purchase action.
   const sku = 'H088612CKAQ';
-  return [{market, marketName: market === 'US' ? 'Herm�s USA' : 'Herm�s Canada',
+  return [{market, marketName: market === 'US' ? 'Hermès USA' : 'Hermès Canada',
     sku, name: 'Neo Garden 23 bag', color: '', price: '', watchOnly: true,
     url: `https://www.hermes.com/${market.toLowerCase()}/en/product/neo-garden-23-bag-${sku}/`}];
 }

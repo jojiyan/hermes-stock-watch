@@ -47,4 +47,4 @@ if(!verifyOnly) {
 if(process.env.GITHUB_OUTPUT)await appendFile(process.env.GITHUB_OUTPUT,
   `execution_status=completed\nverification_status=${report.verificationStatus}\nstate_written=${!verifyOnly}\n`);
 if(process.env.GITHUB_STEP_SUMMARY)await appendFile(process.env.GITHUB_STEP_SUMMARY,
-  '\nProvider: Scrapling (no credits)\n\n'+report.summaries.map(s=>s.market+': **'+s.status+'** - '+(s.error||s.categoryProducts+' catalog products; '+s.newAlerts+' new alerts')).join('\n\n')+'\n');
+  '\nProvider: Scrapling (no credits)\n\n'+report.summaries.map(s=>s.market+': **'+s.status+'** — '+(s.error||s.categoryProducts+' catalog products; '+s.newAlerts+' new alerts')).join('\n\n')+'\n');

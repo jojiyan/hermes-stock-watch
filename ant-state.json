@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T14:02:18.775Z",
+      "lastCheckedAt": "2026-11-05T14:12:18.850Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
       "products": null,
       "targets": null,
@@ -74,10 +74,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official HTTP 403"
+          "error": "Official total changed during pagination: expected 55, received 47 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
         }
       ],
-      "error": "Official HTTP 403",
+      "error": "Official total changed during pagination: expected 55, received 47 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -91,8 +91,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T14:02:18.775Z",
-      "lastSuccessAt": "2026-11-05T14:02:18.775Z",
+      "lastCheckedAt": "2026-11-05T14:12:18.850Z",
+      "lastSuccessAt": "2026-11-05T14:12:18.850Z",
       "products": 124,
       "targets": 1,
       "categoryAvailable": 0,
@@ -116,7 +116,7 @@
         },
         "H069573CKDJ": {
           "ecom": false,
-          "seenAt": "2026-11-05T14:02:18.775Z",
+          "seenAt": "2026-11-05T14:12:18.850Z",
           "source": "complete-official-category-negative"
         }
       },
@@ -133,12 +133,12 @@
       "currentStocks": {
         "H069573CKDJ": {
           "ecom": false,
-          "seenAt": "2026-11-05T14:02:18.775Z",
+          "seenAt": "2026-11-05T14:12:18.850Z",
           "source": "complete-official-category-negative"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T14:02:18.775Z",
+        "checkedAt": "2026-11-05T14:12:18.850Z",
         "products": 124,
         "targets": 1,
         "officialTotal": 124,

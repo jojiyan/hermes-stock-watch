@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-05T12:42:18.269Z",
-      "lastSuccessAt": "2026-11-05T12:12:18.093Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-05T12:52:18.354Z",
+      "lastSuccessAt": "2026-11-05T12:52:18.354Z",
+      "products": 47,
+      "targets": 3,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-05T12:12:18.093Z",
+          "seenAt": "2026-11-05T12:52:18.354Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-05T12:12:18.093Z",
+          "seenAt": "2026-11-05T12:52:18.354Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-05T12:12:18.093Z",
+          "seenAt": "2026-11-05T12:52:18.354Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
@@ -67,21 +67,32 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 47,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
+      "verificationErrors": [],
+      "error": null,
+      "currentStocks": {
+        "H085956CC18": {
+          "ecom": false,
+          "seenAt": "2026-11-05T12:52:18.354Z",
+          "source": "complete-official-category-negative"
+        },
+        "H083189CKAX": {
+          "ecom": false,
+          "seenAt": "2026-11-05T12:52:18.354Z",
+          "source": "complete-official-category-negative"
+        },
+        "H056289CK7G": {
+          "ecom": false,
+          "seenAt": "2026-11-05T12:52:18.354Z",
+          "source": "complete-official-category-negative"
         }
-      ],
-      "error": "Official HTTP 403",
-      "currentStocks": {},
+      },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T12:12:18.093Z",
+        "checkedAt": "2026-11-05T12:52:18.354Z",
         "products": 47,
         "targets": 3,
         "officialTotal": 47,
@@ -91,8 +102,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T12:42:18.269Z",
-      "lastSuccessAt": "2026-11-05T12:42:18.269Z",
+      "lastCheckedAt": "2026-11-05T12:52:18.354Z",
+      "lastSuccessAt": "2026-11-05T12:52:18.354Z",
       "products": 124,
       "targets": 1,
       "categoryAvailable": 1,
@@ -114,7 +125,7 @@
           "color": "Brown",
           "price": "$4,000",
           "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
-          "lastSeenAt": "2026-11-05T12:42:18.269Z",
+          "lastSeenAt": "2026-11-05T12:52:18.354Z",
           "source": "official-catalog"
         }
       },
@@ -126,7 +137,7 @@
         },
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-05T12:42:18.269Z",
+          "seenAt": "2026-11-05T12:52:18.354Z",
           "source": "official-product-purchase"
         }
       },
@@ -144,12 +155,12 @@
       "currentStocks": {
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-05T12:42:18.269Z",
+          "seenAt": "2026-11-05T12:52:18.354Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T12:42:18.269Z",
+        "checkedAt": "2026-11-05T12:52:18.354Z",
         "products": 124,
         "targets": 1,
         "officialTotal": 124,

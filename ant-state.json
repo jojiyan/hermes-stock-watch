@@ -3,11 +3,11 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T18:10:08.478Z",
+      "lastCheckedAt": "2026-11-05T18:20:08.523Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
-      "products": 54,
-      "targets": 3,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -67,11 +67,15 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 54,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official HTTP 403"
+        },
         {
           "sku": "H085956CC18",
           "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CC18/",
@@ -88,7 +92,7 @@
           "error": "US: Hermès returned an access-block page"
         }
       ],
-      "error": "Some official product purchase states are unknown",
+      "error": "Official HTTP 403",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -102,7 +106,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T18:10:08.478Z",
+      "lastCheckedAt": "2026-11-05T18:20:08.523Z",
       "lastSuccessAt": "2026-11-05T17:10:08.074Z",
       "products": null,
       "targets": null,

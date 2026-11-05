@@ -3,11 +3,11 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T21:30:09.916Z",
+      "lastCheckedAt": "2026-11-05T21:40:09.992Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "products": 52,
+      "targets": 3,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -67,15 +67,11 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 52,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
-        },
         {
           "sku": "H085956CC18",
           "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CC18/",
@@ -92,7 +88,7 @@
           "error": "US: Hermès returned an access-block page"
         }
       ],
-      "error": "Official HTTP 403",
+      "error": "Some official product purchase states are unknown",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -106,8 +102,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T21:30:09.916Z",
-      "lastSuccessAt": "2026-11-05T21:30:09.916Z",
+      "lastCheckedAt": "2026-11-05T21:40:09.992Z",
+      "lastSuccessAt": "2026-11-05T21:40:09.992Z",
       "products": 123,
       "targets": 0,
       "categoryAvailable": 0,
@@ -147,7 +143,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T21:30:09.916Z",
+        "checkedAt": "2026-11-05T21:40:09.992Z",
         "products": 123,
         "targets": 0,
         "officialTotal": 123,

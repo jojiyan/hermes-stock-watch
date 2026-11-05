@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-05T20:50:09.632Z",
+      "lastCheckedAt": "2026-11-05T21:00:09.697Z",
       "lastSuccessAt": "2026-11-05T13:42:18.671Z",
       "products": null,
       "targets": null,
@@ -74,25 +74,25 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official HTTP 403"
+          "error": "Scrapling request timed out"
         },
         {
           "sku": "H085956CC18",
           "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CC18/",
-          "error": "US: Hermès returned an access-block page"
+          "error": "Scrapling request timed out"
         },
         {
           "sku": "H083189CKAX",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-18-pocket-bag-H083189CKAX/",
-          "error": "US: Hermès returned an access-block page"
+          "error": "Scrapling request timed out"
         },
         {
           "sku": "H056289CK7G",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CK7G/",
-          "error": "US: Hermès returned an access-block page"
+          "error": "Scrapling request timed out"
         }
       ],
-      "error": "Official HTTP 403",
+      "error": "Scrapling request timed out",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -106,8 +106,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T20:50:09.632Z",
-      "lastSuccessAt": "2026-11-05T20:50:09.632Z",
+      "lastCheckedAt": "2026-11-05T21:00:09.697Z",
+      "lastSuccessAt": "2026-11-05T21:00:09.697Z",
       "products": 123,
       "targets": 0,
       "categoryAvailable": 0,
@@ -147,7 +147,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T20:50:09.632Z",
+        "checkedAt": "2026-11-05T21:00:09.697Z",
         "products": 123,
         "targets": 0,
         "officialTotal": 123,

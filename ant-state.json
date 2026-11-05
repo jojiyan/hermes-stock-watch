@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T11:32:17.853Z",
-      "lastSuccessAt": "2026-11-05T11:32:17.853Z",
+      "lastCheckedAt": "2026-11-05T11:42:17.918Z",
+      "lastSuccessAt": "2026-11-05T11:42:17.918Z",
       "products": 47,
       "targets": 3,
       "categoryAvailable": 0,
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-05T11:32:17.853Z",
+          "seenAt": "2026-11-05T11:42:17.918Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-05T11:32:17.853Z",
+          "seenAt": "2026-11-05T11:42:17.918Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-05T11:32:17.853Z",
+          "seenAt": "2026-11-05T11:42:17.918Z",
           "source": "complete-official-category-negative"
         },
         "H069573CKDM": {
@@ -76,23 +76,23 @@
       "currentStocks": {
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-05T11:32:17.853Z",
+          "seenAt": "2026-11-05T11:42:17.918Z",
           "source": "complete-official-category-negative"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-05T11:32:17.853Z",
+          "seenAt": "2026-11-05T11:42:17.918Z",
           "source": "complete-official-category-negative"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-05T11:32:17.853Z",
+          "seenAt": "2026-11-05T11:42:17.918Z",
           "source": "complete-official-category-negative"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T11:32:17.853Z",
+        "checkedAt": "2026-11-05T11:42:17.918Z",
         "products": 47,
         "targets": 3,
         "officialTotal": 47,
@@ -102,8 +102,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-05T11:32:17.853Z",
-      "lastSuccessAt": "2026-11-05T11:32:17.853Z",
+      "lastCheckedAt": "2026-11-05T11:42:17.918Z",
+      "lastSuccessAt": "2026-11-05T11:42:17.918Z",
       "products": 124,
       "targets": 1,
       "categoryAvailable": 1,
@@ -125,7 +125,7 @@
           "color": "Brown",
           "price": "$4,000",
           "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
-          "lastSeenAt": "2026-11-05T11:32:17.853Z",
+          "lastSeenAt": "2026-11-05T11:42:17.918Z",
           "source": "official-catalog"
         }
       },
@@ -137,7 +137,7 @@
         },
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-05T11:32:17.853Z",
+          "seenAt": "2026-11-05T11:42:17.918Z",
           "source": "official-product-purchase"
         }
       },
@@ -155,12 +155,12 @@
       "currentStocks": {
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-05T11:32:17.853Z",
+          "seenAt": "2026-11-05T11:42:17.918Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-05T11:32:17.853Z",
+        "checkedAt": "2026-11-05T11:42:17.918Z",
         "products": 124,
         "targets": 1,
         "officialTotal": 124,

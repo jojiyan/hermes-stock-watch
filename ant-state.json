@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-06T14:05:13.989Z",
+      "lastCheckedAt": "2026-11-06T14:15:14.885Z",
       "lastSuccessAt": "2026-11-06T13:55:13.822Z",
       "products": 40,
       "targets": 1,
@@ -105,8 +105,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-06T14:05:13.989Z",
-      "lastSuccessAt": "2026-11-06T14:05:13.989Z",
+      "lastCheckedAt": "2026-11-06T14:15:14.885Z",
+      "lastSuccessAt": "2026-11-06T14:15:14.885Z",
       "products": 130,
       "targets": 1,
       "categoryAvailable": 1,
@@ -128,7 +128,7 @@
           "color": "Rose Sakura",
           "price": "CA$11,600",
           "url": "https://www.hermes.com/ca/en/product/lindy-ii-mini-bag-H085957CK3Q/",
-          "lastSeenAt": "2026-11-06T14:05:13.989Z",
+          "lastSeenAt": "2026-11-06T14:15:14.885Z",
           "source": "official-catalog"
         }
       },
@@ -145,12 +145,12 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T13:55:13.822Z",
+          "seenAt": "2026-11-06T14:15:14.885Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
           "ecom": true,
-          "seenAt": "2026-11-06T14:05:13.989Z",
+          "seenAt": "2026-11-06T14:15:14.885Z",
           "source": "official-product-purchase"
         }
       },
@@ -166,14 +166,19 @@
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
+        "H088612CKAQ": {
+          "ecom": false,
+          "seenAt": "2026-11-06T14:15:14.885Z",
+          "source": "official-product-purchase"
+        },
         "H085957CK3Q": {
           "ecom": true,
-          "seenAt": "2026-11-06T14:05:13.989Z",
+          "seenAt": "2026-11-06T14:15:14.885Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T14:05:13.989Z",
+        "checkedAt": "2026-11-06T14:15:14.885Z",
         "products": 130,
         "targets": 1,
         "officialTotal": 130,
@@ -184,14 +189,14 @@
         "candidates": [
           "H088612CKAQ"
         ],
-        "verified": [],
-        "errors": [
+        "verified": [
           {
             "sku": "H088612CKAQ",
-            "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "color": "Bleu Paradis / Bleu Paradis",
+            "ecom": false
           }
-        ]
+        ],
+        "errors": []
       }
     }
   }

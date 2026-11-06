@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-06T14:55:51.837Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-06T15:05:52.515Z",
       "lastSuccessAt": "2026-11-06T14:55:51.837Z",
-      "products": 40,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -17,6 +17,16 @@
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H069573CKDM/",
           "lastSeenAt": "2026-10-28T20:04:32.880Z",
+          "source": "official-catalog"
+        },
+        "H085956CKX3": {
+          "market": "US",
+          "sku": "H085956CKX3",
+          "name": "Lindy II mini bag",
+          "color": "Purple",
+          "price": "$9,050",
+          "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CKX3/",
+          "lastSeenAt": "2026-11-06T15:05:52.515Z",
           "source": "official-catalog"
         }
       },
@@ -62,7 +72,12 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T14:55:51.837Z",
+          "seenAt": "2026-11-06T15:05:52.515Z",
+          "source": "official-product-purchase"
+        },
+        "H085956CKX3": {
+          "ecom": true,
+          "seenAt": "2026-11-06T15:05:52.515Z",
           "source": "official-product-purchase"
         }
       },
@@ -70,18 +85,29 @@
         "H060991CKV8": "2026-10-20T13:23:14.822Z",
         "H086422CK37": "2026-10-08T13:40:17.239Z",
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
-        "H069573CKDM": "2026-10-28T16:34:31.708Z"
+        "H069573CKDM": "2026-10-28T16:34:31.708Z",
+        "H085956CKX3": "2026-11-06T15:05:52.515Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 40,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 51, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 51, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T14:55:51.837Z",
+          "seenAt": "2026-11-06T15:05:52.515Z",
+          "source": "official-product-purchase"
+        },
+        "H085956CKX3": {
+          "ecom": true,
+          "seenAt": "2026-11-06T15:05:52.515Z",
           "source": "official-product-purchase"
         }
       },
@@ -116,12 +142,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-06T14:55:51.837Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-06T15:05:52.515Z",
       "lastSuccessAt": "2026-11-06T14:55:51.837Z",
-      "products": 130,
-      "targets": 1,
-      "categoryAvailable": 1,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -157,7 +183,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T14:55:51.837Z",
+          "seenAt": "2026-11-06T15:05:52.515Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -170,22 +196,27 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 130,
-      "fetchMode": "paginated",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 127, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        },
+        {
+          "sku": "H085957CK3Q",
+          "url": "https://www.hermes.com/ca/en/product/lindy-ii-mini-bag-H085957CK3Q/",
+          "error": "Official HTTP 403"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 127, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T14:55:51.837Z",
-          "source": "official-product-purchase"
-        },
-        "H085957CK3Q": {
-          "ecom": true,
-          "seenAt": "2026-11-06T14:55:51.837Z",
+          "seenAt": "2026-11-06T15:05:52.515Z",
           "source": "official-product-purchase"
         }
       },
@@ -217,7 +248,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-06T14:55:51.837Z",
+          "lastDiscoveredAt": "2026-11-06T15:05:52.515Z",
           "source": "official-product-purchase"
         }
       }

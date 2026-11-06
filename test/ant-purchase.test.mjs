@@ -108,6 +108,8 @@ test('a sibling canonical never weakens market, model, SKU or explicit official 
   'https://example.com/ca/en/product/neo-garden-23-bag-H088612CKAG/'])
   assert.throws(()=>parseOfficialPurchase(gardenHtml().replace('href="https://www.hermes.com'+gardenBody().path+'"','href="'+wrong+'"'),garden),/canonical/);
  assert.throws(()=>parseOfficialPurchase(gardenHtml().replace('Product reference: H088612CKAQ','Product reference: H088612CKAG'),garden),/did not match/);
+ for(const url of [garden.url+'?other=1',garden.url+'#other',garden.url.replace('https://','https://user@')])
+  assert.throws(()=>parseOfficialPurchase(gardenHtml(),{...garden,url}),/canonical/);
 });
 test('variant metadata alone cannot supply a missing main purchase state',()=>{
  assert.throws(()=>parseOfficialPurchase(gardenHtml(gardenBody(),'<p>Loading purchase options</p>'),garden),/unknown/);

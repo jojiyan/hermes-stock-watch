@@ -8,7 +8,8 @@ function matchesOfficialVariantParent(html, canonical, candidate) {
   // this canonical path and both SKUs share the declared variant parent.
   try {
     const requested=new URL(candidate.url), parentUrl=new URL(canonical);
-    if(requested.origin!=='https://www.hermes.com'||parentUrl.origin!==requested.origin||
+    if(requested.origin!=='https://www.hermes.com'||requested.username||requested.password||
+      requested.search||requested.hash||parentUrl.origin!==requested.origin||
       parentUrl.username||parentUrl.password||parentUrl.search||parentUrl.hash) return false;
     const raw=html.match(/<script\b(?=[^>]*\bid=["']hermes-state["'])[^>]*>([\s\S]*?)<\/script>/i)?.[1];
     if(!raw)return false;

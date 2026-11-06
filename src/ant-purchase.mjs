@@ -1,6 +1,6 @@
 import { parseProductPageHtml } from './hermes.mjs';
 import { fetchAntHtml } from './ant-catalog-fetch.mjs';
-import {isGarden23, prioritizeProducts} from './ant-priority.mjs';
+import {isGarden23, prioritizeProducts,discoverPriorityVariants} from './ant-priority.mjs';
 
 function matchesOfficialVariantParent(html, canonical, candidate) {
   // Hermès may canonicalize every colour to a sibling SKU. Accept that only
@@ -86,7 +86,8 @@ export function parseOfficialPurchase(html, candidate) {
   // The common parser verifies visible Product reference and explicit unavailable evidence.
   // Supply only the main purchase buttons; retain the full main product description/reference.
   const scoped = main.replace(/<button\b[^>]*>[\s\S]*?<\/button>/gi,'') + buttons.map(x=>x[0]).join('');
-  const result = parseProductPageHtml(scoped + ' '.repeat(5000),candidate,{backInStockNotice});
+  const result = parseProductPageHtml(scoped + ' '.repeat(5000),
+    candidate.watchOnly?{...candidate,color:'',price:''}:candidate,{backInStockNotice});
   if (candidate.watchOnly && !isGarden23(result.name)) throw new Error('Priority watch product model mismatch');
   return {...candidate, name:result.name, color:result.color, material:result.material,
     price:result.price, ecom:result.available, purchaseVerified:true, canonicalEvidence,
@@ -98,7 +99,9 @@ export function parseOfficialPurchase(html, candidate) {
 
 export async function verifyOfficialProducts(parsed, market, key, options = {}) {
   const attempts = [], products = [], verificationErrors = [], priorityWatchErrors = [];
-  for (const candidate of prioritizeProducts(parsed.products)) {
+  const queue=prioritizeProducts(parsed.products),seen=new Set(queue.map(p=>p.sku)),discovered=new Map();
+  for (let index=0;index<queue.length;index++) {
+    const candidate=queue[index];
     // A complete official catalog explicitly says this SKU cannot be bought.
     // It needs no expensive/blocked detail request, and can never be positive.
     if(candidate.ecom===false && !candidate.watchOnly && options.verifyAllTargets!==true) {
@@ -108,13 +111,23 @@ export async function verifyOfficialProducts(parsed, market, key, options = {}) 
     }
     try {
       const result = await fetchAntHtml(candidate.url,market,key,{...options,attempts,
-        parse:html=>parseOfficialPurchase(html,candidate)});
+        parse:html=>{
+          const extra=[];
+          for(const p of options.priorityWatch===true&&options.officialFetcher?discoverPriorityVariants(html,candidate):[]) {
+            if(discovered.size>=8&&!discovered.has(p.sku))continue;
+            discovered.set(p.sku,p);
+            if(!seen.has(p.sku)){seen.add(p.sku);extra.push(p);}
+          }
+          queue.splice(index+1,0,...prioritizeProducts(extra));
+          return parseOfficialPurchase(html,candidate);
+        }});
       products.push(result.parsed);
     } catch (error) {
       (candidate.watchOnly ? priorityWatchErrors : verificationErrors)
         .push({sku:candidate.sku,url:candidate.url,error:error.message});
     }
   }
-  return {...parsed, products, verificationErrors, priorityWatchErrors, purchaseAttempts:attempts};
+  return {...parsed, products, verificationErrors, priorityWatchErrors,
+    discoveredPriorityProducts:[...discovered.values()],purchaseAttempts:attempts};
 }
 

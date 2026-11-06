@@ -1,7 +1,7 @@
 import {reconcileCatalog} from './ant-catalog.mjs';
 import {fetchOfficialCatalog} from './ant-catalog-fetch.mjs';
 import {verifyOfficialProducts} from './ant-purchase.mjs';
-import {priorityWatchCandidates, prioritizeProducts} from './ant-priority.mjs';
+import {priorityWatchCandidates, prioritizeProducts,rememberPriorityProducts} from './ant-priority.mjs';
 
 function withPriorityWatch(parsed, watch) {
   const products = new Map(watch.map(p => [p.sku,p]));
@@ -10,8 +10,9 @@ function withPriorityWatch(parsed, watch) {
   return {...parsed, products:prioritizeProducts([...products.values()])};
 }
 function watchSummary(parsed, watch) {
-  return {candidates:watch.map(p=>p.sku),
-    verified:parsed.products.filter(p=>watch.some(w=>w.sku===p.sku)&&p.purchaseVerified).map(p=>({sku:p.sku,color:p.color,ecom:p.ecom})),
+  const candidates=new Set([...watch,...(parsed.discoveredPriorityProducts||[])].map(p=>p.sku));
+  return {candidates:[...candidates],
+    verified:parsed.products.filter(p=>candidates.has(p.sku)&&p.purchaseVerified).map(p=>({sku:p.sku,color:p.color,ecom:p.ecom})),
     errors:parsed.priorityWatchErrors||[]};
 }
 
@@ -33,7 +34,7 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
   const summaries=[],alerts=[];
   await Promise.all(['US','CA'].map(async market=>{
     const previous=state.markets[market]||{};
-    const watch=options.priorityWatch===true?priorityWatchCandidates(market):[];
+    const watch=options.priorityWatch===true?priorityWatchCandidates(market,previous):[];
     const discovered=new Map(watch.map(p=>[p.sku,p]));
     const marketOptions={...options,onCatalogPage:async(parsed,code,url)=>{
       for(const p of parsed.products)if(p.market===market&&(p.ecom===true||options.verifyAllTargets===true))discovered.set(p.sku,p);
@@ -49,6 +50,7 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
       const verified=verifiedOnly(parsed,market,true);
       const reconciled=reconcileCatalog(previous,verified,checkedAt);
       state.markets[market]={...previous,
+        priorityWatchProducts:rememberPriorityProducts(previous,parsed,market,checkedAt),
         catalogStocksUsage:'historical observations; consult currentStocks for this scan',
         currentStocks:currentStocks(reconciled,checkedAt),productVerification:'independent',priorityWatch,
         lastVerifiedCatalog:healthy?{checkedAt,products:parsed.pageItems,targets:fetched.parsed.products.length,
@@ -83,6 +85,7 @@ export async function checkCatalogMarkets(inputState,key,checkedAt,options={}) {
       const priorityWatch=watchSummary(parsed,watch);
       const reconciled=reconcileCatalog(previous,verified,checkedAt);
       state.markets[market]={...previous,status:'unknown',lastCheckedAt:checkedAt,
+        priorityWatchProducts:rememberPriorityProducts(previous,parsed,market,checkedAt),
         lastVerifiedCatalog:previous.lastVerifiedCatalog||(previous.lastSuccessAt?{
           checkedAt:previous.lastSuccessAt,products:previous.products,targets:previous.targets,
           officialTotal:previous.officialTotal,coverage:previous.coverage}:null),

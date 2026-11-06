@@ -74,6 +74,11 @@ export function parseOfficialPurchase(html, candidate) {
   const main = clean.slice(start).split(/<h-product-recommendations\b|<h-recommendations\b|You may also like|Complete your look/i)[0];
   const description = main.search(/Product description/i);
   const purchase = description >= 0 ? main.slice(0,description) : main;
+  const purchaseText=purchase.replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;/gi,' ').replace(/\s+/g,' ');
+  const backInStockNotice=/We will notify you when this product is back in stock/i.test(purchaseText)&&
+    [...purchase.matchAll(/<h-call-to-action-notify-me\b[^>]*>([\s\S]*?)<\/h-call-to-action-notify-me>/gi)]
+      .some(x=>[...x[1].matchAll(/<button\b[^>]*>([\s\S]*?)<\/button>/gi)]
+        .some(b=>/^\s*Notify me\s*$/i.test(b[1].replace(/<[^>]*>/g,' '))));
   const buttons = [...purchase.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)]
     .filter(x=>/\bAdd to (?:cart|bag)\b/i.test(x[2].replace(/<[^>]*>/g,' ')));
   if (buttons.some(x=>/(?:^|\s)(?:hidden|inert)(?:\s|=|$)|aria-hidden\s*=\s*["']true["']|style\s*=\s*["'][^"']*(?:display\s*:\s*none|visibility\s*:\s*hidden)/i.test(x[1])))
@@ -81,12 +86,14 @@ export function parseOfficialPurchase(html, candidate) {
   // The common parser verifies visible Product reference and explicit unavailable evidence.
   // Supply only the main purchase buttons; retain the full main product description/reference.
   const scoped = main.replace(/<button\b[^>]*>[\s\S]*?<\/button>/gi,'') + buttons.map(x=>x[0]).join('');
-  const result = parseProductPageHtml(scoped + ' '.repeat(5000),candidate);
+  const result = parseProductPageHtml(scoped + ' '.repeat(5000),candidate,{backInStockNotice});
   if (candidate.watchOnly && !isGarden23(result.name)) throw new Error('Priority watch product model mismatch');
   return {...candidate, name:result.name, color:result.color, material:result.material,
     price:result.price, ecom:result.available, purchaseVerified:true, canonicalEvidence,
     purchaseAction:result.purchaseAction, purchaseButtonDisabled:result.purchaseButtonDisabled,
-    evidence:result.available?'Official matching product page: enabled Add to cart/Add to bag':'Official matching product page: disabled purchase button or explicit unavailable message'};
+    evidence:result.available?'Official matching product page: enabled Add to cart/Add to bag':
+      backInStockNotice?'Official matching product page: back-in-stock notice and Notify me action':
+      'Official matching product page: disabled purchase button or explicit unavailable message'};
 }
 
 export async function verifyOfficialProducts(parsed, market, key, options = {}) {

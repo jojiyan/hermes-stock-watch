@@ -28,6 +28,21 @@ test('the current official unavailable wording verifies a negative for the match
   assert.equal(out.ecom,false);assert.equal(out.purchaseVerified,true);
  }
 });
+const notifyMe='<p>We will notify you when this product is back in stock</p><h-call-to-action-notify-me><button><span>Notify me</span></button></h-call-to-action-notify-me>';
+test('the matching main product back-in-stock action verifies a negative without cart text',()=>{
+ const result=parseOfficialPurchase(html(notifyMe),p);
+ assert.equal(result.ecom,false);assert.equal(result.purchaseVerified,true);
+ assert.match(result.evidence,/back-in-stock notice/);
+});
+test('hidden, incomplete or recommended Notify me controls cannot establish the main purchase state',()=>{
+ for(const action of ['<div hidden>'+notifyMe+'</div>',
+   'You may also like '+notifyMe,notifyMe.replace(/<p>[\s\S]*?<\/p>/,''),
+   notifyMe.replace(/<h-call-to-action-notify-me>[\s\S]*$/,'')])
+  assert.throws(()=>parseOfficialPurchase(html(action),p));
+ assert.equal(parseOfficialPurchase(html('<button>Add to bag</button>').replace('</body>',
+   '<h-product-recommendations>'+notifyMe+'</h-product-recommendations></body>'),p).ecom,true);
+ assert.equal(parseOfficialPurchase(html('<p>We will notify you when this product is back in stock</p><button>Add to bag</button>'),p).ecom,true);
+});
 test('unavailable wording in recommendations cannot establish the main SKU state',()=>{
  assert.throws(()=>parseOfficialPurchase(html('You may also like <p>This product is currently not available.</p>'),p));
 });

@@ -51,15 +51,20 @@ export async function fetchAntHtml(url, market, key, options = {}) {
       evidence.status=response.status;
       evidence.transportAttempts=response.transportAttempts||[];
       const expected=new URL(url),actual=new URL(response.url);
+      evidence.responseUrl=actual.origin+actual.pathname;
+      const html=response.html;
+      // Retain failure pages for diagnosis, without ever using them as stock.
+      if(typeof html==='string') {
+        evidence.bytes=Buffer.byteLength(html);
+        evidence.fetchedAt=new Date().toISOString();
+        evidence.sha256=createHash('sha256').update(html).digest('hex');
+        evidence.responseTitle=html.match(/<title\b[^>]*>([^<]*)<\/title>/i)?.[1]?.slice(0,160)||'';
+        if(options.onHtml)await options.onHtml(html,evidence);
+      }
       if(actual.origin!=='https://www.hermes.com' || actual.href!==expected.href)
         throw new Error('Official request redirected away from the requested market/page');
       if(response.status!==200)throw new Error('Official HTTP '+response.status);
-      const html=response.html;
       if(typeof html!=='string')throw new Error('Missing official HTML');
-      evidence.bytes=Buffer.byteLength(html);
-      evidence.fetchedAt=new Date().toISOString();
-      evidence.sha256=createHash('sha256').update(html).digest('hex');
-      if(options.onHtml)await options.onHtml(html,evidence);
       let parsed;
       try {parsed=options.parse(html);}
       catch(error) {
@@ -253,7 +258,7 @@ async function fetchCatalogScan(market, key, options = {}) {
           }
         }
         if (count !== total || (parsed.skus && skus.size !== total))
-          throw unstableCatalog(`Incomplete Herm�s catalog: received ${count} of ${total} total products; missing next page`);
+          throw unstableCatalog(`Incomplete Hermès catalog: received ${count} of ${total} total products; missing next page`);
         // Re-fetch the first page after pagination: reject a moving boundary/total.
         if (pages.length > 1) {
           const firstUrl = categoryUrl(market);

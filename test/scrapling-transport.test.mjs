@@ -34,6 +34,16 @@ test('redirected market and page cannot establish official inventory',async()=>{
     parse:()=>({ecom:true}),
   }),/redirected/);
 });
+test('blocked and redirected HTML is retained for diagnosis but never sent to the stock parser',async()=>{
+ const captured=[],attempts=[];
+ await assert.rejects(fetchAntHtml('https://www.hermes.com/us/en/product/example/','US',null,{
+  attempts,officialFetcher:async()=>({url:'https://www.hermes.com/us/en/',status:403,html:'<title>Access denied</title>'}),
+  onHtml:async(html,evidence)=>captured.push({html,status:evidence.status,url:evidence.responseUrl}),
+  parse:()=>{throw new Error('Must not parse blocked HTML');},
+ }),/redirected/);
+ assert.deepEqual(captured,[{html:'<title>Access denied</title>',status:403,url:'https://www.hermes.com/us/en/'}]);
+ assert.equal(attempts[0].responseTitle,'Access denied');assert.equal(attempts[0].credits,0);
+});
 
 test('product verification also uses only the no-credit transport',async()=>{
   let called=false;

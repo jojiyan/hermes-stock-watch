@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-06T18:05:58.786Z",
+      "lastCheckedAt": "2026-11-06T18:15:58.911Z",
       "lastSuccessAt": "2026-11-06T17:55:58.307Z",
       "products": null,
       "targets": null,
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T18:05:58.786Z",
+          "seenAt": "2026-11-06T18:15:58.911Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -91,7 +91,7 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T18:05:58.786Z",
+          "seenAt": "2026-11-06T18:15:58.911Z",
           "source": "official-product-purchase"
         }
       },
@@ -126,12 +126,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-06T18:05:58.786Z",
-      "lastSuccessAt": "2026-11-06T17:55:58.307Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-06T18:15:58.911Z",
+      "lastSuccessAt": "2026-11-06T18:15:58.911Z",
+      "products": 124,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -167,7 +167,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T18:05:58.786Z",
+          "seenAt": "2026-11-06T18:15:58.911Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -180,30 +180,25 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 124,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 124, received 125 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 124, received 125 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T18:05:58.786Z",
+          "seenAt": "2026-11-06T18:15:58.911Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T17:55:58.307Z",
-        "products": 125,
+        "checkedAt": "2026-11-06T18:15:58.911Z",
+        "products": 124,
         "targets": 0,
-        "officialTotal": 125,
+        "officialTotal": 124,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -227,7 +222,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-06T18:05:58.786Z",
+          "lastDiscoveredAt": "2026-11-06T18:15:58.911Z",
           "source": "official-product-purchase"
         }
       }

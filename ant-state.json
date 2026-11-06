@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-06T21:46:06.597Z",
-      "lastSuccessAt": "2026-11-06T21:46:06.597Z",
+      "lastCheckedAt": "2026-11-06T21:56:07.008Z",
+      "lastSuccessAt": "2026-11-06T21:56:07.008Z",
       "products": 46,
       "targets": 1,
       "categoryAvailable": 0,
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T21:46:06.597Z",
+          "seenAt": "2026-11-06T21:56:07.008Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -86,13 +86,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T21:46:06.597Z",
+          "seenAt": "2026-11-06T21:56:07.008Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T21:46:06.597Z",
+        "checkedAt": "2026-11-06T21:56:07.008Z",
         "products": 46,
         "targets": 1,
         "officialTotal": 46,
@@ -122,7 +122,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-06T21:46:06.597Z",
+      "lastCheckedAt": "2026-11-06T21:56:07.008Z",
       "lastSuccessAt": "2026-11-06T21:16:05.669Z",
       "products": null,
       "targets": null,
@@ -162,7 +162,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T21:46:06.597Z",
+          "seenAt": "2026-11-06T21:56:07.008Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -190,7 +190,7 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T21:46:06.597Z",
+          "seenAt": "2026-11-06T21:56:07.008Z",
           "source": "official-product-purchase"
         }
       },
@@ -222,7 +222,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-06T21:46:06.597Z",
+          "lastDiscoveredAt": "2026-11-06T21:56:07.008Z",
           "source": "official-product-purchase"
         }
       }

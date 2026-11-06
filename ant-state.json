@@ -2,11 +2,11 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-06T13:55:13.822Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-06T14:05:13.989Z",
       "lastSuccessAt": "2026-11-06T13:55:13.822Z",
-      "products": 36,
-      "targets": 0,
+      "products": 40,
+      "targets": 1,
       "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
@@ -68,11 +68,17 @@
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 36,
+      "officialTotal": 40,
       "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "sku": "H083189CCBQ",
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-pocket-bag-H083189CCBQ/",
+          "error": "US: product purchase state is unknown"
+        }
+      ],
+      "error": "Some official product purchase states are unknown",
       "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
@@ -99,11 +105,11 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-06T13:55:13.822Z",
-      "lastSuccessAt": "2026-11-06T13:55:13.822Z",
-      "products": 123,
-      "targets": 0,
-      "categoryAvailable": 0,
+      "lastCheckedAt": "2026-11-06T14:05:13.989Z",
+      "lastSuccessAt": "2026-11-06T14:05:13.989Z",
+      "products": 130,
+      "targets": 1,
+      "categoryAvailable": 1,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -113,6 +119,16 @@
           "price": "$4,000",
           "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H051551CKCS/",
           "lastSeenAt": "2026-11-03T13:05:20.588Z",
+          "source": "official-catalog"
+        },
+        "H085957CK3Q": {
+          "market": "CA",
+          "sku": "H085957CK3Q",
+          "name": "Lindy II mini bag",
+          "color": "Rose Sakura",
+          "price": "CA$11,600",
+          "url": "https://www.hermes.com/ca/en/product/lindy-ii-mini-bag-H085957CK3Q/",
+          "lastSeenAt": "2026-11-06T14:05:13.989Z",
           "source": "official-catalog"
         }
       },
@@ -131,30 +147,36 @@
           "ecom": false,
           "seenAt": "2026-11-06T13:55:13.822Z",
           "source": "official-product-purchase"
+        },
+        "H085957CK3Q": {
+          "ecom": true,
+          "seenAt": "2026-11-06T14:05:13.989Z",
+          "source": "official-product-purchase"
         }
       },
       "alertedSkus": {
-        "H051551CKCS": "2026-11-02T23:25:15.988Z"
+        "H051551CKCS": "2026-11-02T23:25:15.988Z",
+        "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 123,
+      "officialTotal": 130,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
-        "H088612CKAQ": {
-          "ecom": false,
-          "seenAt": "2026-11-06T13:55:13.822Z",
+        "H085957CK3Q": {
+          "ecom": true,
+          "seenAt": "2026-11-06T14:05:13.989Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T13:55:13.822Z",
-        "products": 123,
-        "targets": 0,
-        "officialTotal": 123,
+        "checkedAt": "2026-11-06T14:05:13.989Z",
+        "products": 130,
+        "targets": 1,
+        "officialTotal": 130,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -162,14 +184,14 @@
         "candidates": [
           "H088612CKAQ"
         ],
-        "verified": [
+        "verified": [],
+        "errors": [
           {
             "sku": "H088612CKAQ",
-            "color": "Bleu Paradis / Bleu Paradis",
-            "ecom": false
+            "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
+            "error": "Official HTTP 403"
           }
-        ],
-        "errors": []
+        ]
       }
     }
   }

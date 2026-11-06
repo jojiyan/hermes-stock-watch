@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-06T17:55:58.307Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-06T18:05:58.786Z",
       "lastSuccessAt": "2026-11-06T17:55:58.307Z",
-      "products": 44,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T17:55:58.307Z",
+          "seenAt": "2026-11-06T18:05:58.786Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -77,16 +77,21 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 44,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Duplicate SKU across catalog pages: H087934CKAA"
+        }
+      ],
+      "error": "Duplicate SKU across catalog pages: H087934CKAA",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T17:55:58.307Z",
+          "seenAt": "2026-11-06T18:05:58.786Z",
           "source": "official-product-purchase"
         }
       },
@@ -121,12 +126,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-06T17:55:58.307Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-06T18:05:58.786Z",
       "lastSuccessAt": "2026-11-06T17:55:58.307Z",
-      "products": 125,
-      "targets": 0,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -162,7 +167,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T17:55:58.307Z",
+          "seenAt": "2026-11-06T18:05:58.786Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -175,17 +180,22 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 125,
-      "fetchMode": "paginated",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 124, received 125 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 124, received 125 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T17:55:58.307Z",
+          "seenAt": "2026-11-06T18:05:58.786Z",
           "source": "official-product-purchase"
         }
       },
@@ -217,7 +227,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-06T17:55:58.307Z",
+          "lastDiscoveredAt": "2026-11-06T18:05:58.786Z",
           "source": "official-product-purchase"
         }
       }

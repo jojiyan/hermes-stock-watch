@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-06T15:25:53.508Z",
+      "lastCheckedAt": "2026-11-06T15:35:53.652Z",
       "lastSuccessAt": "2026-11-06T14:55:51.837Z",
       "products": null,
       "targets": null,
@@ -17,16 +17,6 @@
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H069573CKDM/",
           "lastSeenAt": "2026-10-28T20:04:32.880Z",
-          "source": "official-catalog"
-        },
-        "H085956CKX3": {
-          "market": "US",
-          "sku": "H085956CKX3",
-          "name": "Lindy II mini bag",
-          "color": "Purple",
-          "price": "$9,050",
-          "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CKX3/",
-          "lastSeenAt": "2026-11-06T15:25:53.508Z",
           "source": "official-catalog"
         }
       },
@@ -72,12 +62,12 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T15:25:53.508Z",
+          "seenAt": "2026-11-06T15:35:53.652Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
-          "ecom": true,
-          "seenAt": "2026-11-06T15:25:53.508Z",
+          "ecom": false,
+          "seenAt": "2026-11-06T15:35:53.652Z",
           "source": "official-product-purchase"
         }
       },
@@ -85,8 +75,7 @@
         "H060991CKV8": "2026-10-20T13:23:14.822Z",
         "H086422CK37": "2026-10-08T13:40:17.239Z",
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
-        "H069573CKDM": "2026-10-28T16:34:31.708Z",
-        "H085956CKX3": "2026-11-06T15:05:52.515Z"
+        "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
       "coverage": "unverified",
       "officialTotal": null,
@@ -102,12 +91,12 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T15:25:53.508Z",
+          "seenAt": "2026-11-06T15:35:53.652Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
-          "ecom": true,
-          "seenAt": "2026-11-06T15:25:53.508Z",
+          "ecom": false,
+          "seenAt": "2026-11-06T15:35:53.652Z",
           "source": "official-product-purchase"
         }
       },
@@ -143,7 +132,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-06T15:25:53.508Z",
+      "lastCheckedAt": "2026-11-06T15:35:53.652Z",
       "lastSuccessAt": "2026-11-06T14:55:51.837Z",
       "products": null,
       "targets": null,
@@ -183,7 +172,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T15:25:53.508Z",
+          "seenAt": "2026-11-06T15:35:53.652Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -211,7 +200,7 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T15:25:53.508Z",
+          "seenAt": "2026-11-06T15:35:53.652Z",
           "source": "official-product-purchase"
         }
       },
@@ -243,7 +232,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-06T15:25:53.508Z",
+          "lastDiscoveredAt": "2026-11-06T15:35:53.652Z",
           "source": "official-product-purchase"
         }
       }

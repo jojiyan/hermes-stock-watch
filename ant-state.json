@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-06T03:40:48.424Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-06T03:50:48.536Z",
       "lastSuccessAt": "2026-11-06T03:40:48.424Z",
-      "products": 49,
-      "targets": 3,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-06T03:40:48.424Z",
+          "seenAt": "2026-11-06T03:50:48.536Z",
           "source": "official-product-purchase"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-06T03:40:48.424Z",
+          "seenAt": "2026-11-06T03:50:48.536Z",
           "source": "official-product-purchase"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-06T03:40:48.424Z",
+          "seenAt": "2026-11-06T03:50:48.536Z",
           "source": "official-product-purchase"
         },
         "H069573CKDM": {
@@ -67,26 +67,31 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 49,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 48, received 49 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 48, received 49 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-06T03:40:48.424Z",
+          "seenAt": "2026-11-06T03:50:48.536Z",
           "source": "official-product-purchase"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-06T03:40:48.424Z",
+          "seenAt": "2026-11-06T03:50:48.536Z",
           "source": "official-product-purchase"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-06T03:40:48.424Z",
+          "seenAt": "2026-11-06T03:50:48.536Z",
           "source": "official-product-purchase"
         }
       },
@@ -115,8 +120,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-06T03:40:48.424Z",
-      "lastSuccessAt": "2026-11-06T03:40:48.424Z",
+      "lastCheckedAt": "2026-11-06T03:50:48.536Z",
+      "lastSuccessAt": "2026-11-06T03:50:48.536Z",
       "products": 123,
       "targets": 0,
       "categoryAvailable": 0,
@@ -156,7 +161,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T03:40:48.424Z",
+        "checkedAt": "2026-11-06T03:50:48.536Z",
         "products": 123,
         "targets": 0,
         "officialTotal": 123,
@@ -172,7 +177,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Product canonical URL/market/SKU mismatch"
+            "error": "Official HTTP 403"
           }
         ]
       }

@@ -2,9 +2,9 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-06T14:25:15.064Z",
-      "lastSuccessAt": "2026-11-06T13:55:13.822Z",
+      "status": "ok",
+      "lastCheckedAt": "2026-11-06T14:33:14.585Z",
+      "lastSuccessAt": "2026-11-06T14:33:14.585Z",
       "products": 40,
       "targets": 1,
       "categoryAvailable": 0,
@@ -59,6 +59,11 @@
           "ecom": true,
           "seenAt": "2026-10-28T20:04:32.880Z",
           "source": "official-product-purchase"
+        },
+        "H083189CCBQ": {
+          "ecom": false,
+          "seenAt": "2026-11-06T14:33:14.585Z",
+          "source": "official-product-purchase"
         }
       },
       "alertedSkus": {
@@ -71,21 +76,21 @@
       "officialTotal": 40,
       "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "sku": "H083189CCBQ",
-          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-pocket-bag-H083189CCBQ/",
-          "error": "US: product purchase state is unknown"
+      "verificationErrors": [],
+      "error": null,
+      "currentStocks": {
+        "H083189CCBQ": {
+          "ecom": false,
+          "seenAt": "2026-11-06T14:33:14.585Z",
+          "source": "official-product-purchase"
         }
-      ],
-      "error": "Some official product purchase states are unknown",
-      "currentStocks": {},
+      },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T13:55:13.822Z",
-        "products": 36,
-        "targets": 0,
-        "officialTotal": 36,
+        "checkedAt": "2026-11-06T14:33:14.585Z",
+        "products": 40,
+        "targets": 1,
+        "officialTotal": 40,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -105,8 +110,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-06T14:25:15.064Z",
-      "lastSuccessAt": "2026-11-06T14:25:15.064Z",
+      "lastCheckedAt": "2026-11-06T14:33:14.585Z",
+      "lastSuccessAt": "2026-11-06T14:33:14.585Z",
       "products": 130,
       "targets": 1,
       "categoryAvailable": 1,
@@ -128,7 +133,7 @@
           "color": "Rose Sakura",
           "price": "CA$11,600",
           "url": "https://www.hermes.com/ca/en/product/lindy-ii-mini-bag-H085957CK3Q/",
-          "lastSeenAt": "2026-11-06T14:25:15.064Z",
+          "lastSeenAt": "2026-11-06T14:33:14.585Z",
           "source": "official-catalog"
         }
       },
@@ -145,12 +150,12 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T14:25:15.064Z",
+          "seenAt": "2026-11-06T14:33:14.585Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
           "ecom": true,
-          "seenAt": "2026-11-06T14:25:15.064Z",
+          "seenAt": "2026-11-06T14:33:14.585Z",
           "source": "official-product-purchase"
         }
       },
@@ -168,17 +173,17 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T14:25:15.064Z",
+          "seenAt": "2026-11-06T14:33:14.585Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
           "ecom": true,
-          "seenAt": "2026-11-06T14:25:15.064Z",
+          "seenAt": "2026-11-06T14:33:14.585Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T14:25:15.064Z",
+        "checkedAt": "2026-11-06T14:33:14.585Z",
         "products": 130,
         "targets": 1,
         "officialTotal": 130,

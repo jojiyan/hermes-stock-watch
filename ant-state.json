@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-06T20:46:04.234Z",
+      "lastCheckedAt": "2026-11-06T20:56:04.643Z",
       "lastSuccessAt": "2026-11-06T20:36:03.897Z",
       "products": null,
       "targets": null,
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T20:46:04.234Z",
+          "seenAt": "2026-11-06T20:56:04.643Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -91,7 +91,7 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T20:46:04.234Z",
+          "seenAt": "2026-11-06T20:56:04.643Z",
           "source": "official-product-purchase"
         }
       },
@@ -127,8 +127,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-06T20:46:04.234Z",
-      "lastSuccessAt": "2026-11-06T20:46:04.234Z",
+      "lastCheckedAt": "2026-11-06T20:56:04.643Z",
+      "lastSuccessAt": "2026-11-06T20:56:04.643Z",
       "products": 123,
       "targets": 0,
       "categoryAvailable": 0,
@@ -167,7 +167,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T20:46:04.234Z",
+          "seenAt": "2026-11-06T20:56:04.643Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -190,12 +190,12 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T20:46:04.234Z",
+          "seenAt": "2026-11-06T20:56:04.643Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T20:46:04.234Z",
+        "checkedAt": "2026-11-06T20:56:04.643Z",
         "products": 123,
         "targets": 0,
         "officialTotal": 123,
@@ -222,7 +222,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-06T20:46:04.234Z",
+          "lastDiscoveredAt": "2026-11-06T20:56:04.643Z",
           "source": "official-product-purchase"
         }
       }

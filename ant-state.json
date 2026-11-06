@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-06T06:54:52.728Z",
-      "lastSuccessAt": "2026-11-06T06:54:52.728Z",
+      "lastCheckedAt": "2026-11-06T07:04:53.374Z",
+      "lastSuccessAt": "2026-11-06T07:04:53.374Z",
       "products": 48,
       "targets": 3,
       "categoryAvailable": 0,
@@ -42,17 +42,17 @@
         },
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-06T06:54:52.728Z",
+          "seenAt": "2026-11-06T07:04:53.374Z",
           "source": "official-product-purchase"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-06T06:54:52.728Z",
+          "seenAt": "2026-11-06T07:04:53.374Z",
           "source": "official-product-purchase"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-06T06:54:52.728Z",
+          "seenAt": "2026-11-06T07:04:53.374Z",
           "source": "official-product-purchase"
         },
         "H069573CKDM": {
@@ -76,23 +76,23 @@
       "currentStocks": {
         "H085956CC18": {
           "ecom": false,
-          "seenAt": "2026-11-06T06:54:52.728Z",
+          "seenAt": "2026-11-06T07:04:53.374Z",
           "source": "official-product-purchase"
         },
         "H083189CKAX": {
           "ecom": false,
-          "seenAt": "2026-11-06T06:54:52.728Z",
+          "seenAt": "2026-11-06T07:04:53.374Z",
           "source": "official-product-purchase"
         },
         "H056289CK7G": {
           "ecom": false,
-          "seenAt": "2026-11-06T06:54:52.728Z",
+          "seenAt": "2026-11-06T07:04:53.374Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T06:54:52.728Z",
+        "checkedAt": "2026-11-06T07:04:53.374Z",
         "products": 48,
         "targets": 3,
         "officialTotal": 48,
@@ -114,12 +114,12 @@
       }
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-06T06:54:52.728Z",
-      "lastSuccessAt": "2026-11-06T06:44:52.200Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-06T07:04:53.374Z",
+      "lastSuccessAt": "2026-11-06T07:04:53.374Z",
+      "products": 123,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -145,37 +145,32 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T06:54:52.728Z",
+          "seenAt": "2026-11-06T07:04:53.374Z",
           "source": "official-product-purchase"
         }
       },
       "alertedSkus": {
         "H051551CKCS": "2026-11-02T23:25:15.988Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 123,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 123, received 124 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 123, received 124 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T06:54:52.728Z",
+          "seenAt": "2026-11-06T07:04:53.374Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-06T06:44:52.200Z",
-        "products": 124,
+        "checkedAt": "2026-11-06T07:04:53.374Z",
+        "products": 123,
         "targets": 0,
-        "officialTotal": 124,
+        "officialTotal": 123,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",

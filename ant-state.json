@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-06T15:05:52.515Z",
+      "lastCheckedAt": "2026-11-06T15:15:53.190Z",
       "lastSuccessAt": "2026-11-06T14:55:51.837Z",
       "products": null,
       "targets": null,
@@ -26,7 +26,7 @@
           "color": "Purple",
           "price": "$9,050",
           "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CKX3/",
-          "lastSeenAt": "2026-11-06T15:05:52.515Z",
+          "lastSeenAt": "2026-11-06T15:15:53.190Z",
           "source": "official-catalog"
         }
       },
@@ -72,12 +72,12 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T15:05:52.515Z",
+          "seenAt": "2026-11-06T15:15:53.190Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
           "ecom": true,
-          "seenAt": "2026-11-06T15:05:52.515Z",
+          "seenAt": "2026-11-06T15:15:53.190Z",
           "source": "official-product-purchase"
         }
       },
@@ -102,12 +102,12 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T15:05:52.515Z",
+          "seenAt": "2026-11-06T15:15:53.190Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
           "ecom": true,
-          "seenAt": "2026-11-06T15:05:52.515Z",
+          "seenAt": "2026-11-06T15:15:53.190Z",
           "source": "official-product-purchase"
         }
       },
@@ -130,7 +130,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -143,7 +143,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-06T15:05:52.515Z",
+      "lastCheckedAt": "2026-11-06T15:15:53.190Z",
       "lastSuccessAt": "2026-11-06T14:55:51.837Z",
       "products": null,
       "targets": null,
@@ -183,7 +183,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T15:05:52.515Z",
+          "seenAt": "2026-11-06T15:15:53.190Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -204,11 +204,6 @@
         {
           "stage": "catalog",
           "error": "Official total changed during pagination: expected 127, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        },
-        {
-          "sku": "H085957CK3Q",
-          "url": "https://www.hermes.com/ca/en/product/lindy-ii-mini-bag-H085957CK3Q/",
-          "error": "Official HTTP 403"
         }
       ],
       "error": "Official total changed during pagination: expected 127, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
@@ -216,7 +211,7 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-06T15:05:52.515Z",
+          "seenAt": "2026-11-06T15:15:53.190Z",
           "source": "official-product-purchase"
         }
       },
@@ -248,7 +243,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-06T15:05:52.515Z",
+          "lastDiscoveredAt": "2026-11-06T15:15:53.190Z",
           "source": "official-product-purchase"
         }
       }

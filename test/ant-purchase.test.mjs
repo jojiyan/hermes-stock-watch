@@ -79,3 +79,39 @@ test('a rendered page with no verifiable purchase state remains unknown after on
  assert.equal(calls,2);assert.equal(x.products.length,0);assert.equal(x.verificationErrors.length,1);
 });
 
+// Reduced from the actual CA Bleu Paradis product response. The selected AQ
+// colour has its own URL/reference; its canonical path points to sibling AG.
+const garden={market:'CA',sku:'H088612CKAQ',name:'Neo Garden 23 bag',color:'Blue',
+ url:'https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/'};
+const gardenBody=()=>({sku:garden.sku,slug:'neo-garden-23-bag',variationParentProduct:'H088612CK',
+ url:'/ca/en/product/neo-garden-23-bag-H088612CKAQ/',path:'/ca/en/product/neo-garden-23-bag-H088612CKAG/',
+ variants:{colors:[{sku:garden.sku,slug:'neo-garden-23-bag',url:'/ca/en/product/neo-garden-23-bag-H088612CKAQ/'}]}});
+function gardenHtml(body=gardenBody(),action='<button>Add to cart</button>') {
+ return `<html><head><base href="/ca/en/"><link rel="canonical" href="https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAG/">
+ <script id="hermes-state">${JSON.stringify({product:{b:body}})}</script></head><body><h1>Neo Garden 23 bag</h1>
+ <p>Price CA$3,650</p><p>Color , Bleu Paradis / Bleu Paradis selected</p>${action}<h2>Product description</h2>
+ <p>Product reference: H088612CKAQ</p>${' '.repeat(6000)}</body></html>`;
+}
+test('official sibling-colour canonical mapping still requires the selected SKU purchase page',()=>{
+ const out=parseOfficialPurchase(gardenHtml(),garden);
+ assert.equal(out.ecom,true);assert.equal(out.canonicalEvidence,'official-variant-parent');
+ assert.equal(out.sku,garden.sku);assert.equal(out.color,'Bleu Paradis / Bleu Paradis');
+ const negative=parseOfficialPurchase(gardenHtml(gardenBody(),'<p>Unfortunately this product is no longer available</p><button disabled>Add to cart</button>'),garden);
+ assert.equal(negative.ecom,false);assert.equal(negative.purchaseVerified,true);
+});
+test('a sibling canonical never weakens market, model, SKU or explicit official mapping checks',()=>{
+ const changes=[b=>{b.sku='H088612CKAG';},b=>{b.url=b.path;},b=>{b.path='/ca/en/product/neo-garden-23-bag-H088612CKXX/';},
+  b=>{b.variationParentProduct='H088613CK';},b=>{delete b.variationParentProduct;},
+  b=>{b.variants.colors[0].sku='H088612CKAG';},b=>{b.variants.colors[0].url=b.path;},b=>{b.slug='another-bag';}];
+ for(const change of changes){const b=gardenBody();change(b);assert.throws(()=>parseOfficialPurchase(gardenHtml(b),garden),/canonical/);}
+ for(const wrong of ['https://www.hermes.com/us/en/product/neo-garden-23-bag-H088612CKAG/',
+  'https://example.com/ca/en/product/neo-garden-23-bag-H088612CKAG/'])
+  assert.throws(()=>parseOfficialPurchase(gardenHtml().replace('href="https://www.hermes.com'+gardenBody().path+'"','href="'+wrong+'"'),garden),/canonical/);
+ assert.throws(()=>parseOfficialPurchase(gardenHtml().replace('Product reference: H088612CKAQ','Product reference: H088612CKAG'),garden),/did not match/);
+});
+test('variant metadata alone cannot supply a missing main purchase state',()=>{
+ assert.throws(()=>parseOfficialPurchase(gardenHtml(gardenBody(),'<p>Loading purchase options</p>'),garden),/unknown/);
+ assert.throws(()=>parseOfficialPurchase(gardenHtml().replace(/<script[\s\S]*?<\/script>/,''),garden),/canonical/);
+ assert.throws(()=>parseOfficialPurchase(gardenHtml().replace('<h1>','<div aria-hidden="true"><h1>').replace('</body>','</div></body>'),garden),/Missing main product heading/);
+});
+

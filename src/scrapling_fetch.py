@@ -1,6 +1,7 @@
 """First-party no-credit worker: HTTP plus a persistent Camoufox market session."""
 import contextlib
 import json
+import re
 import sys
 from urllib.parse import urlparse
 from curl_cffi import requests
@@ -13,6 +14,23 @@ def blocked(status, html):
         'sorry, you have been blocked', 'access denied', 'verify you are human',
         'robot challenge', 'just a moment', 'captcha-delivery.com',
     ))
+
+
+def stay_in_market(page, country, attempts):
+    # Geolocation may suggest switching CA to US and hide the actual page.
+    # Dismiss only the explicit "stay" choice for the requested market.
+    name = 'Canada' if country == 'ca' else 'United States'
+    try:
+        stay = page.get_by_role('button', name=re.compile(
+            r'^No,\s*Stay on (?:the )?' + re.escape(name) + r' site$', re.I))
+        if stay.count():
+            stay.first.click(timeout=3000)
+            page.wait_for_timeout(500)
+            attempts.append({'mode':'browser-market-confirm','engine':'camoufox',
+                             'market':country.upper(),'action':'stay in requested market'})
+    except Exception as exc:
+        attempts.append({'mode':'browser-market-confirm','engine':'camoufox',
+                         'market':country.upper(),'error':str(exc)[:150]})
 
 
 def main():
@@ -57,6 +75,7 @@ def main():
                                 warm=page.goto(f'https://www.hermes.com/{country}/en/',
                                                wait_until='domcontentloaded',timeout=15000)
                                 page.wait_for_timeout(3500)
+                                stay_in_market(page,country,attempts)
                                 attempts.append({'mode':'browser-warmup','engine':'camoufox',
                                                  'status':warm.status if warm else None})
                             except Exception as exc:
@@ -64,6 +83,7 @@ def main():
                         page=pages[country]
                         response=page.goto(url,wait_until='domcontentloaded')
                         page.wait_for_timeout(7000 if '/product/' in parsed.path else 3500)
+                        stay_in_market(page,country,attempts)
                         html, status, final=page.content(),response.status if response else 0,page.url
                         attempts.append({'mode':'browser','engine':'camoufox','status':status})
                 result={'html':str(html),'status':status,'url':final,'transportAttempts':attempts}

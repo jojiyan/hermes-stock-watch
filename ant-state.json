@@ -2,8 +2,8 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-08T11:17:55.515Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-08T11:27:55.836Z",
       "lastSuccessAt": "2026-11-08T11:17:55.515Z",
       "products": 42,
       "targets": 1,
@@ -81,15 +81,15 @@
       "officialTotal": 42,
       "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
-      "currentStocks": {
-        "H083189CCBQ": {
-          "ecom": false,
-          "seenAt": "2026-11-08T11:17:55.515Z",
-          "source": "official-product-purchase"
+      "verificationErrors": [
+        {
+          "sku": "H083189CCBQ",
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-pocket-bag-H083189CCBQ/",
+          "error": "Scrapling request timed out"
         }
-      },
+      ],
+      "error": "Some official product purchase states are unknown",
+      "currentStocks": {},
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
         "checkedAt": "2026-11-08T11:17:55.515Z",
@@ -109,12 +109,12 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Scrapling request timed out"
           },
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "Official HTTP 404"
+            "error": "Scrapling request timed out"
           }
         ]
       },
@@ -122,7 +122,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-08T11:17:55.515Z",
+      "lastCheckedAt": "2026-11-08T11:27:55.836Z",
       "lastSuccessAt": "2026-11-08T11:07:54.784Z",
       "products": null,
       "targets": null,
@@ -162,7 +162,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-08T11:17:55.515Z",
+          "seenAt": "2026-11-08T11:27:55.836Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -190,7 +190,7 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-08T11:17:55.515Z",
+          "seenAt": "2026-11-08T11:27:55.836Z",
           "source": "official-product-purchase"
         }
       },
@@ -222,7 +222,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-08T11:17:55.515Z",
+          "lastDiscoveredAt": "2026-11-08T11:27:55.836Z",
           "source": "official-product-purchase"
         }
       }

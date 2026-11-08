@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-08T06:47:39.704Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-08T06:57:40.021Z",
       "lastSuccessAt": "2026-11-08T06:47:39.704Z",
-      "products": 43,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-08T06:47:39.704Z",
+          "seenAt": "2026-11-08T06:57:40.021Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -77,16 +77,21 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 43,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 43, received 42 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 43, received 42 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-08T06:47:39.704Z",
+          "seenAt": "2026-11-08T06:57:40.021Z",
           "source": "official-product-purchase"
         }
       },
@@ -122,8 +127,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-08T06:47:39.704Z",
-      "lastSuccessAt": "2026-11-08T06:47:39.704Z",
+      "lastCheckedAt": "2026-11-08T06:57:40.021Z",
+      "lastSuccessAt": "2026-11-08T06:57:40.021Z",
       "products": 122,
       "targets": 0,
       "categoryAvailable": 0,
@@ -162,7 +167,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-08T06:37:39.579Z",
+          "seenAt": "2026-11-08T06:57:40.021Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -182,9 +187,15 @@
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {},
+      "currentStocks": {
+        "H088612CKAQ": {
+          "ecom": false,
+          "seenAt": "2026-11-08T06:57:40.021Z",
+          "source": "official-product-purchase"
+        }
+      },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-08T06:47:39.704Z",
+        "checkedAt": "2026-11-08T06:57:40.021Z",
         "products": 122,
         "targets": 0,
         "officialTotal": 122,
@@ -195,14 +206,14 @@
         "candidates": [
           "H088612CKAQ"
         ],
-        "verified": [],
-        "errors": [
+        "verified": [
           {
             "sku": "H088612CKAQ",
-            "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "color": "Bleu Paradis / Bleu Paradis",
+            "ecom": false
           }
-        ]
+        ],
+        "errors": []
       },
       "priorityWatchProducts": {
         "H088612CKAQ": {
@@ -211,7 +222,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-08T06:37:39.579Z",
+          "lastDiscoveredAt": "2026-11-08T06:57:40.021Z",
           "source": "official-product-purchase"
         }
       }

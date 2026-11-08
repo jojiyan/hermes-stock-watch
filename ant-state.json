@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-08T16:18:09.382Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-08T16:28:09.767Z",
       "lastSuccessAt": "2026-11-08T16:18:09.382Z",
-      "products": 42,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-08T16:18:09.382Z",
+          "seenAt": "2026-11-08T16:28:09.767Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -77,16 +77,21 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 42,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official HTTP 403"
+        }
+      ],
+      "error": "Official HTTP 403",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-08T16:18:09.382Z",
+          "seenAt": "2026-11-08T16:28:09.767Z",
           "source": "official-product-purchase"
         }
       },
@@ -109,7 +114,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -122,8 +127,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-08T16:18:09.382Z",
-      "lastSuccessAt": "2026-11-08T16:18:09.382Z",
+      "lastCheckedAt": "2026-11-08T16:28:09.767Z",
+      "lastSuccessAt": "2026-11-08T16:28:09.767Z",
       "products": 121,
       "targets": 0,
       "categoryAvailable": 0,
@@ -162,7 +167,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-08T16:08:09.156Z",
+          "seenAt": "2026-11-08T16:28:09.767Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -182,9 +187,15 @@
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {},
+      "currentStocks": {
+        "H088612CKAQ": {
+          "ecom": false,
+          "seenAt": "2026-11-08T16:28:09.767Z",
+          "source": "official-product-purchase"
+        }
+      },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-08T16:18:09.382Z",
+        "checkedAt": "2026-11-08T16:28:09.767Z",
         "products": 121,
         "targets": 0,
         "officialTotal": 121,
@@ -195,14 +206,14 @@
         "candidates": [
           "H088612CKAQ"
         ],
-        "verified": [],
-        "errors": [
+        "verified": [
           {
             "sku": "H088612CKAQ",
-            "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "color": "Bleu Paradis / Bleu Paradis",
+            "ecom": false
           }
-        ]
+        ],
+        "errors": []
       },
       "priorityWatchProducts": {
         "H088612CKAQ": {
@@ -211,7 +222,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-08T16:08:09.156Z",
+          "lastDiscoveredAt": "2026-11-08T16:28:09.767Z",
           "source": "official-product-purchase"
         }
       }

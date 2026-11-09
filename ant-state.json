@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-09T14:39:02.265Z",
+      "lastCheckedAt": "2026-11-09T14:49:02.386Z",
       "lastSuccessAt": "2026-11-09T14:19:00.863Z",
       "products": null,
       "targets": null,
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T14:39:02.265Z",
+          "seenAt": "2026-11-09T14:49:02.386Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -84,14 +84,14 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Incomplete category product list"
+          "error": "Official total changed during pagination: expected 53, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
         }
       ],
-      "error": "Incomplete category product list",
+      "error": "Official total changed during pagination: expected 53, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T14:39:02.265Z",
+          "seenAt": "2026-11-09T14:49:02.386Z",
           "source": "official-product-purchase"
         }
       },
@@ -127,8 +127,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-09T14:39:02.265Z",
-      "lastSuccessAt": "2026-11-09T14:39:02.265Z",
+      "lastCheckedAt": "2026-11-09T14:49:02.386Z",
+      "lastSuccessAt": "2026-11-09T14:49:02.386Z",
       "products": 120,
       "targets": 0,
       "categoryAvailable": 0,
@@ -167,7 +167,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T14:29:01.439Z",
+          "seenAt": "2026-11-09T14:49:02.386Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -187,9 +187,15 @@
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {},
+      "currentStocks": {
+        "H088612CKAQ": {
+          "ecom": false,
+          "seenAt": "2026-11-09T14:49:02.386Z",
+          "source": "official-product-purchase"
+        }
+      },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-09T14:39:02.265Z",
+        "checkedAt": "2026-11-09T14:49:02.386Z",
         "products": 120,
         "targets": 0,
         "officialTotal": 120,
@@ -200,14 +206,14 @@
         "candidates": [
           "H088612CKAQ"
         ],
-        "verified": [],
-        "errors": [
+        "verified": [
           {
             "sku": "H088612CKAQ",
-            "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "color": "Bleu Paradis / Bleu Paradis",
+            "ecom": false
           }
-        ]
+        ],
+        "errors": []
       },
       "priorityWatchProducts": {
         "H088612CKAQ": {
@@ -216,7 +222,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-09T14:29:01.439Z",
+          "lastDiscoveredAt": "2026-11-09T14:49:02.386Z",
           "source": "official-product-purchase"
         }
       }

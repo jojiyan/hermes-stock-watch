@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-09T20:09:17.178Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-09T20:19:17.328Z",
       "lastSuccessAt": "2026-11-09T20:09:17.178Z",
-      "products": 54,
-      "targets": 2,
-      "categoryAvailable": 1,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -26,7 +26,7 @@
           "color": "Granny / Gris Pantin",
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCY/",
-          "lastSeenAt": "2026-11-09T20:09:17.178Z",
+          "lastSeenAt": "2026-11-09T20:19:17.328Z",
           "source": "official-catalog"
         }
       },
@@ -72,7 +72,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T20:09:17.178Z",
+          "seenAt": "2026-11-09T20:19:17.328Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -87,7 +87,7 @@
         },
         "H051551CKCY": {
           "ecom": true,
-          "seenAt": "2026-11-09T20:09:17.178Z",
+          "seenAt": "2026-11-09T20:19:17.328Z",
           "source": "official-product-purchase"
         }
       },
@@ -98,21 +98,26 @@
         "H069573CKDM": "2026-10-28T16:34:31.708Z",
         "H051551CKCY": "2026-11-09T15:59:04.836Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 54,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official HTTP 403"
+        }
+      ],
+      "error": "Official HTTP 403",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T20:09:17.178Z",
+          "seenAt": "2026-11-09T20:19:17.328Z",
           "source": "official-product-purchase"
         },
         "H051551CKCY": {
           "ecom": true,
-          "seenAt": "2026-11-09T20:09:17.178Z",
+          "seenAt": "2026-11-09T20:19:17.328Z",
           "source": "official-product-purchase"
         }
       },
@@ -135,7 +140,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -148,8 +153,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-09T20:09:17.178Z",
-      "lastSuccessAt": "2026-11-09T20:09:17.178Z",
+      "lastCheckedAt": "2026-11-09T20:19:17.328Z",
+      "lastSuccessAt": "2026-11-09T20:19:17.328Z",
       "products": 122,
       "targets": 0,
       "categoryAvailable": 0,
@@ -188,7 +193,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T20:09:17.178Z",
+          "seenAt": "2026-11-09T20:19:17.328Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -211,12 +216,12 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T20:09:17.178Z",
+          "seenAt": "2026-11-09T20:19:17.328Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-09T20:09:17.178Z",
+        "checkedAt": "2026-11-09T20:19:17.328Z",
         "products": 122,
         "targets": 0,
         "officialTotal": 122,
@@ -243,7 +248,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-09T20:09:17.178Z",
+          "lastDiscoveredAt": "2026-11-09T20:19:17.328Z",
           "source": "official-product-purchase"
         }
       }

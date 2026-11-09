@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-09T08:08:44.996Z",
-      "lastSuccessAt": "2026-11-09T08:08:44.996Z",
+      "lastCheckedAt": "2026-11-09T08:18:45.429Z",
+      "lastSuccessAt": "2026-11-09T08:18:45.429Z",
       "products": 40,
       "targets": 1,
       "categoryAvailable": 0,
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T08:08:44.996Z",
+          "seenAt": "2026-11-09T08:18:45.429Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -86,13 +86,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T08:08:44.996Z",
+          "seenAt": "2026-11-09T08:18:45.429Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-09T08:08:44.996Z",
+        "checkedAt": "2026-11-09T08:18:45.429Z",
         "products": 40,
         "targets": 1,
         "officialTotal": 40,
@@ -109,24 +109,24 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "504 Server Error: Gateway Time-out for url: https://github.com/scrapfly/fingerprint-generator/releases/download/model-2/2026/model-release.zip"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "504 Server Error: Gateway Time-out for url: https://github.com/scrapfly/fingerprint-generator/releases/download/model-2/2026/model-release.zip"
+            "error": "Official HTTP 404"
           }
         ]
       },
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-09T08:08:44.996Z",
-      "lastSuccessAt": "2026-11-09T07:58:44.345Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-09T08:18:45.429Z",
+      "lastSuccessAt": "2026-11-09T08:18:45.429Z",
+      "products": 120,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -175,27 +175,16 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 120,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "504 Server Error: Gateway Time-out for url: https://github.com/scrapfly/fingerprint-generator/releases/download/model-2/2026/model-release.zip"
-        }
-      ],
-      "error": "504 Server Error: Gateway Time-out for url: https://github.com/scrapfly/fingerprint-generator/releases/download/model-2/2026/model-release.zip",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {
-        "H088612CKAQ": {
-          "ecom": false,
-          "seenAt": "2026-11-09T08:08:44.996Z",
-          "source": "official-product-purchase"
-        }
-      },
+      "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-09T07:58:44.345Z",
+        "checkedAt": "2026-11-09T08:18:45.429Z",
         "products": 120,
         "targets": 0,
         "officialTotal": 120,
@@ -206,14 +195,14 @@
         "candidates": [
           "H088612CKAQ"
         ],
-        "verified": [
+        "verified": [],
+        "errors": [
           {
             "sku": "H088612CKAQ",
-            "color": "Bleu Paradis / Bleu Paradis",
-            "ecom": false
+            "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
+            "error": "Official HTTP 403"
           }
-        ],
-        "errors": []
+        ]
       },
       "priorityWatchProducts": {
         "H088612CKAQ": {

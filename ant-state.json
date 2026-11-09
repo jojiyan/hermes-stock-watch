@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-09T23:19:22.292Z",
-      "lastSuccessAt": "2026-11-09T23:19:22.292Z",
+      "lastCheckedAt": "2026-11-09T23:29:22.873Z",
+      "lastSuccessAt": "2026-11-09T23:29:22.873Z",
       "products": 51,
       "targets": 2,
       "categoryAvailable": 1,
@@ -26,7 +26,7 @@
           "color": "Granny / Gris Pantin",
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCY/",
-          "lastSeenAt": "2026-11-09T23:19:22.292Z",
+          "lastSeenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-catalog"
         }
       },
@@ -72,7 +72,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -87,7 +87,7 @@
         },
         "H051551CKCY": {
           "ecom": true,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         }
       },
@@ -107,18 +107,18 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         },
         "H051551CKCY": {
           "ecom": true,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-09T23:19:22.292Z",
+        "checkedAt": "2026-11-09T23:29:22.873Z",
         "products": 51,
         "targets": 2,
         "officialTotal": 51,
@@ -148,7 +148,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-09T23:19:22.292Z",
+      "lastCheckedAt": "2026-11-09T23:29:22.873Z",
       "lastSuccessAt": "2026-11-09T22:29:21.113Z",
       "products": null,
       "targets": null,
@@ -173,26 +173,6 @@
           "url": "https://www.hermes.com/ca/en/product/lindy-ii-mini-bag-H085957CK3Q/",
           "lastSeenAt": "2026-11-06T14:55:51.837Z",
           "source": "official-catalog"
-        },
-        "H056289CCV8": {
-          "market": "CA",
-          "sku": "H056289CCV8",
-          "name": "Picotin Lock 18 bag",
-          "color": "Vert Loden",
-          "price": "CA$4,825",
-          "url": "https://www.hermes.com/ca/en/product/picotin-lock-18-bag-H056289CCV8/",
-          "lastSeenAt": "2026-11-09T23:19:22.292Z",
-          "source": "official-catalog"
-        },
-        "H056289CC0G": {
-          "market": "CA",
-          "sku": "H056289CC0G",
-          "name": "Picotin Lock 18 bag",
-          "color": "Rouge Sellier",
-          "price": "CA$4,825",
-          "url": "https://www.hermes.com/ca/en/product/picotin-lock-18-bag-H056289CC0G/",
-          "lastSeenAt": "2026-11-09T23:19:22.292Z",
-          "source": "official-catalog"
         }
       },
       "catalogStocks": {
@@ -208,7 +188,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -217,21 +197,19 @@
           "source": "official-product-purchase"
         },
         "H056289CCV8": {
-          "ecom": true,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "ecom": false,
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         },
         "H056289CC0G": {
-          "ecom": true,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "ecom": false,
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         }
       },
       "alertedSkus": {
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
-        "H085957CK3Q": "2026-11-06T14:05:13.989Z",
-        "H056289CCV8": "2026-11-09T22:49:21.628Z",
-        "H056289CC0G": "2026-11-09T22:49:21.628Z"
+        "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
       "coverage": "unverified",
       "officialTotal": null,
@@ -248,17 +226,17 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         },
         "H056289CCV8": {
-          "ecom": true,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "ecom": false,
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         },
         "H056289CC0G": {
-          "ecom": true,
-          "seenAt": "2026-11-09T23:19:22.292Z",
+          "ecom": false,
+          "seenAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         }
       },
@@ -290,7 +268,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-09T23:19:22.292Z",
+          "lastDiscoveredAt": "2026-11-09T23:29:22.873Z",
           "source": "official-product-purchase"
         }
       }

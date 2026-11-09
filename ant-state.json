@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-09T17:39:08.532Z",
+      "lastCheckedAt": "2026-11-09T17:49:09.044Z",
       "lastSuccessAt": "2026-11-09T17:09:07.349Z",
       "products": null,
       "targets": null,
@@ -26,7 +26,7 @@
           "color": "Granny / Gris Pantin",
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCY/",
-          "lastSeenAt": "2026-11-09T17:39:08.532Z",
+          "lastSeenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-catalog"
         }
       },
@@ -72,7 +72,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T17:39:08.532Z",
+          "seenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -82,12 +82,12 @@
         },
         "H086422CK89": {
           "ecom": false,
-          "seenAt": "2026-11-09T17:39:08.532Z",
+          "seenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         },
         "H051551CKCY": {
           "ecom": true,
-          "seenAt": "2026-11-09T17:39:08.532Z",
+          "seenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         }
       },
@@ -112,17 +112,17 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T17:39:08.532Z",
+          "seenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         },
         "H086422CK89": {
           "ecom": false,
-          "seenAt": "2026-11-09T17:39:08.532Z",
+          "seenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         },
         "H051551CKCY": {
           "ecom": true,
-          "seenAt": "2026-11-09T17:39:08.532Z",
+          "seenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         }
       },
@@ -145,7 +145,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -157,12 +157,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-09T17:39:08.532Z",
-      "lastSuccessAt": "2026-11-09T17:09:07.349Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-09T17:49:09.044Z",
+      "lastSuccessAt": "2026-11-09T17:49:09.044Z",
+      "products": 122,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -198,7 +198,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T17:39:08.532Z",
+          "seenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -211,27 +211,22 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 122,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Duplicate SKU across catalog pages: H083648CK18"
-        }
-      ],
-      "error": "Duplicate SKU across catalog pages: H083648CK18",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-09T17:39:08.532Z",
+          "seenAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-09T17:09:07.349Z",
+        "checkedAt": "2026-11-09T17:49:09.044Z",
         "products": 122,
         "targets": 0,
         "officialTotal": 122,
@@ -258,7 +253,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-09T17:39:08.532Z",
+          "lastDiscoveredAt": "2026-11-09T17:49:09.044Z",
           "source": "official-product-purchase"
         }
       }

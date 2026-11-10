@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-10T02:49:28.294Z",
-      "lastSuccessAt": "2026-11-10T02:29:26.895Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-10T02:59:28.455Z",
+      "lastSuccessAt": "2026-11-10T02:59:28.455Z",
+      "products": 48,
+      "targets": 1,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T02:49:28.294Z",
+          "seenAt": "2026-11-10T02:59:28.455Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -87,30 +87,25 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 48,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 48, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 48, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T02:49:28.294Z",
+          "seenAt": "2026-11-10T02:59:28.455Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-10T02:29:26.895Z",
-        "products": 50,
+        "checkedAt": "2026-11-10T02:59:28.455Z",
+        "products": 48,
         "targets": 1,
-        "officialTotal": 50,
+        "officialTotal": 48,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -137,8 +132,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-10T02:49:28.294Z",
-      "lastSuccessAt": "2026-11-10T02:49:28.294Z",
+      "lastCheckedAt": "2026-11-10T02:59:28.455Z",
+      "lastSuccessAt": "2026-11-10T02:59:28.455Z",
       "products": 124,
       "targets": 0,
       "categoryAvailable": 0,
@@ -177,7 +172,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T02:49:28.294Z",
+          "seenAt": "2026-11-10T02:59:28.455Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -210,12 +205,12 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T02:49:28.294Z",
+          "seenAt": "2026-11-10T02:59:28.455Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-10T02:49:28.294Z",
+        "checkedAt": "2026-11-10T02:59:28.455Z",
         "products": 124,
         "targets": 0,
         "officialTotal": 124,
@@ -242,7 +237,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-10T02:49:28.294Z",
+          "lastDiscoveredAt": "2026-11-10T02:59:28.455Z",
           "source": "official-product-purchase"
         }
       }

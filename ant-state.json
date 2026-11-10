@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-10T14:29:59.022Z",
+      "lastCheckedAt": "2026-11-10T14:39:59.499Z",
       "lastSuccessAt": "2026-11-10T14:19:58.528Z",
       "products": null,
       "targets": null,
@@ -26,7 +26,7 @@
           "color": "Gold",
           "price": "$9,050",
           "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK37/",
-          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "lastSeenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-catalog"
         },
         "H056289CK89": {
@@ -36,7 +36,7 @@
           "color": "Noir",
           "price": "$3,975",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CK89/",
-          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "lastSeenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-catalog"
         },
         "H084238CKL4": {
@@ -46,7 +46,7 @@
           "color": "Rose Bubblegum",
           "price": "$11,700",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084238CKL4/",
-          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "lastSeenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-catalog"
         },
         "H060991CK10": {
@@ -56,7 +56,7 @@
           "color": "Craie",
           "price": "$4,275",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-22-bag-H060991CK10/",
-          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "lastSeenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-catalog"
         },
         "H085956CC89": {
@@ -66,7 +66,7 @@
           "color": "Noir",
           "price": "$9,050",
           "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CC89/",
-          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "lastSeenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-catalog"
         }
       },
@@ -112,7 +112,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -132,27 +132,27 @@
         },
         "H085956CK37": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H056289CK89": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H084238CKL4": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H060991CK10": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H085956CC89": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         }
       },
@@ -181,32 +181,32 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H085956CK37": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H056289CK89": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H084238CKL4": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H060991CK10": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H085956CC89": {
           "ecom": true,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         }
       },
@@ -242,7 +242,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-10T14:29:59.022Z",
+      "lastCheckedAt": "2026-11-10T14:39:59.499Z",
       "lastSuccessAt": "2026-11-10T13:59:57.718Z",
       "products": null,
       "targets": null,
@@ -282,7 +282,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -320,7 +320,7 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T14:29:59.022Z",
+          "seenAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         }
       },
@@ -352,7 +352,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-10T14:29:59.022Z",
+          "lastDiscoveredAt": "2026-11-10T14:39:59.499Z",
           "source": "official-product-purchase"
         }
       }

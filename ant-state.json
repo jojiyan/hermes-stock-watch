@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-10T15:20:01.728Z",
+      "lastCheckedAt": "2026-11-10T15:30:01.897Z",
       "lastSuccessAt": "2026-11-10T14:19:58.528Z",
       "products": null,
       "targets": null,
@@ -26,7 +26,7 @@
           "color": "Rose Bubblegum",
           "price": "$11,700",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084238CKL4/",
-          "lastSeenAt": "2026-11-10T15:20:01.728Z",
+          "lastSeenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-catalog"
         }
       },
@@ -72,7 +72,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -92,27 +92,27 @@
         },
         "H085956CK37": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H056289CK89": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H084238CKL4": {
           "ecom": true,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H060991CK10": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H085956CC89": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         }
       },
@@ -137,32 +137,32 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H085956CK37": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H056289CK89": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H084238CKL4": {
           "ecom": true,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H060991CK10": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H085956CC89": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         }
       },
@@ -198,7 +198,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-10T15:20:01.728Z",
+      "lastCheckedAt": "2026-11-10T15:30:01.897Z",
       "lastSuccessAt": "2026-11-10T13:59:57.718Z",
       "products": null,
       "targets": null,
@@ -238,7 +238,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -276,7 +276,7 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:20:01.728Z",
+          "seenAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         }
       },
@@ -308,7 +308,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-10T15:20:01.728Z",
+          "lastDiscoveredAt": "2026-11-10T15:30:01.897Z",
           "source": "official-product-purchase"
         }
       }

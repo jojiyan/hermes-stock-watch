@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-10T05:59:36.864Z",
-      "lastSuccessAt": "2026-11-10T05:59:36.864Z",
+      "lastCheckedAt": "2026-11-10T06:09:37.295Z",
+      "lastSuccessAt": "2026-11-10T06:09:37.295Z",
       "products": 48,
       "targets": 1,
       "categoryAvailable": 0,
@@ -62,7 +62,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T05:59:36.864Z",
+          "seenAt": "2026-11-10T06:09:37.295Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -96,13 +96,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T05:59:36.864Z",
+          "seenAt": "2026-11-10T06:09:37.295Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-10T05:59:36.864Z",
+        "checkedAt": "2026-11-10T06:09:37.295Z",
         "products": 48,
         "targets": 1,
         "officialTotal": 48,
@@ -132,8 +132,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-10T05:59:36.864Z",
-      "lastSuccessAt": "2026-11-10T05:59:36.864Z",
+      "lastCheckedAt": "2026-11-10T06:09:37.295Z",
+      "lastSuccessAt": "2026-11-10T06:09:37.295Z",
       "products": 124,
       "targets": 0,
       "categoryAvailable": 0,
@@ -172,7 +172,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T05:59:36.864Z",
+          "seenAt": "2026-11-10T06:09:37.295Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -205,12 +205,12 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T05:59:36.864Z",
+          "seenAt": "2026-11-10T06:09:37.295Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-10T05:59:36.864Z",
+        "checkedAt": "2026-11-10T06:09:37.295Z",
         "products": 124,
         "targets": 0,
         "officialTotal": 124,
@@ -237,7 +237,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-10T05:59:36.864Z",
+          "lastDiscoveredAt": "2026-11-10T06:09:37.295Z",
           "source": "official-product-purchase"
         }
       }

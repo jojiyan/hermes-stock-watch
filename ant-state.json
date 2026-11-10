@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-10T15:50:02.571Z",
-      "lastSuccessAt": "2026-11-10T14:19:58.528Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-10T16:00:02.688Z",
+      "lastSuccessAt": "2026-11-10T16:00:02.688Z",
+      "products": 57,
+      "targets": 4,
+      "categoryAvailable": 1,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -36,7 +36,7 @@
           "color": "Granny / Gris Pantin",
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCY/",
-          "lastSeenAt": "2026-11-10T15:50:02.571Z",
+          "lastSeenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-catalog"
         }
       },
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -97,7 +97,7 @@
         },
         "H051551CKCY": {
           "ecom": true,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         },
         "H085956CK37": {
@@ -117,7 +117,7 @@
         },
         "H060991CK10": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         },
         "H085956CC89": {
@@ -127,7 +127,7 @@
         },
         "H086422CK37": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         }
       },
@@ -138,45 +138,40 @@
         "H084238CKL4": "2026-11-10T14:29:59.022Z",
         "H051551CKCY": "2026-11-10T15:40:02.243Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 57,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 58, received 57 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 58, received 57 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         },
         "H051551CKCY": {
           "ecom": true,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         },
         "H060991CK10": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         },
         "H086422CK37": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-10T14:19:58.528Z",
-        "products": 48,
-        "targets": 1,
-        "officialTotal": 48,
+        "checkedAt": "2026-11-10T16:00:02.688Z",
+        "products": 57,
+        "targets": 4,
+        "officialTotal": 57,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -202,12 +197,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-10T15:50:02.571Z",
-      "lastSuccessAt": "2026-11-10T13:59:57.718Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-10T16:00:02.688Z",
+      "lastSuccessAt": "2026-11-10T16:00:02.688Z",
+      "products": 125,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -243,7 +238,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -266,30 +261,25 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 125,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 128, received 125 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 128, received 125 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T15:50:02.571Z",
+          "seenAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-10T13:59:57.718Z",
-        "products": 124,
+        "checkedAt": "2026-11-10T16:00:02.688Z",
+        "products": 125,
         "targets": 0,
-        "officialTotal": 124,
+        "officialTotal": 125,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -313,7 +303,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-10T15:50:02.571Z",
+          "lastDiscoveredAt": "2026-11-10T16:00:02.688Z",
           "source": "official-product-purchase"
         }
       }

@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-10T14:19:58.528Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-10T14:29:59.022Z",
       "lastSuccessAt": "2026-11-10T14:19:58.528Z",
-      "products": 48,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -17,6 +17,56 @@
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H069573CKDM/",
           "lastSeenAt": "2026-10-28T20:04:32.880Z",
+          "source": "official-catalog"
+        },
+        "H085956CK37": {
+          "market": "US",
+          "sku": "H085956CK37",
+          "name": "Lindy II mini bag",
+          "color": "Gold",
+          "price": "$9,050",
+          "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CK37/",
+          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-catalog"
+        },
+        "H056289CK89": {
+          "market": "US",
+          "sku": "H056289CK89",
+          "name": "Picotin Lock 18 bag",
+          "color": "Noir",
+          "price": "$3,975",
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-18-bag-H056289CK89/",
+          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-catalog"
+        },
+        "H084238CKL4": {
+          "market": "US",
+          "sku": "H084238CKL4",
+          "name": "Picotin Lock micro bag",
+          "color": "Rose Bubblegum",
+          "price": "$11,700",
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-micro-bag-H084238CKL4/",
+          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-catalog"
+        },
+        "H060991CK10": {
+          "market": "US",
+          "sku": "H060991CK10",
+          "name": "Picotin Lock 22 bag",
+          "color": "Craie",
+          "price": "$4,275",
+          "url": "https://www.hermes.com/us/en/product/picotin-lock-22-bag-H060991CK10/",
+          "lastSeenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-catalog"
+        },
+        "H085956CC89": {
+          "market": "US",
+          "sku": "H085956CC89",
+          "name": "Lindy II mini bag",
+          "color": "Noir",
+          "price": "$9,050",
+          "url": "https://www.hermes.com/us/en/product/lindy-ii-mini-bag-H085956CC89/",
+          "lastSeenAt": "2026-11-10T14:29:59.022Z",
           "source": "official-catalog"
         }
       },
@@ -62,7 +112,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T14:19:58.528Z",
+          "seenAt": "2026-11-10T14:29:59.022Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -79,24 +129,84 @@
           "ecom": false,
           "seenAt": "2026-11-10T00:39:24.205Z",
           "source": "official-product-purchase"
+        },
+        "H085956CK37": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H056289CK89": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H084238CKL4": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H060991CK10": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H085956CC89": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
         }
       },
       "alertedSkus": {
         "H060991CKV8": "2026-10-20T13:23:14.822Z",
         "H086422CK37": "2026-10-08T13:40:17.239Z",
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
-        "H069573CKDM": "2026-10-28T16:34:31.708Z"
+        "H069573CKDM": "2026-10-28T16:34:31.708Z",
+        "H085956CK37": "2026-11-10T14:29:59.022Z",
+        "H056289CK89": "2026-11-10T14:29:59.022Z",
+        "H084238CKL4": "2026-11-10T14:29:59.022Z",
+        "H060991CK10": "2026-11-10T14:29:59.022Z",
+        "H085956CC89": "2026-11-10T14:29:59.022Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 48,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 48, received 58 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 48, received 58 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T14:19:58.528Z",
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H085956CK37": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H056289CK89": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H084238CKL4": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H060991CK10": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
+          "source": "official-product-purchase"
+        },
+        "H085956CC89": {
+          "ecom": true,
+          "seenAt": "2026-11-10T14:29:59.022Z",
           "source": "official-product-purchase"
         }
       },
@@ -132,7 +242,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-10T14:19:58.528Z",
+      "lastCheckedAt": "2026-11-10T14:29:59.022Z",
       "lastSuccessAt": "2026-11-10T13:59:57.718Z",
       "products": null,
       "targets": null,
@@ -172,7 +282,7 @@
         },
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T14:19:58.528Z",
+          "seenAt": "2026-11-10T14:29:59.022Z",
           "source": "official-product-purchase"
         },
         "H085957CK3Q": {
@@ -210,7 +320,7 @@
       "currentStocks": {
         "H088612CKAQ": {
           "ecom": false,
-          "seenAt": "2026-11-10T14:19:58.528Z",
+          "seenAt": "2026-11-10T14:29:59.022Z",
           "source": "official-product-purchase"
         }
       },
@@ -242,7 +352,7 @@
           "name": "Neo Garden 23 bag",
           "color": "Bleu Paradis / Bleu Paradis",
           "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-          "lastDiscoveredAt": "2026-11-10T14:19:58.528Z",
+          "lastDiscoveredAt": "2026-11-10T14:29:59.022Z",
           "source": "official-product-purchase"
         }
       }

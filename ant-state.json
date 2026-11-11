@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-11T06:50:45.575Z",
-      "lastSuccessAt": "2026-11-11T06:50:45.575Z",
+      "lastCheckedAt": "2026-11-11T07:00:46.093Z",
+      "lastSuccessAt": "2026-11-11T07:00:46.093Z",
       "products": 49,
       "targets": 1,
       "categoryAvailable": 0,
@@ -72,7 +72,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-11T06:50:45.575Z",
+          "seenAt": "2026-11-11T07:00:46.093Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -136,13 +136,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-11T06:50:45.575Z",
+          "seenAt": "2026-11-11T07:00:46.093Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-11T06:50:45.575Z",
+        "checkedAt": "2026-11-11T07:00:46.093Z",
         "products": 49,
         "targets": 1,
         "officialTotal": 49,
@@ -172,7 +172,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-11T06:50:45.575Z",
+      "lastCheckedAt": "2026-11-11T07:00:46.093Z",
       "lastSuccessAt": "2026-11-11T06:40:45.320Z",
       "products": null,
       "targets": null,
@@ -242,10 +242,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 121, received 122 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official total changed during pagination: expected 121, received 122 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=3)"
         }
       ],
-      "error": "Official total changed during pagination: expected 121, received 122 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official total changed during pagination: expected 121, received 122 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=3)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

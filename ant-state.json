@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-11T19:51:18.138Z",
-      "lastSuccessAt": "2026-11-11T19:31:17.067Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-11T20:01:18.514Z",
+      "lastSuccessAt": "2026-11-11T20:01:18.514Z",
+      "products": 50,
+      "targets": 1,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -72,7 +72,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-11T19:51:18.138Z",
+          "seenAt": "2026-11-11T20:01:18.514Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -127,30 +127,25 @@
         "H069573CKDM": "2026-10-28T16:34:31.708Z",
         "H084238CKL4": "2026-11-10T14:29:59.022Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 50,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 50, received 52 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 50, received 52 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-11T19:51:18.138Z",
+          "seenAt": "2026-11-11T20:01:18.514Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-11T19:31:17.067Z",
-        "products": 52,
+        "checkedAt": "2026-11-11T20:01:18.514Z",
+        "products": 50,
         "targets": 1,
-        "officialTotal": 52,
+        "officialTotal": 50,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -164,7 +159,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -177,7 +172,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-11T19:51:18.138Z",
+      "lastCheckedAt": "2026-11-11T20:01:18.514Z",
       "lastSuccessAt": "2026-11-11T19:31:17.067Z",
       "products": null,
       "targets": null,

@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-12T17:26:33.340Z",
-      "lastSuccessAt": "2026-11-12T17:26:33.340Z",
+      "lastCheckedAt": "2026-11-12T17:36:33.502Z",
+      "lastSuccessAt": "2026-11-12T17:36:33.502Z",
       "products": 54,
       "targets": 1,
       "categoryAvailable": 0,
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-12T17:26:33.340Z",
+          "seenAt": "2026-11-12T17:36:33.502Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -167,13 +167,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-12T17:26:33.340Z",
+          "seenAt": "2026-11-12T17:36:33.502Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-12T17:26:33.340Z",
+        "checkedAt": "2026-11-12T17:36:33.502Z",
         "products": 54,
         "targets": 1,
         "officialTotal": 54,
@@ -202,12 +202,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-12T17:26:33.340Z",
-      "lastSuccessAt": "2026-11-12T15:26:27.693Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-12T17:36:33.502Z",
+      "lastSuccessAt": "2026-11-12T17:36:33.502Z",
+      "products": 123,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -266,21 +266,16 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 123,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 127, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 127, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-12T15:26:27.693Z",
+        "checkedAt": "2026-11-12T17:36:33.502Z",
         "products": 123,
         "targets": 0,
         "officialTotal": 123,

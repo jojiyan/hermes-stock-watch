@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-12T15:16:27.370Z",
-      "lastSuccessAt": "2026-11-12T15:16:27.370Z",
+      "lastCheckedAt": "2026-11-12T15:26:27.693Z",
+      "lastSuccessAt": "2026-11-12T15:26:27.693Z",
       "products": 60,
       "targets": 5,
       "categoryAvailable": 1,
@@ -36,7 +36,7 @@
           "color": "Rose Mexico",
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086729CK0D/",
-          "lastSeenAt": "2026-11-12T15:16:27.370Z",
+          "lastSeenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-catalog"
         }
       },
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -132,22 +132,22 @@
         },
         "H086729CK0D": {
           "ecom": true,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         },
         "H085957CKX9": {
           "ecom": false,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         },
         "H077914CC46": {
           "ecom": false,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         },
         "H056289CK37": {
           "ecom": false,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         }
       },
@@ -167,33 +167,33 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         },
         "H086729CK0D": {
           "ecom": true,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         },
         "H085957CKX9": {
           "ecom": false,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         },
         "H077914CC46": {
           "ecom": false,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         },
         "H056289CK37": {
           "ecom": false,
-          "seenAt": "2026-11-12T15:16:27.370Z",
+          "seenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-12T15:16:27.370Z",
+        "checkedAt": "2026-11-12T15:26:27.693Z",
         "products": 60,
         "targets": 5,
         "officialTotal": 60,
@@ -223,8 +223,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-12T15:16:27.370Z",
-      "lastSuccessAt": "2026-11-12T15:16:27.370Z",
+      "lastCheckedAt": "2026-11-12T15:26:27.693Z",
+      "lastSuccessAt": "2026-11-12T15:26:27.693Z",
       "products": 123,
       "targets": 0,
       "categoryAvailable": 0,
@@ -295,7 +295,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-12T15:16:27.370Z",
+        "checkedAt": "2026-11-12T15:26:27.693Z",
         "products": 123,
         "targets": 0,
         "officialTotal": 123,

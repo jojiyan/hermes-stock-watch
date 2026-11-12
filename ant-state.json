@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-12T16:56:32.469Z",
-      "lastSuccessAt": "2026-11-12T16:56:32.469Z",
+      "lastCheckedAt": "2026-11-12T17:06:32.615Z",
+      "lastSuccessAt": "2026-11-12T17:06:32.615Z",
       "products": 54,
       "targets": 1,
       "categoryAvailable": 0,
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-12T16:56:32.469Z",
+          "seenAt": "2026-11-12T17:06:32.615Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -167,13 +167,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-12T16:56:32.469Z",
+          "seenAt": "2026-11-12T17:06:32.615Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-12T16:56:32.469Z",
+        "checkedAt": "2026-11-12T17:06:32.615Z",
         "products": 54,
         "targets": 1,
         "officialTotal": 54,
@@ -203,7 +203,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-12T16:56:32.469Z",
+      "lastCheckedAt": "2026-11-12T17:06:32.615Z",
       "lastSuccessAt": "2026-11-12T15:26:27.693Z",
       "products": null,
       "targets": null,
@@ -296,7 +296,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

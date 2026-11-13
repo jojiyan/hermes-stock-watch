@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-13T18:09:22.762Z",
-      "lastSuccessAt": "2026-11-13T17:59:22.269Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-13T18:19:22.907Z",
+      "lastSuccessAt": "2026-11-13T18:19:22.907Z",
+      "products": 48,
+      "targets": 1,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T18:09:22.762Z",
+          "seenAt": "2026-11-13T18:19:22.907Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -158,35 +158,25 @@
         "H084238CKL4": "2026-11-10T14:29:59.022Z",
         "H086729CK0D": "2026-11-12T14:36:24.693Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 48,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 48, received 49 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 48, received 49 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T18:09:22.762Z",
-          "source": "official-product-purchase"
-        },
-        "H086422CK37": {
-          "ecom": false,
-          "seenAt": "2026-11-13T18:09:22.762Z",
+          "seenAt": "2026-11-13T18:19:22.907Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T17:59:22.269Z",
-        "products": 49,
-        "targets": 2,
-        "officialTotal": 49,
+        "checkedAt": "2026-11-13T18:19:22.907Z",
+        "products": 48,
+        "targets": 1,
+        "officialTotal": 48,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -213,7 +203,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-13T18:09:22.762Z",
+      "lastCheckedAt": "2026-11-13T18:19:22.907Z",
       "lastSuccessAt": "2026-11-13T10:41:46.866Z",
       "products": null,
       "targets": null,
@@ -299,10 +289,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 121, received 124 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official total changed during pagination: expected 121, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=4)"
         }
       ],
-      "error": "Official total changed during pagination: expected 121, received 124 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official total changed during pagination: expected 121, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=4)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

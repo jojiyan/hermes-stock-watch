@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-13T19:59:28.023Z",
-      "lastSuccessAt": "2026-11-13T19:59:28.023Z",
+      "lastCheckedAt": "2026-11-13T20:09:28.625Z",
+      "lastSuccessAt": "2026-11-13T20:09:28.625Z",
       "products": 48,
       "targets": 1,
       "categoryAvailable": 0,
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T19:59:28.023Z",
+          "seenAt": "2026-11-13T20:09:28.625Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -167,13 +167,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T19:59:28.023Z",
+          "seenAt": "2026-11-13T20:09:28.625Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T19:59:28.023Z",
+        "checkedAt": "2026-11-13T20:09:28.625Z",
         "products": 48,
         "targets": 1,
         "officialTotal": 48,
@@ -203,8 +203,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-13T19:59:28.023Z",
-      "lastSuccessAt": "2026-11-13T19:59:28.023Z",
+      "lastCheckedAt": "2026-11-13T20:09:28.625Z",
+      "lastSuccessAt": "2026-11-13T20:09:28.625Z",
       "products": 124,
       "targets": 2,
       "categoryAvailable": 1,
@@ -246,7 +246,7 @@
           "color": "Dune",
           "price": "CA$5,200",
           "url": "https://www.hermes.com/ca/en/product/picotin-lock-22-bag-H060991CK2D/",
-          "lastSeenAt": "2026-11-13T19:59:28.023Z",
+          "lastSeenAt": "2026-11-13T20:09:28.625Z",
           "source": "official-catalog"
         }
       },
@@ -288,12 +288,12 @@
         },
         "H060991CK2D": {
           "ecom": true,
-          "seenAt": "2026-11-13T19:59:28.023Z",
+          "seenAt": "2026-11-13T20:09:28.625Z",
           "source": "official-product-purchase"
         },
         "H056289CK2S": {
           "ecom": false,
-          "seenAt": "2026-11-13T19:59:28.023Z",
+          "seenAt": "2026-11-13T20:09:28.625Z",
           "source": "official-product-purchase"
         }
       },
@@ -313,17 +313,17 @@
       "currentStocks": {
         "H060991CK2D": {
           "ecom": true,
-          "seenAt": "2026-11-13T19:59:28.023Z",
+          "seenAt": "2026-11-13T20:09:28.625Z",
           "source": "official-product-purchase"
         },
         "H056289CK2S": {
           "ecom": false,
-          "seenAt": "2026-11-13T19:59:28.023Z",
+          "seenAt": "2026-11-13T20:09:28.625Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T19:59:28.023Z",
+        "checkedAt": "2026-11-13T20:09:28.625Z",
         "products": 124,
         "targets": 2,
         "officialTotal": 124,
@@ -339,7 +339,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

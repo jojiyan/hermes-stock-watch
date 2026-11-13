@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-13T02:11:19.207Z",
-      "lastSuccessAt": "2026-11-13T02:11:19.207Z",
+      "lastCheckedAt": "2026-11-13T02:21:20.211Z",
+      "lastSuccessAt": "2026-11-13T02:21:20.211Z",
       "products": 51,
       "targets": 1,
       "categoryAvailable": 0,
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T02:11:19.207Z",
+          "seenAt": "2026-11-13T02:21:20.211Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -160,20 +160,20 @@
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
       "officialTotal": 51,
-      "fetchMode": "facet-recovered",
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
       "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T02:11:19.207Z",
+          "seenAt": "2026-11-13T02:21:20.211Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T02:11:19.207Z",
+        "checkedAt": "2026-11-13T02:21:20.211Z",
         "products": 51,
         "targets": 1,
         "officialTotal": 51,
@@ -190,7 +190,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -202,12 +202,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-13T02:11:19.207Z",
-      "lastSuccessAt": "2026-11-13T01:41:17.693Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-13T02:21:20.211Z",
+      "lastSuccessAt": "2026-11-13T02:21:20.211Z",
+      "products": 120,
+      "targets": 0,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -266,24 +266,19 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 120,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 121, received 120 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=3)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 121, received 120 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=3)",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T01:41:17.693Z",
-        "products": 121,
+        "checkedAt": "2026-11-13T02:21:20.211Z",
+        "products": 120,
         "targets": 0,
-        "officialTotal": 121,
+        "officialTotal": 120,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -296,7 +291,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           }
         ]
       },

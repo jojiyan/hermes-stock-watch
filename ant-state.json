@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-13T17:49:21.248Z",
-      "lastSuccessAt": "2026-11-13T17:49:21.248Z",
+      "lastCheckedAt": "2026-11-13T17:59:22.269Z",
+      "lastSuccessAt": "2026-11-13T17:59:22.269Z",
       "products": 49,
       "targets": 2,
       "categoryAvailable": 1,
@@ -46,7 +46,7 @@
           "color": "Gold",
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
-          "lastSeenAt": "2026-11-13T17:49:21.248Z",
+          "lastSeenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-catalog"
         }
       },
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T17:49:21.248Z",
+          "seenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -137,7 +137,7 @@
         },
         "H086422CK37": {
           "ecom": true,
-          "seenAt": "2026-11-13T17:49:21.248Z",
+          "seenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-product-purchase"
         },
         "H086729CK0D": {
@@ -178,18 +178,18 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T17:49:21.248Z",
+          "seenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-product-purchase"
         },
         "H086422CK37": {
           "ecom": true,
-          "seenAt": "2026-11-13T17:49:21.248Z",
+          "seenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T17:49:21.248Z",
+        "checkedAt": "2026-11-13T17:59:22.269Z",
         "products": 49,
         "targets": 2,
         "officialTotal": 49,
@@ -211,7 +211,7 @@
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },
@@ -219,7 +219,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-13T17:49:21.248Z",
+      "lastCheckedAt": "2026-11-13T17:59:22.269Z",
       "lastSuccessAt": "2026-11-13T10:41:46.866Z",
       "products": null,
       "targets": null,
@@ -252,7 +252,7 @@
           "color": "Canari",
           "price": "CA$4,825",
           "url": "https://www.hermes.com/ca/en/product/picotin-lock-18-bag-H056289CK9L/",
-          "lastSeenAt": "2026-11-13T17:49:21.248Z",
+          "lastSeenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-catalog"
         }
       },
@@ -289,7 +289,7 @@
         },
         "H056289CK9L": {
           "ecom": true,
-          "seenAt": "2026-11-13T17:49:21.248Z",
+          "seenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-product-purchase"
         }
       },
@@ -313,7 +313,7 @@
       "currentStocks": {
         "H056289CK9L": {
           "ecom": true,
-          "seenAt": "2026-11-13T17:49:21.248Z",
+          "seenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-product-purchase"
         }
       },
@@ -334,7 +334,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

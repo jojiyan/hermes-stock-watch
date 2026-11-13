@@ -3,11 +3,11 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-13T10:41:46.866Z",
-      "lastSuccessAt": "2026-11-13T10:41:46.866Z",
+      "lastCheckedAt": "2026-11-13T17:39:19.415Z",
+      "lastSuccessAt": "2026-11-13T17:39:19.415Z",
       "products": 49,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "targets": 2,
+      "categoryAvailable": 1,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -37,6 +37,16 @@
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086729CK0D/",
           "lastSeenAt": "2026-11-12T15:26:27.693Z",
+          "source": "official-catalog"
+        },
+        "H086422CK37": {
+          "market": "US",
+          "sku": "H086422CK37",
+          "name": "Neo Garden 23 bag",
+          "color": "Gold",
+          "price": "$4,475",
+          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
+          "lastSeenAt": "2026-11-13T17:39:19.415Z",
           "source": "official-catalog"
         }
       },
@@ -82,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T10:41:46.866Z",
+          "seenAt": "2026-11-13T17:39:19.415Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -126,8 +136,8 @@
           "source": "official-product-purchase"
         },
         "H086422CK37": {
-          "ecom": false,
-          "seenAt": "2026-11-10T16:40:03.852Z",
+          "ecom": true,
+          "seenAt": "2026-11-13T17:39:19.415Z",
           "source": "official-product-purchase"
         },
         "H086729CK0D": {
@@ -156,7 +166,8 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z",
         "H084238CKL4": "2026-11-10T14:29:59.022Z",
-        "H086729CK0D": "2026-11-12T14:36:24.693Z"
+        "H086729CK0D": "2026-11-12T14:36:24.693Z",
+        "H086422CK37": "2026-11-13T17:39:19.415Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
       "officialTotal": 49,
@@ -167,15 +178,20 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T10:41:46.866Z",
+          "seenAt": "2026-11-13T17:39:19.415Z",
+          "source": "official-product-purchase"
+        },
+        "H086422CK37": {
+          "ecom": true,
+          "seenAt": "2026-11-13T17:39:19.415Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T10:41:46.866Z",
+        "checkedAt": "2026-11-13T17:39:19.415Z",
         "products": 49,
-        "targets": 1,
+        "targets": 2,
         "officialTotal": 49,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
@@ -190,7 +206,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
@@ -202,12 +218,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-13T10:41:46.866Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-13T17:39:19.415Z",
       "lastSuccessAt": "2026-11-13T10:41:46.866Z",
-      "products": 120,
-      "targets": 0,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -227,6 +243,16 @@
           "price": "CA$11,600",
           "url": "https://www.hermes.com/ca/en/product/lindy-ii-mini-bag-H085957CK3Q/",
           "lastSeenAt": "2026-11-06T14:55:51.837Z",
+          "source": "official-catalog"
+        },
+        "H056289CK9L": {
+          "market": "CA",
+          "sku": "H056289CK9L",
+          "name": "Picotin Lock 18 bag",
+          "color": "Canari",
+          "price": "CA$4,825",
+          "url": "https://www.hermes.com/ca/en/product/picotin-lock-18-bag-H056289CK9L/",
+          "lastSeenAt": "2026-11-13T17:39:19.415Z",
           "source": "official-catalog"
         }
       },
@@ -260,20 +286,37 @@
           "ecom": false,
           "seenAt": "2026-11-09T23:49:23.567Z",
           "source": "official-product-purchase"
+        },
+        "H056289CK9L": {
+          "ecom": true,
+          "seenAt": "2026-11-13T17:39:19.415Z",
+          "source": "official-product-purchase"
         }
       },
       "alertedSkus": {
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
-        "H085957CK3Q": "2026-11-06T14:05:13.989Z"
+        "H085957CK3Q": "2026-11-06T14:05:13.989Z",
+        "H056289CK9L": "2026-11-13T17:39:19.415Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 120,
-      "fetchMode": "paginated",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 124, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=4)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 124, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=4)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {},
+      "currentStocks": {
+        "H056289CK9L": {
+          "ecom": true,
+          "seenAt": "2026-11-13T17:39:19.415Z",
+          "source": "official-product-purchase"
+        }
+      },
       "lastVerifiedCatalog": {
         "checkedAt": "2026-11-13T10:41:46.866Z",
         "products": 120,
@@ -291,7 +334,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           }
         ]
       },

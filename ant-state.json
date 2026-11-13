@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-13T18:19:22.907Z",
-      "lastSuccessAt": "2026-11-13T18:19:22.907Z",
+      "lastCheckedAt": "2026-11-13T18:29:23.018Z",
+      "lastSuccessAt": "2026-11-13T18:29:23.018Z",
       "products": 48,
       "targets": 1,
       "categoryAvailable": 0,
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T18:19:22.907Z",
+          "seenAt": "2026-11-13T18:29:23.018Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -167,13 +167,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T18:19:22.907Z",
+          "seenAt": "2026-11-13T18:29:23.018Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T18:19:22.907Z",
+        "checkedAt": "2026-11-13T18:29:23.018Z",
         "products": 48,
         "targets": 1,
         "officialTotal": 48,
@@ -190,7 +190,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -203,7 +203,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-13T18:19:22.907Z",
+      "lastCheckedAt": "2026-11-13T18:29:23.018Z",
       "lastSuccessAt": "2026-11-13T10:41:46.866Z",
       "products": null,
       "targets": null,

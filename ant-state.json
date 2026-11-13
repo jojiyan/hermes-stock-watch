@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-13T19:09:25.593Z",
-      "lastSuccessAt": "2026-11-13T19:09:25.593Z",
+      "lastCheckedAt": "2026-11-13T19:19:26.685Z",
+      "lastSuccessAt": "2026-11-13T19:19:26.685Z",
       "products": 48,
       "targets": 1,
       "categoryAvailable": 0,
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T19:09:25.593Z",
+          "seenAt": "2026-11-13T19:19:26.685Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -167,13 +167,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-13T19:09:25.593Z",
+          "seenAt": "2026-11-13T19:19:26.685Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T19:09:25.593Z",
+        "checkedAt": "2026-11-13T19:19:26.685Z",
         "products": 48,
         "targets": 1,
         "officialTotal": 48,
@@ -203,11 +203,11 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-13T19:09:25.593Z",
-      "lastSuccessAt": "2026-11-13T19:09:25.593Z",
-      "products": 121,
-      "targets": 0,
-      "categoryAvailable": 0,
+      "lastCheckedAt": "2026-11-13T19:19:26.685Z",
+      "lastSuccessAt": "2026-11-13T19:19:26.685Z",
+      "products": 124,
+      "targets": 2,
+      "categoryAvailable": 1,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -237,6 +237,16 @@
           "price": "CA$4,825",
           "url": "https://www.hermes.com/ca/en/product/picotin-lock-18-bag-H056289CK9L/",
           "lastSeenAt": "2026-11-13T17:59:22.269Z",
+          "source": "official-catalog"
+        },
+        "H060991CK2D": {
+          "market": "CA",
+          "sku": "H060991CK2D",
+          "name": "Picotin Lock 22 bag",
+          "color": "Dune",
+          "price": "CA$5,200",
+          "url": "https://www.hermes.com/ca/en/product/picotin-lock-22-bag-H060991CK2D/",
+          "lastSeenAt": "2026-11-13T19:19:26.685Z",
           "source": "official-catalog"
         }
       },
@@ -275,26 +285,48 @@
           "ecom": true,
           "seenAt": "2026-11-13T17:59:22.269Z",
           "source": "official-product-purchase"
+        },
+        "H060991CK2D": {
+          "ecom": true,
+          "seenAt": "2026-11-13T19:19:26.685Z",
+          "source": "official-product-purchase"
+        },
+        "H056289CK2S": {
+          "ecom": false,
+          "seenAt": "2026-11-13T19:19:26.685Z",
+          "source": "official-product-purchase"
         }
       },
       "alertedSkus": {
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z",
-        "H056289CK9L": "2026-11-13T17:39:19.415Z"
+        "H056289CK9L": "2026-11-13T17:39:19.415Z",
+        "H060991CK2D": "2026-11-13T19:19:26.685Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 121,
+      "officialTotal": 124,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {},
+      "currentStocks": {
+        "H060991CK2D": {
+          "ecom": true,
+          "seenAt": "2026-11-13T19:19:26.685Z",
+          "source": "official-product-purchase"
+        },
+        "H056289CK2S": {
+          "ecom": false,
+          "seenAt": "2026-11-13T19:19:26.685Z",
+          "source": "official-product-purchase"
+        }
+      },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-13T19:09:25.593Z",
-        "products": 121,
-        "targets": 0,
-        "officialTotal": 121,
+        "checkedAt": "2026-11-13T19:19:26.685Z",
+        "products": 124,
+        "targets": 2,
+        "officialTotal": 124,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",

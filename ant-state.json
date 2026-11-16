@@ -3,11 +3,11 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-16T13:43:58.443Z",
-      "lastSuccessAt": "2026-11-16T13:43:58.443Z",
-      "products": 46,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "lastCheckedAt": "2026-11-16T13:53:58.610Z",
+      "lastSuccessAt": "2026-11-16T13:53:58.610Z",
+      "products": 50,
+      "targets": 2,
+      "categoryAvailable": 1,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -37,6 +37,16 @@
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086729CK0D/",
           "lastSeenAt": "2026-11-12T15:26:27.693Z",
+          "source": "official-catalog"
+        },
+        "H086422CK37": {
+          "market": "US",
+          "sku": "H086422CK37",
+          "name": "Neo Garden 23 bag",
+          "color": "Gold",
+          "price": "$4,475",
+          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
+          "lastSeenAt": "2026-11-16T13:53:58.610Z",
           "source": "official-catalog"
         }
       },
@@ -82,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-16T13:43:58.443Z",
+          "seenAt": "2026-11-16T13:53:58.610Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -126,8 +136,8 @@
           "source": "official-product-purchase"
         },
         "H086422CK37": {
-          "ecom": false,
-          "seenAt": "2026-11-13T18:09:22.762Z",
+          "ecom": true,
+          "seenAt": "2026-11-16T13:53:58.610Z",
           "source": "official-product-purchase"
         },
         "H086729CK0D": {
@@ -156,10 +166,11 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z",
         "H084238CKL4": "2026-11-10T14:29:59.022Z",
-        "H086729CK0D": "2026-11-12T14:36:24.693Z"
+        "H086729CK0D": "2026-11-12T14:36:24.693Z",
+        "H086422CK37": "2026-11-16T13:53:58.610Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 46,
+      "officialTotal": 50,
       "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
@@ -167,16 +178,21 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-16T13:43:58.443Z",
+          "seenAt": "2026-11-16T13:53:58.610Z",
+          "source": "official-product-purchase"
+        },
+        "H086422CK37": {
+          "ecom": true,
+          "seenAt": "2026-11-16T13:53:58.610Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-16T13:43:58.443Z",
-        "products": 46,
-        "targets": 1,
-        "officialTotal": 46,
+        "checkedAt": "2026-11-16T13:53:58.610Z",
+        "products": 50,
+        "targets": 2,
+        "officialTotal": 50,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -190,7 +206,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -203,8 +219,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-16T13:43:58.443Z",
-      "lastSuccessAt": "2026-11-16T13:43:58.443Z",
+      "lastCheckedAt": "2026-11-16T13:53:58.610Z",
+      "lastSuccessAt": "2026-11-16T13:53:58.610Z",
       "products": 118,
       "targets": 0,
       "categoryAvailable": 0,
@@ -312,7 +328,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-16T13:43:58.443Z",
+        "checkedAt": "2026-11-16T13:53:58.610Z",
         "products": 118,
         "targets": 0,
         "officialTotal": 118,

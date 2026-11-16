@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-16T14:54:02.611Z",
-      "lastSuccessAt": "2026-11-16T14:44:01.852Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-16T15:04:04.083Z",
+      "lastSuccessAt": "2026-11-16T15:04:04.083Z",
+      "products": 49,
+      "targets": 1,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-16T14:54:02.611Z",
+          "seenAt": "2026-11-16T15:04:04.083Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -169,35 +169,25 @@
         "H086729CK0D": "2026-11-12T14:36:24.693Z",
         "H086422CK37": "2026-11-16T13:53:58.610Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 49,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 49, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        },
-        {
-          "sku": "H086422CK37",
-          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
-          "error": "Official HTTP 404"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 49, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-16T14:54:02.611Z",
+          "seenAt": "2026-11-16T15:04:04.083Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-16T14:44:01.852Z",
-        "products": 50,
-        "targets": 2,
-        "officialTotal": 50,
+        "checkedAt": "2026-11-16T15:04:04.083Z",
+        "products": 49,
+        "targets": 1,
+        "officialTotal": 49,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -224,8 +214,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-16T14:54:02.611Z",
-      "lastSuccessAt": "2026-11-16T14:54:02.611Z",
+      "lastCheckedAt": "2026-11-16T15:04:04.083Z",
+      "lastSuccessAt": "2026-11-16T15:04:04.083Z",
       "products": 120,
       "targets": 0,
       "categoryAvailable": 0,
@@ -333,7 +323,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-16T14:54:02.611Z",
+        "checkedAt": "2026-11-16T15:04:04.083Z",
         "products": 120,
         "targets": 0,
         "officialTotal": 120,
@@ -349,7 +339,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           }
         ]
       },

@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-16T23:17:34.718Z",
-      "lastSuccessAt": "2026-11-16T23:17:34.718Z",
+      "lastCheckedAt": "2026-11-16T23:27:35.193Z",
+      "lastSuccessAt": "2026-11-16T23:27:35.193Z",
       "products": 47,
       "targets": 1,
       "categoryAvailable": 0,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-16T23:17:34.718Z",
+          "seenAt": "2026-11-16T23:27:35.193Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -178,13 +178,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-16T23:17:34.718Z",
+          "seenAt": "2026-11-16T23:27:35.193Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-16T23:17:34.718Z",
+        "checkedAt": "2026-11-16T23:27:35.193Z",
         "products": 47,
         "targets": 1,
         "officialTotal": 47,
@@ -201,7 +201,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -214,9 +214,9 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-16T23:17:34.718Z",
-      "lastSuccessAt": "2026-11-16T23:17:34.718Z",
-      "products": 120,
+      "lastCheckedAt": "2026-11-16T23:27:35.193Z",
+      "lastSuccessAt": "2026-11-16T23:27:35.193Z",
+      "products": 119,
       "targets": 0,
       "categoryAvailable": 0,
       "available": {
@@ -315,7 +315,7 @@
         "H060991CK2D": "2026-11-13T19:19:26.685Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 120,
+      "officialTotal": 119,
       "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
@@ -323,10 +323,10 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-16T23:17:34.718Z",
-        "products": 120,
+        "checkedAt": "2026-11-16T23:27:35.193Z",
+        "products": 119,
         "targets": 0,
-        "officialTotal": 120,
+        "officialTotal": 119,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",

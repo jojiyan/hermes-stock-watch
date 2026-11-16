@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-16T15:54:05.656Z",
-      "lastSuccessAt": "2026-11-16T15:54:05.656Z",
+      "lastCheckedAt": "2026-11-16T16:04:06.262Z",
+      "lastSuccessAt": "2026-11-16T16:04:06.262Z",
       "products": 50,
       "targets": 1,
       "categoryAvailable": 0,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-16T15:54:05.656Z",
+          "seenAt": "2026-11-16T16:04:06.262Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -178,13 +178,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-16T15:54:05.656Z",
+          "seenAt": "2026-11-16T16:04:06.262Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-16T15:54:05.656Z",
+        "checkedAt": "2026-11-16T16:04:06.262Z",
         "products": 50,
         "targets": 1,
         "officialTotal": 50,
@@ -206,7 +206,7 @@
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },
@@ -214,8 +214,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-16T15:54:05.656Z",
-      "lastSuccessAt": "2026-11-16T15:54:05.656Z",
+      "lastCheckedAt": "2026-11-16T16:04:06.262Z",
+      "lastSuccessAt": "2026-11-16T16:04:06.262Z",
       "products": 120,
       "targets": 0,
       "categoryAvailable": 0,
@@ -323,7 +323,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-16T15:54:05.656Z",
+        "checkedAt": "2026-11-16T16:04:06.262Z",
         "products": 120,
         "targets": 0,
         "officialTotal": 120,

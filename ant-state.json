@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T02:57:46.581Z",
-      "lastSuccessAt": "2026-11-17T02:57:46.581Z",
+      "lastCheckedAt": "2026-11-17T03:07:47.045Z",
+      "lastSuccessAt": "2026-11-17T03:07:47.045Z",
       "products": 46,
       "targets": 1,
       "categoryAvailable": 0,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T02:57:46.581Z",
+          "seenAt": "2026-11-17T03:07:47.045Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -178,13 +178,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T02:57:46.581Z",
+          "seenAt": "2026-11-17T03:07:47.045Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T02:57:46.581Z",
+        "checkedAt": "2026-11-17T03:07:47.045Z",
         "products": 46,
         "targets": 1,
         "officialTotal": 46,
@@ -214,8 +214,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T02:57:46.581Z",
-      "lastSuccessAt": "2026-11-17T02:57:46.581Z",
+      "lastCheckedAt": "2026-11-17T03:07:47.045Z",
+      "lastSuccessAt": "2026-11-17T03:07:47.045Z",
       "products": 119,
       "targets": 0,
       "categoryAvailable": 0,
@@ -323,7 +323,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T02:57:46.581Z",
+        "checkedAt": "2026-11-17T03:07:47.045Z",
         "products": 119,
         "targets": 0,
         "officialTotal": 119,
@@ -339,7 +339,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-17T02:07:44.651Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-17T02:17:45.122Z",
       "lastSuccessAt": "2026-11-17T02:07:44.651Z",
-      "products": 47,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T02:07:44.651Z",
+          "seenAt": "2026-11-17T02:17:45.122Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -169,16 +169,21 @@
         "H086729CK0D": "2026-11-12T14:36:24.693Z",
         "H086422CK37": "2026-11-16T13:53:58.610Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 47,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 47, received 46 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 47, received 46 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T02:07:44.651Z",
+          "seenAt": "2026-11-17T02:17:45.122Z",
           "source": "official-product-purchase"
         }
       },
@@ -214,8 +219,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T02:07:44.651Z",
-      "lastSuccessAt": "2026-11-17T02:07:44.651Z",
+      "lastCheckedAt": "2026-11-17T02:17:45.122Z",
+      "lastSuccessAt": "2026-11-17T02:17:45.122Z",
       "products": 119,
       "targets": 0,
       "categoryAvailable": 0,
@@ -323,7 +328,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T02:07:44.651Z",
+        "checkedAt": "2026-11-17T02:17:45.122Z",
         "products": 119,
         "targets": 0,
         "officialTotal": 119,

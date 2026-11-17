@@ -3,9 +3,9 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T14:28:25.652Z",
-      "lastSuccessAt": "2026-11-17T14:28:25.652Z",
-      "products": 46,
+      "lastCheckedAt": "2026-11-17T14:38:26.478Z",
+      "lastSuccessAt": "2026-11-17T14:38:26.478Z",
+      "products": 49,
       "targets": 1,
       "categoryAvailable": 0,
       "available": {
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T14:28:25.652Z",
+          "seenAt": "2026-11-17T14:38:26.478Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -170,7 +170,7 @@
         "H086422CK37": "2026-11-16T13:53:58.610Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 46,
+      "officialTotal": 49,
       "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
@@ -178,16 +178,16 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T14:28:25.652Z",
+          "seenAt": "2026-11-17T14:38:26.478Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T14:28:25.652Z",
-        "products": 46,
+        "checkedAt": "2026-11-17T14:38:26.478Z",
+        "products": 49,
         "targets": 1,
-        "officialTotal": 46,
+        "officialTotal": 49,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -201,7 +201,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
@@ -213,12 +213,12 @@
       "priorityWatchProducts": {}
     },
     "CA": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-17T14:28:25.652Z",
-      "lastSuccessAt": "2026-11-17T14:18:25.480Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-17T14:38:26.478Z",
+      "lastSuccessAt": "2026-11-17T14:38:26.478Z",
+      "products": 134,
+      "targets": 1,
+      "categoryAvailable": 1,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -267,7 +267,7 @@
           "color": "Craie / Poussière",
           "price": "CA$5,100",
           "url": "https://www.hermes.com/ca/en/product/picotin-lock-18-eclat-bag-H069560CKCG/",
-          "lastSeenAt": "2026-11-17T14:28:25.652Z",
+          "lastSeenAt": "2026-11-17T14:38:26.478Z",
           "source": "official-catalog"
         }
       },
@@ -319,7 +319,7 @@
         },
         "H069560CKCG": {
           "ecom": true,
-          "seenAt": "2026-11-17T14:28:25.652Z",
+          "seenAt": "2026-11-17T14:38:26.478Z",
           "source": "official-product-purchase"
         }
       },
@@ -330,30 +330,25 @@
         "H060991CK2D": "2026-11-13T19:19:26.685Z",
         "H069560CKCG": "2026-11-17T14:28:25.652Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 134,
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 118, received 133 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 118, received 133 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H069560CKCG": {
           "ecom": true,
-          "seenAt": "2026-11-17T14:28:25.652Z",
+          "seenAt": "2026-11-17T14:38:26.478Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T14:18:25.480Z",
-        "products": 118,
-        "targets": 0,
-        "officialTotal": 118,
+        "checkedAt": "2026-11-17T14:38:26.478Z",
+        "products": 134,
+        "targets": 1,
+        "officialTotal": 134,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -366,7 +361,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           }
         ]
       },

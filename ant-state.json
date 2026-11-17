@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-17T15:08:27.863Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-17T15:18:28.762Z",
       "lastSuccessAt": "2026-11-17T15:08:27.863Z",
-      "products": 49,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T15:08:27.863Z",
+          "seenAt": "2026-11-17T15:18:28.762Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -169,16 +169,21 @@
         "H086729CK0D": "2026-11-12T14:36:24.693Z",
         "H086422CK37": "2026-11-16T13:53:58.610Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 49,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official HTTP 403"
+        }
+      ],
+      "error": "Official HTTP 403",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T15:08:27.863Z",
+          "seenAt": "2026-11-17T15:18:28.762Z",
           "source": "official-product-purchase"
         }
       },
@@ -214,7 +219,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-17T15:08:27.863Z",
+      "lastCheckedAt": "2026-11-17T15:18:28.762Z",
       "lastSuccessAt": "2026-11-17T14:58:27.523Z",
       "products": null,
       "targets": null,
@@ -326,10 +331,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 133, received 129 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official HTTP 403"
         }
       ],
-      "error": "Official total changed during pagination: expected 133, received 129 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official HTTP 403",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
@@ -349,7 +354,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

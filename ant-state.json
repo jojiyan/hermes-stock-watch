@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T14:48:26.936Z",
-      "lastSuccessAt": "2026-11-17T14:48:26.936Z",
+      "lastCheckedAt": "2026-11-17T14:58:27.523Z",
+      "lastSuccessAt": "2026-11-17T14:58:27.523Z",
       "products": 49,
       "targets": 1,
       "categoryAvailable": 0,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T14:48:26.936Z",
+          "seenAt": "2026-11-17T14:58:27.523Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -178,13 +178,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T14:48:26.936Z",
+          "seenAt": "2026-11-17T14:58:27.523Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T14:48:26.936Z",
+        "checkedAt": "2026-11-17T14:58:27.523Z",
         "products": 49,
         "targets": 1,
         "officialTotal": 49,
@@ -214,8 +214,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T14:48:26.936Z",
-      "lastSuccessAt": "2026-11-17T14:48:26.936Z",
+      "lastCheckedAt": "2026-11-17T14:58:27.523Z",
+      "lastSuccessAt": "2026-11-17T14:58:27.523Z",
       "products": 133,
       "targets": 1,
       "categoryAvailable": 0,
@@ -309,7 +309,7 @@
         },
         "H069560CKCG": {
           "ecom": false,
-          "seenAt": "2026-11-17T14:48:26.936Z",
+          "seenAt": "2026-11-17T14:58:27.523Z",
           "source": "official-product-purchase"
         }
       },
@@ -329,12 +329,12 @@
       "currentStocks": {
         "H069560CKCG": {
           "ecom": false,
-          "seenAt": "2026-11-17T14:48:26.936Z",
+          "seenAt": "2026-11-17T14:58:27.523Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T14:48:26.936Z",
+        "checkedAt": "2026-11-17T14:58:27.523Z",
         "products": 133,
         "targets": 1,
         "officialTotal": 133,

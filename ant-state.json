@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T14:38:26.478Z",
-      "lastSuccessAt": "2026-11-17T14:38:26.478Z",
+      "lastCheckedAt": "2026-11-17T14:48:26.936Z",
+      "lastSuccessAt": "2026-11-17T14:48:26.936Z",
       "products": 49,
       "targets": 1,
       "categoryAvailable": 0,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T14:38:26.478Z",
+          "seenAt": "2026-11-17T14:48:26.936Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -178,13 +178,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T14:38:26.478Z",
+          "seenAt": "2026-11-17T14:48:26.936Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T14:38:26.478Z",
+        "checkedAt": "2026-11-17T14:48:26.936Z",
         "products": 49,
         "targets": 1,
         "officialTotal": 49,
@@ -214,11 +214,11 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T14:38:26.478Z",
-      "lastSuccessAt": "2026-11-17T14:38:26.478Z",
-      "products": 134,
+      "lastCheckedAt": "2026-11-17T14:48:26.936Z",
+      "lastSuccessAt": "2026-11-17T14:48:26.936Z",
+      "products": 133,
       "targets": 1,
-      "categoryAvailable": 1,
+      "categoryAvailable": 0,
       "available": {
         "H051551CKCS": {
           "market": "CA",
@@ -258,16 +258,6 @@
           "price": "CA$5,200",
           "url": "https://www.hermes.com/ca/en/product/picotin-lock-22-bag-H060991CK2D/",
           "lastSeenAt": "2026-11-13T20:09:28.625Z",
-          "source": "official-catalog"
-        },
-        "H069560CKCG": {
-          "market": "CA",
-          "sku": "H069560CKCG",
-          "name": "Picotin Lock 18 eclat bag",
-          "color": "Craie / Poussière",
-          "price": "CA$5,100",
-          "url": "https://www.hermes.com/ca/en/product/picotin-lock-18-eclat-bag-H069560CKCG/",
-          "lastSeenAt": "2026-11-17T14:38:26.478Z",
           "source": "official-catalog"
         }
       },
@@ -318,8 +308,8 @@
           "source": "official-product-purchase"
         },
         "H069560CKCG": {
-          "ecom": true,
-          "seenAt": "2026-11-17T14:38:26.478Z",
+          "ecom": false,
+          "seenAt": "2026-11-17T14:48:26.936Z",
           "source": "official-product-purchase"
         }
       },
@@ -327,28 +317,27 @@
         "H051551CKCS": "2026-11-02T23:25:15.988Z",
         "H085957CK3Q": "2026-11-06T14:05:13.989Z",
         "H056289CK9L": "2026-11-13T17:39:19.415Z",
-        "H060991CK2D": "2026-11-13T19:19:26.685Z",
-        "H069560CKCG": "2026-11-17T14:28:25.652Z"
+        "H060991CK2D": "2026-11-13T19:19:26.685Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 134,
-      "fetchMode": "paginated",
+      "officialTotal": 133,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H069560CKCG": {
-          "ecom": true,
-          "seenAt": "2026-11-17T14:38:26.478Z",
+          "ecom": false,
+          "seenAt": "2026-11-17T14:48:26.936Z",
           "source": "official-product-purchase"
         }
       },
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T14:38:26.478Z",
-        "products": 134,
+        "checkedAt": "2026-11-17T14:48:26.936Z",
+        "products": 133,
         "targets": 1,
-        "officialTotal": 134,
+        "officialTotal": 133,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -361,7 +350,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

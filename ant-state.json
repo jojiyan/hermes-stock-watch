@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T11:48:14.998Z",
-      "lastSuccessAt": "2026-11-17T11:48:14.998Z",
+      "lastCheckedAt": "2026-11-17T11:58:15.354Z",
+      "lastSuccessAt": "2026-11-17T11:58:15.354Z",
       "products": 46,
       "targets": 1,
       "categoryAvailable": 0,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T11:48:14.998Z",
+          "seenAt": "2026-11-17T11:58:15.354Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -178,13 +178,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T11:48:14.998Z",
+          "seenAt": "2026-11-17T11:58:15.354Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T11:48:14.998Z",
+        "checkedAt": "2026-11-17T11:58:15.354Z",
         "products": 46,
         "targets": 1,
         "officialTotal": 46,
@@ -214,8 +214,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T11:48:14.998Z",
-      "lastSuccessAt": "2026-11-17T11:48:14.998Z",
+      "lastCheckedAt": "2026-11-17T11:58:15.354Z",
+      "lastSuccessAt": "2026-11-17T11:58:15.354Z",
       "products": 118,
       "targets": 0,
       "categoryAvailable": 0,
@@ -323,7 +323,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T11:48:14.998Z",
+        "checkedAt": "2026-11-17T11:58:15.354Z",
         "products": 118,
         "targets": 0,
         "officialTotal": 118,
@@ -339,7 +339,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 403"
+            "error": "BrowserType.launch: Failed to launch the browser process.\nBrowser logs:\n\n<launching> /home/runner/.cache/camoufox/browsers/official/158.0.1-beta.41-3f2eb1d0/camoufox-bin -no-remote -wait-for-browser -foreground -profile /tmp/playwright_firefoxdev_profile-jeBPuM -juggler-pipe -silent\n<launched> pid=3239\n[pid=3239][err] [3241] Sandbox: CanCreateUserNamespace() unshare(CLONE_NEWPID): EPERM\n[pid=3239][err] Error: cannot open display: :99\n[pid=3239] <process did exit: exitCode=1, signal=null>\n[pid=3239] starting temporary directories cleanup\nCall log:\n  - <launching> /home/runner/.cache/camoufox/browsers/official/158.0.1-beta.41-3f2eb1d0/camoufox-bin -no-remote -wait-for-browser -foreground -profile /tmp/playwright_firefoxdev_profile-jeBPuM -juggler-pipe -silent\n  - <launched> pid=3239\n  - [pid=3239][err] [3241] Sandbox: CanCreateUserNamespace() unshare(CLONE_NEWPID): EPERM\n  - [pid=3239][err] Error: cannot open display: :99\n  - [pid=3239] <process did exit: exitCode=1, signal=null>\n  - [pid=3239] starting temporary directories cleanup\n  - [pid=3239] <gracefully close start>\n  - [pid=3239] <kill>\n  - [pid=3239] <skipped force kill spawnedProcess.killed=false processClosed=true>\n  - [pid=3239] finished temporary directories cleanup\n  - [pid=3239] <gracefully close end>\n"
           }
         ]
       },

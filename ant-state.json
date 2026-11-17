@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-17T23:18:58.817Z",
+      "lastCheckedAt": "2026-11-17T23:28:59.160Z",
       "lastSuccessAt": "2026-11-17T23:08:58.703Z",
       "products": null,
       "targets": null,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T23:18:58.817Z",
+          "seenAt": "2026-11-17T23:28:59.160Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -183,7 +183,7 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-17T23:18:58.817Z",
+          "seenAt": "2026-11-17T23:28:59.160Z",
           "source": "official-product-purchase"
         }
       },
@@ -206,7 +206,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
@@ -219,8 +219,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-17T23:18:58.817Z",
-      "lastSuccessAt": "2026-11-17T23:18:58.817Z",
+      "lastCheckedAt": "2026-11-17T23:28:59.160Z",
+      "lastSuccessAt": "2026-11-17T23:28:59.160Z",
       "products": 122,
       "targets": 0,
       "categoryAvailable": 0,
@@ -333,7 +333,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-17T23:18:58.817Z",
+        "checkedAt": "2026-11-17T23:28:59.160Z",
         "products": 122,
         "targets": 0,
         "officialTotal": 122,
@@ -349,7 +349,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

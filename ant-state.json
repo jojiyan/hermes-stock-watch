@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-18T20:40:09.540Z",
+      "lastCheckedAt": "2026-11-18T20:50:10.022Z",
       "lastSuccessAt": "2026-11-18T20:20:08.690Z",
       "products": null,
       "targets": null,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T20:40:09.540Z",
+          "seenAt": "2026-11-18T20:50:10.022Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -183,7 +183,7 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T20:40:09.540Z",
+          "seenAt": "2026-11-18T20:50:10.022Z",
           "source": "official-product-purchase"
         }
       },
@@ -206,7 +206,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -219,7 +219,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-18T20:40:09.540Z",
+      "lastCheckedAt": "2026-11-18T20:50:10.022Z",
       "lastSuccessAt": "2026-11-18T19:20:05.459Z",
       "products": null,
       "targets": null,
@@ -347,13 +347,7 @@
       ],
       "error": "Official total changed during pagination: expected 125, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
-      "currentStocks": {
-        "H069573CKDJ": {
-          "ecom": true,
-          "seenAt": "2026-11-18T20:40:09.540Z",
-          "source": "official-product-purchase"
-        }
-      },
+      "currentStocks": {},
       "lastVerifiedCatalog": {
         "checkedAt": "2026-11-18T19:20:05.459Z",
         "products": 122,

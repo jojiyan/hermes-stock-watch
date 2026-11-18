@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-18T20:20:08.690Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-18T20:30:08.830Z",
       "lastSuccessAt": "2026-11-18T20:20:08.690Z",
-      "products": 49,
-      "targets": 1,
-      "categoryAvailable": 0,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T20:20:08.690Z",
+          "seenAt": "2026-11-18T20:30:08.830Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -169,16 +169,21 @@
         "H086729CK0D": "2026-11-12T14:36:24.693Z",
         "H086422CK37": "2026-11-16T13:53:58.610Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 49,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 50, received 49 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 50, received 49 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T20:20:08.690Z",
+          "seenAt": "2026-11-18T20:30:08.830Z",
           "source": "official-product-purchase"
         }
       },
@@ -201,7 +206,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
@@ -214,7 +219,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-18T20:20:08.690Z",
+      "lastCheckedAt": "2026-11-18T20:30:08.830Z",
       "lastSuccessAt": "2026-11-18T19:20:05.459Z",
       "products": null,
       "targets": null,
@@ -267,7 +272,7 @@
           "color": "Bai / Brun / Bai / Brun",
           "price": "CA$4,000",
           "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
-          "lastSeenAt": "2026-11-18T20:20:08.690Z",
+          "lastSeenAt": "2026-11-18T20:30:08.830Z",
           "source": "official-catalog"
         }
       },
@@ -279,7 +284,7 @@
         },
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-18T20:20:08.690Z",
+          "seenAt": "2026-11-18T20:30:08.830Z",
           "source": "official-product-purchase"
         },
         "H088612CKAQ": {
@@ -337,15 +342,15 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 124, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official total changed during pagination: expected 125, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
         }
       ],
-      "error": "Official total changed during pagination: expected 124, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official total changed during pagination: expected 125, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-18T20:20:08.690Z",
+          "seenAt": "2026-11-18T20:30:08.830Z",
           "source": "official-product-purchase"
         }
       },

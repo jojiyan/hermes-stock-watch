@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "ok",
-      "lastCheckedAt": "2026-11-18T15:19:49.823Z",
+      "status": "unknown",
+      "lastCheckedAt": "2026-11-18T15:29:49.933Z",
       "lastSuccessAt": "2026-11-18T15:19:49.823Z",
-      "products": 51,
-      "targets": 2,
-      "categoryAvailable": 1,
+      "products": null,
+      "targets": null,
+      "categoryAvailable": null,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -47,16 +47,6 @@
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
           "lastSeenAt": "2026-11-16T14:44:01.852Z",
-          "source": "official-catalog"
-        },
-        "H086422CK89": {
-          "market": "US",
-          "sku": "H086422CK89",
-          "name": "Neo Garden 23 bag",
-          "color": "Noir",
-          "price": "$4,475",
-          "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK89/",
-          "lastSeenAt": "2026-11-18T15:19:49.823Z",
           "source": "official-catalog"
         }
       },
@@ -102,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T15:19:49.823Z",
+          "seenAt": "2026-11-18T15:29:49.933Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -111,8 +101,8 @@
           "source": "official-product-purchase"
         },
         "H086422CK89": {
-          "ecom": true,
-          "seenAt": "2026-11-18T15:19:49.823Z",
+          "ecom": false,
+          "seenAt": "2026-11-18T15:29:49.933Z",
           "source": "official-product-purchase"
         },
         "H051551CKCY": {
@@ -177,24 +167,28 @@
         "H069573CKDM": "2026-10-28T16:34:31.708Z",
         "H084238CKL4": "2026-11-10T14:29:59.022Z",
         "H086729CK0D": "2026-11-12T14:36:24.693Z",
-        "H086422CK37": "2026-11-16T13:53:58.610Z",
-        "H086422CK89": "2026-11-18T13:39:44.635Z"
+        "H086422CK37": "2026-11-16T13:53:58.610Z"
       },
-      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 51,
-      "fetchMode": "facet-recovered",
+      "coverage": "unverified",
+      "officialTotal": null,
+      "fetchMode": null,
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [],
-      "error": null,
+      "verificationErrors": [
+        {
+          "stage": "catalog",
+          "error": "Official total changed during pagination: expected 49, received 51 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+        }
+      ],
+      "error": "Official total changed during pagination: expected 49, received 51 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T15:19:49.823Z",
+          "seenAt": "2026-11-18T15:29:49.933Z",
           "source": "official-product-purchase"
         },
         "H086422CK89": {
-          "ecom": true,
-          "seenAt": "2026-11-18T15:19:49.823Z",
+          "ecom": false,
+          "seenAt": "2026-11-18T15:29:49.933Z",
           "source": "official-product-purchase"
         }
       },
@@ -217,7 +211,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -230,7 +224,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-18T15:19:49.823Z",
+      "lastCheckedAt": "2026-11-18T15:29:49.933Z",
       "lastSuccessAt": "2026-11-18T14:39:47.967Z",
       "products": null,
       "targets": null,

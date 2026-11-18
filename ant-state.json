@@ -3,9 +3,9 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-18T01:39:04.429Z",
-      "lastSuccessAt": "2026-11-18T01:39:04.429Z",
-      "products": 49,
+      "lastCheckedAt": "2026-11-18T01:49:05.383Z",
+      "lastSuccessAt": "2026-11-18T01:49:05.383Z",
+      "products": 48,
       "targets": 1,
       "categoryAvailable": 0,
       "available": {
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T01:39:04.429Z",
+          "seenAt": "2026-11-18T01:49:05.383Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -170,7 +170,7 @@
         "H086422CK37": "2026-11-16T13:53:58.610Z"
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
-      "officialTotal": 49,
+      "officialTotal": 48,
       "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
@@ -178,16 +178,16 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T01:39:04.429Z",
+          "seenAt": "2026-11-18T01:49:05.383Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-18T01:39:04.429Z",
-        "products": 49,
+        "checkedAt": "2026-11-18T01:49:05.383Z",
+        "products": 48,
         "targets": 1,
-        "officialTotal": 49,
+        "officialTotal": 48,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -214,8 +214,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-18T01:39:04.429Z",
-      "lastSuccessAt": "2026-11-18T01:39:04.429Z",
+      "lastCheckedAt": "2026-11-18T01:49:05.383Z",
+      "lastSuccessAt": "2026-11-18T01:49:05.383Z",
       "products": 121,
       "targets": 0,
       "categoryAvailable": 0,
@@ -328,7 +328,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-18T01:39:04.429Z",
+        "checkedAt": "2026-11-18T01:49:05.383Z",
         "products": 121,
         "targets": 0,
         "officialTotal": 121,

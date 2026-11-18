@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-18T20:30:08.830Z",
+      "lastCheckedAt": "2026-11-18T20:40:09.540Z",
       "lastSuccessAt": "2026-11-18T20:20:08.690Z",
       "products": null,
       "targets": null,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T20:30:08.830Z",
+          "seenAt": "2026-11-18T20:40:09.540Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -183,7 +183,7 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T20:30:08.830Z",
+          "seenAt": "2026-11-18T20:40:09.540Z",
           "source": "official-product-purchase"
         }
       },
@@ -219,7 +219,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-18T20:30:08.830Z",
+      "lastCheckedAt": "2026-11-18T20:40:09.540Z",
       "lastSuccessAt": "2026-11-18T19:20:05.459Z",
       "products": null,
       "targets": null,
@@ -272,7 +272,7 @@
           "color": "Bai / Brun / Bai / Brun",
           "price": "CA$4,000",
           "url": "https://www.hermes.com/ca/en/product/garden-party-30-bag-H069573CKDJ/",
-          "lastSeenAt": "2026-11-18T20:30:08.830Z",
+          "lastSeenAt": "2026-11-18T20:40:09.540Z",
           "source": "official-catalog"
         }
       },
@@ -284,7 +284,7 @@
         },
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-18T20:30:08.830Z",
+          "seenAt": "2026-11-18T20:40:09.540Z",
           "source": "official-product-purchase"
         },
         "H088612CKAQ": {
@@ -342,15 +342,15 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 125, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official total changed during pagination: expected 125, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
         }
       ],
-      "error": "Official total changed during pagination: expected 125, received 126 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official total changed during pagination: expected 125, received 123 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {
         "H069573CKDJ": {
           "ecom": true,
-          "seenAt": "2026-11-18T20:30:08.830Z",
+          "seenAt": "2026-11-18T20:40:09.540Z",
           "source": "official-product-purchase"
         }
       },

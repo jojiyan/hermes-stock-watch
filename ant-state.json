@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-18T14:29:47.606Z",
-      "lastSuccessAt": "2026-11-18T13:19:43.407Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-18T14:39:47.967Z",
+      "lastSuccessAt": "2026-11-18T14:39:47.967Z",
+      "products": 51,
+      "targets": 2,
+      "categoryAvailable": 1,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -56,7 +56,7 @@
           "color": "Noir",
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK89/",
-          "lastSeenAt": "2026-11-18T14:29:47.606Z",
+          "lastSeenAt": "2026-11-18T14:39:47.967Z",
           "source": "official-catalog"
         }
       },
@@ -102,7 +102,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T14:29:47.606Z",
+          "seenAt": "2026-11-18T14:39:47.967Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -112,7 +112,7 @@
         },
         "H086422CK89": {
           "ecom": true,
-          "seenAt": "2026-11-18T14:29:47.606Z",
+          "seenAt": "2026-11-18T14:39:47.967Z",
           "source": "official-product-purchase"
         },
         "H051551CKCY": {
@@ -180,35 +180,30 @@
         "H086422CK37": "2026-11-16T13:53:58.610Z",
         "H086422CK89": "2026-11-18T13:39:44.635Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 51,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 51, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 51, received 50 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T14:29:47.606Z",
+          "seenAt": "2026-11-18T14:39:47.967Z",
           "source": "official-product-purchase"
         },
         "H086422CK89": {
           "ecom": true,
-          "seenAt": "2026-11-18T14:29:47.606Z",
+          "seenAt": "2026-11-18T14:39:47.967Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-18T13:19:43.407Z",
-        "products": 47,
-        "targets": 1,
-        "officialTotal": 47,
+        "checkedAt": "2026-11-18T14:39:47.967Z",
+        "products": 51,
+        "targets": 2,
+        "officialTotal": 51,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -235,8 +230,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-18T14:29:47.606Z",
-      "lastSuccessAt": "2026-11-18T14:29:47.606Z",
+      "lastCheckedAt": "2026-11-18T14:39:47.967Z",
+      "lastSuccessAt": "2026-11-18T14:39:47.967Z",
       "products": 121,
       "targets": 0,
       "categoryAvailable": 0,
@@ -349,7 +344,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-18T14:29:47.606Z",
+        "checkedAt": "2026-11-18T14:39:47.967Z",
         "products": 121,
         "targets": 0,
         "officialTotal": 121,

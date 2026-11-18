@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-18T17:29:56.709Z",
-      "lastSuccessAt": "2026-11-18T17:29:56.709Z",
+      "lastCheckedAt": "2026-11-18T17:39:56.818Z",
+      "lastSuccessAt": "2026-11-18T17:39:56.818Z",
       "products": 50,
       "targets": 2,
       "categoryAvailable": 0,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T17:29:56.709Z",
+          "seenAt": "2026-11-18T17:39:56.818Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -102,7 +102,7 @@
         },
         "H086422CK89": {
           "ecom": false,
-          "seenAt": "2026-11-18T17:29:56.709Z",
+          "seenAt": "2026-11-18T17:39:56.818Z",
           "source": "official-product-purchase"
         },
         "H051551CKCY": {
@@ -178,18 +178,18 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-18T17:29:56.709Z",
+          "seenAt": "2026-11-18T17:39:56.818Z",
           "source": "official-product-purchase"
         },
         "H086422CK89": {
           "ecom": false,
-          "seenAt": "2026-11-18T17:29:56.709Z",
+          "seenAt": "2026-11-18T17:39:56.818Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-18T17:29:56.709Z",
+        "checkedAt": "2026-11-18T17:39:56.818Z",
         "products": 50,
         "targets": 2,
         "officialTotal": 50,
@@ -206,7 +206,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -219,7 +219,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-18T17:29:56.709Z",
+      "lastCheckedAt": "2026-11-18T17:39:56.818Z",
       "lastSuccessAt": "2026-11-18T17:19:56.209Z",
       "products": null,
       "targets": null,

@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-19T22:11:27.038Z",
-      "lastSuccessAt": "2026-11-19T22:11:27.038Z",
+      "lastCheckedAt": "2026-11-19T22:21:27.167Z",
+      "lastSuccessAt": "2026-11-19T22:21:27.167Z",
       "products": 51,
       "targets": 1,
       "categoryAvailable": 0,
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T22:11:27.038Z",
+          "seenAt": "2026-11-19T22:21:27.167Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -172,13 +172,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T22:11:27.038Z",
+          "seenAt": "2026-11-19T22:21:27.167Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-19T22:11:27.038Z",
+        "checkedAt": "2026-11-19T22:21:27.167Z",
         "products": 51,
         "targets": 1,
         "officialTotal": 51,
@@ -208,7 +208,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-19T22:11:27.038Z",
+      "lastCheckedAt": "2026-11-19T22:21:27.167Z",
       "lastSuccessAt": "2026-11-19T22:01:26.455Z",
       "products": null,
       "targets": null,
@@ -331,10 +331,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Incomplete category product list"
+          "error": "Official total changed during pagination: expected 120, received 125 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
         }
       ],
-      "error": "Incomplete category product list",
+      "error": "Official total changed during pagination: expected 120, received 125 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

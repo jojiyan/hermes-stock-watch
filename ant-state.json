@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-19T14:41:06.102Z",
-      "lastSuccessAt": "2026-11-19T14:41:06.102Z",
+      "lastCheckedAt": "2026-11-19T14:51:06.801Z",
+      "lastSuccessAt": "2026-11-19T14:51:06.801Z",
       "products": 57,
       "targets": 3,
       "categoryAvailable": 2,
@@ -46,7 +46,7 @@
           "color": "Gold",
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/",
-          "lastSeenAt": "2026-11-19T14:41:06.102Z",
+          "lastSeenAt": "2026-11-19T14:51:06.801Z",
           "source": "official-catalog"
         },
         "H051551CKCU": {
@@ -56,7 +56,7 @@
           "color": "Vert Olive / Bai Brun",
           "price": "$3,300",
           "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCU/",
-          "lastSeenAt": "2026-11-19T14:41:06.102Z",
+          "lastSeenAt": "2026-11-19T14:51:06.801Z",
           "source": "official-catalog"
         }
       },
@@ -102,7 +102,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T14:41:06.102Z",
+          "seenAt": "2026-11-19T14:51:06.801Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -147,7 +147,7 @@
         },
         "H086422CK37": {
           "ecom": true,
-          "seenAt": "2026-11-19T14:41:06.102Z",
+          "seenAt": "2026-11-19T14:51:06.801Z",
           "source": "official-product-purchase"
         },
         "H086729CK0D": {
@@ -172,7 +172,7 @@
         },
         "H051551CKCU": {
           "ecom": true,
-          "seenAt": "2026-11-19T14:41:06.102Z",
+          "seenAt": "2026-11-19T14:51:06.801Z",
           "source": "official-product-purchase"
         }
       },
@@ -194,23 +194,23 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T14:41:06.102Z",
+          "seenAt": "2026-11-19T14:51:06.801Z",
           "source": "official-product-purchase"
         },
         "H086422CK37": {
           "ecom": true,
-          "seenAt": "2026-11-19T14:41:06.102Z",
+          "seenAt": "2026-11-19T14:51:06.801Z",
           "source": "official-product-purchase"
         },
         "H051551CKCU": {
           "ecom": true,
-          "seenAt": "2026-11-19T14:41:06.102Z",
+          "seenAt": "2026-11-19T14:51:06.801Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-19T14:41:06.102Z",
+        "checkedAt": "2026-11-19T14:51:06.801Z",
         "products": 57,
         "targets": 3,
         "officialTotal": 57,
@@ -240,8 +240,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-19T14:41:06.102Z",
-      "lastSuccessAt": "2026-11-19T14:41:06.102Z",
+      "lastCheckedAt": "2026-11-19T14:51:06.801Z",
+      "lastSuccessAt": "2026-11-19T14:51:06.801Z",
       "products": 122,
       "targets": 0,
       "categoryAvailable": 0,
@@ -365,7 +365,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-19T14:41:06.102Z",
+        "checkedAt": "2026-11-19T14:51:06.801Z",
         "products": 122,
         "targets": 0,
         "officialTotal": 122,

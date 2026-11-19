@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-19T20:41:22.150Z",
+      "lastCheckedAt": "2026-11-19T20:51:22.298Z",
       "lastSuccessAt": "2026-11-19T19:51:19.714Z",
       "products": null,
       "targets": null,
@@ -82,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T20:41:22.150Z",
+          "seenAt": "2026-11-19T20:51:22.298Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -152,7 +152,7 @@
         },
         "H051551CKCU": {
           "ecom": false,
-          "seenAt": "2026-11-19T20:41:22.150Z",
+          "seenAt": "2026-11-19T20:51:22.298Z",
           "source": "official-product-purchase"
         }
       },
@@ -177,12 +177,12 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T20:41:22.150Z",
+          "seenAt": "2026-11-19T20:51:22.298Z",
           "source": "official-product-purchase"
         },
         "H051551CKCU": {
           "ecom": false,
-          "seenAt": "2026-11-19T20:41:22.150Z",
+          "seenAt": "2026-11-19T20:51:22.298Z",
           "source": "official-product-purchase"
         }
       },
@@ -218,8 +218,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-19T20:41:22.150Z",
-      "lastSuccessAt": "2026-11-19T20:41:22.150Z",
+      "lastCheckedAt": "2026-11-19T20:51:22.298Z",
+      "lastSuccessAt": "2026-11-19T20:51:22.298Z",
       "products": 120,
       "targets": 0,
       "categoryAvailable": 0,
@@ -343,7 +343,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-19T20:41:22.150Z",
+        "checkedAt": "2026-11-19T20:51:22.298Z",
         "products": 120,
         "targets": 0,
         "officialTotal": 120,
@@ -359,7 +359,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

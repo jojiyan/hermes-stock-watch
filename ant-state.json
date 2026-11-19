@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-19T04:00:31.322Z",
-      "lastSuccessAt": "2026-11-19T04:00:31.322Z",
+      "lastCheckedAt": "2026-11-19T04:10:31.468Z",
+      "lastSuccessAt": "2026-11-19T04:10:31.468Z",
       "products": 49,
       "targets": 1,
       "categoryAvailable": 0,
@@ -92,7 +92,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T04:00:31.322Z",
+          "seenAt": "2026-11-19T04:10:31.468Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -178,13 +178,13 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T04:00:31.322Z",
+          "seenAt": "2026-11-19T04:10:31.468Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-19T04:00:31.322Z",
+        "checkedAt": "2026-11-19T04:10:31.468Z",
         "products": 49,
         "targets": 1,
         "officialTotal": 49,
@@ -214,8 +214,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-19T04:00:31.322Z",
-      "lastSuccessAt": "2026-11-19T04:00:31.322Z",
+      "lastCheckedAt": "2026-11-19T04:10:31.468Z",
+      "lastSuccessAt": "2026-11-19T04:10:31.468Z",
       "products": 122,
       "targets": 0,
       "categoryAvailable": 0,
@@ -332,14 +332,14 @@
       },
       "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
       "officialTotal": 122,
-      "fetchMode": "facet-recovered",
+      "fetchMode": "paginated",
       "unlistedPreviouslyAlerted": [],
       "verificationErrors": [],
       "error": null,
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-19T04:00:31.322Z",
+        "checkedAt": "2026-11-19T04:10:31.468Z",
         "products": 122,
         "targets": 0,
         "officialTotal": 122,

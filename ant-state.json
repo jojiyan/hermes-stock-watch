@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-19T19:31:19.251Z",
-      "lastSuccessAt": "2026-11-19T18:41:17.084Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-19T19:41:19.596Z",
+      "lastSuccessAt": "2026-11-19T19:41:19.596Z",
+      "products": 55,
+      "targets": 2,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -37,16 +37,6 @@
           "price": "$4,475",
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086729CK0D/",
           "lastSeenAt": "2026-11-12T15:26:27.693Z",
-          "source": "official-catalog"
-        },
-        "H051551CKCU": {
-          "market": "US",
-          "sku": "H051551CKCU",
-          "name": "Garden Party 30 bag",
-          "color": "Vert Olive / Bai Brun",
-          "price": "$3,300",
-          "url": "https://www.hermes.com/us/en/product/garden-party-30-bag-H051551CKCU/",
-          "lastSeenAt": "2026-11-19T19:31:19.251Z",
           "source": "official-catalog"
         }
       },
@@ -92,7 +82,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T19:31:19.251Z",
+          "seenAt": "2026-11-19T19:41:19.596Z",
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -161,8 +151,8 @@
           "source": "official-product-purchase"
         },
         "H051551CKCU": {
-          "ecom": true,
-          "seenAt": "2026-11-19T19:31:19.251Z",
+          "ecom": false,
+          "seenAt": "2026-11-19T19:41:19.596Z",
           "source": "official-product-purchase"
         }
       },
@@ -171,38 +161,32 @@
         "H056289CC3Y": "2026-10-08T13:40:17.239Z",
         "H069573CKDM": "2026-10-28T16:34:31.708Z",
         "H084238CKL4": "2026-11-10T14:29:59.022Z",
-        "H086729CK0D": "2026-11-12T14:36:24.693Z",
-        "H051551CKCU": "2026-11-19T18:51:17.205Z"
+        "H086729CK0D": "2026-11-12T14:36:24.693Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 55,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
-        }
-      ],
-      "error": "Official HTTP 403",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-19T19:31:19.251Z",
+          "seenAt": "2026-11-19T19:41:19.596Z",
           "source": "official-product-purchase"
         },
         "H051551CKCU": {
-          "ecom": true,
-          "seenAt": "2026-11-19T19:31:19.251Z",
+          "ecom": false,
+          "seenAt": "2026-11-19T19:41:19.596Z",
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-19T18:41:17.084Z",
-        "products": 54,
+        "checkedAt": "2026-11-19T19:41:19.596Z",
+        "products": 55,
         "targets": 2,
-        "officialTotal": 54,
+        "officialTotal": 55,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -221,7 +205,7 @@
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           }
         ]
       },
@@ -229,8 +213,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-19T19:31:19.251Z",
-      "lastSuccessAt": "2026-11-19T19:31:19.251Z",
+      "lastCheckedAt": "2026-11-19T19:41:19.596Z",
+      "lastSuccessAt": "2026-11-19T19:41:19.596Z",
       "products": 121,
       "targets": 0,
       "categoryAvailable": 0,
@@ -354,7 +338,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-19T19:31:19.251Z",
+        "checkedAt": "2026-11-19T19:41:19.596Z",
         "products": 121,
         "targets": 0,
         "officialTotal": 121,

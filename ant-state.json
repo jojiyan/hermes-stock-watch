@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-20T17:53:46.630Z",
+      "lastCheckedAt": "2026-11-20T18:03:47.333Z",
       "lastSuccessAt": "2026-11-20T17:23:44.097Z",
       "products": null,
       "targets": null,
@@ -84,7 +84,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T17:53:46.630Z",
+          "seenAt": "2026-11-20T18:03:47.333Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -174,14 +174,14 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 53, received 54 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official HTTP 403"
         }
       ],
-      "error": "Official total changed during pagination: expected 53, received 54 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official HTTP 403",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T17:53:46.630Z",
+          "seenAt": "2026-11-20T18:03:47.333Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         }
@@ -210,7 +210,7 @@
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },
@@ -218,7 +218,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-20T17:53:46.630Z",
+      "lastCheckedAt": "2026-11-20T18:03:47.333Z",
       "lastSuccessAt": "2026-11-20T16:33:41.366Z",
       "products": null,
       "targets": null,
@@ -364,7 +364,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

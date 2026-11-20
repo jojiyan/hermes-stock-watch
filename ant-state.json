@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-20T15:03:34.272Z",
+      "lastCheckedAt": "2026-11-20T15:13:34.950Z",
       "lastSuccessAt": "2026-11-20T14:23:30.116Z",
       "products": null,
       "targets": null,
@@ -46,7 +46,7 @@
           "color": "Vert Loden",
           "price": "$4,275",
           "url": "https://www.hermes.com/us/en/product/picotin-lock-22-bag-H060991CKV8/",
-          "lastSeenAt": "2026-11-20T15:03:34.272Z",
+          "lastSeenAt": "2026-11-20T15:13:34.950Z",
           "source": "official-catalog"
         }
       },
@@ -68,7 +68,7 @@
         },
         "H060991CKV8": {
           "ecom": true,
-          "seenAt": "2026-11-20T15:03:34.272Z",
+          "seenAt": "2026-11-20T15:13:34.950Z",
           "negativeCount": 0,
           "source": "official-product-purchase"
         },
@@ -94,7 +94,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T15:03:34.272Z",
+          "seenAt": "2026-11-20T15:13:34.950Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -105,7 +105,7 @@
         },
         "H086422CK89": {
           "ecom": false,
-          "seenAt": "2026-11-20T15:03:34.272Z",
+          "seenAt": "2026-11-20T15:13:34.950Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -191,19 +191,19 @@
       "currentStocks": {
         "H060991CKV8": {
           "ecom": true,
-          "seenAt": "2026-11-20T15:03:34.272Z",
+          "seenAt": "2026-11-20T15:13:34.950Z",
           "negativeCount": 0,
           "source": "official-product-purchase"
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T15:03:34.272Z",
+          "seenAt": "2026-11-20T15:13:34.950Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
         "H086422CK89": {
           "ecom": false,
-          "seenAt": "2026-11-20T15:03:34.272Z",
+          "seenAt": "2026-11-20T15:13:34.950Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         }
@@ -227,7 +227,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
@@ -240,7 +240,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-20T15:03:34.272Z",
+      "lastCheckedAt": "2026-11-20T15:13:34.950Z",
       "lastSuccessAt": "2026-11-20T14:23:30.116Z",
       "products": null,
       "targets": null,

@@ -29,7 +29,7 @@ test("parses official stock true and false, explicitly excludes Garden Party 36"
   ["H086422CK37",true],["H056289CC3Y",false],["H051551CKCM",false]]);
  assert.equal(p.products[0].url,"https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK37/");
 });
-test("new e-commerce stock alerts once, then stays silent until explicitly sold out",()=>{
+test("new e-commerce stock alerts once and rearms only after two verified sold-out scans",()=>{
  const catalog=verifiedCatalog(makeHtml(),market);
  const first=reconcileCatalog({},catalog,time);
  assert.equal(first.alerts.length,1);
@@ -40,7 +40,12 @@ test("new e-commerce stock alerts once, then stays silent until explicitly sold 
  const p3=reconcileCatalog({...p2},verifiedCatalog(noStock,market),"2026-10-09T05:20:00.000Z");
  assert.equal(p3.alerts.length,0);
  const p4=reconcileCatalog({...p3},catalog,"2026-10-09T05:30:00.000Z");
- assert.equal(p4.alerts.length,1);
+ assert.equal(p4.alerts.length,0);
+ const p5=reconcileCatalog({...p4},verifiedCatalog(noStock,market),"2026-10-09T05:40:00.000Z");
+ const p6=reconcileCatalog({...p5},verifiedCatalog(noStock,market),"2026-10-09T05:50:00.000Z");
+ assert.equal(p6.alertedSkus.H086422CK37,undefined);
+ const p7=reconcileCatalog({...p6},catalog,"2026-10-09T06:00:00.000Z");
+ assert.equal(p7.alerts.length,1);
 });
 test("missing SKU does not trigger an artificial restock",()=>{
  const old=reconcileCatalog({},verifiedCatalog(makeHtml(),market),time);

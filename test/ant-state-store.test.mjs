@@ -41,14 +41,17 @@ test('old candidate observations cannot roll back current stock or notification 
   assert.equal(result.markets.US.alertedSkus.SKU,t(20));
   assert.equal(result.markets.US.lastCheckedAt,t(20));
 });
-test('fresh explicit negatives remove availability and rearm only their own SKU',()=>{
+test('fresh explicit negatives remove availability but require two confirmations to rearm',()=>{
   const current=state(t(10),{catalogStocks:{OLD:stock(t(10),true),KEEP:stock(t(10),true)},
     alertedSkus:{OLD:t(10),KEEP:t(10)},available:{OLD:{lastSeenAt:t(10)},KEEP:{lastSeenAt:t(10)}}});
-  const candidate=state(t(20),{catalogStocks:{OLD:stock(t(20),false)}});
+  const candidate=state(t(20),{catalogStocks:{OLD:{...stock(t(20),false),negativeCount:1}}});
   const result=mergeMonitorState(current,candidate);
-  assert.equal(result.markets.US.alertedSkus.OLD,undefined);
+  assert.equal(result.markets.US.alertedSkus.OLD,t(10));
   assert.equal(result.markets.US.available.OLD,undefined);
   assert.equal(result.markets.US.alertedSkus.KEEP,t(10));
+  const confirmed=state(t(30),{catalogStocks:{OLD:{...stock(t(30),false),negativeCount:2}}});
+  const rearmed=mergeMonitorState(result,confirmed);
+  assert.equal(rearmed.markets.US.alertedSkus.OLD,undefined);
 });
 test('unknown scans preserve latest verified history and expose no current stocks',()=>{
   const current=state(t(10),{catalogStocks:{SKU:stock(t(10),true)},lastVerifiedCatalog:{checkedAt:t(10)}});

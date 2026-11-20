@@ -22,7 +22,7 @@ export function mergeMonitorState(remote,incoming) {
     const available=latestMap(before.available,next.available,'lastSeenAt');
     for(const [sku,stock] of Object.entries(stocks)) {
       if(stock.ecom===false) {
-        if(stamp(stock.seenAt)>=stamp(notified[sku]))delete notified[sku];
+        if(stock.negativeCount>=2 && stamp(stock.seenAt)>=stamp(notified[sku]))delete notified[sku];
         if(stamp(stock.seenAt)>=stamp(available[sku]?.lastSeenAt))delete available[sku];
       }
     }

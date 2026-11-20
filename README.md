@@ -37,7 +37,7 @@ The only production state is ant-state.json, schema version 3, shared with the C
 
 Production loads the current state before scanning and saves through the GitHub Contents API with bounded conflict retries. Newer market observations and SKU histories survive concurrent writes. No git rebase or force push is used.
 
-A newly verified purchasable target creates a GitHub Issue mentioning and assigning the owner, with a stock marker for deduplication across all Issue pages. The ChatGPT reminder accepts only fresh, currently verified purchase observations, including independently verified SKUs during partial catalog failures. Historical or unverified SKU observations remain silent.
+A newly verified purchasable target creates a GitHub Issue mentioning and assigning the owner, with a stock marker for deduplication across all Issue pages. A SKU is rearmed only after two consecutive verified sold-out scans, preventing a transient unavailable render from producing a duplicate alert while the listing remains live. The ChatGPT reminder accepts only fresh, currently verified purchase observations, including independently verified SKUs during partial catalog failures. Historical or unverified SKU observations remain silent.
 
 GitHub Issue creation is the configured notification channel. Gmail inbox delivery is not independently verified. No fake inventory notifications are sent for testing.
 

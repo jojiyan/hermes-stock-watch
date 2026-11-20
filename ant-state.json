@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-20T01:21:34.802Z",
-      "lastSuccessAt": "2026-11-20T01:21:34.802Z",
+      "lastCheckedAt": "2026-11-20T01:22:49.997Z",
+      "lastSuccessAt": "2026-11-20T01:22:49.997Z",
       "products": 51,
       "targets": 1,
       "categoryAvailable": 0,
@@ -82,7 +82,8 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T01:21:34.802Z",
+          "seenAt": "2026-11-20T01:22:49.997Z",
+          "negativeCount": 2,
           "source": "official-product-purchase"
         },
         "H085956CKX3": {
@@ -172,13 +173,14 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T01:21:34.802Z",
+          "seenAt": "2026-11-20T01:22:49.997Z",
+          "negativeCount": 2,
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-20T01:21:34.802Z",
+        "checkedAt": "2026-11-20T01:22:49.997Z",
         "products": 51,
         "targets": 1,
         "officialTotal": 51,
@@ -195,7 +197,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
@@ -208,8 +210,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-20T01:21:34.802Z",
-      "lastSuccessAt": "2026-11-20T01:21:34.802Z",
+      "lastCheckedAt": "2026-11-20T01:22:49.997Z",
+      "lastSuccessAt": "2026-11-20T01:22:49.997Z",
       "products": 121,
       "targets": 0,
       "categoryAvailable": 0,
@@ -333,7 +335,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-20T01:21:34.802Z",
+        "checkedAt": "2026-11-20T01:22:49.997Z",
         "products": 121,
         "targets": 0,
         "officialTotal": 121,

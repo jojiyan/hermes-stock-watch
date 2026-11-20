@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-20T15:23:35.967Z",
+      "lastCheckedAt": "2026-11-20T15:33:36.093Z",
       "lastSuccessAt": "2026-11-20T14:23:30.116Z",
       "products": null,
       "targets": null,
@@ -38,16 +38,6 @@
           "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086729CK0D/",
           "lastSeenAt": "2026-11-12T15:26:27.693Z",
           "source": "official-catalog"
-        },
-        "H060991CKV8": {
-          "market": "US",
-          "sku": "H060991CKV8",
-          "name": "Picotin Lock 22 bag",
-          "color": "Vert Loden",
-          "price": "$4,275",
-          "url": "https://www.hermes.com/us/en/product/picotin-lock-22-bag-H060991CKV8/",
-          "lastSeenAt": "2026-11-20T15:23:35.967Z",
-          "source": "official-catalog"
         }
       },
       "catalogStocks": {
@@ -67,9 +57,9 @@
           "source": "complete-official-category-negative"
         },
         "H060991CKV8": {
-          "ecom": true,
-          "seenAt": "2026-11-20T15:23:35.967Z",
-          "negativeCount": 0,
+          "ecom": false,
+          "seenAt": "2026-11-20T15:33:36.093Z",
+          "negativeCount": 1,
           "source": "official-product-purchase"
         },
         "H085956CC18": {
@@ -94,7 +84,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T15:23:35.967Z",
+          "seenAt": "2026-11-20T15:33:36.093Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -105,7 +95,7 @@
         },
         "H086422CK89": {
           "ecom": false,
-          "seenAt": "2026-11-20T15:23:35.967Z",
+          "seenAt": "2026-11-20T15:33:36.093Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -184,26 +174,26 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 53, received 57 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official total changed during pagination: expected 55, received 57 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
         }
       ],
-      "error": "Official total changed during pagination: expected 53, received 57 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official total changed during pagination: expected 55, received 57 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H060991CKV8": {
-          "ecom": true,
-          "seenAt": "2026-11-20T15:23:35.967Z",
-          "negativeCount": 0,
+          "ecom": false,
+          "seenAt": "2026-11-20T15:33:36.093Z",
+          "negativeCount": 1,
           "source": "official-product-purchase"
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T15:23:35.967Z",
+          "seenAt": "2026-11-20T15:33:36.093Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
         "H086422CK89": {
           "ecom": false,
-          "seenAt": "2026-11-20T15:23:35.967Z",
+          "seenAt": "2026-11-20T15:33:36.093Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         }
@@ -227,12 +217,12 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           },
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           }
         ]
       },
@@ -240,7 +230,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-20T15:23:35.967Z",
+      "lastCheckedAt": "2026-11-20T15:33:36.093Z",
       "lastSuccessAt": "2026-11-20T14:23:30.116Z",
       "products": null,
       "targets": null,
@@ -363,10 +353,10 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 121, received 122 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Duplicate SKU across catalog pages: H087080CC89"
         }
       ],
-      "error": "Official total changed during pagination: expected 121, received 122 (https://www.hermes.com/ca/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Duplicate SKU across catalog pages: H087080CC89",
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {

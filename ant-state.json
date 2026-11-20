@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-20T20:03:58.022Z",
+      "lastCheckedAt": "2026-11-20T20:13:59.421Z",
       "lastSuccessAt": "2026-11-20T19:33:54.728Z",
       "products": null,
       "targets": null,
@@ -84,7 +84,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T20:03:58.022Z",
+          "seenAt": "2026-11-20T20:13:59.421Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -181,7 +181,7 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T20:03:58.022Z",
+          "seenAt": "2026-11-20T20:13:59.421Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         }
@@ -205,12 +205,12 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },
@@ -218,8 +218,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-20T20:03:58.022Z",
-      "lastSuccessAt": "2026-11-20T20:03:58.022Z",
+      "lastCheckedAt": "2026-11-20T20:13:59.421Z",
+      "lastSuccessAt": "2026-11-20T20:13:59.421Z",
       "products": 118,
       "targets": 0,
       "categoryAvailable": 0,
@@ -343,7 +343,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-20T20:03:58.022Z",
+        "checkedAt": "2026-11-20T20:13:59.421Z",
         "products": 118,
         "targets": 0,
         "officialTotal": 118,

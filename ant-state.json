@@ -3,8 +3,8 @@
   "markets": {
     "US": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-20T23:24:12.831Z",
-      "lastSuccessAt": "2026-11-20T23:24:12.831Z",
+      "lastCheckedAt": "2026-11-20T23:34:13.615Z",
+      "lastSuccessAt": "2026-11-20T23:34:13.615Z",
       "products": 52,
       "targets": 1,
       "categoryAvailable": 0,
@@ -84,7 +84,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T23:24:12.831Z",
+          "seenAt": "2026-11-20T23:34:13.615Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -176,14 +176,14 @@
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-20T23:24:12.831Z",
+          "seenAt": "2026-11-20T23:34:13.615Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-20T23:24:12.831Z",
+        "checkedAt": "2026-11-20T23:34:13.615Z",
         "products": 52,
         "targets": 1,
         "officialTotal": 52,
@@ -200,7 +200,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
@@ -213,7 +213,7 @@
     },
     "CA": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-20T23:24:12.831Z",
+      "lastCheckedAt": "2026-11-20T23:34:13.615Z",
       "lastSuccessAt": "2026-11-20T23:04:11.923Z",
       "products": null,
       "targets": null,
@@ -359,7 +359,7 @@
           {
             "sku": "H088612CKAQ",
             "url": "https://www.hermes.com/ca/en/product/neo-garden-23-bag-H088612CKAQ/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           }
         ]
       },

@@ -3,7 +3,7 @@
   "markets": {
     "US": {
       "status": "unknown",
-      "lastCheckedAt": "2026-11-21T13:35:05.055Z",
+      "lastCheckedAt": "2026-11-21T13:45:05.173Z",
       "lastSuccessAt": "2026-11-21T13:15:04.078Z",
       "products": null,
       "targets": null,
@@ -84,7 +84,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-21T13:35:05.055Z",
+          "seenAt": "2026-11-21T13:45:05.173Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -174,14 +174,14 @@
       "verificationErrors": [
         {
           "stage": "catalog",
-          "error": "Official total changed during pagination: expected 51, received 52 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
+          "error": "Official total changed during pagination: expected 64, received 52 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
         }
       ],
-      "error": "Official total changed during pagination: expected 51, received 52 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "error": "Official total changed during pagination: expected 64, received 52 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-21T13:35:05.055Z",
+          "seenAt": "2026-11-21T13:45:05.173Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         }
@@ -205,7 +205,7 @@
           {
             "sku": "H086422CK18",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086422CK18/",
-            "error": "Official HTTP 404"
+            "error": "Official HTTP 403"
           },
           {
             "sku": "H086418CKAC",
@@ -218,8 +218,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-21T13:35:05.055Z",
-      "lastSuccessAt": "2026-11-21T13:35:05.055Z",
+      "lastCheckedAt": "2026-11-21T13:45:05.173Z",
+      "lastSuccessAt": "2026-11-21T13:45:05.173Z",
       "products": 117,
       "targets": 0,
       "categoryAvailable": 0,
@@ -343,7 +343,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-21T13:35:05.055Z",
+        "checkedAt": "2026-11-21T13:45:05.173Z",
         "products": 117,
         "targets": 0,
         "officialTotal": 117,

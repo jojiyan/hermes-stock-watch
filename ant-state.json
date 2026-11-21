@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-21T03:54:28.813Z",
-      "lastSuccessAt": "2026-11-21T03:44:27.789Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-21T04:04:29.299Z",
+      "lastSuccessAt": "2026-11-21T04:04:29.299Z",
+      "products": 51,
+      "targets": 1,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -84,7 +84,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-21T03:54:28.813Z",
+          "seenAt": "2026-11-21T04:04:29.299Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -167,28 +167,23 @@
         "H084238CKL4": "2026-11-10T14:29:59.022Z",
         "H086729CK0D": "2026-11-12T14:36:24.693Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 51,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official HTTP 403"
-        }
-      ],
-      "error": "Official HTTP 403",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-21T03:54:28.813Z",
+          "seenAt": "2026-11-21T04:04:29.299Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-21T03:44:27.789Z",
+        "checkedAt": "2026-11-21T04:04:29.299Z",
         "products": 51,
         "targets": 1,
         "officialTotal": 51,
@@ -210,7 +205,7 @@
           {
             "sku": "H086418CKAC",
             "url": "https://www.hermes.com/us/en/product/neo-garden-23-bag-H086418CKAC/",
-            "error": "Official HTTP 403"
+            "error": "Official HTTP 404"
           }
         ]
       },
@@ -218,8 +213,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-21T03:54:28.813Z",
-      "lastSuccessAt": "2026-11-21T03:54:28.813Z",
+      "lastCheckedAt": "2026-11-21T04:04:29.299Z",
+      "lastSuccessAt": "2026-11-21T04:04:29.299Z",
       "products": 118,
       "targets": 0,
       "categoryAvailable": 0,
@@ -343,7 +338,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-21T03:54:28.813Z",
+        "checkedAt": "2026-11-21T04:04:29.299Z",
         "products": 118,
         "targets": 0,
         "officialTotal": 118,

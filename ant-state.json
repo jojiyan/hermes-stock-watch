@@ -2,12 +2,12 @@
   "version": 3,
   "markets": {
     "US": {
-      "status": "unknown",
-      "lastCheckedAt": "2026-11-21T02:34:24.384Z",
-      "lastSuccessAt": "2026-11-21T02:14:22.788Z",
-      "products": null,
-      "targets": null,
-      "categoryAvailable": null,
+      "status": "ok",
+      "lastCheckedAt": "2026-11-21T02:44:25.023Z",
+      "lastSuccessAt": "2026-11-21T02:44:25.023Z",
+      "products": 51,
+      "targets": 1,
+      "categoryAvailable": 0,
       "available": {
         "H069573CKDM": {
           "market": "US",
@@ -84,7 +84,7 @@
         },
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-21T02:34:24.384Z",
+          "seenAt": "2026-11-21T02:44:25.023Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         },
@@ -167,31 +167,26 @@
         "H084238CKL4": "2026-11-10T14:29:59.022Z",
         "H086729CK0D": "2026-11-12T14:36:24.693Z"
       },
-      "coverage": "unverified",
-      "officialTotal": null,
-      "fetchMode": null,
+      "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification",
+      "officialTotal": 51,
+      "fetchMode": "facet-recovered",
       "unlistedPreviouslyAlerted": [],
-      "verificationErrors": [
-        {
-          "stage": "catalog",
-          "error": "Official total changed during pagination: expected 52, received 51 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)"
-        }
-      ],
-      "error": "Official total changed during pagination: expected 52, received 51 (https://www.hermes.com/us/en/category/leather-goods/bags-and-clutches/womens-bags-and-clutches/?page=2)",
+      "verificationErrors": [],
+      "error": null,
       "currentStocks": {
         "H083189CCBQ": {
           "ecom": false,
-          "seenAt": "2026-11-21T02:34:24.384Z",
+          "seenAt": "2026-11-21T02:44:25.023Z",
           "negativeCount": 2,
           "source": "official-product-purchase"
         }
       },
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-21T02:14:22.788Z",
-        "products": 52,
+        "checkedAt": "2026-11-21T02:44:25.023Z",
+        "products": 51,
         "targets": 1,
-        "officialTotal": 52,
+        "officialTotal": 51,
         "coverage": "all published category SKUs; exact official total with closing page and recovery-facet verification"
       },
       "productVerification": "independent",
@@ -218,8 +213,8 @@
     },
     "CA": {
       "status": "ok",
-      "lastCheckedAt": "2026-11-21T02:34:24.384Z",
-      "lastSuccessAt": "2026-11-21T02:34:24.384Z",
+      "lastCheckedAt": "2026-11-21T02:44:25.023Z",
+      "lastSuccessAt": "2026-11-21T02:44:25.023Z",
       "products": 118,
       "targets": 0,
       "categoryAvailable": 0,
@@ -343,7 +338,7 @@
       "catalogStocksUsage": "historical observations; consult currentStocks for this scan",
       "currentStocks": {},
       "lastVerifiedCatalog": {
-        "checkedAt": "2026-11-21T02:34:24.384Z",
+        "checkedAt": "2026-11-21T02:44:25.023Z",
         "products": 118,
         "targets": 0,
         "officialTotal": 118,
